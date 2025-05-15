@@ -14,8 +14,8 @@ export default function InfoCard({ type, value, time }: InfoCardProps) {
         <div className="w-full">
           <span className="text-md font-semibold">Dolar {type}</span>
         </div>
-        <span className="w-full text-sm text-muted-foreground text-end">
-          {time} Hs
+        <span className="w-full text-md text-muted-foreground text-end">
+          {time}
         </span>
       </div>
       <span className="text-md  font-semibold w-2/4 px-4">${value}</span>

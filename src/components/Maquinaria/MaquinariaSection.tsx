@@ -1,11 +1,8 @@
 import { useState } from "react";
-
-import CotizacionesIcon from "../../assets/Icons/Outlined/cotizaciones.png";
 import CargaDatosIcon from "../../assets/Icons/Outlined/cargaDatos.png";
 import GraficoBarrasIcon from "../../assets/Icons/Outlined/graficoBarras.png";
 
 import TitleContainer from "../TitleContainer/TitleContainer";
-import InfoCard from "../InfoCard/InfoCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,6 +17,7 @@ import {
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import ExchangeRateCard from "../ExchangeRate/ExchangeRateCard";
 
 const chartData = [
   { month: "A", desktop: 186 },
@@ -52,13 +50,7 @@ export default function MaquinariaSection() {
 
   return (
     <>
-      <TitleContainer title="Cotizaciones" icon={CotizacionesIcon}>
-        <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
-          <InfoCard type="MEP" value="1.401,00" time="15:10:44" />
-          <InfoCard type="Oficial" value="1.500,00" time="12:40:20" />
-          <InfoCard type="Agro" value="1.231,00" time="11:12:01" />
-        </div>
-      </TitleContainer>
+    <ExchangeRateCard />
       <TitleContainer title="Carga de datos" icon={CargaDatosIcon}>
         <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
           <Label htmlFor="cv">Potencia Tractor</Label>
