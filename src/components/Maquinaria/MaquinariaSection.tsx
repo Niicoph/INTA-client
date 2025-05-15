@@ -4,6 +4,8 @@ import CotizacionesIcon from "../../assets/Icons/Outlined/cotizaciones.png";
 import CargaDatosIcon from "../../assets/Icons/Outlined/cargaDatos.png";
 import GraficoBarrasIcon from "../../assets/Icons/Outlined/graficoBarras.png";
 
+import TitleContainer from "../TitleContainer/TitleContainer";
+import InfoCard from "../InfoCard/InfoCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,11 +17,32 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import TitleContainer from "../TitleContainer/TitleContainer";
-import InfoCard from "../InfoCard/InfoCard";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
+import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+
+const chartData = [
+  { month: "A", desktop: 186 },
+  { month: "B", desktop: 305 },
+  { month: "C", desktop: 237 },
+  { month: "D", desktop: 73 },
+  { month: "E", desktop: 209 },
+  { month: "F", desktop: 214 },
+];
+
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "#2563eb",
+  },
+  mobile: {
+    label: "Mobile",
+    color: "#60a5fa",
+  },
+} satisfies ChartConfig;
 
 export default function MaquinariaSection() {
-  const [implemento, setImplemento] = useState("");
+  const [implemento, setImplemento] = useState("arado");
   const [valorDolar, setValorDolar] = useState("");
   const [customImplementoValue, setCustomImplementoValue] = useState("");
   const [customDolarValue, setCustomDolarValue] = useState("");
@@ -31,9 +54,9 @@ export default function MaquinariaSection() {
     <>
       <TitleContainer title="Cotizaciones" icon={CotizacionesIcon}>
         <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
-          <InfoCard type="MEP" value="1.200,00" />
-          <InfoCard type="Oficial" value="1.200,00" />
-          <InfoCard type="Agro" value="1.200,00" />
+          <InfoCard type="MEP" value="1.401,00" time="15:10:44" />
+          <InfoCard type="Oficial" value="1.500,00" time="12:40:20" />
+          <InfoCard type="Agro" value="1.231,00" time="11:12:01" />
         </div>
       </TitleContainer>
       <TitleContainer title="Carga de datos" icon={CargaDatosIcon}>
@@ -128,9 +151,34 @@ export default function MaquinariaSection() {
       </TitleContainer>
       <TitleContainer title="Grafica comparativa" icon={GraficoBarrasIcon}>
         <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
-          <InfoCard type="MEP" value="1.200,00" />
-          <InfoCard type="Oficial" value="1.200,00" />
-          <InfoCard type="Agro" value="1.200,00" />
+          <Label htmlFor="conjunto">Lista de conjuntos</Label>
+          <Label htmlFor="conjunto" className="text-muted-foreground">
+            Costo/hora
+          </Label>
+
+          <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+            <BarChart accessibilityLayer data={chartData}>
+              {/* Grilla */}
+              <CartesianGrid vertical={false} />
+              {/* Ejes (valores) */}
+              <XAxis
+                dataKey="month"
+                tickLine={false}
+                tickMargin={10}
+                axisLine={false}
+                tickFormatter={(value) => value.slice(0, 3)}
+              />
+              {/* tool tip that displays profit value comparision */}
+              <ChartTooltip content={<ChartTooltipContent />} />
+              {/* limit the max width using barSize */}
+              <Bar
+                dataKey="desktop"
+                fill="var(--color-desktop)"
+                radius={4}
+                barSize={40}
+              />
+            </BarChart>
+          </ChartContainer>
         </div>
       </TitleContainer>
     </>
