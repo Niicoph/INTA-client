@@ -14,16 +14,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import ExchangeRateCard from "../ExchangeRate/ExchangeRateCard";
 
 const chartData = [
   { month: "A", desktop: 186 },
-  { month: "B", desktop: 305 },
+  { month: "B", desktop: 9000 },
   { month: "C", desktop: 237 },
-  { month: "D", desktop: 73 },
+  { month: "D", desktop: 700 },
   { month: "E", desktop: 209 },
   { month: "F", desktop: 214 },
 ];
@@ -32,10 +32,6 @@ const chartConfig = {
   desktop: {
     label: "Desktop",
     color: "#2563eb",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "#60a5fa",
   },
 } satisfies ChartConfig;
 
@@ -50,95 +46,114 @@ export default function MaquinariaSection() {
 
   return (
     <>
-    <ExchangeRateCard />
+      <ExchangeRateCard />
       <TitleContainer title="Carga de datos" icon={CargaDatosIcon}>
-        <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
-          <Label htmlFor="cv">Potencia Tractor</Label>
-          <Input
-            type="number"
-            id="cv"
-            placeholder="Introduce potencia"
-            className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
-          />
-          <Label htmlFor="implemento">Implemento</Label>
-          <Select onValueChange={(value) => setImplemento(value)}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Selecciona un implemento" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="arado">Arado</SelectItem>
-              <SelectItem value="rastra">Rastra de disco</SelectItem>
-              <SelectItem value="pulverizadora">Pulverizadora</SelectItem>
-              <SelectItem value="custom">Otro (especificar)</SelectItem>
-            </SelectContent>
-          </Select>
-
-          {isCustom && (
-            <Input
-              type="text"
-              placeholder="Especificar implemento"
-              value={customImplementoValue}
-              onChange={(e) => setCustomImplementoValue(e.target.value)}
-            />
-          )}
-          <Label htmlFor="valor-implemento">Valor del implemento</Label>
-          <Input
-            type="number"
-            id="valor-implemento"
-            placeholder="Introduce valor"
-            className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
-          />
-          <Label htmlFor="coeficiente">Gasto coeficiente</Label>
-          <Input
-            type="number"
-            id="coeficiente"
-            placeholder="Introduce gasto"
-            className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
-          />
-          <Label htmlFor="minutos-utiles">Minutos útiles</Label>
-          <Input
-            type="number"
-            id="minutos-utiles"
-            placeholder="Introduce minutos"
-            className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
-          />
-          <Label htmlFor="valor-residual">Valor residual</Label>
-          <Input
-            type="number"
-            id="valor-residual"
-            placeholder="Introduce porcentaje"
-            className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
-          />
-          <Label htmlFor="consumo-combustible">Consumo litro / hora</Label>
-          <Input
-            type="number"
-            id="consumo-combustible"
-            placeholder="Introduce litros"
-            className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
-          />
-          <Label htmlFor="valor-dolar">Valor Dolar</Label>
-          <Select onValueChange={(value) => setValorDolar(value)}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Selecciona una cotización" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Oficial">Oficial - $valor</SelectItem>
-              <SelectItem value="MEP">MEP - $valor</SelectItem>
-              <SelectItem value="Agro">Agro - $valor</SelectItem>
-              <SelectItem value="custom">Otro (especificar)</SelectItem>
-            </SelectContent>
-          </Select>
-
-          {isCustomDolar && (
+        <div className="w-full rounded-b-lg p-4 gap-4  grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 ">
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="cv">Potencia Tractor</Label>
             <Input
               type="number"
-              placeholder="Especificar cotización"
-              value={customDolarValue}
-              onChange={(e) => setCustomDolarValue(e.target.value)}
+              id="cv"
+              placeholder="Introduce potencia"
+              className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
             />
-          )}
+          </div>
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="implemento">Implemento</Label>
+            <Select onValueChange={(value) => setImplemento(value)}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Selecciona un implemento" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="arado">Arado</SelectItem>
+                <SelectItem value="rastra">Rastra de disco</SelectItem>
+                <SelectItem value="pulverizadora">Pulverizadora</SelectItem>
+                <SelectItem value="custom">Otro (especificar)</SelectItem>
+              </SelectContent>
+            </Select>
 
-          <Button className="bg-[#2563EB]">Agregar Conjunto</Button>
+            {isCustom && (
+              <Input
+                type="text"
+                placeholder="Especificar implemento"
+                value={customImplementoValue}
+                onChange={(e) => setCustomImplementoValue(e.target.value)}
+              />
+            )}
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="valor-implemento">Valor del implemento</Label>
+            <Input
+              type="number"
+              id="valor-implemento"
+              placeholder="Introduce valor"
+              className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="coeficiente">Gasto coeficiente</Label>
+            <Input
+              type="number"
+              id="coeficiente"
+              placeholder="Introduce gasto"
+              className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="minutos-utiles">Minutos útiles</Label>
+            <Input
+              type="number"
+              id="minutos-utiles"
+              placeholder="Introduce minutos"
+              className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="valor-residual">Valor residual</Label>
+            <Input
+              type="number"
+              id="valor-residual"
+              placeholder="Introduce porcentaje"
+              className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="consumo-combustible">Consumo litro / hora</Label>
+            <Input
+              type="number"
+              id="consumo-combustible"
+              placeholder="Introduce litros"
+              className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="valor-dolar">Valor Dolar</Label>
+            <Select onValueChange={(value) => setValorDolar(value)}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Selecciona una cotización" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Oficial">Oficial - $valor</SelectItem>
+                <SelectItem value="MEP">MEP - $valor</SelectItem>
+                <SelectItem value="Agro">Agro - $valor</SelectItem>
+                <SelectItem value="custom">Otro (especificar)</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {isCustomDolar && (
+              <Input
+                type="number"
+                placeholder="Especificar cotización"
+                value={customDolarValue}
+                onChange={(e) => setCustomDolarValue(e.target.value)}
+              />
+            )}
+          </div>
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="nuevo-conjunto">Nuevo Conjunto</Label>
+            <Button className="bg-[#348fe2]">Agregar Conjunto</Button>
+          </div>
         </div>
       </TitleContainer>
       <TitleContainer title="Grafica comparativa" icon={GraficoBarrasIcon}>
@@ -153,6 +168,15 @@ export default function MaquinariaSection() {
               {/* Grilla */}
               <CartesianGrid vertical={false} />
               {/* Ejes (valores) */}
+              {/* Eje Y con formato en $ */}
+              <YAxis
+                tickLine={false}
+                axisLine={false}
+                tickMargin={10}
+                tickFormatter={(value) => `$${value.toLocaleString("es-AR")}`}
+              />
+
+              {/* Eje X */}
               <XAxis
                 dataKey="month"
                 tickLine={false}
@@ -165,7 +189,8 @@ export default function MaquinariaSection() {
               {/* limit the max width using barSize */}
               <Bar
                 dataKey="desktop"
-                fill="var(--color-desktop)"
+                // fill="var(--color-desktop)"
+                fill={"#348fe2"}
                 radius={4}
                 barSize={40}
               />

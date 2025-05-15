@@ -6,12 +6,12 @@ import FertilizacionSection from "./components/Fertilizacion/FertilizacionSectio
 
 function App() {
   return (
-    <div className="flex justify-center items-center h-screen min-w-[300px]">
-      <main className="flex flex-col w-full h-full p-4">
+    <div className="flex justify-center items-center min-h-screen min-w-[350px] ">
+      <main className="flex flex-col w-full min-h-screen p-4  lg:w-4/6">
         <div className="flex flex-col flex-1">
           <Tabs
             defaultValue="tab1"
-            className="w-full h-full flex flex-col gap-4 "
+            className="w-full h-full flex flex-col gap-4"
           >
             <TabsList className="rounded-sm w-full h-12 text-lg">
               <TabsTrigger value="tab1" className="rounded-sm">
