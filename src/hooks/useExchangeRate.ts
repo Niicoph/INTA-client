@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { fetchExchangeRateBCRA } from "../../services/fetchBCRAapi";
-import type { Result } from "../../services/fetchBCRAapi";
+import { fetchExchangeRateBCRA } from "../services/fetchBCRAapi";
+import type { Result } from "../services/fetchBCRAapi";
 
 export function useExchangeRate(currency: string) {
   const [data, setData] = useState<Result | null>(null);

@@ -18,6 +18,7 @@ import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import ExchangeRateCard from "../ExchangeRate/ExchangeRateCard";
+import type { Result } from "@/services/fetchBCRAapi";
 
 const chartData = [
   { month: "A", desktop: 186 },
@@ -35,7 +36,17 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function MaquinariaSection() {
+interface MaquinariaSectionProps {
+  data: Result | null;
+  loading: boolean;
+  error: string | null;
+}
+
+export default function MaquinariaSection({
+  data,
+  loading,
+  error,
+}: MaquinariaSectionProps) {
   const [implemento, setImplemento] = useState("arado");
   const [valorDolar, setValorDolar] = useState("");
   const [customImplementoValue, setCustomImplementoValue] = useState("");
@@ -46,7 +57,7 @@ export default function MaquinariaSection() {
 
   return (
     <>
-      <ExchangeRateCard />
+      <ExchangeRateCard data={data} loading={loading} error={error} />
       <TitleContainer title="Carga de datos" icon={CargaDatosIcon}>
         <div className="w-full rounded-b-lg p-4 gap-4  grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 ">
           <div className="flex flex-col gap-4">
