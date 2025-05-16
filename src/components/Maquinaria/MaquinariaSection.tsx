@@ -6,23 +6,66 @@ import TitleContainer from "../TitleContainer/TitleContainer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+
+import { DataTable } from "@/components/ui/data-table";
+import { columns } from "@/components/ui/columns";
+
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+
 import ExchangeRateCard from "../ExchangeRate/ExchangeRateCard";
 import type { Result } from "@/services/fetchBCRAapi";
 
+/* Valores de testing para DataTable */
+const tableData = [
+    {
+      potencia: 60,
+      implemento: "Arado",
+      valorimplemento: 100,
+      coeficiente: 0.0043,
+      minutos: 5,
+      residuo: 3, 
+      consumo: 2,
+      costohora: 186,
+    },
+    {
+      potencia: 50,
+      implemento: "Rastra de disco",
+      valorimplemento: 120,
+      coeficiente: 0.004,
+      minutos: 10,
+      residuo: 11, 
+      consumo: 3.8,
+      costohora: 237,
+    },
+    {
+      potencia: 60,
+      implemento: "Pulverizadora",
+      valorimplemento: 150,
+      coeficiente: 0.003,
+      minutos: 7,
+      residuo: 11, 
+      consumo: 3.5,
+      costohora: 209,
+    },
+    {
+      potencia: 70,
+      implemento: "Arado",
+      valorimplemento: 100,
+      coeficiente: 0.0042,
+      minutos: 10,
+      residuo: 11, 
+      consumo: 5,
+      costohora: 214,
+    }
+];
+
 const chartData = [
   { month: "A", desktop: 186 },
-  { month: "B", desktop: 9000 },
+  { month: "B", desktop: 580 },
   { month: "C", desktop: 237 },
   { month: "D", desktop: 700 },
   { month: "E", desktop: 209 },
@@ -167,46 +210,113 @@ export default function MaquinariaSection({
           </div>
         </div>
       </TitleContainer>
-      <TitleContainer title="Grafica comparativa" icon={GraficoBarrasIcon}>
-        <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
-          <Label htmlFor="conjunto">Lista de conjuntos</Label>
-          <Label htmlFor="conjunto" className="text-muted-foreground">
-            Costo/hora
-          </Label>
+      <TitleContainer title="Comparaciones" icon={GraficoBarrasIcon}>
+        <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">          
 
-          <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-            <BarChart accessibilityLayer data={chartData}>
-              {/* Grilla */}
-              <CartesianGrid vertical={false} />
-              {/* Ejes (valores) */}
-              {/* Eje Y con formato en $ */}
-              <YAxis
-                tickLine={false}
-                axisLine={false}
-                tickMargin={10}
-                tickFormatter={(value) => `$${value.toLocaleString("es-AR")}`}
-              />
+          <Tabs defaultValue="tab1" className="w-full h-full flex flex-col gap-4">
+            <TabsList className="rounded-sm w-full h-12 text-lg">
+              <TabsTrigger value="tab1" className="rounded-sm">
+                Gráfico
+              </TabsTrigger>
+              <TabsTrigger value="tab2" className="rounded-sm">
+                Tabla
+              </TabsTrigger>
+              <TabsTrigger value="tab3" className="rounded-sm">
+                Gráfico y Tabla
+              </TabsTrigger>
+            </TabsList>
 
-              {/* Eje X */}
-              <XAxis
-                dataKey="month"
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-                tickFormatter={(value) => value.slice(0, 3)}
-              />
-              {/* tool tip that displays profit value comparision */}
-              <ChartTooltip content={<ChartTooltipContent />} />
-              {/* limit the max width using barSize */}
-              <Bar
-                dataKey="desktop"
-                // fill="var(--color-desktop)"
-                fill={"#348fe2"}
-                radius={4}
-                barSize={40}
-              />
-            </BarChart>
-          </ChartContainer>
+            {/* Comparaciones visuales de conjunto */}
+            <Label htmlFor="conjunto">Conjuntos</Label>
+
+            <TabsContent value="tab1" aria-label="Gráfico" className="flex flex-col gap-4">
+              <Label htmlFor="conjunto" className="text-muted-foreground">
+                Costo/Hora
+              </Label>
+
+              <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+                <BarChart accessibilityLayer data={chartData}>
+                  {/* Grilla */}
+                  <CartesianGrid vertical={false} />
+                  {/* Ejes (valores) */}
+                  {/* Eje Y con formato en $ */}
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tickMargin={10}
+                    tickFormatter={(value) => `$${value.toLocaleString("es-AR")}`}
+                  />
+
+                  {/* Eje X */}
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    tickMargin={10}
+                    axisLine={false}
+                    tickFormatter={(value) => value.slice(0, 3)}
+                  />
+                  {/* tool tip that displays profit value comparision */}
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  {/* limit the max width using barSize */}
+                  <Bar
+                    dataKey="desktop"
+                    // fill="var(--color-desktop)"
+                    fill={"#348fe2"}
+                    radius={4}
+                    barSize={40}
+                  />
+                </BarChart>
+              </ChartContainer>
+            </TabsContent>
+            
+            <TabsContent value="tab2" aria-label="Tabla" className="flex flex-col gap-4">  
+                <DataTable columns={columns} data={tableData} />
+            </TabsContent>
+
+            {/*TOTALMENTE EXPERIMENTAL, DEBERIA MODULARIZARSE,
+            Solo es un copypaste del tab1 y tab2 dentro del tab3*/}
+            <TabsContent value="tab3" aria-label="Gráfico" className="flex flex-col gap-4">
+              <Label htmlFor="conjunto" className="text-muted-foreground">
+                Costo/Hora
+              </Label>
+
+              <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+                <BarChart accessibilityLayer data={chartData}>
+                  {/* Grilla */}
+                  <CartesianGrid vertical={false} />
+                  {/* Ejes (valores) */}
+                  {/* Eje Y con formato en $ */}
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tickMargin={10}
+                    tickFormatter={(value) => `$${value.toLocaleString("es-AR")}`}
+                  />
+
+                  {/* Eje X */}
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    tickMargin={10}
+                    axisLine={false}
+                    tickFormatter={(value) => value.slice(0, 3)}
+                  />
+                  {/* tool tip that displays profit value comparision */}
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  {/* limit the max width using barSize */}
+                  <Bar
+                    dataKey="desktop"
+                    // fill="var(--color-desktop)"
+                    fill={"#348fe2"}
+                    radius={4}
+                    barSize={40}
+                  />
+                </BarChart>
+              </ChartContainer>
+              <DataTable columns={columns} data={tableData} />
+            </TabsContent>
+
+          </Tabs>
         </div>
       </TitleContainer>
     </>
