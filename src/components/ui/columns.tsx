@@ -2,28 +2,28 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
-import { Button } from "@/components/ui/button"; 
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
- 
+} from "@/components/ui/dropdown-menu";
+
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Maquinaria = {
-  potencia: number
-  implemento: string
-  valorimplemento: number
-  coeficiente: number
-  minutos: number   //minutos utiles
-  residuo: number 
-  consumo: number   //litro/hora
-  costohora: number
-}
- 
+  potencia: number;
+  implemento: string;
+  valorimplemento: number;
+  coeficiente: number;
+  minutos: number; //minutos utiles
+  residuo: number;
+  consumo: number; //litro/hora
+  costohora: number;
+};
+
 export const columns: ColumnDef<Maquinaria>[] = [
   {
     id: "select",
@@ -48,7 +48,7 @@ export const columns: ColumnDef<Maquinaria>[] = [
     ),
     enableSorting: false,
     enableHiding: false,
-  },  
+  },
   {
     accessorKey: "potencia",
     header: ({ column }) => {
@@ -56,11 +56,12 @@ export const columns: ColumnDef<Maquinaria>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Potencia (CV)
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -70,11 +71,12 @@ export const columns: ColumnDef<Maquinaria>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Implemento
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -84,11 +86,12 @@ export const columns: ColumnDef<Maquinaria>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Valor de implemento
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -98,11 +101,12 @@ export const columns: ColumnDef<Maquinaria>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Gasto coeficiente
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -112,11 +116,12 @@ export const columns: ColumnDef<Maquinaria>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Minutos útiles
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -126,11 +131,12 @@ export const columns: ColumnDef<Maquinaria>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Valor residual
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -140,11 +146,12 @@ export const columns: ColumnDef<Maquinaria>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Consumo litros/hora
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -154,18 +161,19 @@ export const columns: ColumnDef<Maquinaria>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Costo/hora
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const maquinaria = row.original
- 
+      const maquinaria = row.original;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -176,12 +184,14 @@ export const columns: ColumnDef<Maquinaria>[] = [
           </DropdownMenuTrigger>
 
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => {
-                  const formattedData = Object.entries(maquinaria)
-                    .map(([key, value]) => `${key}: ${value}`)
-                    .join(', ');
-                  navigator.clipboard.writeText(formattedData);
-                }}>
+            <DropdownMenuItem
+              onClick={() => {
+                const formattedData = Object.entries(maquinaria)
+                  .map(([key, value]) => `${key}: ${value}`)
+                  .join(", ");
+                navigator.clipboard.writeText(formattedData);
+              }}
+            >
               Copiar datos de fila
             </DropdownMenuItem>
             <DropdownMenuSeparator />
@@ -189,7 +199,7 @@ export const columns: ColumnDef<Maquinaria>[] = [
             <DropdownMenuItem>Eliminar fila</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];

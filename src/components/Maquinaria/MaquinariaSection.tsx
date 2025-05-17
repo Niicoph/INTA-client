@@ -6,7 +6,13 @@ import TitleContainer from "../TitleContainer/TitleContainer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
@@ -21,46 +27,46 @@ import type { Result } from "@/services/fetchBCRAapi";
 
 /* Valores de testing para DataTable */
 const tableData = [
-    {
-      potencia: 60,
-      implemento: "Arado",
-      valorimplemento: 100,
-      coeficiente: 0.0043,
-      minutos: 5,
-      residuo: 3, 
-      consumo: 2,
-      costohora: 186,
-    },
-    {
-      potencia: 50,
-      implemento: "Rastra de disco",
-      valorimplemento: 120,
-      coeficiente: 0.004,
-      minutos: 10,
-      residuo: 11, 
-      consumo: 3.8,
-      costohora: 237,
-    },
-    {
-      potencia: 60,
-      implemento: "Pulverizadora",
-      valorimplemento: 150,
-      coeficiente: 0.003,
-      minutos: 7,
-      residuo: 11, 
-      consumo: 3.5,
-      costohora: 209,
-    },
-    {
-      potencia: 70,
-      implemento: "Arado",
-      valorimplemento: 100,
-      coeficiente: 0.0042,
-      minutos: 10,
-      residuo: 11, 
-      consumo: 5,
-      costohora: 214,
-    }
+  {
+    potencia: 60,
+    implemento: "Arado",
+    valorimplemento: 100,
+    coeficiente: 0.0043,
+    minutos: 5,
+    residuo: 3,
+    consumo: 2,
+    costohora: 186,
+  },
+  {
+    potencia: 50,
+    implemento: "Rastra de disco",
+    valorimplemento: 120,
+    coeficiente: 0.004,
+    minutos: 10,
+    residuo: 11,
+    consumo: 3.8,
+    costohora: 237,
+  },
+  {
+    potencia: 60,
+    implemento: "Pulverizadora",
+    valorimplemento: 150,
+    coeficiente: 0.003,
+    minutos: 7,
+    residuo: 11,
+    consumo: 3.5,
+    costohora: 209,
+  },
+  {
+    potencia: 70,
+    implemento: "Arado",
+    valorimplemento: 100,
+    coeficiente: 0.0042,
+    minutos: 10,
+    residuo: 11,
+    consumo: 5,
+    costohora: 214,
+  },
 ];
 
 const chartData = [
@@ -211,9 +217,11 @@ export default function MaquinariaSection({
         </div>
       </TitleContainer>
       <TitleContainer title="Comparaciones" icon={GraficoBarrasIcon}>
-        <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">          
-
-          <Tabs defaultValue="tab1" className="w-full h-full flex flex-col gap-4">
+        <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
+          <Tabs
+            defaultValue="tab1"
+            className="w-full h-full flex flex-col gap-4"
+          >
             <TabsList className="rounded-sm w-full h-12 text-lg">
               <TabsTrigger value="tab1" className="rounded-sm">
                 Gráfico
@@ -227,14 +235,23 @@ export default function MaquinariaSection({
             </TabsList>
 
             {/* Comparaciones visuales de conjunto */}
-            <Label htmlFor="conjunto">Conjuntos</Label>
 
-            <TabsContent value="tab1" aria-label="Gráfico" className="flex flex-col gap-4">
-              <Label htmlFor="conjunto" className="text-muted-foreground">
-                Costo/Hora
+            <TabsContent
+              value="tab1"
+              aria-label="Gráfico"
+              className="flex flex-col gap-4"
+            >
+              <Label htmlFor="conjunto">
+                Conjuntos
+                <Label htmlFor="conjunto" className="text-muted-foreground">
+                  - Costo/Hora
+                </Label>
               </Label>
 
-              <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+              <ChartContainer
+                config={chartConfig}
+                className="min-h-[200px] w-full"
+              >
                 <BarChart accessibilityLayer data={chartData}>
                   {/* Grilla */}
                   <CartesianGrid vertical={false} />
@@ -244,7 +261,9 @@ export default function MaquinariaSection({
                     tickLine={false}
                     axisLine={false}
                     tickMargin={10}
-                    tickFormatter={(value) => `$${value.toLocaleString("es-AR")}`}
+                    tickFormatter={(value) =>
+                      `$${value.toLocaleString("es-AR")}`
+                    }
                   />
 
                   {/* Eje X */}
@@ -268,19 +287,30 @@ export default function MaquinariaSection({
                 </BarChart>
               </ChartContainer>
             </TabsContent>
-            
-            <TabsContent value="tab2" aria-label="Tabla" className="flex flex-col gap-4">  
-                <DataTable columns={columns} data={tableData} />
+
+            <TabsContent
+              value="tab2"
+              aria-label="Tabla"
+              className="flex flex-col gap-4"
+            >
+              <DataTable columns={columns} data={tableData} />
             </TabsContent>
 
             {/*TOTALMENTE EXPERIMENTAL, DEBERIA MODULARIZARSE,
             Solo es un copypaste del tab1 y tab2 dentro del tab3*/}
-            <TabsContent value="tab3" aria-label="Gráfico" className="flex flex-col gap-4">
+            <TabsContent
+              value="tab3"
+              aria-label="Gráfico"
+              className="flex flex-col gap-4"
+            >
               <Label htmlFor="conjunto" className="text-muted-foreground">
                 Costo/Hora
               </Label>
 
-              <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+              <ChartContainer
+                config={chartConfig}
+                className="min-h-[200px] w-full"
+              >
                 <BarChart accessibilityLayer data={chartData}>
                   {/* Grilla */}
                   <CartesianGrid vertical={false} />
@@ -290,7 +320,9 @@ export default function MaquinariaSection({
                     tickLine={false}
                     axisLine={false}
                     tickMargin={10}
-                    tickFormatter={(value) => `$${value.toLocaleString("es-AR")}`}
+                    tickFormatter={(value) =>
+                      `$${value.toLocaleString("es-AR")}`
+                    }
                   />
 
                   {/* Eje X */}
@@ -315,7 +347,6 @@ export default function MaquinariaSection({
               </ChartContainer>
               <DataTable columns={columns} data={tableData} />
             </TabsContent>
-
           </Tabs>
         </div>
       </TitleContainer>
