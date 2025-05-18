@@ -23,7 +23,6 @@ import { columns } from "@/components/ui/columns";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import ExchangeRateCard from "../ExchangeRate/ExchangeRateCard";
-import type { Result } from "@/services/fetchBCRAapi";
 
 /* Valores de testing para DataTable */
 const tableData = [
@@ -85,17 +84,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-interface MaquinariaSectionProps {
-  data: Result | null;
-  loading: boolean;
-  error: string | null;
-}
 
-export default function MaquinariaSection({
-  data,
-  loading,
-  error,
-}: MaquinariaSectionProps) {
+export default function MaquinariaSection(
+) {
   const [implemento, setImplemento] = useState("arado");
   const [valorDolar, setValorDolar] = useState("");
   const [customImplementoValue, setCustomImplementoValue] = useState("");
@@ -106,7 +97,7 @@ export default function MaquinariaSection({
 
   return (
     <>
-      <ExchangeRateCard data={data} loading={loading} error={error} />
+      <ExchangeRateCard />      
       <TitleContainer title="Carga de datos" icon={CargaDatosIcon}>
         <div className="w-full rounded-b-lg p-4 gap-4  grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 ">
           <div className="flex flex-col gap-4">

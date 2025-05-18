@@ -3,6 +3,7 @@ export interface Detail {
 }
 
 export interface Result {
+  tipoCotizacion: number;
   fecha: string;
   detalle: Detail[];
 }
@@ -15,9 +16,6 @@ export async function fetchExchangeRateBCRA(currency: string): Promise<Result> {
   const API_URL = `https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones/${currency}`;
 
   const response = await fetch(API_URL);
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
 
   const result: ApiResponse = await response.json();
   return result.results[0];

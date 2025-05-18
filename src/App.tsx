@@ -1,4 +1,4 @@
-import { useExchangeRate } from "./hooks/useExchangeRate";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import MaquinariaSection from "./components/Maquinaria/MaquinariaSection";
@@ -6,7 +6,7 @@ import SanidadSection from "./components/Sanidad/SanidadSection";
 import FertilizacionSection from "./components/Fertilizacion/FertilizacionSection";
 
 function App() {
-  const { data, loading, error } = useExchangeRate("USD");
+
 
   return (
     <div className="flex justify-center items-center min-h-screen min-w-[350px] ">
@@ -33,7 +33,7 @@ function App() {
               aria-label="Maquinaria"
               className="flex flex-col gap-4"
             >
-              <MaquinariaSection data={data} loading={loading} error={error} />
+              <MaquinariaSection />
             </TabsContent>
             <TabsContent
               value="tab2"

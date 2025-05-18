@@ -1,4 +1,11 @@
 import Container from "../Container/Container";
+import ExchangeRateCard from "../ExchangeRate/ExchangeRateCard"
+
 export default function SanidadSection() {
-  return <Container className="h-full"></Container>;
+
+  return (
+    <>
+      <ExchangeRateCard />
+    </>
+  );
 }
