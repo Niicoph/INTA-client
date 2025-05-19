@@ -2,6 +2,7 @@ import { Label } from "@/components/ui/label";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { type Maquinaria } from "@/types/maquinaria";
+import { type Sanidad } from "@/types/sanidad"
 
 const chartConfig = {
   desktop: {
@@ -11,7 +12,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface ChartData {
-    data: Maquinaria[]; //Por ahora, luego con Fertilizantes y Sanitizacion se refactorizar
+    data:  Maquinaria[] | Sanidad[] ; //Por ahora, luego con Fertilizantes y Sanitizacion se refactorizar
 }
 
 export function Chart({ data }: ChartData) {
