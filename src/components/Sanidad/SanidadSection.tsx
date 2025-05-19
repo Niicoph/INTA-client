@@ -2,7 +2,7 @@ import { useState } from "react";
 import CargaDatosIcon from "../../assets/Icons/Outlined/cargaDatos.png";
 import GraficoBarrasIcon from "../../assets/Icons/Outlined/graficoBarras.png";
 
-import TitleContainer from "../TitleContainer/TitleContainer";
+import TitleContainer from "../ui/TitleContainer/TitleContainer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,12 +14,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Chart } from "../Chart/Chart";
+import { Chart } from "../ui/Chart/Chart";
 
-import { DataTable } from "@/components/DataTable/DataTable";
-import { columnsSanidad } from "@/components/DataTable/columnsSanidad";
+import { DataTable } from "@/components/ui/DataTable/DataTable";
+import { columnsSanidad } from "@/components/ui/DataTable/columnsSanidad";
 
-import ExchangeRateCard from "../ExchangeRate/ExchangeRateCard";
+import CotizacionesContainer from "../Cotizaciones/CotizacionesContainer";
 
 /* Valores de testing para DataTable */
 const dataSanidad = [
@@ -62,7 +62,7 @@ const dataSanidad = [
     volumen: 5,
     tratamientos: 3,
     costohora: 37,
-  } 
+  },
 ];
 
 export default function SanidadSection() {
@@ -76,7 +76,7 @@ export default function SanidadSection() {
 
   return (
     <>
-      <ExchangeRateCard />
+      <CotizacionesContainer />
       <TitleContainer title="Carga de datos" icon={CargaDatosIcon}>
         <div className="w-full rounded-b-lg p-4 gap-4  grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 ">
           <div className="flex flex-col gap-4">
@@ -131,7 +131,7 @@ export default function SanidadSection() {
             <Input
               type="number"
               id="precioDolares"
-              step="0.01" 
+              step="0.01"
               placeholder="Introduce el precio en dolares"
               className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
             />
@@ -141,7 +141,7 @@ export default function SanidadSection() {
             <Input
               type="number"
               id="dosis"
-              step="0.001"       
+              step="0.001"
               placeholder="Introduce la dosis en hl"
               className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
             />
@@ -172,10 +172,12 @@ export default function SanidadSection() {
         </div>
       </TitleContainer>
 
-            <TitleContainer title="Comparaciones" icon={GraficoBarrasIcon}>
+      <TitleContainer title="Comparaciones" icon={GraficoBarrasIcon}>
         <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
-
-          <Tabs defaultValue="tab1" className="w-full h-full flex flex-col gap-4">
+          <Tabs
+            defaultValue="tab1"
+            className="w-full h-full flex flex-col gap-4"
+          >
             {/* Definición de tabs */}
             <TabsList className="rounded-sm w-full h-12 text-lg">
               <TabsTrigger value="tab1" className="rounded-sm">
@@ -190,17 +192,29 @@ export default function SanidadSection() {
             </TabsList>
 
             {/* Contenido de tabs */}
-            <TabsContent value="tab1" aria-label="GraficoTabla" className="flex flex-col gap-4">
-              <Chart data = {dataSanidad}/>
+            <TabsContent
+              value="tab1"
+              aria-label="GraficoTabla"
+              className="flex flex-col gap-4"
+            >
+              <Chart data={dataSanidad} />
               <DataTable columns={columnsSanidad} data={dataSanidad} />
             </TabsContent>
 
-            <TabsContent value="tab2" aria-label="Tabla" className="flex flex-col gap-4" >
+            <TabsContent
+              value="tab2"
+              aria-label="Tabla"
+              className="flex flex-col gap-4"
+            >
               <DataTable columns={columnsSanidad} data={dataSanidad} />
             </TabsContent>
 
-            <TabsContent value="tab3" aria-label="Grafico" className="flex flex-col gap-4">
-              <Chart data = {dataSanidad}/>
+            <TabsContent
+              value="tab3"
+              aria-label="Grafico"
+              className="flex flex-col gap-4"
+            >
+              <Chart data={dataSanidad} />
             </TabsContent>
           </Tabs>
         </div>

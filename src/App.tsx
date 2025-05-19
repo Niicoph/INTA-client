@@ -1,13 +1,9 @@
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
 import MaquinariaSection from "./components/Maquinaria/MaquinariaSection";
 import SanidadSection from "./components/Sanidad/SanidadSection";
 import FertilizacionSection from "./components/Fertilizacion/FertilizacionSection";
 
 function App() {
-
-
   return (
     <div className="flex justify-center items-center min-h-screen min-w-[350px] ">
       <main className="flex flex-col w-full min-h-screen p-4  lg:w-4/6">

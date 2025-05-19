@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CargaDatosIcon from "../../assets/Icons/Outlined/cargaDatos.png";
 
-import TitleContainer from "../TitleContainer/TitleContainer";
+import TitleContainer from "../ui/TitleContainer/TitleContainer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import ExchangeRateCard from "../ExchangeRate/ExchangeRateCard";
+import CotizacionesContainer from "../Cotizaciones/CotizacionesContainer";
 
 export default function FertilizacionSection() {
   const [principioActivo, setPrincipioActivo] = useState("");
@@ -26,7 +26,7 @@ export default function FertilizacionSection() {
 
   return (
     <>
-      <ExchangeRateCard />
+      <CotizacionesContainer />
       <TitleContainer title="Carga de datos" icon={CargaDatosIcon}>
         <div className="w-full rounded-b-lg p-4 gap-4  grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 ">
           <div className="flex flex-col gap-4">
@@ -39,7 +39,7 @@ export default function FertilizacionSection() {
                 <SelectItem value="sulfonitrato">Sulfonitrato</SelectItem>
                 <SelectItem value="triple-15">Triple 15</SelectItem>
                 <SelectItem value="nitratoCalcio">Nitrato calcio</SelectItem>
-                <SelectItem value="basfFoliar">Basf foliar</SelectItem>                
+                <SelectItem value="basfFoliar">Basf foliar</SelectItem>
               </SelectContent>
             </Select>
             {isCustomPrincipioActivo && (
@@ -77,7 +77,7 @@ export default function FertilizacionSection() {
             <Input
               type="number"
               id="precioDolares"
-              step="0.01" 
+              step="0.01"
               placeholder="Introduce el precio en dolares"
               className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
             />
@@ -87,7 +87,7 @@ export default function FertilizacionSection() {
             <Input
               type="number"
               id="dosis"
-              step="0.01" 
+              step="0.01"
               placeholder="Introduce la dosis en hl"
               className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
             />
@@ -107,8 +107,6 @@ export default function FertilizacionSection() {
           </div>
         </div>
       </TitleContainer>
-
-      
     </>
   );
 }
