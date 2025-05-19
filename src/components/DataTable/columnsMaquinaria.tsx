@@ -3,28 +3,10 @@ import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { type Maquinaria } from "@/types/maquinaria";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Maquinaria = {
-  potencia: number;
-  implemento: string;
-  valorimplemento: number;
-  coeficiente: number;
-  minutos: number; //minutos utiles
-  residuo: number;
-  consumo: number; //litro/hora
-  costohora: number;
-};
-
-export const columns: ColumnDef<Maquinaria>[] = [
+export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -48,6 +30,21 @@ export const columns: ColumnDef<Maquinaria>[] = [
     ),
     enableSorting: false,
     enableHiding: false,
+  },
+  {
+    accessorKey: "conjunto",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
+        >
+          Conjunto
+          <ArrowUpDown className="h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "potencia",
