@@ -5,6 +5,9 @@ import { DataTable } from "@/components/ui/DataTable/DataTable";
 import { columnsMaquinaria } from "@/components/ui/DataTable/columnsMaquinaria";
 import TitleContainer from "@/components/ui/TitleContainer/TitleContainer";
 
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
+
 /* Valores de testing para DataTable */
 const dataMaquinaria = [
   {
@@ -79,28 +82,38 @@ export default function VisualizacionContainer() {
   return (
     <TitleContainer title="Comparaciones" icon={GraficoBarrasIcon}>
       <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
-        <Tabs defaultValue="tab1" className="w-full h-full flex flex-col gap-4">
-          {/* Definición de tabs */}
-          <TabsList className="rounded-sm w-full h-12 text-lg">
-            <TabsTrigger value="tab1" className="rounded-sm">
-              Gráfico y Tabla
-            </TabsTrigger>
-            <TabsTrigger value="tab2" className="rounded-sm">
-              Tabla
-            </TabsTrigger>
-            <TabsTrigger value="tab3" className="rounded-sm">
-              Gráfico
-            </TabsTrigger>
-          </TabsList>
+        <Tabs
+          defaultValue="tab1"
+          className="w-full h-full flex flex-col relative"
+        >
+          <div className=" w-full flex flex-col gap-2  pt-[3px] md:flex-row">
+            {/* Definición de tabs */}
+            <TabsList className="rounded-sm  h-10 text-lg w-full md:w-fit">
+              <TabsTrigger value="tab1" className="rounded-sm">
+                Gráfico y Tabla
+              </TabsTrigger>
+              <TabsTrigger value="tab2" className="rounded-sm">
+                Tabla
+              </TabsTrigger>
+              <TabsTrigger value="tab3" className="rounded-sm">
+                Gráfico
+              </TabsTrigger>
+            </TabsList>
 
+            {/* Botón de descarga */}
+            <Button variant="outline" className="ml-auto h-10 w-full md:w-fit">
+              Descargar
+              <Download size={24} strokeWidth={2} />
+            </Button>
+          </div>
           {/* Contenido de tabs */}
           <TabsContent
             value="tab1"
             aria-label="GraficoTabla"
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-4 "
           >
-            <Chart data={dataMaquinaria} />
             <DataTable columns={columnsMaquinaria} data={dataMaquinaria} />
+            <Chart data={dataMaquinaria} />
           </TabsContent>
 
           <TabsContent

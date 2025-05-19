@@ -1,43 +1,46 @@
 import { type JSX } from "react";
 
 interface InfoCardProps {
-  type: string;
-  value: string;
+  name: string;
+  value: number;
   time: string;
+  date: string;
   icon: string | JSX.Element;
   color: string;
 }
 
 export default function CotizacionesCard({
-  type,
+  name,
   value,
   time,
   icon,
   color,
+  date,
 }: InfoCardProps) {
   return (
-    <div className="w-full flex items-stretch justify-between border-b border-border">
-      <div className="flex gap-2 w-full p-4 justify-between items-stretch">
-        <div className="w-full">
-          <div className="flex gap-2">
+    <div className="w-full flex items-stretch justify-between border-b  border-border md:border-r ">
+      <div className="flex w-full p-4 justify-between items-stretch">
+        <div className="w-full ">
+          <div className="flex gap-2 ">
             <div
-              className="p-3 rounded-md flex justify-center items-center"
-              style={{ backgroundColor: `#${color}` }}
+              className="p-3 rounded-md flex justify-center items-center bg-gradient-custom"
+              // style={{ backgroundColor: `#${color}` }}
             >
               {icon}
             </div>
-            <div className="flex flex-col justify-between">
-              <span className="text-lg inter-semibold text-muted-foreground">
-                {type}
+            <div className="w-full flex flex-col justify-between">
+              <span className="text-lg inter-semibold text-foreground">
+                {name}
               </span>
               <span className="text-xs inter-regular text-zinc-400">
-                {time}
+                {date}
               </span>
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-end w-2/4">
-          <span className="text-2xl inter-bold">${value},00</span>
+        <div className="flex flex-col justify-between w-30 items-end ">
+          <span className="text-xl inter-bold text-foreground">${value}</span>
+          <span className="text-xs inter-regular text-zinc-400">{time}</span>
         </div>
       </div>
     </div>

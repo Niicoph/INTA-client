@@ -3,7 +3,13 @@ import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { type Maquinaria } from "@/types/maquinaria";
 
 export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
@@ -41,7 +47,7 @@ export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Conjunto
-          <ArrowUpDown className="h-4 w-4" />
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
         </Button>
       );
     },
@@ -56,7 +62,7 @@ export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Potencia (CV)
-          <ArrowUpDown className="h-4 w-4" />
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
         </Button>
       );
     },
@@ -71,7 +77,7 @@ export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Implemento
-          <ArrowUpDown className="h-4 w-4" />
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
         </Button>
       );
     },
@@ -85,8 +91,8 @@ export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
-          Valor de implemento
-          <ArrowUpDown className="h-4 w-4" />
+          Valor implemento
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
         </Button>
       );
     },
@@ -101,7 +107,7 @@ export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Gasto coeficiente
-          <ArrowUpDown className="h-4 w-4" />
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
         </Button>
       );
     },
@@ -116,7 +122,7 @@ export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Minutos útiles
-          <ArrowUpDown className="h-4 w-4" />
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
         </Button>
       );
     },
@@ -131,7 +137,7 @@ export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Valor residual
-          <ArrowUpDown className="h-4 w-4" />
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
         </Button>
       );
     },
@@ -146,7 +152,7 @@ export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Consumo litros/hora
-          <ArrowUpDown className="h-4 w-4" />
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
         </Button>
       );
     },

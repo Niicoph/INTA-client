@@ -21,9 +21,10 @@ export default function CargaDatosContainer() {
   const isCustomDolar = valorDolar === "custom";
   return (
     <TitleContainer title="Carga de datos" icon={CargaDatosIcon}>
-      <div className="w-full rounded-b-lg p-4 gap-4  grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 ">
-        <div className="flex flex-col gap-4">
-          <Label htmlFor="valor-dolar">Valor Dolar</Label>
+      <div className="w-full rounded-b-lg p-4 grid gap-6 grid-cols-1 md:grid-cols-4">
+        {/* Valor Dólar */}
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="valor-dolar">Valor Dólar</Label>
           <Select onValueChange={(value) => setValorDolar(value)}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Selecciona una cotización" />
@@ -35,7 +36,6 @@ export default function CargaDatosContainer() {
               <SelectItem value="custom">Otro (especificar)</SelectItem>
             </SelectContent>
           </Select>
-
           {isCustomDolar && (
             <Input
               type="number"
@@ -45,16 +45,20 @@ export default function CargaDatosContainer() {
             />
           )}
         </div>
-        <div className="flex flex-col gap-4">
+
+        {/* Potencia Tractor */}
+        <div className="flex flex-col gap-2">
           <Label htmlFor="cv">Potencia Tractor</Label>
           <Input
             type="number"
             id="cv"
             placeholder="Introduce potencia"
-            className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
+            className="appearance-none placeholder:text-sm"
           />
         </div>
-        <div className="flex flex-col gap-4">
+
+        {/* Implemento */}
+        <div className="flex flex-col gap-2">
           <Label htmlFor="implemento">Implemento</Label>
           <Select onValueChange={(value) => setImplemento(value)}>
             <SelectTrigger className="w-full">
@@ -67,7 +71,6 @@ export default function CargaDatosContainer() {
               <SelectItem value="custom">Otro (especificar)</SelectItem>
             </SelectContent>
           </Select>
-
           {isCustom && (
             <Input
               type="text"
@@ -78,60 +81,66 @@ export default function CargaDatosContainer() {
           )}
         </div>
 
-        <div className="flex flex-col gap-4">
+        {/* Valor implemento */}
+        <div className="flex flex-col gap-2">
           <Label htmlFor="valor-implemento">Valor del implemento</Label>
           <Input
             type="number"
             id="valor-implemento"
             placeholder="Introduce valor"
-            className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
+            className="appearance-none placeholder:text-sm"
           />
         </div>
 
-        <div className="flex justify-between gap-4">
-          <div className="flex flex-col gap-4">
-            <Label htmlFor="coeficiente">Gasto coeficiente</Label>
+        {/* Gasto coeficiente */}
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="coeficiente">Gasto coeficiente</Label>
+          <Input
+            type="number"
+            id="coeficiente"
+            placeholder="Introduce gasto"
+            className="appearance-none placeholder:text-sm"
+          />
+        </div>
+        {/* Valor residual */}
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="valor-residual">Valor residual</Label>
+          <Input
+            type="number"
+            id="valor-residual"
+            placeholder="Introduce porcentaje"
+            className="appearance-none placeholder:text-sm"
+          />
+        </div>
+
+        <div className="flex flex-row gap-2">
+          {/* Consumo de combustible */}
+          <div className="flex flex-col gap-2 w-full">
+            <Label htmlFor="consumo-combustible">Consumo</Label>
             <Input
               type="number"
-              id="coeficiente"
-              placeholder="Introduce gasto"
-              className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
+              id="consumo-combustible"
+              placeholder="Introduce lts"
+              className="appearance-none placeholder:text-sm"
             />
           </div>
-          <div className="flex flex-col gap-4">
+          {/* Minutos útiles */}
+          <div className="flex flex-col gap-2 w-full">
             <Label htmlFor="minutos-utiles">Minutos útiles</Label>
             <Input
               type="number"
               id="minutos-utiles"
-              placeholder="Introduce minutos"
-              className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
+              placeholder="Introduce min"
+              className="placeholder:text-sm"
             />
           </div>
         </div>
-        <div className="flex justify-between gap-4">
-          <div className="flex flex-col gap-4">
-            <Label htmlFor="valor-residual">Valor residual</Label>
-            <Input
-              type="number"
-              id="valor-residual"
-              placeholder="Introduce porcentaje"
-              className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
-            />
-          </div>
-          <div className="flex flex-col gap-4">
-            <Label htmlFor="consumo-combustible">Consumo litro / hora</Label>
-            <Input
-              type="number"
-              id="consumo-combustible"
-              placeholder="Introduce litros"
-              className="appearance-none placeholder:text-sm" // aplicar clase segun navegador
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-4">
+        {/* Botón */}
+        <div className="flex flex-col gap-2 ">
           <Label htmlFor="nuevo-conjunto">Nuevo Conjunto</Label>
-          <Button className="bg-[#348fe2]">Agregar Conjunto</Button>
+          <Button className="w-full" variant={"submit"}>
+            Agregar Conjunto
+          </Button>
         </div>
       </div>
     </TitleContainer>

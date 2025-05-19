@@ -1,10 +1,32 @@
 import * as React from "react";
-import { type ColumnDef, type SortingState, type VisibilityState, flexRender, getCoreRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  type ColumnDef,
+  type SortingState,
+  type VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Download } from "lucide-react";
+
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -35,21 +57,17 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="">
+    <div>
       <div className="flex items-center py-1">
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columnas
-              <ChevronDown size={24} strokeWidth={2} />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Exportar
-              <ChevronDown size={24} strokeWidth={2} />
-            </Button>
-          </DropdownMenuTrigger>
+          {/* <div className="w-fit flex justify-end  gap-2 absolute top-1 right-32">
+            <DropdownMenuTrigger>
+              <Button variant="outline" className="ml-auto h-10">
+                Columnas
+                <ChevronDown size={24} strokeWidth={2} />
+              </Button>
+            </DropdownMenuTrigger>
+          </div> */}
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()
