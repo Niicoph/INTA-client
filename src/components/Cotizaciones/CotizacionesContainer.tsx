@@ -1,5 +1,6 @@
-import TitleContainer from "@/components/ui/TitleContainer/TitleContainer";
 import CotizacionesIcon from "../../assets/Icons/Outlined/cotizaciones.png";
+import TitleContainer from "@/components/ui/TitleContainer/TitleContainer";
+
 import CotizacionesCard from "./CotizacionesCard";
 import { useDollar } from "@/hooks/useDollar";
 import { type Dollar } from "@/types/dollar";
@@ -8,7 +9,6 @@ import { DollarSignIcon } from "lucide-react";
 export default function CotizacionesContainer() {
   const { dataCollection, isLoading, isError } = useDollar();
 
-  if (isLoading) return <div>Cargando...</div>;
   if (isError) return <div>Ocurrió un error</div>;
   if (!dataCollection) return null;
 
@@ -36,6 +36,7 @@ export default function CotizacionesContainer() {
 
           return (
             <CotizacionesCard
+              isLoading={isLoading}
               key={dollar.casa}
               name={dollar.nombre}
               value={dollar.venta}
