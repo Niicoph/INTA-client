@@ -1,12 +1,12 @@
 import CotizacionesIcon from "../../assets/Icons/Outlined/cotizaciones.png";
 import TitleContainer from "@/components/ui/TitleContainer/TitleContainer";
 
-import CotizacionesCard from "./CotizacionesCard";
+import CardCotizaciones from "./CardCotizaciones";
 import { useDollar } from "@/hooks/useDollar";
 import { type Dollar } from "@/types/dollar";
 import { DollarSignIcon } from "lucide-react";
 
-export default function CotizacionesContainer() {
+export default function ContainerCotizaciones() {
   const { dataCollection, isLoading, isError } = useDollar();
 
   if (isError) return <div>Ocurrió un error</div>;
@@ -14,7 +14,7 @@ export default function CotizacionesContainer() {
 
   return (
     <TitleContainer title="Cotizaciones" icon={CotizacionesIcon}>
-      <div className="w-full rounded-b-lg flex flex-col md:flex-row">
+      <div className="w-full rounded-b-lg flex flex-col lg:flex-row">
         {dataCollection.map((dollar: Dollar) => {
           const dateObj = new Date(dollar.fechaActualizacion);
           const time = dateObj.toLocaleTimeString("en-US", {
@@ -35,7 +35,7 @@ export default function CotizacionesContainer() {
           const date = `${capitalizedMonth} ${day}, ${year}`;
 
           return (
-            <CotizacionesCard
+            <CardCotizaciones
               isLoading={isLoading}
               key={dollar.casa}
               name={dollar.nombre}

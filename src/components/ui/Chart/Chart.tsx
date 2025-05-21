@@ -23,23 +23,19 @@ interface ChartData {
 export function Chart({ data }: ChartData) {
   return (
     <>
-      <Label htmlFor="conjunto" className="text-muted-foreground">
+      {/* <Label htmlFor="conjunto" className="text-muted-foreground">
         Costo/Hora
-      </Label>
-      <ChartContainer config={chartConfig} className="max-h-[250px] w-full">
+      </Label> */}
+      <ChartContainer config={chartConfig} className="max-h-[250px] w-full ">
         <BarChart accessibilityLayer data={data}>
           {/* Grilla */}
           <CartesianGrid vertical={false} />
-          {/* Ejes (valores) */}
-          {/* Eje Y con formato en $ */}
           <YAxis
             tickLine={false}
             axisLine={false}
             tickMargin={10}
             tickFormatter={(value) => `$${value.toLocaleString("es-AR")}`}
           />
-
-          {/* Eje X */}
           <XAxis
             dataKey="conjunto"
             tickLine={false}
@@ -47,16 +43,14 @@ export function Chart({ data }: ChartData) {
             axisLine={false}
             tickFormatter={(value) => value.slice(0, 3)}
           />
-          {/* tool tip that displays profit value comparision */}
           <ChartTooltip content={<ChartTooltipContent />} />
-          {/* limit the max width using barSize */}
           <Bar
             dataKey="costohora"
             // fill="var(--color-desktop)"
             fill={"#3b82f6"}
             radius={4}
             barSize={40}
-            stackId="a" // Agrupa con las otras, las centra
+            stackId="a"
           />
         </BarChart>
       </ChartContainer>

@@ -20,7 +20,7 @@ export default function CotizacionesCard({
   isLoading,
 }: InfoCardProps) {
   return (
-    <div className="w-full flex items-stretch justify-between  md:border-r ">
+    <div className="w-full flex items-stretch justify-between border-b border-border  md:border-r ">
       {isLoading ? (
         <CardSkeleton />
       ) : (
