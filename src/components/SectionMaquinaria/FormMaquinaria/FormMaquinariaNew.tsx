@@ -61,6 +61,8 @@ export default function FormMaquinariaNew() {
       cotizacion_gasoil_litro: isCustomGasoil ? Number(customGasoilValue) : data.cotizacion_gasoil_litro,
     };
     console.log(finalData);
+    setValorDolar("");
+    setValorGasoil("");
     setIsFormComplete(false);
     form.reset();
   };
@@ -94,10 +96,11 @@ export default function FormMaquinariaNew() {
                   <FormLabel>Dólar</FormLabel>
                   <div className="flex gap-2 ">
                     <Select
+                      value={valorDolar ?? ""}
                       onValueChange={(val) => {
                         setValorDolar(val);
                         if (val === 'custom') {
-                          field.onChange(null);
+                          field.onChange("");
                         } else {
                           field.onChange(Number(val));
                         }
@@ -141,10 +144,11 @@ export default function FormMaquinariaNew() {
                   <FormLabel>Gasoil</FormLabel>
                   <div className="flex gap-2">
                     <Select
+                      value={valorGasoil ?? ""}
                       onValueChange={(val) => {
                         setValorGasoil(val);
                         if (val === 'custom') {
-                          field.onChange(null);
+                          field.onChange("");
                         } else {
                           field.onChange(Number(val));
                         }
