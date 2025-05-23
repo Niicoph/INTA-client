@@ -1,40 +1,31 @@
-import { Label } from "@/components/ui/label";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { type costoEconomico } from '@/types/maquinaria';
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
-import { type Maquinaria } from "@/types/maquinaria";
-import { type Sanidad } from "@/types/sanidad";
+} from '@/components/ui/chart';
 
 const chartConfig = {
   desktop: {
-    label: "Desktop",
-    color: "#2563eb",
+    label: 'Desktop',
+    color: '#2563eb',
   },
 } satisfies ChartConfig;
 
-interface ChartData {
-  data: Maquinaria[] | Sanidad[]; //Por ahora, luego con Fertilizantes y Sanitizacion se refactorizar
-}
-
-export function Chart({ data }: ChartData) {
+export function Chart({ costosEconomicos }: { costosEconomicos: costoEconomico[] }) {
   return (
     <>
-      {/* <Label htmlFor="conjunto" className="text-muted-foreground">
-        Costo/Hora
-      </Label> */}
       <ChartContainer config={chartConfig} className="max-h-[250px] w-full ">
-        <BarChart accessibilityLayer data={data}>
+        <BarChart accessibilityLayer data={costosEconomicos}>
           {/* Grilla */}
           <CartesianGrid vertical={false} />
           <YAxis
             tickLine={false}
             axisLine={false}
             tickMargin={10}
-            tickFormatter={(value) => `$${value.toLocaleString("es-AR")}`}
+            tickFormatter={(value) => `$${value.toLocaleString('es-AR')}`}
           />
           <XAxis
             dataKey="conjunto"
@@ -45,9 +36,9 @@ export function Chart({ data }: ChartData) {
           />
           <ChartTooltip content={<ChartTooltipContent />} />
           <Bar
-            dataKey="costohora"
+            dataKey="total"
             // fill="var(--color-desktop)"
-            fill={"#3b82f6"}
+            fill={'#3b82f6'}
             radius={4}
             barSize={40}
             stackId="a"
