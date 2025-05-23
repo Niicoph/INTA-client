@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { useContext } from 'react';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
+import { calcularCostoTotalMaquinaria } from '@/utils/costoTotalMaquinaria';
 
 export default function ChartMaquinaria() {
   const maquinariaContext = useContext(MaquinariaContext);
@@ -15,37 +16,7 @@ export default function ChartMaquinaria() {
   }
 
   const { data } = maquinariaContext;
-
-  /**
-   * Calcula el costo economico total de la maquinaria
-   * @param data - Datos de la maquinaria
-   * @returns [] : costoEconomicoTotalObj : {costoEconomicoTotal: number}
-   */
-  const costosEconomicos = data.map((conjunto, index) => {
-    // COSTO ECONOMICO IMPLEMENTO
-    const valorResidual = (conjunto.valor_residual_pct_i * conjunto.precio_usd_i) / 100;
-    const amortizacion =
-      ((conjunto.precio_usd_i - valorResidual) / conjunto.horas_utiles_i) * conjunto.cotizacion_usd;
-    const costoCombustible =
-      conjunto.potencia_CV * conjunto.consumo_litros_hora_CV * conjunto.cotizacion_usd;
-    const costoMantenimiento =
-      conjunto.coef_gastos_conservacion_i * conjunto.precio_usd_i * conjunto.cotizacion_usd;
-    const costoEconomico = amortizacion + costoCombustible + costoMantenimiento;
-    // COSTO ECONOMICO TRACTOR
-    const valorResidualTractor = (conjunto.valor_residual_pct_t * conjunto.precio_usd_t) / 100;
-    const amortizacionTractor =
-      ((conjunto.precio_usd_t - valorResidualTractor) / conjunto.horas_utiles_t) *
-      conjunto.cotizacion_usd;
-    const costoMantenimientoTractor =
-      conjunto.coef_gastos_conservacion_t * conjunto.precio_usd_t * conjunto.cotizacion_usd;
-    const costoEconomicoTractor = amortizacionTractor + costoMantenimientoTractor;
-    // COSTO ECONOMICO TOTAL
-    const costoEconomicoTotalObj = {
-      total: costoEconomico + costoEconomicoTractor,
-      conjunto: `${index + 1}`,
-    };
-    return costoEconomicoTotalObj;
-  });
+  const costosEconomicos = calcularCostoTotalMaquinaria(data);
 
   return (
     <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">

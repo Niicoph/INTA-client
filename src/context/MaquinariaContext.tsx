@@ -16,4 +16,8 @@ const MaquinariaProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+if (!MaquinariaContext) {
+  throw new Error('MaquinariaContext must be used within a MaquinariaProvider');
+}
+
 export { MaquinariaContext, MaquinariaProvider };
