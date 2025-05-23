@@ -6,6 +6,13 @@ export const MaquinariaSchema = z.object({
     required_error: 'La cotización del dólar es obligatoria',
     invalid_type_error: 'Debe ser un número',
   })
+  .positive('Debe ser un valor positivo'),  
+
+  cotizacion_gasoil_litro: z
+  .number({
+    required_error: 'La cotización del gasoil es obligatoria',
+    invalid_type_error: 'Debe ser un número',
+  })
   .positive('Debe ser un valor positivo'),
 
   tractor: z

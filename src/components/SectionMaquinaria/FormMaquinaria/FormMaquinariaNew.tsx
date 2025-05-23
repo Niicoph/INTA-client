@@ -19,14 +19,22 @@ export default function FormMaquinariaNew() {
   const [customDolarValue, setCustomDolarValue] = useState(0);
   const isCustomDolar = valorDolar === 'custom';
 
+  const [valorGasoil, setValorGasoil] = useState('');
+  const [customGasoilValue, setCustomGasoilValue] = useState(0);
+  const isCustomGasoil = valorGasoil === 'custom';
+
   const maquinaria = useMaquinaria();
   const [selectedTractor, setSelectedTractor] = useState<Tractor | null>(null);  
   const [selectedImplemento, setSelectedImplemento] = useState<Implemento | null>(null);
 
+  const [isFormComplete, setIsFormComplete] = useState(false);
+
   const form = useForm<MaquinariaFormData>({
     resolver: zodResolver(MaquinariaSchema),
     defaultValues: {
+      //Cotizaciones
       cotizacion_usd: undefined,
+      cotizacion_gasoil_litro: undefined,
 
       //Datos del tractor
       tractor: '',
@@ -50,19 +58,19 @@ export default function FormMaquinariaNew() {
     const finalData = {
       ...data,      
       cotizacion_usd: isCustomDolar ? Number(customDolarValue) : data.cotizacion_usd,
+      cotizacion_gasoil_litro: isCustomGasoil ? Number(customGasoilValue) : data.cotizacion_gasoil_litro,
     };
     console.log(finalData);
+    setIsFormComplete(false);
     form.reset();
-    setCustomDolarValue(0);
   };
 
+  
   useEffect(() => {
     // Cada vez que cambian los valores, verificamos si ambos están completos
     const isFormComplete = !(selectedTractor === null || selectedImplemento === null || valorDolar === '');
     setIsFormComplete(isFormComplete);  // Estado para habilitar o deshabilitar el botón
   }, [selectedTractor, selectedImplemento, valorDolar]);
-
-  const [isFormComplete, setIsFormComplete] = useState(false);
 
   return (
     
@@ -72,60 +80,110 @@ export default function FormMaquinariaNew() {
         className="w-full rounded-b-lg p-4 grid gap-6 grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 border-amber-400 border-2"
       >
 
-        {/* cotizacion_usd */}
+        {/* Cotizaciones */}
         <div>
-          <h1> Cotización </h1>
-          <div className="w-full rounded-b-lg p-4 grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-1">
-          <FormField
-            control={form.control}
-            name="cotizacion_usd"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Valor Dólar</FormLabel>
-                <div className="flex gap-2">
-                  <Select
-                    onValueChange={(val) => {
-                      setValorDolar(val);
-                      if (val === 'custom') {
-                        field.onChange(null);
-                      } else {
-                        field.onChange(Number(val));
-                      }
-                    }}
-                  >
-                    {/* <FormControl> */}
-                    <SelectTrigger className="text-xs w-full">
-                      <SelectValue placeholder="Selecciona una cotización" />
-                    </SelectTrigger>
-                    {/* </FormControl> */}
-                    <SelectContent>
-                      <SelectItem value="1050">Oficial - $1050</SelectItem>
-                      <SelectItem value="custom">Otro (especificar)</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <Input
-                    disabled={!isCustomDolar}
-                    placeholder="Especificar cotización"
-                    type="number"
-                    //   value={customDolarValue}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-                      setCustomDolarValue(value);
-                      field.onChange(value);
-                    }}
-                  />
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <h1> Cotizaciones </h1>
+          <div className="w-full rounded-b-lg p-4 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+
+            {/* cotizacion_usd */}
+            <FormField
+              control={form.control}
+              name="cotizacion_usd"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Dólar</FormLabel>
+                  <div className="flex gap-2 ">
+                    <Select
+                      onValueChange={(val) => {
+                        setValorDolar(val);
+                        if (val === 'custom') {
+                          field.onChange(null);
+                        } else {
+                          field.onChange(Number(val));
+                        }
+                      }}
+                    >
+                      {/* <FormControl> */}
+                      <SelectTrigger className={`text-xs w-full border-2 ${field.value? "border-green-200": "border-blue-200"}`}>
+                        <SelectValue placeholder="Selecciona una cotización"/>
+                      </SelectTrigger>
+                      {/* </FormControl> */}
+                      <SelectContent>
+                        <SelectItem value="1050">Oficial - $1050</SelectItem>
+                        <SelectItem value="custom">Otro (especificar)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      className={`text-xs w-full border-2 ${field.value? "border-green-200": "border-gray-200"}`}
+                      disabled={!isCustomDolar}
+                      placeholder="Especificar cotización"
+                      type="number"
+                      //   value={customDolarValue}
+                      value={!isCustomDolar? "":field.value}
+                      onChange={(e) => {
+                        const value = Number(e.target.value);
+                        setCustomDolarValue(value);
+                        field.onChange(value);
+                      }}        
+                    />
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* cotizacion_gasoil_litro */}
+            <FormField
+              control={form.control}
+              name="cotizacion_gasoil_litro"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Gasoil</FormLabel>
+                  <div className="flex gap-2">
+                    <Select
+                      onValueChange={(val) => {
+                        setValorGasoil(val);
+                        if (val === 'custom') {
+                          field.onChange(null);
+                        } else {
+                          field.onChange(Number(val));
+                        }
+                      }}
+                    >
+                      {/* <FormControl> */}
+                      <SelectTrigger className={`text-xs w-full border-2 ${field.value? "border-green-200": "border-blue-200"}`}>
+                        <SelectValue placeholder="Selecciona una cotización" />
+                      </SelectTrigger>
+                      {/* </FormControl> */}
+                      <SelectContent>
+                        <SelectItem value="1100">YPF - $1100</SelectItem>
+                        <SelectItem value="custom">Otro (especificar)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      className={`text-xs w-full border-2 ${field.value? "border-green-200": "border-gray-200"}`}
+                      disabled={!isCustomGasoil}
+                      placeholder="Especificar cotización"
+                      type="number"
+                      value={!isCustomGasoil? "":field.value}
+                      onChange={(e) => {
+                        const value = Number(e.target.value);
+                        setCustomGasoilValue(value);
+                        field.onChange(value);
+                      }}                      
+                    />
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
         </div>
 
         {/* Tractor */}
         <div>
-          <h1> Datos del tractor </h1>
-          <div className='w-full rounded-b-lg p-4 grid gap-6 grid-cols-1 lg:grid-cols-2 xl:grid-cols-2'>
+          <h1> Tractor </h1>
+          <div className='w-full rounded-b-lg p-4 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'>
             {/* tractor.id = tractor.marca+ " " +tractor.modelo */}
             <FormField
               control={form.control}
@@ -135,14 +193,58 @@ export default function FormMaquinariaNew() {
                   <FormLabel>Tractor</FormLabel>                  
                     <Select
                       value={field.value}
+                      defaultValue='Tractor A (60 CV)'
                       onValueChange={(value) => {                        
                         field.onChange(value);
                         const tractor = maquinaria.data?.find(t => t.id === value) || null;
-                        setSelectedTractor(tractor);                                         
+
+                        setSelectedTractor(tractor);
+                        setSelectedImplemento(null);
+                        form.setValue("implemento", "", {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+
+                        if (tractor) {
+                          form.setValue("potencia_CV", tractor.potencia_CV, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue("precio_usd_t", tractor.precio_usd, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue("coef_gastos_conservacion_t", tractor.coef_gastos_conservacion, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue("valor_residual_pct_t", tractor.valor_residual_pct, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue("horas_utiles_t", tractor.horas_utiles, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+
+                          //Reinicia inputs de implemento al cambiar de tractor
+                          form.resetField("implemento");
+                          form.resetField("precio_usd_i");
+                          form.resetField("coef_gastos_conservacion_i");
+                          form.resetField("valor_residual_pct_i");
+                          form.resetField("consumo_litros_hora_CV");
+                          form.resetField("horas_utiles_i");
+                        }
                       }}
                     >
                       {/* <FormControl> */}
-                      <SelectTrigger className="text-xs w-full">
+                      <SelectTrigger className={`text-xs w-full border-2 ${field.value? "border-green-200": "border-blue-200"}`}>
                         <SelectValue placeholder="Selecciona un tractor" />
                       </SelectTrigger>
                       {/* </FormControl> */}
@@ -170,12 +272,9 @@ export default function FormMaquinariaNew() {
                       <Input
                         type="number"
                         placeholder="Selecciona un tractor de la lista"
-                        value={selectedTractor?.potencia_CV?? ""}
-                        onChange={(value) => {
-                          field.onChange(Number(value));
-                          console.log(field);
-                        }}
-                        disabled
+                        value={field.value?? ""}
+                        className='cursor-not-allowed'
+                        readOnly
                       />
                     </FormControl>
                   <FormMessage />
@@ -194,11 +293,9 @@ export default function FormMaquinariaNew() {
                     <Input
                       type="number"
                       placeholder="Selecciona un tractor de la lista"
-                      value={selectedTractor?.precio_usd ?? ""}
-                      onChange={(value) => {
-                        field.onChange(Number(value));
-                      }}
-                      disabled
+                      value={field.value?? ""}
+                      className='cursor-not-allowed'
+                      readOnly
                     />
                   </FormControl>
                   <FormMessage />
@@ -217,11 +314,9 @@ export default function FormMaquinariaNew() {
                     <Input
                       type="number"
                       placeholder="Selecciona un tractor de la lista"
-                      value={selectedTractor?.coef_gastos_conservacion ?? ""}
-                      onChange={(value) => {
-                        field.onChange(Number(value));
-                      }}
-                      disabled
+                      value={field.value?? ""}
+                      className='cursor-not-allowed'
+                      readOnly
                     />
                   </FormControl>
                   <FormMessage />
@@ -240,11 +335,9 @@ export default function FormMaquinariaNew() {
                     <Input
                       type="number"
                       placeholder="Selecciona un tractor de la lista"
-                      value={selectedTractor?.valor_residual_pct ?? ""}
-                      onChange={(value) => {
-                        field.onChange(Number(value));
-                      }}
-                      disabled
+                      value={field.value?? ""}
+                      className='cursor-not-allowed'
+                      readOnly
                     />
                   </FormControl>
                   <FormMessage />
@@ -262,11 +355,9 @@ export default function FormMaquinariaNew() {
                   <FormControl>
                     <Input
                       placeholder="Selecciona un tractor de la lista"
-                      value={selectedTractor?.horas_utiles?? ""}
-                      onChange={(value) => {
-                        field.onChange(Number(value));
-                      }}
-                      disabled
+                      value={field.value?? ""}
+                      className='cursor-not-allowed'
+                      readOnly
                     />
                   </FormControl>
                   <FormMessage />
@@ -279,23 +370,51 @@ export default function FormMaquinariaNew() {
 
         {/* Implemento */}
         <div>
-          <h1> Datos del implemento </h1>
-          <div className='w-full rounded-b-lg p-4 grid gap-6 grid-cols-1 lg:grid-cols-2 xl:grid-cols-2'>
+          <h1> Implemento </h1>
+          <div className='w-full rounded-b-lg p-4 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'>
             <FormField
               control={form.control}
               name="implemento"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Implemento</FormLabel>              
+                  <FormLabel>Implemento</FormLabel>
                     <Select
                       value={field.value}
                       onValueChange={(value) => {
                         field.onChange(value);
                         const implemento = selectedTractor?.implementos.find(i => i.nombre === value) || null;
                         setSelectedImplemento(implemento);
+
+                        if(implemento) {
+                          form.setValue("precio_usd_i", implemento.precio_usd, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue("coef_gastos_conservacion_i", implemento.coef_gastos_conservacion, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue("valor_residual_pct_i", implemento.valor_residual_pct, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue("consumo_litros_hora_CV", implemento.consumo_litros_hora_CV, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue("horas_utiles_i", implemento.horas_utiles, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                        }
                       }}
                     >
-                      <SelectTrigger className="text-xs w-full">
+                      <SelectTrigger className={`text-xs w-full border-2 ${field.value? "border-green-200": "border-blue-200"}`}>
                         <SelectValue placeholder={selectedTractor? "Selecciona un implemento": "Primero selecciona un tractor"
                           } />
                       </SelectTrigger>
@@ -312,6 +431,27 @@ export default function FormMaquinariaNew() {
               )}
             />
 
+            {/* Consumo implemento */}
+            <FormField
+              control={form.control}
+              name="consumo_litros_hora_CV"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Consumo lt/h.CV</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Selecciona un implemento de la lista"
+                      value={field.value?? ""}
+                      className='cursor-not-allowed'
+                      readOnly
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             {/* Valor Implemento */}
             <FormField
               control={form.control}
@@ -321,13 +461,11 @@ export default function FormMaquinariaNew() {
                   <FormLabel>Precio del implemento USD</FormLabel>
                   <FormControl>
                     <Input
-                      type="number"
+                      type='input'
                       placeholder="Selecciona un implemento de la lista"
-                      value={selectedImplemento?.precio_usd ?? ""}
-                      onChange={(value) => {
-                        field.onChange(Number(value));
-                      }}
-                      disabled
+                      value={field.value?? ""}
+                      className='cursor-not-allowed'
+                      readOnly
                     />
                   </FormControl>
                   <FormMessage />
@@ -346,11 +484,9 @@ export default function FormMaquinariaNew() {
                     <Input
                       type="number"
                       placeholder="Selecciona un implemento de la lista"
-                      value={selectedImplemento?.coef_gastos_conservacion ?? ""}
-                      onChange={(e) => {
-                        field.onChange(Number(e.target.value));
-                      }}
-                      disabled
+                      value={field.value?? ""}
+                      className='cursor-not-allowed'
+                      readOnly
                     />
                   </FormControl>
                   <FormMessage />
@@ -369,34 +505,9 @@ export default function FormMaquinariaNew() {
                     <Input
                       type="number"
                       placeholder="Selecciona un implemento de la lista"
-                      value={selectedImplemento?.valor_residual_pct ?? ""}
-                      onChange={(e) => {
-                        field.onChange(Number(e.target.value));
-                      }}
-                      disabled
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Consumo implemento */}
-            <FormField
-              control={form.control}
-              name="consumo_litros_hora_CV"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Consumo lt/h.CV</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="Selecciona un implemento de la lista"
-                      value={selectedImplemento?.consumo_litros_hora_CV ?? ""}
-                      onChange={(e) => {
-                        field.onChange(Number(e.target.value));
-                      }}
-                      disabled
+                      value={field.value?? ""}
+                      className='cursor-not-allowed'
+                      readOnly
                     />
                   </FormControl>
                   <FormMessage />
@@ -414,11 +525,9 @@ export default function FormMaquinariaNew() {
                   <FormControl>
                     <Input
                       placeholder="Selecciona un implemento de la lista"
-                      value={selectedImplemento?.horas_utiles ?? ""}
-                      onChange={(e) => {
-                        field.onChange(Number(e.target.value));
-                      }}
-                      disabled
+                      value={field.value?? ""}
+                      className='cursor-not-allowed'
+                      readOnly
                     />
                   </FormControl>
                   <FormMessage />
