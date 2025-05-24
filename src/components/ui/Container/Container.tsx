@@ -1,19 +1,19 @@
-import { cva, type VariantProps } from "class-variance-authority";
-import type { ReactNode } from "react";
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { ReactNode } from 'react';
 
 interface ContainerProps {
   className?: string;
   children?: ReactNode;
 }
 
-const containerVariants = cva("border border-border rounded-lg", {
+const containerVariants = cva('w-full border border-border rounded-lg', {
   variants: {
     variant: {
-      default: "bg-background/50 dark:bg-background/80",
+      default: 'bg-background/50 dark:bg-background/80',
     },
   },
   defaultVariants: {
-    variant: "default",
+    variant: 'default',
   },
 });
 
@@ -29,7 +29,5 @@ export default function Container({
   variant,
   children,
 }: ContainerProps & VariantProps<typeof containerVariants>) {
-  return (
-    <div className={containerVariants({ variant, className })}>{children}</div>
-  );
+  return <div className={containerVariants({ variant, className })}>{children}</div>;
 }

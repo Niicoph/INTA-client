@@ -1,5 +1,5 @@
-import { type JSX } from "react";
-import { CardSkeleton } from "../ui/CardSkeleton/CardSkeleton";
+import { type JSX } from 'react';
+import { CardSkeleton } from '../ui/CardSkeleton/CardSkeleton';
 
 interface InfoCardProps {
   name: string;
@@ -28,7 +28,7 @@ export default function CotizacionesCard({
           <div className="w-full ">
             <div className="flex gap-2">
               <div
-                className="p-3 rounded-md flex justify-center items-center bg-gradient-custom"
+                className="p-3 rounded-md flex justify-center items-center bg-black"
                 // style={{ backgroundColor: `#${color}` }}
               >
                 {icon}

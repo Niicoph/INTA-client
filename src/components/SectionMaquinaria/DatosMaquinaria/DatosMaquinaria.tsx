@@ -18,7 +18,7 @@ export default function ChartMaquinaria() {
 
   const { data } = maquinariaContext;
   const costosEconomicos: CostoEconomico[] = calcularCostoTotalMaquinaria(data);
-  
+
   return (
     <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
       <Tabs defaultValue="tab1" className="w-full h-full flex flex-col relative">
@@ -43,7 +43,11 @@ export default function ChartMaquinaria() {
           </Button>
         </div>
         {/* Contenido de tabs */}
-        <TabsContent value="tab1" aria-label="GraficoTabla" className="flex flex-col gap-4 ">
+        <TabsContent
+          value="tab1"
+          aria-label="GraficoTabla"
+          className="flex flex-col gap-4 max-w-[642px]"
+        >
           <Chart costosEconomicos={costosEconomicos} />
           <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
         </TabsContent>

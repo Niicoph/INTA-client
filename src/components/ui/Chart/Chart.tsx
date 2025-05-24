@@ -16,8 +16,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function Chart({ costosEconomicos }: { costosEconomicos: CostoEconomico[] }) {
-  
-  return (costosEconomicos && costosEconomicos.length > 0)? (
+  return costosEconomicos && costosEconomicos.length > 0 ? (
     <>
       <ChartContainer config={chartConfig} className="max-h-[250px] w-full ">
         <BarChart accessibilityLayer data={costosEconomicos}>
@@ -47,9 +46,7 @@ export function Chart({ costosEconomicos }: { costosEconomicos: CostoEconomico[]
         </BarChart>
       </ChartContainer>
     </>
-    
-  ): 
-  (
-    <Alert text="No hay conjuntos para mostrar."/>
+  ) : (
+    <Alert text="No hay conjuntos para mostrar." />
   );
 }

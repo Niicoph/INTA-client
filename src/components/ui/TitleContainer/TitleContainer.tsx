@@ -1,5 +1,5 @@
-import Container from "../Container/Container";
-import { type ReactNode } from "react";
+import Container from '../Container/Container';
+import { type ReactNode } from 'react';
 
 interface TitleContainerProps {
   className?: string;
@@ -8,12 +8,7 @@ interface TitleContainerProps {
   icon: string;
 }
 
-export default function TitleContainer({
-  title,
-  className,
-  icon,
-  children,
-}: TitleContainerProps) {
+export default function TitleContainer({ title, className, icon, children }: TitleContainerProps) {
   return (
     <Container>
       <div

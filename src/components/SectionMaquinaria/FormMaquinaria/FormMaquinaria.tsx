@@ -52,7 +52,7 @@ export default function FormMaquinaria() {
       implemento: isCustom ? customImplementoValue : data.implemento,
       valorDolar: isCustomDolar ? Number(customDolarValue) : data.valorDolar,
     };
-    console.log(finalData);
+
     form.reset();
     setCustomImplementoValue('');
     setCustomDolarValue(0);

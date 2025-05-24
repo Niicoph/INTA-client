@@ -1,13 +1,13 @@
-import CotizacionesIcon from "../../assets/Icons/Outlined/cotizaciones.png";
-import TitleContainer from "@/components/ui/TitleContainer/TitleContainer";
+import CotizacionesIcon from '../../assets/Icons/Outlined/cotizaciones.png';
+import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 
-import CardCotizaciones from "./CardCotizaciones";
-import { type Dollar } from "@/types/dollar";
-import { useDollar } from "@/hooks/useDollar";
-import { DollarSignIcon } from "lucide-react";
-import { type Gasoil } from "@/types/gasoil";
-import { useGasoil } from "@/hooks/useGasoil";
-import { Fuel } from "lucide-react";
+import CardCotizaciones from './CardCotizaciones';
+import { type Dollar } from '@/types/dollar';
+import { useDollar } from '@/hooks/useDollar';
+import { DollarSignIcon } from 'lucide-react';
+import { type Gasoil } from '@/types/gasoil';
+import { useGasoil } from '@/hooks/useGasoil';
+import { Fuel } from 'lucide-react';
 
 import {
   Carousel,
@@ -15,39 +15,36 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from '@/components/ui/carousel';
 
 export default function ContainerCotizaciones() {
   const dollarCollection = useDollar();
-  const gasoilCollection = useGasoil("NEUQUEN");
+  const gasoilCollection = useGasoil('NEUQUEN');
 
   if (dollarCollection.isError || gasoilCollection.isError) return <div>Ocurrió un error</div>;
   if (!dollarCollection.data || !gasoilCollection.data) return null;
-  console.log(dollarCollection.data);
-  console.log(gasoilCollection.data);
 
   return (
     <TitleContainer title="Cotizaciones" icon={CotizacionesIcon}>
       {/*Carousel de USD*/}
-      <Carousel>        
+      <Carousel>
         <CarouselContent>
           {dollarCollection.data.map((dollar: Dollar) => {
             const dateObj = new Date(dollar.fechaActualizacion);
-            const time = dateObj.toLocaleTimeString("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
-              second: "2-digit",
+            const time = dateObj.toLocaleTimeString('en-US', {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
               hour12: true,
             });
 
-            const rawDate = dateObj.toLocaleDateString("es-ES", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
+            const rawDate = dateObj.toLocaleDateString('es-ES', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
             });
-            const [day, , monthRaw, , year] = rawDate.split(" ");
-            const capitalizedMonth =
-              monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
+            const [day, , monthRaw, , year] = rawDate.split(' ');
+            const capitalizedMonth = monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
             const date = `${capitalizedMonth} ${day}, ${year}`;
 
             return (
@@ -66,8 +63,8 @@ export default function ContainerCotizaciones() {
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className="left-1"/>
-        <CarouselNext className="right-1"/>
+        <CarouselPrevious className="left-1" />
+        <CarouselNext className="right-1" />
       </Carousel>
 
       {/*Carousel de Gasoil*/}
@@ -75,22 +72,24 @@ export default function ContainerCotizaciones() {
         <CarouselContent>
           {gasoilCollection.data.map((gasoil: Gasoil, index) => {
             const dateObj = new Date(gasoil.fecha_vigencia);
-            const rawDate = dateObj.toLocaleDateString("es-ES", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
+            const rawDate = dateObj.toLocaleDateString('es-ES', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
             });
-            const [day, , monthRaw, , year] = rawDate.split(" ");
-            const capitalizedMonth =
-              monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
+            const [day, , monthRaw, , year] = rawDate.split(' ');
+            const capitalizedMonth = monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
             const date = `${capitalizedMonth} ${day}, ${year}`;
 
             return (
-              <CarouselItem key={`${index + 1}`+gasoil.empresabandera} className="lg:basis-1/2 pl-0">
+              <CarouselItem
+                key={`${index + 1}` + gasoil.empresabandera}
+                className="lg:basis-1/2 pl-0"
+              >
                 <CardCotizaciones
                   isLoading={dollarCollection.isLoading}
-                  key={gasoil.empresabandera+" - "+gasoil.localidad}
-                  name={gasoil.empresabandera+" - "+gasoil.localidad}
+                  key={gasoil.empresabandera + ' - ' + gasoil.localidad}
+                  name={gasoil.empresabandera + ' - ' + gasoil.localidad}
                   value={gasoil.precio}
                   date={gasoil.direccion}
                   time={date}
@@ -101,8 +100,8 @@ export default function ContainerCotizaciones() {
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className="left-1"/>
-        <CarouselNext className="right-1"/>
+        <CarouselPrevious className="left-1" />
+        <CarouselNext className="right-1" />
       </Carousel>
     </TitleContainer>
   );
