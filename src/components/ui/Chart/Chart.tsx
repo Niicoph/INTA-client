@@ -1,11 +1,12 @@
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
-import { type costoEconomico } from '@/types/maquinaria';
+import { type CostoEconomico } from '@/types/maquinaria';
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+import Alert from '../Alert';
 
 const chartConfig = {
   desktop: {
@@ -14,8 +15,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function Chart({ costosEconomicos }: { costosEconomicos: costoEconomico[] }) {
-  return (
+export function Chart({ costosEconomicos }: { costosEconomicos: CostoEconomico[] }) {
+  
+  return (costosEconomicos && costosEconomicos.length > 0)? (
     <>
       <ChartContainer config={chartConfig} className="max-h-[250px] w-full ">
         <BarChart accessibilityLayer data={costosEconomicos}>
@@ -28,7 +30,7 @@ export function Chart({ costosEconomicos }: { costosEconomicos: costoEconomico[]
             tickFormatter={(value) => `$${value.toLocaleString('es-AR')}`}
           />
           <XAxis
-            dataKey="conjunto"
+            dataKey="id_conjunto"
             tickLine={false}
             tickMargin={10}
             axisLine={false}
@@ -36,15 +38,18 @@ export function Chart({ costosEconomicos }: { costosEconomicos: costoEconomico[]
           />
           <ChartTooltip content={<ChartTooltipContent />} />
           <Bar
-            dataKey="total"
+            dataKey="costo_total_hora"
             // fill="var(--color-desktop)"
             fill={'#3b82f6'}
             radius={4}
             barSize={40}
-            stackId="a"
           />
         </BarChart>
       </ChartContainer>
     </>
+    
+  ): 
+  (
+    <Alert text="No hay conjuntos para mostrar."/>
   );
 }

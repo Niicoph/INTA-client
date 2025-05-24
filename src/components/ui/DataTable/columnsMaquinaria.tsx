@@ -10,10 +10,50 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { type Maquinaria } from "@/types/maquinaria";
+import { type CostoEconomico  } from "@/types/maquinaria";
 
-export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
-  {
+const colLabels = {
+  id_conjunto: "Conjunto",
+
+  conjunto: {
+    cotizacion_usd: "USD $",
+    cotizacion_gasoil_litro: "Gasoil $/lt",
+
+    tractor: "Tractor",
+    potencia_CV: "CV",
+    precio_usd_t: "USD",
+    coef_gastos_conservacion_t: "Coef Conservación",
+    horas_utiles_t: "Horas Útiles",
+    valor_residual_pct_t: "$ Residual %",
+
+    implemento: "Implemento",
+    consumo_litros_hora_CV: "Consumo lt/h CV",
+    precio_usd_i: "USD",
+    coef_gastos_conservacion_i: "Coef Conservacion",
+    horas_utiles_i: "Horas Útiles Imp",
+    valor_residual_pct_i: "$ Residual %",
+  },
+
+  amortizacion_t: "Amortización $/h",
+  costo_mantenimiento_t: "Mantenimiento $/h",
+  
+  amortizacion_i: "Amortizacion $/h",
+  costo_combustible: "Combustible $/h",
+  costo_mantenimiento_i: "Mantenimeitno $/h",
+
+  costo_total_hora: "Costo Económico $/h",
+}
+
+const colClasses = {
+  id: "px-2 bg-blue-100",
+  cotizaciones: "px-2 bg-orange-100",
+  tractor: "px-2 bg-red-100",
+  implemento: "px-2 bg-yellow-100",
+  costo_total: "px-2 bg-green-100",
+}
+
+export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
+  /*{
     id: "select",
     header: ({ table }) => (
       <Checkbox
@@ -36,142 +76,9 @@ export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
     ),
     enableSorting: false,
     enableHiding: false,
-  },
-  {
-    accessorKey: "conjunto",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Conjunto
-          {/* <ArrowUpDown className="h-4 w-4" /> */}
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "potencia",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Potencia (CV)
-          {/* <ArrowUpDown className="h-4 w-4" /> */}
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "implemento",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Implemento
-          {/* <ArrowUpDown className="h-4 w-4" /> */}
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "valorimplemento",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Valor implemento
-          {/* <ArrowUpDown className="h-4 w-4" /> */}
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "coeficiente",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Gasto coeficiente
-          {/* <ArrowUpDown className="h-4 w-4" /> */}
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "minutos",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Minutos útiles
-          {/* <ArrowUpDown className="h-4 w-4" /> */}
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "residuo",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Valor residual
-          {/* <ArrowUpDown className="h-4 w-4" /> */}
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "consumo",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Consumo litros/hora
-          {/* <ArrowUpDown className="h-4 w-4" /> */}
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "costohora",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Costo/hora
-          <ArrowUpDown className="h-4 w-4" />
-        </Button>
-      );
-    },
-  },
+  },*/
+
+  //MENU DE OPCIONES
   {
     id: "actions",
     cell: ({ row }) => {
@@ -198,10 +105,336 @@ export const columnsMaquinaria: ColumnDef<Maquinaria>[] = [
               Copiar datos de fila
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Editar fila</DropdownMenuItem>
             <DropdownMenuItem>Eliminar fila</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+      );
+    },
+  },
+
+  //IDENTIFICADOR DEL CONJUNTO
+  {
+    accessorKey: "id_conjunto",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.id} flex has-[>svg]:px-0`}
+        >
+          {colLabels.id_conjunto}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+
+  //COLUMNAS DE COTIZACIONES
+  {
+    accessorKey: "conjunto.cotizacion_usd",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.cotizaciones} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.cotizacion_usd}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "conjunto.cotizacion_gasoil_litro",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.cotizaciones} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.cotizacion_gasoil_litro}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+
+  //COLUMNAS DE TRACTOR
+  {
+    accessorKey: "conjunto.tractor",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.tractor} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.tractor}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "conjunto.potencia_CV",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.tractor} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.potencia_CV}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "conjunto.precio_usd_t",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.tractor} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.precio_usd_t}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "conjunto.coef_gastos_conservacion_t",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.tractor} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.coef_gastos_conservacion_t}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "conjunto.horas_utiles_t",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.tractor} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.horas_utiles_t}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "conjunto.valor_residual_pct_t",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.tractor} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.valor_residual_pct_t}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  //COLUMNAS PARA CALCULOS DEL TRACTOR
+  {
+    accessorKey: "amortizacion_t",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.tractor} flex has-[>svg]:px-0`}
+        >
+          {colLabels.amortizacion_t}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "costo_mantenimiento_t",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.tractor} flex has-[>svg]:px-0`}
+        >
+          {colLabels.costo_mantenimiento_t}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },  
+  
+  //COLUMNAS DE IMPLEMENTO
+  {
+    accessorKey: "conjunto.implemento",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.implemento} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.implemento}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "conjunto.consumo_litros_hora_CV",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.implemento} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.consumo_litros_hora_CV}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "conjunto.precio_usd_i",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.implemento} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.precio_usd_i}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "conjunto.coef_gastos_conservacion_i",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.implemento} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.coef_gastos_conservacion_i}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "conjunto.horas_utiles_i",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.implemento} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.horas_utiles_i}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "conjunto.valor_residual_pct_i",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.implemento} flex has-[>svg]:px-0`}
+        >
+          {colLabels.conjunto.valor_residual_pct_i}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  //COLUMNAS PARA CALCULOS DEL IMPLEMENTO
+  {
+    accessorKey: "amortizacion_i",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.implemento} flex has-[>svg]:px-0`}
+        >
+          {colLabels.amortizacion_i}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "costo_combustible",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.implemento} flex has-[>svg]:px-0`}
+        >
+          {colLabels.costo_combustible}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "costo_mantenimiento_i",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.implemento} flex has-[>svg]:px-0`}
+        >
+          {colLabels.costo_mantenimiento_i}
+          {/* <ArrowUpDown className="h-4 w-4" /> */}
+        </Button>
+      );
+    },
+  },
+
+  //COLUMNA PARA COSTO TOTAL POR HORA DEL CONJUNTO
+  {
+    accessorKey: "costo_total_hora",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className={`w-full text-left justify-start ${colClasses.costo_total} flex has-[>svg]:px-0`}
+        >
+          {colLabels.costo_total_hora}
+          {/*<ArrowUpDown className="h-4 w-4" />*/}
+        </Button>
       );
     },
   },

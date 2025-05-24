@@ -27,6 +27,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Alert from "../Alert";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -130,9 +131,9 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-24 px-5"
                 >
-                  No results.
+                  <Alert text="No hay conjuntos para mostrar." className="items-start p-8"/>
                 </TableCell>
               </TableRow>
             )}

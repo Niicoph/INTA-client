@@ -82,11 +82,22 @@ export default function FormMaquinariaNew() {
         : data.cotizacion_gasoil_litro,
     };
     setData((prevData) => [...prevData, finalData]);
-    setValorDolar('');
-    setValorGasoil('');
-    setIsFormComplete(false);
+    resetValues();
     form.reset();
   };
+
+  /**
+   * Reinicia valores no accesibles por el formulario
+   */
+  function resetValues() {
+    setSelectedTractor(null);
+    setSelectedImplemento(null);
+    setValorDolar('');
+    setValorGasoil('');
+    setCustomDolarValue(0);
+    setCustomGasoilValue(0);
+    setIsFormComplete(false);
+  }
 
   useEffect(() => {
     // Cada vez que cambian los valores, verificamos si ambos están completos
@@ -218,7 +229,7 @@ export default function FormMaquinariaNew() {
                 <FormItem>
                   <FormLabel>Tractor</FormLabel>
                   <Select
-                    value={field.value}
+                    value={field.value?? ""}
                     defaultValue="Tractor A (60 CV)"
                     onValueChange={(value) => {
                       field.onChange(value);
@@ -409,7 +420,7 @@ export default function FormMaquinariaNew() {
                 <FormItem className="flex flex-col">
                   <FormLabel>Implemento</FormLabel>
                   <Select
-                    value={field.value}
+                    value={selectedTractor? (field.value ?? ''):''}
                     onValueChange={(value) => {
                       field.onChange(value);
                       const implemento =

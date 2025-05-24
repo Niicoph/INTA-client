@@ -7,6 +7,7 @@ import { Download } from 'lucide-react';
 import { useContext } from 'react';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
 import { calcularCostoTotalMaquinaria } from '@/utils/costoTotalMaquinaria';
+import type { CostoEconomico } from '@/types/maquinaria';
 
 export default function ChartMaquinaria() {
   const maquinariaContext = useContext(MaquinariaContext);
@@ -16,8 +17,8 @@ export default function ChartMaquinaria() {
   }
 
   const { data } = maquinariaContext;
-  const costosEconomicos = calcularCostoTotalMaquinaria(data);
-
+  const costosEconomicos: CostoEconomico[] = calcularCostoTotalMaquinaria(data);
+  
   return (
     <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
       <Tabs defaultValue="tab1" className="w-full h-full flex flex-col relative">
@@ -37,18 +38,18 @@ export default function ChartMaquinaria() {
 
           {/* Botón de descarga */}
           <Button variant="outline" className="ml-auto h-10 w-full md:w-fit">
-            Descargar
+            PDF
             <Download size={24} strokeWidth={2} />
           </Button>
         </div>
         {/* Contenido de tabs */}
         <TabsContent value="tab1" aria-label="GraficoTabla" className="flex flex-col gap-4 ">
           <Chart costosEconomicos={costosEconomicos} />
-          {/* <DataTable columns={columnsMaquinaria} data={dataMaquinaria} /> */}
+          <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
         </TabsContent>
 
         <TabsContent value="tab2" aria-label="Tabla" className="flex flex-col gap-4">
-          {/* <DataTable columns={columnsMaquinaria} data={dataMaquinaria} /> */}
+          <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
         </TabsContent>
 
         <TabsContent value="tab3" aria-label="Grafico" className="flex flex-col gap-4">

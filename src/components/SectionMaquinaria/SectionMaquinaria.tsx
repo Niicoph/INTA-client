@@ -1,7 +1,7 @@
 import ContainerCargaDatos from '../ContainerCargaDatos/ContainerCargaDatos';
 import ContainerCotizaciones from '../ContainerCotizaciones/ContainerCotizaciones';
 import ContainerVisualizacion from '../ContainerVisualizacion/ContainerVisualizacion';
-import ChartMaquinaria from './ChartMaquinaria/ChartMaquinaria';
+import DatosMaquinaria from './DatosMaquinaria/DatosMaquinaria';
 import FormMaquinariaNew from './FormMaquinaria/FormMaquinariaNew';
 
 import { MaquinariaProvider } from '@/context/MaquinariaContext';
@@ -15,7 +15,7 @@ export default function SectionMaquinaria() {
           <FormMaquinariaNew />
         </ContainerCargaDatos>
         <ContainerVisualizacion>
-          <ChartMaquinaria />
+          <DatosMaquinaria />
         </ContainerVisualizacion>
       </MaquinariaProvider>
     </>
