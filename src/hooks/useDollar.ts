@@ -21,7 +21,7 @@ export function useDollar() {
   });
 
   return {
-    dataCollection: filteredData,
+    data: filteredData,
     isLoading: query.isLoading,
     isError: query.isError,
   };

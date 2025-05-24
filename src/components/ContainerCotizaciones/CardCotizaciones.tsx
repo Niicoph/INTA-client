@@ -20,13 +20,13 @@ export default function CotizacionesCard({
   isLoading,
 }: InfoCardProps) {
   return (
-    <div className="w-full flex items-stretch justify-between border-b border-border  md:border-r ">
+    <div className="w-full flex items-stretch justify-between border-b border-border md:border-r ">
       {isLoading ? (
         <CardSkeleton />
       ) : (
-        <div className="flex w-full p-4 justify-between items-stretch">
+        <div className="flex w-full p-4 justify-between items-stretch mx-5">
           <div className="w-full ">
-            <div className="flex gap-2 ">
+            <div className="flex gap-2">
               <div
                 className="p-3 rounded-md flex justify-center items-center bg-gradient-custom"
                 // style={{ backgroundColor: `#${color}` }}
@@ -34,16 +34,16 @@ export default function CotizacionesCard({
                 {icon}
               </div>
               <div className="w-full flex flex-col justify-between">
-                <span className="text-lg inter-semibold text-foreground">
+                <span className="text-sm inter-semibold text-foreground truncate inline-block max-w-[120px] sm:max-w-[160px] md:max-w-[200px] lg:max-w-[250px]">
                   {name}
                 </span>
-                <span className="text-xs inter-regular text-zinc-400">
+                <span className="text-xs inter-regular text-zinc-400 truncate inline-block max-w-[120px] sm:max-w-[160px] md:max-w-[200px] lg:max-w-[250px]">
                   {date}
                 </span>
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-between w-30 items-end ">
+          <div className="flex flex-col justify-between w-30 items-end">
             <span className="text-xl inter-bold text-foreground">${value}</span>
             <span className="text-xs inter-regular text-zinc-400">{time}</span>
           </div>

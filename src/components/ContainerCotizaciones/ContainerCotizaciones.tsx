@@ -2,52 +2,108 @@ import CotizacionesIcon from "../../assets/Icons/Outlined/cotizaciones.png";
 import TitleContainer from "@/components/ui/TitleContainer/TitleContainer";
 
 import CardCotizaciones from "./CardCotizaciones";
-import { useDollar } from "@/hooks/useDollar";
 import { type Dollar } from "@/types/dollar";
+import { useDollar } from "@/hooks/useDollar";
 import { DollarSignIcon } from "lucide-react";
+import { type Gasoil } from "@/types/gasoil";
+import { useGasoil } from "@/hooks/useGasoil";
+import { Fuel } from "lucide-react";
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 export default function ContainerCotizaciones() {
-  const { dataCollection, isLoading, isError } = useDollar();
+  const dollarCollection = useDollar();
+  const gasoilCollection = useGasoil("NEUQUEN");
 
-  if (isError) return <div>Ocurrió un error</div>;
-  if (!dataCollection) return null;
+  if (dollarCollection.isError || gasoilCollection.isError) return <div>Ocurrió un error</div>;
+  if (!dollarCollection.data || !gasoilCollection.data) return null;
+  console.log(dollarCollection.data);
+  console.log(gasoilCollection.data);
 
   return (
     <TitleContainer title="Cotizaciones" icon={CotizacionesIcon}>
-      <div className="w-full rounded-b-lg flex flex-col lg:flex-row">
-        {dataCollection.map((dollar: Dollar) => {
-          const dateObj = new Date(dollar.fechaActualizacion);
-          const time = dateObj.toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: true,
-          });
+      {/*Carousel de USD*/}
+      <Carousel>        
+        <CarouselContent>
+          {dollarCollection.data.map((dollar: Dollar) => {
+            const dateObj = new Date(dollar.fechaActualizacion);
+            const time = dateObj.toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+              hour12: true,
+            });
 
-          const rawDate = dateObj.toLocaleDateString("es-ES", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          });
-          const [day, , monthRaw, , year] = rawDate.split(" ");
-          const capitalizedMonth =
-            monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
-          const date = `${capitalizedMonth} ${day}, ${year}`;
+            const rawDate = dateObj.toLocaleDateString("es-ES", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+            const [day, , monthRaw, , year] = rawDate.split(" ");
+            const capitalizedMonth =
+              monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
+            const date = `${capitalizedMonth} ${day}, ${year}`;
 
-          return (
-            <CardCotizaciones
-              isLoading={isLoading}
-              key={dollar.casa}
-              name={dollar.nombre}
-              value={dollar.venta}
-              date={date}
-              time={time}
-              icon={<DollarSignIcon color="#ffffff" size={22} />}
-              color="96C1AC"
-            />
-          );
-        })}
-      </div>
+            return (
+              <CarouselItem key={dollar.casa} className="md:basis-1/2 lg:basis-1/2 pl-0">
+                <CardCotizaciones
+                  isLoading={dollarCollection.isLoading}
+                  key={dollar.casa}
+                  name={dollar.nombre}
+                  value={dollar.venta}
+                  date={date}
+                  time={time}
+                  icon={<DollarSignIcon color="#ffffff" size={22} />}
+                  color="96C1AC"
+                />
+              </CarouselItem>
+            );
+          })}
+        </CarouselContent>
+        <CarouselPrevious className="left-1"/>
+        <CarouselNext className="right-1"/>
+      </Carousel>
+
+      {/*Carousel de Gasoil*/}
+      <Carousel>
+        <CarouselContent>
+          {gasoilCollection.data.map((gasoil: Gasoil, index) => {
+            const dateObj = new Date(gasoil.fecha_vigencia);
+            const rawDate = dateObj.toLocaleDateString("es-ES", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+            const [day, , monthRaw, , year] = rawDate.split(" ");
+            const capitalizedMonth =
+              monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
+            const date = `${capitalizedMonth} ${day}, ${year}`;
+
+            return (
+              <CarouselItem key={`${index + 1}`+gasoil.empresabandera} className="lg:basis-1/2 pl-0">
+                <CardCotizaciones
+                  isLoading={dollarCollection.isLoading}
+                  key={gasoil.empresabandera+" - "+gasoil.localidad}
+                  name={gasoil.empresabandera+" - "+gasoil.localidad}
+                  value={gasoil.precio}
+                  date={gasoil.direccion}
+                  time={date}
+                  icon={<Fuel color="#ffffff" size={22} />}
+                  color="96C1AC"
+                />
+              </CarouselItem>
+            );
+          })}
+        </CarouselContent>
+        <CarouselPrevious className="left-1"/>
+        <CarouselNext className="right-1"/>
+      </Carousel>
     </TitleContainer>
   );
 }
