@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+// import * as Select from '@/components/ui/select';
 
 import { MaquinariaSchema } from '@/schemas/MaquinariaNew/schema';
 import { useMaquinaria } from '@/hooks/useMaquinaria';
@@ -113,12 +114,11 @@ export default function FormMaquinariaNew() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleFormSubmit)}
-        className="w-full rounded-b-lg p-4 gap-3 grid  grid-cols-1 lg:grid-cols-1 xl:grid-cols-1"
+        className="w-full rounded-b-lg p-4 gap-3 grid grid-row-2 grid-cols-1 md:grid-cols-2 "
       >
         {/* Cotizaciones */}
-        <div>
+        <div className="col-span-full">
           <div className="w-full grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-            {/* cotizacion_usd */}
             <FormField
               control={form.control}
               name="cotizacion_usd"
@@ -137,13 +137,11 @@ export default function FormMaquinariaNew() {
                         }
                       }}
                     >
-                      {/* <FormControl> */}
                       <SelectTrigger
                         className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
                         <SelectValue placeholder="Selecciona una cotización" />
                       </SelectTrigger>
-                      {/* </FormControl> */}
                       <SelectContent>
                         <SelectItem value="1050">Oficial - $1050</SelectItem>
                         <SelectItem value="custom">Otro (especificar)</SelectItem>
@@ -167,8 +165,6 @@ export default function FormMaquinariaNew() {
                 </FormItem>
               )}
             />
-
-            {/* cotizacion_gasoil_litro */}
             <FormField
               control={form.control}
               name="cotizacion_gasoil_litro"
@@ -187,13 +183,11 @@ export default function FormMaquinariaNew() {
                         }
                       }}
                     >
-                      {/* <FormControl> */}
                       <SelectTrigger
                         className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
                         <SelectValue placeholder="Selecciona una cotización" />
                       </SelectTrigger>
-                      {/* </FormControl> */}
                       <SelectContent>
                         <SelectItem value="1100">YPF - $1100</SelectItem>
                         <SelectItem value="custom">Otro (especificar)</SelectItem>
@@ -221,7 +215,7 @@ export default function FormMaquinariaNew() {
 
         {/* Tractor */}
         <div>
-          <div className="w-full  grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="w-full grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-1">
             <FormField
               control={form.control}
               name="tractor"
@@ -229,7 +223,7 @@ export default function FormMaquinariaNew() {
                 <FormItem>
                   <FormLabel>Tractor</FormLabel>
                   <Select
-                    value={field.value?? ""}
+                    value={field.value ?? ''}
                     defaultValue="Tractor A (60 CV)"
                     onValueChange={(value) => {
                       field.onChange(value);
@@ -412,7 +406,7 @@ export default function FormMaquinariaNew() {
 
         {/* Implemento */}
         <div>
-          <div className="w-full grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="w-full grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-1">
             <FormField
               control={form.control}
               name="implemento"
@@ -420,7 +414,7 @@ export default function FormMaquinariaNew() {
                 <FormItem className="flex flex-col">
                   <FormLabel>Implemento</FormLabel>
                   <Select
-                    value={selectedTractor? (field.value ?? ''):''}
+                    value={selectedTractor ? (field.value ?? '') : ''}
                     onValueChange={(value) => {
                       field.onChange(value);
                       const implemento =
@@ -589,8 +583,6 @@ export default function FormMaquinariaNew() {
             />
           </div>
         </div>
-
-        {/* Botón */}
         <div className="col-span-full flex flex-col gap-2">
           <Button className="w-full" type="submit" variant={'submit'} disabled={!isFormComplete}>
             Agregar Conjunto
