@@ -16,13 +16,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { Label } from '@/components/ui/label'
 
 export default function ContainerCotizaciones() {
   const dollarCollection = useDollar();
-  const gasoilCollection = useGasoil('NEUQUEN');
+  const gasoilCollectionNQN = useGasoil('NEUQUEN');
+   const gasoilCollectionRN = useGasoil('RIO NEGRO');
 
-  if (dollarCollection.isError || gasoilCollection.isError) return <div>Ocurrió un error</div>;
-  if (!dollarCollection.data || !gasoilCollection.data) return null;
+  if (dollarCollection.isError || gasoilCollectionNQN.isError || gasoilCollectionRN.isError) return <div>Ocurrió un error</div>;
+  if (!dollarCollection.data || !gasoilCollectionNQN.data || !gasoilCollectionRN.data) return null;
 
   return (
     <TitleContainer title="Cotizaciones" icon={CotizacionesIcon}>
@@ -67,10 +69,11 @@ export default function ContainerCotizaciones() {
         <CarouselNext className="right-1" />
       </Carousel>
 
-      {/*Carousel de Gasoil*/}
+      {/*Carousel de Gasoil NQN*/}
       <Carousel>
+        <Label htmlFor="gasoilNQN" className="mt-2 ml-7">Gasoil grado 2 - Provincia de Neuquén</Label>
         <CarouselContent>
-          {gasoilCollection.data.map((gasoil: Gasoil, index) => {
+          {gasoilCollectionNQN.data.map((gasoil: Gasoil, index) => {
             const dateObj = new Date(gasoil.fecha_vigencia);
             const rawDate = dateObj.toLocaleDateString('es-ES', {
               year: 'numeric',
@@ -85,6 +88,46 @@ export default function ContainerCotizaciones() {
               <CarouselItem
                 key={`${index + 1}` + gasoil.empresabandera}
                 className="lg:basis-1/2 pl-0"
+                id="gasoilNQN"
+              >
+                <CardCotizaciones
+                  isLoading={dollarCollection.isLoading}
+                  key={gasoil.empresabandera + ' - ' + gasoil.localidad}
+                  name={gasoil.empresabandera + ' - ' + gasoil.localidad}
+                  value={gasoil.precio}
+                  date={gasoil.direccion}
+                  time={date}
+                  icon={<Fuel color="#ffffff" size={22} />}
+                  color="96C1AC"
+                />
+              </CarouselItem>
+            );
+          })}
+        </CarouselContent>
+        <CarouselPrevious className="left-1" />
+        <CarouselNext className="right-1" />
+      </Carousel>
+
+      {/*Carousel de Gasoil*/}
+      <Carousel>
+        <Label htmlFor="gasoilRN" className="mt-2 ml-7">Gasoil grado 2 - Provincia de Río Negro</Label>
+        <CarouselContent>
+          {gasoilCollectionRN.data.map((gasoil: Gasoil, index) => {
+            const dateObj = new Date(gasoil.fecha_vigencia);
+            const rawDate = dateObj.toLocaleDateString('es-ES', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            });
+            const [day, , monthRaw, , year] = rawDate.split(' ');
+            const capitalizedMonth = monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
+            const date = `${capitalizedMonth} ${day}, ${year}`;
+
+            return (
+              <CarouselItem
+                key={`${index + 1}` + gasoil.empresabandera}
+                className="lg:basis-1/2 pl-0"
+                id="gasoilRN"
               >
                 <CardCotizaciones
                   isLoading={dollarCollection.isLoading}
