@@ -72,7 +72,7 @@ export default function ChartMaquinaria() {
           {
             table: {
               headerRows: 1,
-              widths: ['auto', 'auto', 'auto'],
+              widths: ['auto', 'auto'],
               body: tableBody,
             },
             layout: 'lightHorizontalLines',
