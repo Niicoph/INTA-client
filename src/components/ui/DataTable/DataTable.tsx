@@ -17,17 +17,17 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-import { Button } from '@/components/ui/button';
-import { ChevronDown } from 'lucide-react';
-import { Download } from 'lucide-react';
+// import { Button } from '@/components/ui/button';
+// import { ChevronDown } from 'lucide-react';
+// import { Download } from 'lucide-react';
 
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuTrigger,
+  // DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Alert from '../Alert';
+import Alert from '../alert';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -55,7 +55,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
 
   return (
     <div>
-      <div className="flex items-center py-1 ">
+      <div className="flex items-center py-1">
         <DropdownMenu>
           {/* <div className="w-fit flex justify-end  gap-2 absolute top-1 right-32">
             <DropdownMenuTrigger>
