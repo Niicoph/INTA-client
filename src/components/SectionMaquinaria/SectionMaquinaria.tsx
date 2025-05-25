@@ -11,13 +11,17 @@ export default function SectionMaquinaria() {
     <div className="flex flex-col gap-4">
       <ContainerCotizaciones />
       <MaquinariaProvider>
-        <div className="flex gap-4">
-          <ContainerCargaDatos>
-            <FormMaquinariaNew />
-          </ContainerCargaDatos>
-          <ContainerVisualizacion>
-            <DatosMaquinaria />
-          </ContainerVisualizacion>
+        <div className="flex flex-col md:flex-row gap-4 ">
+          <div className=" md:w-1/2">
+            <ContainerCargaDatos>
+              <FormMaquinariaNew />
+            </ContainerCargaDatos>
+          </div>
+          <div className="md:w-1/2">
+            <ContainerVisualizacion>
+              <DatosMaquinaria />
+            </ContainerVisualizacion>
+          </div>
         </div>
       </MaquinariaProvider>
     </div>
