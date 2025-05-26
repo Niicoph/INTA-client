@@ -8,14 +8,12 @@ import { useContext, useRef } from 'react';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
 import { calcularCostoTotalMaquinaria } from '@/utils/costoTotalMaquinaria';
 
-// import domtoimage from 'dom-to-image-more';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.vfs;
-//pdfMake.vfs = pdfFonts.pdfMake.vfs; error en pdfMake
 
 import type { CostoEconomico } from '@/types/maquinaria';
-import { mejorarImadenPDF } from '@/utils/mejorarImagenPDF';
+import { mejorarImagenPDF } from '@/utils/mejorarImagenPDF';
 
 export default function ChartMaquinaria() {
   const maquinariaContext = useContext(MaquinariaContext);
@@ -38,27 +36,7 @@ export default function ChartMaquinaria() {
     console.log('Botón PDF clickeado');
 
     try {
-      const dataUrl = await mejorarImadenPDF(captureRef.current, 2); // 2x resolución
-      // const node = captureRef.current!;
-      // const dataUrl = await domtoimage.toPng(node, {
-      //   quality: 2,
-      //   width: node.offsetWidth * 1.01,
-      //   height: node.offsetHeight * 1.03,
-      //   style: {
-      //     // backgroundColor: '#ffffff',
-      //   },
-      //   // filter: (el:any) => {
-      //   //   if (!(el instanceof Element)) return false; // ignoramos nodos que no son elementos
-
-      //   //   const style = window.getComputedStyle(el);
-      //   //   return (
-      //   //     style.color.includes('oklab') ||
-      //   //     style.backgroundColor.includes('oklab') ||
-      //   //     style.color.includes('oklch') ||
-      //   //     style.backgroundColor.includes('oklch')
-      //   //   );
-      //   // },
-      // });
+      const dataUrl = await mejorarImagenPDF(captureRef.current);
 
       const tableBody = [
         ['Conjunto', 'Costo total por hora ($)'],
@@ -71,7 +49,7 @@ export default function ChartMaquinaria() {
       const docDefinition: any = {
         content: [
           { text: 'Reporte de Maquinaria', style: 'header' },
-          { image: dataUrl, fit: [500, 350] },
+          { image: dataUrl, width: 500 },
           { text: 'Tabla de Costos', style: 'subheader' },
           {
             table: {
@@ -131,16 +109,10 @@ export default function ChartMaquinaria() {
           aria-label="GraficoTabla"
           className="flex flex-col gap-4 max-w-[642px]"
         >
-          
-            <div ref={captureRef} className="flex justify-center pb-1.5 -mt-1.2 -ml-1.2">
-              <Chart costosEconomicos={costosEconomicos} />
-            </div>
-            <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
-          
-          {/* <div ref={captureRef}>
+          <div ref={captureRef}>
             <Chart costosEconomicos={costosEconomicos} />
           </div>
-          <DataTable columns={columnsMaquinaria} data={costosEconomicos} /> */}
+          <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
         </TabsContent>
 
         <TabsContent value="tab2" aria-label="Tabla" className="flex flex-col gap-4">

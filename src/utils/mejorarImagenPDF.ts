@@ -1,33 +1,21 @@
-import domtoimage from 'dom-to-image-more';
+import { toPng } from 'html-to-image';
 
-export async function mejorarImadenPDF(
-  nodo: HTMLElement,
-  escala: number = 2,
-): Promise<string> {
-  const width = nodo.offsetWidth;
-  const height = nodo.offsetHeight;
-
+/**
+ * Genera una imagen PNG desde un nodo HTML, con opciones optimizadas para exportar a PDF.
+ * @param nodo - Elemento HTML del que se generará la imagen.
+ * @returns Una URL de imagen PNG en formato Data URL.
+ */
+export async function mejorarImagenPDF(nodo: HTMLElement): Promise<string> {
   try {
-    const dataUrl = await domtoimage.toPng(nodo, {
-      width: width * escala,
-      height: height * escala,
+    const dataUrl = await toPng(nodo, {
+      quality: 1,
+      backgroundColor: '#ffffff',
+      canvasWidth: 1000,
+      canvasHeight: 600,
       style: {
-        transform: `scale(${escala})`,
+        transform: 'scale(1)',
         transformOrigin: 'top left',
-        width: `${width}px`,
-        height: `${height}px`,
-        backgroundColor: '#ffffff',
       },
-    //   filter: (node: any) => {
-    //     if (!(node instanceof Element)) return true;
-    //     const style = window.getComputedStyle(node);
-    //     return (
-    //       !style.color.includes('oklab') &&
-    //       !style.backgroundColor.includes('oklab') &&
-    //       !style.color.includes('oklch') &&
-    //       !style.backgroundColor.includes('oklch')
-    //     );
-    //   },
     });
 
     return dataUrl;
