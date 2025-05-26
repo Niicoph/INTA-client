@@ -16,19 +16,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { Label } from '@/components/ui/label'
-
 export default function ContainerCotizaciones() {
   const dollarCollection = useDollar();
   const gasoilCollectionNQN = useGasoil('NEUQUEN');
-   const gasoilCollectionRN = useGasoil('RIO NEGRO');
+  const gasoilCollectionRN = useGasoil('RIO NEGRO');
 
-  if (dollarCollection.isError || gasoilCollectionNQN.isError || gasoilCollectionRN.isError) return <div>Ocurrió un error</div>;
+  if (dollarCollection.isError || gasoilCollectionNQN.isError || gasoilCollectionRN.isError)
+    return <div>Ocurrió un error</div>;
   if (!dollarCollection.data || !gasoilCollectionNQN.data || !gasoilCollectionRN.data) return null;
 
   return (
     <TitleContainer title="Cotizaciones" icon={CotizacionesIcon}>
-      {/*Carousel de USD*/}
       <Carousel>
         <CarouselContent>
           {dollarCollection.data.map((dollar: Dollar) => {
@@ -50,7 +48,7 @@ export default function ContainerCotizaciones() {
             const date = `${capitalizedMonth} ${day}, ${year}`;
 
             return (
-              <CarouselItem key={dollar.casa} className="md:basis-1/2 lg:basis-1/2 pl-0">
+              <CarouselItem key={dollar.casa} className="lg:basis-1/2 pl-0">
                 <CardCotizaciones
                   isLoading={dollarCollection.isLoading}
                   key={dollar.casa}
@@ -65,13 +63,11 @@ export default function ContainerCotizaciones() {
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className="left-1" />
-        <CarouselNext className="right-1" />
+        <CarouselPrevious className="-left-5" />
+        <CarouselNext className="-right-5" />
       </Carousel>
 
-      {/*Carousel de Gasoil NQN*/}
-      <Carousel>
-        <Label htmlFor="gasoilNQN" className="mt-2 ml-7">Gasoil grado 2 - Provincia de Neuquén</Label>
+      {/* <Carousel>
         <CarouselContent>
           {gasoilCollectionNQN.data.map((gasoil: Gasoil, index) => {
             const dateObj = new Date(gasoil.fecha_vigencia);
@@ -87,7 +83,7 @@ export default function ContainerCotizaciones() {
             return (
               <CarouselItem
                 key={`${index + 1}` + gasoil.empresabandera}
-                className="lg:basis-1/2 pl-0"
+                className="lg:basis-1/2 p-0 "
                 id="gasoilNQN"
               >
                 <CardCotizaciones
@@ -104,13 +100,10 @@ export default function ContainerCotizaciones() {
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className="left-1" />
-        <CarouselNext className="right-1" />
-      </Carousel>
-
-      {/*Carousel de Gasoil*/}
-      <Carousel>
-        <Label htmlFor="gasoilRN" className="mt-2 ml-7">Gasoil grado 2 - Provincia de Río Negro</Label>
+        <CarouselPrevious className="-left-5" />
+        <CarouselNext className="-right-5" />
+      </Carousel> */}
+      {/* <Carousel>
         <CarouselContent>
           {gasoilCollectionRN.data.map((gasoil: Gasoil, index) => {
             const dateObj = new Date(gasoil.fecha_vigencia);
@@ -143,9 +136,9 @@ export default function ContainerCotizaciones() {
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className="left-1" />
-        <CarouselNext className="right-1" />
-      </Carousel>
+        <CarouselPrevious className="-left-5" />
+        <CarouselNext className="-right-5" />
+      </Carousel> */}
     </TitleContainer>
   );
 }

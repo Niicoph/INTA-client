@@ -82,9 +82,8 @@ export default function ChartMaquinaria() {
 
   return (
     <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
-      <Tabs defaultValue="tab1" className="w-full h-full flex flex-col relative">
-        <div className=" w-full flex flex-col gap-2  pt-[3px] md:flex-row">
-          {/* Definición de tabs */}
+      <Tabs defaultValue="tab1" className="w-full h-full gap-4 flex flex-col relative">
+        <div className=" w-full flex flex-col gap-4 md:flex-row">
           <TabsList className="rounded-sm  h-10 text-lg w-full md:w-fit">
             <TabsTrigger value="tab1" className="rounded-sm">
               Gráfico y Tabla
@@ -96,19 +95,12 @@ export default function ChartMaquinaria() {
               Gráfico
             </TabsTrigger>
           </TabsList>
-
-          {/* Botón de descarga */}
           <Button variant="outline" className="ml-auto h-10 w-full md:w-fit" onClick={exportToPDF}>
             PDF
             <Download size={24} strokeWidth={2} />
           </Button>
         </div>
-        {/* Contenido de tabs */}
-        <TabsContent
-          value="tab1"
-          aria-label="GraficoTabla"
-          className="flex flex-col gap-4 max-w-[642px]"
-        >
+        <TabsContent value="tab1" aria-label="GraficoTabla" className="flex flex-col gap-4 w-full">
           <div ref={captureRef}>
             <Chart costosEconomicos={costosEconomicos} />
           </div>

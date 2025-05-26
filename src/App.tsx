@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="flex justify-center items-center min-h-screen min-w-[350px] bg-background">
       <main className="mx-auto flex flex-col min-h-screen w-full p-4  md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-[1400px]">
-        <Tabs defaultValue="tab1" className="w-full flex flex-col gap-4">
+        <Tabs defaultValue="tab1" className="w-full flex flex-col gap-4 flex-1">
           <TabsList className="rounded-sm w-full h-12 text-lg">
             <TabsTrigger value="tab1" className="rounded-sm">
               Maquinaria

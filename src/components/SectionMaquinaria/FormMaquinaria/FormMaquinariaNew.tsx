@@ -20,7 +20,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-// import * as Select from '@/components/ui/select';
 
 import { MaquinariaSchema } from '@/schemas/MaquinariaNew/schema';
 import { useMaquinaria } from '@/hooks/useMaquinaria';
@@ -101,31 +100,29 @@ export default function FormMaquinariaNew() {
   }
 
   useEffect(() => {
-    // Cada vez que cambian los valores, verificamos si ambos están completos
     const isFormComplete = !(
       selectedTractor === null ||
       selectedImplemento === null ||
       valorDolar === ''
     );
-    setIsFormComplete(isFormComplete); // Estado para habilitar o deshabilitar el botón
+    setIsFormComplete(isFormComplete);
   }, [selectedTractor, selectedImplemento, valorDolar]);
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleFormSubmit)}
-        className="w-full rounded-b-lg p-4 gap-3 grid grid-row-2 grid-cols-1 md:grid-cols-2 "
+        className="w-full h-full p-4 gap-4 grid grid-row-2 grid-cols-1 md:grid-cols-2"
       >
-        {/* Cotizaciones */}
         <div className="col-span-full">
-          <div className="w-full grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+          <div className="w-full grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2">
             <FormField
               control={form.control}
               name="cotizacion_usd"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Dólar</FormLabel>
-                  <div className="flex gap-2 ">
+                  <div className="flex gap-4 ">
                     <Select
                       value={valorDolar ?? ''}
                       onValueChange={(val) => {
@@ -140,7 +137,7 @@ export default function FormMaquinariaNew() {
                       <SelectTrigger
                         className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
-                        <SelectValue placeholder="Selecciona una cotización" />
+                        <SelectValue placeholder="Selecciona cotización" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="1050">Oficial - $1050</SelectItem>
@@ -150,7 +147,7 @@ export default function FormMaquinariaNew() {
                     <Input
                       className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-gray-200'}`}
                       disabled={!isCustomDolar}
-                      placeholder="Especificar cotización"
+                      placeholder="Especificar"
                       type="number"
                       //   value={customDolarValue}
                       value={!isCustomDolar ? '' : field.value}
@@ -171,7 +168,7 @@ export default function FormMaquinariaNew() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Gasoil</FormLabel>
-                  <div className="flex gap-2">
+                  <div className="flex gap-4">
                     <Select
                       value={valorGasoil ?? ''}
                       onValueChange={(val) => {
@@ -186,7 +183,7 @@ export default function FormMaquinariaNew() {
                       <SelectTrigger
                         className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
-                        <SelectValue placeholder="Selecciona una cotización" />
+                        <SelectValue placeholder="Selecciona cotización" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="1100">YPF - $1100</SelectItem>
@@ -196,7 +193,7 @@ export default function FormMaquinariaNew() {
                     <Input
                       className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-gray-200'}`}
                       disabled={!isCustomGasoil}
-                      placeholder="Especificar cotización"
+                      placeholder="Especificar"
                       type="number"
                       value={!isCustomGasoil ? '' : field.value}
                       onChange={(e) => {
@@ -212,10 +209,8 @@ export default function FormMaquinariaNew() {
             />
           </div>
         </div>
-
-        {/* Tractor */}
         <div>
-          <div className="w-full grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-1">
+          <div className="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-1">
             <FormField
               control={form.control}
               name="tractor"
@@ -278,13 +273,11 @@ export default function FormMaquinariaNew() {
                       }
                     }}
                   >
-                    {/* <FormControl> */}
                     <SelectTrigger
                       className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                     >
-                      <SelectValue placeholder="Selecciona un tractor" />
+                      <SelectValue placeholder="Selecciona tractor" />
                     </SelectTrigger>
-                    {/* </FormControl> */}
                     <SelectContent>
                       {maquinaria.data?.map((tractor: Tractor) => (
                         <SelectItem key={tractor.id} value={tractor.id}>
@@ -297,8 +290,6 @@ export default function FormMaquinariaNew() {
                 </FormItem>
               )}
             />
-
-            {/* potencia_CV */}
             <FormField
               control={form.control}
               name="potencia_CV"
@@ -308,7 +299,7 @@ export default function FormMaquinariaNew() {
                   <FormControl>
                     <Input
                       type="number"
-                      placeholder="Selecciona un tractor de la lista"
+                      placeholder="Selecciona tractor"
                       value={field.value ?? ''}
                       className="cursor-not-allowed"
                       readOnly
@@ -318,8 +309,6 @@ export default function FormMaquinariaNew() {
                 </FormItem>
               )}
             />
-
-            {/* precio_usd */}
             <FormField
               control={form.control}
               name="precio_usd_t"
@@ -329,7 +318,7 @@ export default function FormMaquinariaNew() {
                   <FormControl>
                     <Input
                       type="number"
-                      placeholder="Selecciona un tractor de la lista"
+                      placeholder="Selecciona tractor"
                       value={field.value ?? ''}
                       className="cursor-not-allowed"
                       readOnly
@@ -339,8 +328,6 @@ export default function FormMaquinariaNew() {
                 </FormItem>
               )}
             />
-
-            {/* Gasto Coeficiente Tractor*/}
             <FormField
               control={form.control}
               name="coef_gastos_conservacion_t"
@@ -350,7 +337,7 @@ export default function FormMaquinariaNew() {
                   <FormControl>
                     <Input
                       type="number"
-                      placeholder="Selecciona un tractor de la lista"
+                      placeholder="Selecciona tractor"
                       value={field.value ?? ''}
                       className="cursor-not-allowed"
                       readOnly
@@ -360,8 +347,6 @@ export default function FormMaquinariaNew() {
                 </FormItem>
               )}
             />
-
-            {/* Valor Residual Tractor */}
             <FormField
               control={form.control}
               name="valor_residual_pct_t"
@@ -371,7 +356,7 @@ export default function FormMaquinariaNew() {
                   <FormControl>
                     <Input
                       type="number"
-                      placeholder="Selecciona un tractor de la lista"
+                      placeholder="Selecciona tractor"
                       value={field.value ?? ''}
                       className="cursor-not-allowed"
                       readOnly
@@ -381,8 +366,6 @@ export default function FormMaquinariaNew() {
                 </FormItem>
               )}
             />
-
-            {/* Horas Útiles Tractor */}
             <FormField
               control={form.control}
               name="horas_utiles_t"
@@ -391,7 +374,7 @@ export default function FormMaquinariaNew() {
                   <FormLabel>Horas útiles</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Selecciona un tractor de la lista"
+                      placeholder="Selecciona tractor"
                       value={field.value ?? ''}
                       className="cursor-not-allowed"
                       readOnly
@@ -403,10 +386,8 @@ export default function FormMaquinariaNew() {
             />
           </div>
         </div>
-
-        {/* Implemento */}
         <div>
-          <div className="w-full grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-1">
+          <div className="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-1">
             <FormField
               control={form.control}
               name="implemento"
@@ -477,8 +458,6 @@ export default function FormMaquinariaNew() {
                 </FormItem>
               )}
             />
-
-            {/* Consumo implemento */}
             <FormField
               control={form.control}
               name="consumo_litros_hora_CV"
@@ -488,7 +467,7 @@ export default function FormMaquinariaNew() {
                   <FormControl>
                     <Input
                       type="number"
-                      placeholder="Selecciona un implemento de la lista"
+                      placeholder="Selecciona implemento"
                       value={field.value ?? ''}
                       className="cursor-not-allowed"
                       readOnly
@@ -498,8 +477,6 @@ export default function FormMaquinariaNew() {
                 </FormItem>
               )}
             />
-
-            {/* Valor Implemento */}
             <FormField
               control={form.control}
               name="precio_usd_i"
@@ -509,7 +486,7 @@ export default function FormMaquinariaNew() {
                   <FormControl>
                     <Input
                       type="input"
-                      placeholder="Selecciona un implemento de la lista"
+                      placeholder="Selecciona implemento"
                       value={field.value ?? ''}
                       className="cursor-not-allowed"
                       readOnly
@@ -519,8 +496,6 @@ export default function FormMaquinariaNew() {
                 </FormItem>
               )}
             />
-
-            {/* Gasto Coeficiente implemento */}
             <FormField
               control={form.control}
               name="coef_gastos_conservacion_i"
@@ -530,7 +505,7 @@ export default function FormMaquinariaNew() {
                   <FormControl>
                     <Input
                       type="number"
-                      placeholder="Selecciona un implemento de la lista"
+                      placeholder="Selecciona implemento"
                       value={field.value ?? ''}
                       className="cursor-not-allowed"
                       readOnly
@@ -540,8 +515,6 @@ export default function FormMaquinariaNew() {
                 </FormItem>
               )}
             />
-
-            {/* Valor Residual implemento */}
             <FormField
               control={form.control}
               name="valor_residual_pct_i"
@@ -551,7 +524,7 @@ export default function FormMaquinariaNew() {
                   <FormControl>
                     <Input
                       type="number"
-                      placeholder="Selecciona un implemento de la lista"
+                      placeholder="Selecciona implemento"
                       value={field.value ?? ''}
                       className="cursor-not-allowed"
                       readOnly
@@ -561,8 +534,6 @@ export default function FormMaquinariaNew() {
                 </FormItem>
               )}
             />
-
-            {/* Horas útiles implemento */}
             <FormField
               control={form.control}
               name="horas_utiles_i"
@@ -571,7 +542,7 @@ export default function FormMaquinariaNew() {
                   <FormLabel>Horas útiles</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Selecciona un implemento de la lista"
+                      placeholder="Selecciona implemento"
                       value={field.value ?? ''}
                       className="cursor-not-allowed"
                       readOnly

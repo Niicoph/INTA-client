@@ -1,6 +1,6 @@
  [
     {
-        "id": "Tractor A (60 CV)",
+        "id": "Tractor A",
         "marca": "Tractor A",
         "modelo": "(60 CV)",
         "potencia_CV": 60,
@@ -8,7 +8,7 @@
         "coef_gastos_conservacion": 0.00007,
         "horas_utiles": 12000,
         "valor_residual_pct": 20,
-        
+
         "implementos": [
             {
                 "nombre": "Arado",
@@ -37,7 +37,7 @@
         ]
     },
     {
-        "id": "Tractor B (100 CV)",
+        "id": "Tractor B",
         "marca": "Tractor B",
         "modelo": "(100 CV)",
         "potencia_CV": 100,
@@ -73,7 +73,7 @@
         ]
     },
     {
-        "id": "Tractor C (150 CV)",
+        "id": "Tractor C",
         "marca": "Tractor C",
         "modelo": "(150 CV)",
         "potencia_CV": 150,

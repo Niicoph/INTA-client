@@ -19,30 +19,30 @@ export function Chart({ costosEconomicos }: { costosEconomicos: CostoEconomico[]
   return costosEconomicos && costosEconomicos.length > 0 ? (
     <>
       <ChartContainer config={chartConfig} className="max-h-[250px] w-full">
-        <BarChart accessibilityLayer data={costosEconomicos} margin={{top: 20}}>
+        <BarChart accessibilityLayer data={costosEconomicos} margin={{ top: 20 }}>
           {/* Grilla */}
           <CartesianGrid vertical={false} />
           <YAxis
             tickLine={false}
             axisLine={false}
-            tickMargin={10}
-            tickFormatter={(value) => `$ ${value.toLocaleString('es-AR')}`}
+            tickMargin={1}
+            tickFormatter={(value) => `$${value.toLocaleString('es-AR')}`}
           />
           <XAxis
-            dataKey="id_conjunto"            
+            dataKey="id_conjunto"
             tickLine={false}
             tickMargin={10}
             axisLine={false}
             tickFormatter={(value) => value.slice(0, 3)}
           />
-          <ChartTooltip content={<ChartTooltipContent indicator='dashed'/>} />
+          <ChartTooltip content={<ChartTooltipContent indicator="dashed" />} />
           <Bar
             dataKey="costo_total_hora"
-            name = "Costo $/hora"            
+            name="Costo $/hora"
             // fill="var(--color-desktop)"
             fill={'#3b82f6'}
             radius={4}
-            barSize={40}            
+            barSize={40}
           />
         </BarChart>
       </ChartContainer>

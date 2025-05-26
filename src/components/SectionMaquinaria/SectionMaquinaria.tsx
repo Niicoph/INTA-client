@@ -8,16 +8,16 @@ import { MaquinariaProvider } from '@/context/MaquinariaContext';
 
 export default function SectionMaquinaria() {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 h-full flex-1">
       <ContainerCotizaciones />
       <MaquinariaProvider>
-        <div className="flex flex-col md:flex-row gap-4 ">
-          <div className=" md:w-1/2">
+        <div className="flex flex-col gap-4 flex-1  lg:flex-row ">
+          <div className="w-full min-w-0 flex flex-1 lg:w-1/2">
             <ContainerCargaDatos>
               <FormMaquinariaNew />
             </ContainerCargaDatos>
           </div>
-          <div className="md:w-1/2">
+          <div className="w-full min-w-0 flex flex-1 lg:w-1/2 ">
             <ContainerVisualizacion>
               <DatosMaquinaria />
             </ContainerVisualizacion>
