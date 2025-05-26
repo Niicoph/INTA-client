@@ -1,18 +1,19 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle } from 'lucide-react';
 
 interface AlertProps {
   text: string;
   className?: string; // Opcional
-};
+}
 
-export default function Alert({ text, className = "" }: AlertProps) {
-
-    return (
-        <div className={`flex flex-col items-center justify-center h-64 border border-dashed rounded-md bg-muted/50 text-muted-foreground gap-2 ${className}`}>
-            <div className="flex flex-col items-center justify-center gap-6">
-                <AlertCircle className="w-6 h-6"/>
-                <p className="text-sm">{text}</p>
-            </div>
-        </div>
-    );
+export default function Alert({ text, className = '' }: AlertProps) {
+  return (
+    <div
+      className={`flex flex-col items-center justify-center h-64 py-10 border border-dashed rounded-md bg-muted/50 text-muted-foreground gap-2 ${className}`}
+    >
+      <div className="flex flex-col items-center justify-center ">
+        <AlertCircle className="w-6 h-6" />
+        <p className="text-sm">{text}</p>
+      </div>
+    </div>
+  );
 }

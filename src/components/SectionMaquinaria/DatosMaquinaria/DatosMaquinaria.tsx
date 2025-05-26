@@ -81,7 +81,7 @@ export default function ChartMaquinaria() {
   };
 
   return (
-    <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col">
+    <div className="w-full h-full rounded-b-lg p-4 gap-4 flex flex-col">
       <Tabs defaultValue="tab1" className="w-full h-full gap-4 flex flex-col relative">
         <div className=" w-full flex flex-col gap-4 md:flex-row">
           <TabsList className="rounded-sm  h-10 text-lg w-full md:w-fit">
@@ -101,10 +101,12 @@ export default function ChartMaquinaria() {
           </Button>
         </div>
         <TabsContent value="tab1" aria-label="GraficoTabla" className="flex flex-col gap-4 w-full">
-          <div ref={captureRef}>
+          <div ref={captureRef} className="h-1/2">
             <Chart costosEconomicos={costosEconomicos} />
           </div>
-          <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
+          <div className="h-1/2   overflow-y-scroll no-scrollbar">
+            <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
+          </div>
         </TabsContent>
 
         <TabsContent value="tab2" aria-label="Tabla" className="flex flex-col gap-4">

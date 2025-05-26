@@ -112,17 +112,17 @@ export default function FormMaquinariaNew() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleFormSubmit)}
-        className="w-full h-full p-4 gap-4 grid grid-row-2 grid-cols-1 md:grid-cols-2"
+        className="w-full h-full p-4 gap-4 flex flex-col justify-between"
       >
         <div className="col-span-full">
-          <div className="w-full grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2">
+          <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2">
             <FormField
               control={form.control}
               name="cotizacion_usd"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Dólar</FormLabel>
-                  <div className="flex gap-4 ">
+                  <div className="flex flex-col gap-1 md:flex-row">
                     <Select
                       value={valorDolar ?? ''}
                       onValueChange={(val) => {
@@ -168,7 +168,7 @@ export default function FormMaquinariaNew() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Gasoil</FormLabel>
-                  <div className="flex gap-4">
+                  <div className="flex flex-col gap-1 md:flex-row">
                     <Select
                       value={valorGasoil ?? ''}
                       onValueChange={(val) => {
@@ -209,8 +209,8 @@ export default function FormMaquinariaNew() {
             />
           </div>
         </div>
-        <div>
-          <div className="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-1">
+        <div className="col-span-full h-full flex flex-col gap-4 md:flex-row">
+          <div className="w-full flex flex-col gap-4 ">
             <FormField
               control={form.control}
               name="tractor"
@@ -301,7 +301,7 @@ export default function FormMaquinariaNew() {
                       type="number"
                       placeholder="Selecciona tractor"
                       value={field.value ?? ''}
-                      className="cursor-not-allowed"
+                      className="cursor-not-allowed text-xs"
                       readOnly
                     />
                   </FormControl>
@@ -320,7 +320,7 @@ export default function FormMaquinariaNew() {
                       type="number"
                       placeholder="Selecciona tractor"
                       value={field.value ?? ''}
-                      className="cursor-not-allowed"
+                      className="cursor-not-allowed text-xs"
                       readOnly
                     />
                   </FormControl>
@@ -339,7 +339,7 @@ export default function FormMaquinariaNew() {
                       type="number"
                       placeholder="Selecciona tractor"
                       value={field.value ?? ''}
-                      className="cursor-not-allowed"
+                      className="cursor-not-allowed text-xs"
                       readOnly
                     />
                   </FormControl>
@@ -358,7 +358,7 @@ export default function FormMaquinariaNew() {
                       type="number"
                       placeholder="Selecciona tractor"
                       value={field.value ?? ''}
-                      className="cursor-not-allowed"
+                      className="cursor-not-allowed text-xs"
                       readOnly
                     />
                   </FormControl>
@@ -376,7 +376,7 @@ export default function FormMaquinariaNew() {
                     <Input
                       placeholder="Selecciona tractor"
                       value={field.value ?? ''}
-                      className="cursor-not-allowed"
+                      className="cursor-not-allowed text-xs"
                       readOnly
                     />
                   </FormControl>
@@ -385,9 +385,7 @@ export default function FormMaquinariaNew() {
               )}
             />
           </div>
-        </div>
-        <div>
-          <div className="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-1">
+          <div className="w-full flex flex-col gap-4 ">
             <FormField
               control={form.control}
               name="implemento"
@@ -440,9 +438,7 @@ export default function FormMaquinariaNew() {
                     >
                       <SelectValue
                         placeholder={
-                          selectedTractor
-                            ? 'Selecciona un implemento'
-                            : 'Primero selecciona un tractor'
+                          selectedTractor ? 'Selecciona un implemento' : 'Selecciona un tractor'
                         }
                       />
                     </SelectTrigger>
@@ -469,7 +465,7 @@ export default function FormMaquinariaNew() {
                       type="number"
                       placeholder="Selecciona implemento"
                       value={field.value ?? ''}
-                      className="cursor-not-allowed"
+                      className="cursor-not-allowed text-xs"
                       readOnly
                     />
                   </FormControl>
@@ -482,13 +478,13 @@ export default function FormMaquinariaNew() {
               name="precio_usd_i"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Precio del implemento USD</FormLabel>
+                  <FormLabel>Precio del implemento</FormLabel>
                   <FormControl>
                     <Input
                       type="input"
                       placeholder="Selecciona implemento"
                       value={field.value ?? ''}
-                      className="cursor-not-allowed"
+                      className="cursor-not-allowed text-xs"
                       readOnly
                     />
                   </FormControl>
@@ -507,7 +503,7 @@ export default function FormMaquinariaNew() {
                       type="number"
                       placeholder="Selecciona implemento"
                       value={field.value ?? ''}
-                      className="cursor-not-allowed"
+                      className="cursor-not-allowed text-xs"
                       readOnly
                     />
                   </FormControl>
@@ -526,7 +522,7 @@ export default function FormMaquinariaNew() {
                       type="number"
                       placeholder="Selecciona implemento"
                       value={field.value ?? ''}
-                      className="cursor-not-allowed"
+                      className="cursor-not-allowed text-xs"
                       readOnly
                     />
                   </FormControl>
@@ -544,7 +540,7 @@ export default function FormMaquinariaNew() {
                     <Input
                       placeholder="Selecciona implemento"
                       value={field.value ?? ''}
-                      className="cursor-not-allowed"
+                      className="cursor-not-allowed text-xs"
                       readOnly
                     />
                   </FormControl>
@@ -554,7 +550,7 @@ export default function FormMaquinariaNew() {
             />
           </div>
         </div>
-        <div className="col-span-full flex flex-col gap-2">
+        <div className="col-span-full">
           <Button className="w-full" type="submit" variant={'submit'} disabled={!isFormComplete}>
             Agregar Conjunto
           </Button>

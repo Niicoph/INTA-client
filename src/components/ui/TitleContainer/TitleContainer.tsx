@@ -9,7 +9,7 @@ interface TitleContainerProps {
 
 export default function TitleContainer({ title, className, icon, children }: TitleContainerProps) {
   return (
-    <div className="w-full border border-border rounded-md  flex flex-col">
+    <div className="w-full border border-border rounded-md flex flex-col">
       <div
         className={` border-b bg-muted border-border rounded-t-lg flex items-baseline justify-start py-2 px-4 gap-2 inter-regular ${className}`}
       >

@@ -67,7 +67,7 @@ export default function ContainerCotizaciones() {
         <CarouselNext className="-right-5" />
       </Carousel>
 
-      {/* <Carousel>
+      <Carousel>
         <CarouselContent>
           {gasoilCollectionNQN.data.map((gasoil: Gasoil, index) => {
             const dateObj = new Date(gasoil.fecha_vigencia);
@@ -102,7 +102,7 @@ export default function ContainerCotizaciones() {
         </CarouselContent>
         <CarouselPrevious className="-left-5" />
         <CarouselNext className="-right-5" />
-      </Carousel> */}
+      </Carousel>
       {/* <Carousel>
         <CarouselContent>
           {gasoilCollectionRN.data.map((gasoil: Gasoil, index) => {
