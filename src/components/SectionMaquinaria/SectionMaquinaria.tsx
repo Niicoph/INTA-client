@@ -4,26 +4,22 @@ import ContainerVisualizacion from '../ContainerVisualizacion/ContainerVisualiza
 import DatosMaquinaria from './DatosMaquinaria/DatosMaquinaria';
 import FormMaquinariaNew from './FormMaquinaria/FormMaquinariaNew';
 
-import { MaquinariaProvider } from '@/context/MaquinariaContext';
-
 export default function SectionMaquinaria() {
   return (
     <div className="flex flex-col gap-4 h-full flex-1">
       <ContainerCotizaciones />
-      <MaquinariaProvider>
-        <div className="flex flex-col gap-4 flex-1  lg:flex-row ">
-          <div className="w-full min-w-0 flex flex-1 lg:w-1/2">
-            <ContainerCargaDatos>
-              <FormMaquinariaNew />
-            </ContainerCargaDatos>
-          </div>
-          <div className="w-full min-w-0 flex flex-1 lg:w-1/2 ">
-            <ContainerVisualizacion>
-              <DatosMaquinaria />
-            </ContainerVisualizacion>
-          </div>
+      <div className="flex flex-col gap-4 flex-1  lg:flex-row ">
+        <div className="w-full min-w-0 flex flex-1 lg:w-1/2">
+          <ContainerCargaDatos>
+            <FormMaquinariaNew />
+          </ContainerCargaDatos>
         </div>
-      </MaquinariaProvider>
+        <div className="w-full min-w-0 flex flex-1 lg:w-1/2 ">
+          <ContainerVisualizacion>
+            <DatosMaquinaria />
+          </ContainerVisualizacion>
+        </div>
+      </div>
     </div>
   );
 }

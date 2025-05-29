@@ -26,6 +26,7 @@ import { useMaquinaria } from '@/hooks/useMaquinaria';
 import { type MaquinariaFormData } from '@/schemas/MaquinariaNew/types';
 import { type Implemento, type Tractor } from '@/types/maquinaria';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
+import { useDollar } from '@/hooks/useDollar';
 
 export default function FormMaquinariaNew() {
   const maquinariaContext = useContext(MaquinariaContext);
@@ -35,7 +36,7 @@ export default function FormMaquinariaNew() {
   }
 
   const { setData } = maquinariaContext;
-
+  const dollarCollection = useDollar();
   const [valorDolar, setValorDolar] = useState('');
   const [customDolarValue, setCustomDolarValue] = useState(0);
   const [valorGasoil, setValorGasoil] = useState('');
@@ -140,7 +141,13 @@ export default function FormMaquinariaNew() {
                         <SelectValue placeholder="Selecciona cotización" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1050">Oficial - $1050</SelectItem>
+                        {dollarCollection.data?.map((dollar) => {
+                          return (
+                            <SelectItem key={dollar.venta} value={dollar.venta.toString()}>
+                              {dollar.nombre} - ${dollar.venta}
+                            </SelectItem>
+                          );
+                        })}
                         <SelectItem value="custom">Otro (especificar)</SelectItem>
                       </SelectContent>
                     </Select>
