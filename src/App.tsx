@@ -12,13 +12,13 @@ import SipanLogo from '../src/assets/Sipan.png';
 
 function App() {
   return (
-    <main className="flex flex-col items-center w-full   min-h-screen min-w-[350px] bg-background">
-      <header className="w-full flex justify-center  py-4">
+    <main className="flex flex-col items-center w-full min-h-screen min-w-[350px] bg-background gap-4 px-4">
+      <header className="w-full flex justify-center pt-4">
         <img src={SipanLogo} alt="Sipan Logo" className="h-10" />
       </header>
       <Tabs
         defaultValue="tab1"
-        className="w-full flex h-full flex-col px-4 gap-4 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-[1400px]"
+        className="w-full flex h-full flex-col pb-4 gap-4 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-[1400px]"
       >
         <MaquinariaProvider>
           <TabsList className="rounded-sm w-full h-12 text-lg ">
