@@ -1,7 +1,9 @@
+import VisualizacionesIcon from '../../../assets/Icons/Outlined/graficoBarras.png';
 import { Chart } from '@/components/ui/Chart/Chart';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { DataTable } from '@/components/ui/DataTable/DataTable';
 import { columnsMaquinaria } from '@/components/ui/DataTable/columnsMaquinaria';
+import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { useContext, useRef } from 'react';
@@ -81,42 +83,61 @@ export default function ChartMaquinaria() {
   };
 
   return (
-    <div className="w-full h-full rounded-b-lg p-4 gap-4 flex flex-col">
-      <Tabs defaultValue="tab1" className="w-full h-full gap-4 flex flex-col relative">
-        <div className=" w-full flex flex-col gap-4 md:flex-row">
-          <TabsList className="rounded-sm  h-10 text-lg w-full md:w-fit">
-            <TabsTrigger value="tab1" className="rounded-sm">
-              Gráfico y Tabla
-            </TabsTrigger>
-            <TabsTrigger value="tab2" className="rounded-sm">
-              Tabla
-            </TabsTrigger>
-            <TabsTrigger value="tab3" className="rounded-sm">
-              Gráfico
-            </TabsTrigger>
-          </TabsList>
-          <Button variant="outline" className="ml-auto h-10 w-full md:w-fit" onClick={exportToPDF}>
-            PDF
-            <Download size={24} strokeWidth={2} />
-          </Button>
-        </div>
-        <TabsContent value="tab1" aria-label="GraficoTabla" className="flex flex-col gap-4 w-full">
-          <div ref={captureRef} className="h-1/2">
-            <Chart costosEconomicos={costosEconomicos} />
+    <div className="rounded-md flex flex-col border border-border overflow-hidden">
+      <TitleContainer icon={VisualizacionesIcon} title="Visualización Gráfica" />
+      <div className="w-full h-full rounded-b-lg p-4 gap-4 flex flex-col overflow-hidden">
+        <Tabs defaultValue="tab1" className="w-full flex flex-col flex-1 min-h-0 gap-4">
+          <div className="w-full flex flex-col gap-4 md:flex-row">
+            <TabsList className="rounded-sm h-10 text-lg w-full md:w-fit">
+              <TabsTrigger value="tab1" className="rounded-sm">
+                Gráfico y Tabla
+              </TabsTrigger>
+              <TabsTrigger value="tab2" className="rounded-sm">
+                Tabla
+              </TabsTrigger>
+              <TabsTrigger value="tab3" className="rounded-sm">
+                Gráfico
+              </TabsTrigger>
+            </TabsList>
+            <Button
+              variant="outline"
+              className="ml-auto h-10 w-full md:w-fit"
+              onClick={exportToPDF}
+            >
+              PDF
+              <Download size={24} strokeWidth={2} />
+            </Button>
           </div>
-          <div className="h-1/2   overflow-y-scroll no-scrollbar">
+          <TabsContent
+            value="tab1"
+            aria-label="GraficoTabla"
+            className="h-full w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden"
+          >
+            <div ref={captureRef} className="max-h-80 overflow-x-auto">
+              <Chart costosEconomicos={costosEconomicos} />
+            </div>
+            <div className="max-h-80 overflow-x-auto">
+              <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
+            </div>
+          </TabsContent>
+
+          <TabsContent
+            value="tab2"
+            aria-label="Tabla"
+            className="flex flex-col gap-4 h-full overflow-y-auto"
+          >
             <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
-          </div>
-        </TabsContent>
+          </TabsContent>
 
-        <TabsContent value="tab2" aria-label="Tabla" className="flex flex-col gap-4">
-          <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
-        </TabsContent>
-
-        <TabsContent value="tab3" aria-label="Grafico" className="flex flex-col gap-4">
-          <Chart costosEconomicos={costosEconomicos} />
-        </TabsContent>
-      </Tabs>
+          <TabsContent
+            value="tab3"
+            aria-label="Grafico"
+            className="flex flex-col gap-4 h-full overflow-y-auto"
+          >
+            <Chart costosEconomicos={costosEconomicos} />
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 }

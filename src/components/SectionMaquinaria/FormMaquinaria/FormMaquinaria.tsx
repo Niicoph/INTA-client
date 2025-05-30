@@ -1,11 +1,8 @@
 'use client';
-
-import { useState } from 'react';
+import CargaDatosIcon from '../../../assets/Icons/Outlined/cargaDatos.png';
+import { useState, useEffect, useContext } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { MaquinariaSchema } from '@/schemas/Maquinaria/schema';
-import { type MaquinariaFormData } from '@/schemas/Maquinaria/types';
-
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,254 +20,557 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
+
+import { MaquinariaSchema } from '@/schemas/MaquinariaNew/schema';
+import { useMaquinaria } from '@/hooks/useMaquinaria';
+import { type MaquinariaFormData } from '@/schemas/MaquinariaNew/types';
+import { type Implemento, type Tractor } from '@/types/maquinaria';
+import { MaquinariaContext } from '@/context/MaquinariaContext';
+import { useDollar } from '@/hooks/useDollar';
 
 export default function FormMaquinaria() {
-  const [implemento, setImplemento] = useState('');
+  const maquinariaContext = useContext(MaquinariaContext);
+
+  if (!maquinariaContext) {
+    return null;
+  }
+
+  const { setData } = maquinariaContext;
+  const dollarCollection = useDollar();
   const [valorDolar, setValorDolar] = useState('');
-  const [customImplementoValue, setCustomImplementoValue] = useState('');
   const [customDolarValue, setCustomDolarValue] = useState(0);
-  const isCustom = implemento === 'custom';
+  const [valorGasoil, setValorGasoil] = useState('');
+  const [customGasoilValue, setCustomGasoilValue] = useState(0);
+  const [selectedTractor, setSelectedTractor] = useState<Tractor | null>(null);
+  const [selectedImplemento, setSelectedImplemento] = useState<Implemento | null>(null);
+  const [isFormComplete, setIsFormComplete] = useState(false);
+  const maquinaria = useMaquinaria();
+
+  const isCustomGasoil = valorGasoil === 'custom';
   const isCustomDolar = valorDolar === 'custom';
 
   const form = useForm<MaquinariaFormData>({
     resolver: zodResolver(MaquinariaSchema),
     defaultValues: {
-      valorDolar: undefined,
-      potenciaTractor: undefined,
+      //Cotizaciones
+      cotizacion_usd: undefined,
+      cotizacion_gasoil_litro: undefined,
+
+      //Datos del tractor
+      tractor: '',
+      potencia_CV: undefined,
+      precio_usd_t: undefined,
+      coef_gastos_conservacion_t: undefined,
+      valor_residual_pct_t: undefined,
+      horas_utiles_t: undefined,
+
+      //Datos del implemento
       implemento: '',
-      valorImplemento: undefined,
-      gastoCoeficiente: undefined,
-      valorResidual: undefined,
-      consumo: undefined,
-      minutosUtiles: undefined,
+      precio_usd_i: undefined,
+      coef_gastos_conservacion_i: undefined,
+      valor_residual_pct_i: undefined,
+      consumo_litros_hora_CV: undefined,
+      horas_utiles_i: undefined,
     },
   });
 
   const handleFormSubmit = (data: MaquinariaFormData) => {
     const finalData = {
       ...data,
-      implemento: isCustom ? customImplementoValue : data.implemento,
-      valorDolar: isCustomDolar ? Number(customDolarValue) : data.valorDolar,
+      cotizacion_usd: isCustomDolar ? Number(customDolarValue) : data.cotizacion_usd,
+      cotizacion_gasoil_litro: isCustomGasoil
+        ? Number(customGasoilValue)
+        : data.cotizacion_gasoil_litro,
     };
-
+    setData((prevData) => [...prevData, finalData]);
+    resetValues();
     form.reset();
-    setCustomImplementoValue('');
-    setCustomDolarValue(0);
   };
 
-  return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(handleFormSubmit)}
-        className="w-full rounded-b-lg p-4 grid gap-6 grid-cols-1 lg:grid-cols-2 xl:grid-cols-2"
-      >
-        <FormField
-          control={form.control}
-          name="valorDolar"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Valor Dólar</FormLabel>
-              <div className="flex gap-2">
-                <Select
-                  onValueChange={(val) => {
-                    setValorDolar(val);
-                    if (val === 'custom') {
-                      field.onChange(undefined);
-                    } else {
-                      field.onChange(Number(val));
-                    }
-                  }}
-                >
-                  {/* <FormControl> */}
-                  <SelectTrigger className="text-xs w-full">
-                    <SelectValue placeholder="Selecciona una cotización" />
-                  </SelectTrigger>
-                  {/* </FormControl> */}
-                  <SelectContent>
-                    <SelectItem value="350">Oficial - $350</SelectItem>
-                    <SelectItem value="950">MEP - $950</SelectItem>
-                    <SelectItem value="850">Agro - $850</SelectItem>
-                    <SelectItem value="custom">Otro (especificar)</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Input
-                  disabled={!isCustomDolar}
-                  placeholder="Especificar cotización"
-                  type="number"
-                  //   value={customDolarValue}
-                  onChange={(e) => {
-                    const value = Number(e.target.value);
-                    setCustomDolarValue(value);
-                    field.onChange(value);
-                  }}
-                />
-              </div>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+  /**
+   * Reinicia valores no accesibles por el formulario
+   */
+  function resetValues() {
+    setSelectedTractor(null);
+    setSelectedImplemento(null);
+    setValorDolar('');
+    setValorGasoil('');
+    setCustomDolarValue(0);
+    setCustomGasoilValue(0);
+    setIsFormComplete(false);
+  }
 
-        {/* Potencia Tractor */}
-        <FormField
-          control={form.control}
-          name="potenciaTractor"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Potencia Tractor</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Introduce potencia"
-                  onChange={(e) => {
-                    field.onChange(Number(e.target.value));
-                  }}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Implemento */}
-        <FormField
-          control={form.control}
-          name="implemento"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Implemento</FormLabel>
-              <div className="flex gap-2 ">
-                <Select
-                  value={field.value}
-                  onValueChange={(value) => {
-                    setImplemento(value);
-                    field.onChange(value);
-                  }}
-                >
-                  <SelectTrigger className="text-xs w-full">
-                    <SelectValue placeholder="Selecciona un implemento" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="arado">Arado</SelectItem>
-                    <SelectItem value="rastra">Rastra de disco</SelectItem>
-                    <SelectItem value="pulverizadora">Pulverizadora</SelectItem>
-                    <SelectItem value="custom">Otro (especificar)</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Input
-                  disabled={!isCustom}
-                  placeholder="Especificar implemento"
-                  value={customImplementoValue}
-                  onChange={(e) => setCustomImplementoValue(e.target.value)}
-                />
-              </div>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Valor Implemento */}
-        <FormField
-          control={form.control}
-          name="valorImplemento"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Valor del implemento</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Introduce valor"
-                  onChange={(e) => {
-                    field.onChange(Number(e.target.value));
-                  }}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Gasto Coeficiente */}
-        <FormField
-          control={form.control}
-          name="gastoCoeficiente"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Gasto coeficiente</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Introduce coeficiente"
-                  onChange={(e) => {
-                    field.onChange(Number(e.target.value));
-                  }}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Valor Residual */}
-        <FormField
-          control={form.control}
-          name="valorResidual"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Valor residual</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Introduce valor residual"
-                  onChange={(e) => {
-                    field.onChange(Number(e.target.value));
-                  }}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Consumo */}
-        <FormField
-          control={form.control}
-          name="consumo"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Consumo</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Introduce litros"
-                  onChange={(e) => {
-                    field.onChange(Number(e.target.value));
-                  }}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Minutos útiles */}
-        <FormField
-          control={form.control}
-          name="minutosUtiles"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Minutos útiles</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Introduce minutos"
-                  onChange={(e) => {
-                    field.onChange(Number(e.target.value));
-                  }}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Botón */}
-        <div className="col-span-full flex flex-col gap-2">
-          <Button className="w-full" type="submit" variant={'submit'}>
-            Agregar Conjunto
-          </Button>
-        </div>
-      </form>
-    </Form>
+  useEffect(() => {
+    const isFormComplete = !(
+      selectedTractor === null ||
+      selectedImplemento === null ||
+      valorDolar === ''
+    );
+    setIsFormComplete(isFormComplete);
+  }, [selectedTractor, selectedImplemento, valorDolar]);
+
+  return (
+    <div className="rounded-md flex flex-col border border-border">
+      <TitleContainer icon={CargaDatosIcon} title="Carga de datos" />
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(handleFormSubmit)}
+          className="w-full h-full p-4 gap-4 flex flex-col justify-between"
+        >
+          <div className="col-span-full">
+            <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="cotizacion_usd"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Dólar</FormLabel>
+                    <div className="flex flex-col gap-1 md:flex-row">
+                      <Select
+                        value={valorDolar ?? ''}
+                        onValueChange={(val) => {
+                          setValorDolar(val);
+                          if (val === 'custom') {
+                            field.onChange('');
+                          } else {
+                            field.onChange(Number(val));
+                          }
+                        }}
+                      >
+                        <SelectTrigger
+                          className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
+                        >
+                          <SelectValue placeholder="Selecciona cotización" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {dollarCollection.data?.map((dollar) => {
+                            return (
+                              <SelectItem key={dollar.venta} value={dollar.venta.toString()}>
+                                {dollar.nombre} - ${dollar.venta}
+                              </SelectItem>
+                            );
+                          })}
+                          <SelectItem value="custom">Otro (especificar)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Input
+                        className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-gray-200'}`}
+                        disabled={!isCustomDolar}
+                        placeholder="Especificar"
+                        type="number"
+                        //   value={customDolarValue}
+                        value={!isCustomDolar ? '' : field.value}
+                        onChange={(e) => {
+                          const value = Number(e.target.value);
+                          setCustomDolarValue(value);
+                          field.onChange(value);
+                        }}
+                      />
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="cotizacion_gasoil_litro"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Gasoil</FormLabel>
+                    <div className="flex flex-col gap-1 md:flex-row">
+                      <Select
+                        value={valorGasoil ?? ''}
+                        onValueChange={(val) => {
+                          setValorGasoil(val);
+                          if (val === 'custom') {
+                            field.onChange('');
+                          } else {
+                            field.onChange(Number(val));
+                          }
+                        }}
+                      >
+                        <SelectTrigger
+                          className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
+                        >
+                          <SelectValue placeholder="Selecciona cotización" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="1100">YPF - $1100</SelectItem>
+                          <SelectItem value="custom">Otro (especificar)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Input
+                        className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-gray-200'}`}
+                        disabled={!isCustomGasoil}
+                        placeholder="Especificar"
+                        type="number"
+                        value={!isCustomGasoil ? '' : field.value}
+                        onChange={(e) => {
+                          const value = Number(e.target.value);
+                          setCustomGasoilValue(value);
+                          field.onChange(value);
+                        }}
+                      />
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+          <div className="col-span-full h-full flex flex-col gap-4 md:flex-row">
+            <div className="w-full flex flex-col gap-4 ">
+              <FormField
+                control={form.control}
+                name="tractor"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Tractor</FormLabel>
+                    <Select
+                      value={field.value ?? ''}
+                      defaultValue="Tractor A (60 CV)"
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        const tractor = maquinaria.data?.find((t) => t.id === value) || null;
+
+                        setSelectedTractor(tractor);
+                        setSelectedImplemento(null);
+                        form.setValue('implemento', '', {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                          shouldTouch: true,
+                        });
+
+                        if (tractor) {
+                          form.setValue('potencia_CV', tractor.potencia_CV, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue('precio_usd_t', tractor.precio_usd, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue(
+                            'coef_gastos_conservacion_t',
+                            tractor.coef_gastos_conservacion,
+                            {
+                              shouldValidate: true,
+                              shouldDirty: true,
+                              shouldTouch: true,
+                            }
+                          );
+                          form.setValue('valor_residual_pct_t', tractor.valor_residual_pct, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue('horas_utiles_t', tractor.horas_utiles, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+
+                          //Reinicia inputs de implemento al cambiar de tractor
+                          form.resetField('implemento');
+                          form.resetField('precio_usd_i');
+                          form.resetField('coef_gastos_conservacion_i');
+                          form.resetField('valor_residual_pct_i');
+                          form.resetField('consumo_litros_hora_CV');
+                          form.resetField('horas_utiles_i');
+                        }
+                      }}
+                    >
+                      <SelectTrigger
+                        className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
+                      >
+                        <SelectValue placeholder="Selecciona tractor" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {maquinaria.data?.map((tractor: Tractor) => (
+                          <SelectItem key={tractor.id} value={tractor.id}>
+                            {tractor.marca} {tractor.modelo}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="potencia_CV"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>CV del tractor</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Selecciona tractor"
+                        value={field.value ?? ''}
+                        className="cursor-not-allowed text-xs"
+                        readOnly
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="precio_usd_t"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Precio del tractor USD</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Selecciona tractor"
+                        value={field.value ?? ''}
+                        className="cursor-not-allowed text-xs"
+                        readOnly
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="coef_gastos_conservacion_t"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Coeficiente de gastos de conservación</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Selecciona tractor"
+                        value={field.value ?? ''}
+                        className="cursor-not-allowed text-xs"
+                        readOnly
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="valor_residual_pct_t"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Valor residual en %</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Selecciona tractor"
+                        value={field.value ?? ''}
+                        className="cursor-not-allowed text-xs"
+                        readOnly
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="horas_utiles_t"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Horas útiles</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Selecciona tractor"
+                        value={field.value ?? ''}
+                        className="cursor-not-allowed text-xs"
+                        readOnly
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="w-full flex flex-col gap-4 ">
+              <FormField
+                control={form.control}
+                name="implemento"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Implemento</FormLabel>
+                    <Select
+                      value={selectedTractor ? (field.value ?? '') : ''}
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        const implemento =
+                          selectedTractor?.implementos.find((i) => i.nombre === value) || null;
+                        setSelectedImplemento(implemento);
+
+                        if (implemento) {
+                          form.setValue('precio_usd_i', implemento.precio_usd, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue(
+                            'coef_gastos_conservacion_i',
+                            implemento.coef_gastos_conservacion,
+                            {
+                              shouldValidate: true,
+                              shouldDirty: true,
+                              shouldTouch: true,
+                            }
+                          );
+                          form.setValue('valor_residual_pct_i', implemento.valor_residual_pct, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                          form.setValue(
+                            'consumo_litros_hora_CV',
+                            implemento.consumo_litros_hora_CV,
+                            {
+                              shouldValidate: true,
+                              shouldDirty: true,
+                              shouldTouch: true,
+                            }
+                          );
+                          form.setValue('horas_utiles_i', implemento.horas_utiles, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
+                        }
+                      }}
+                    >
+                      <SelectTrigger
+                        className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
+                      >
+                        <SelectValue
+                          placeholder={
+                            selectedTractor ? 'Selecciona un implemento' : 'Selecciona un tractor'
+                          }
+                        />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {selectedTractor?.implementos.map((implemento: Implemento) => (
+                          <SelectItem key={implemento.nombre} value={implemento.nombre}>
+                            {implemento.nombre}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="consumo_litros_hora_CV"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Consumo lt/h.CV</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Selecciona implemento"
+                        value={field.value ?? ''}
+                        className="cursor-not-allowed text-xs"
+                        readOnly
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="precio_usd_i"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Precio del implemento</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="input"
+                        placeholder="Selecciona implemento"
+                        value={field.value ?? ''}
+                        className="cursor-not-allowed text-xs"
+                        readOnly
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="coef_gastos_conservacion_i"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Coeficiente de gastos de conservación</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Selecciona implemento"
+                        value={field.value ?? ''}
+                        className="cursor-not-allowed text-xs"
+                        readOnly
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="valor_residual_pct_i"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Valor residual en %</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Selecciona implemento"
+                        value={field.value ?? ''}
+                        className="cursor-not-allowed text-xs"
+                        readOnly
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="horas_utiles_i"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Horas útiles</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Selecciona implemento"
+                        value={field.value ?? ''}
+                        className="cursor-not-allowed text-xs"
+                        readOnly
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+          <div className="col-span-full">
+            <Button className="w-full" type="submit" variant={'submit'} disabled={!isFormComplete}>
+              Agregar Conjunto
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 }

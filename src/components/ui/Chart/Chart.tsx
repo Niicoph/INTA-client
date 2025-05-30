@@ -16,8 +16,14 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function Chart({ costosEconomicos }: { costosEconomicos: CostoEconomico[] }) {
+  const scrollThreshold = 12; // Número de barras que activa el scroll
+  const shouldScroll = costosEconomicos.length > scrollThreshold;
+
   return costosEconomicos && costosEconomicos.length > 0 ? (
-    <ChartContainer config={chartConfig} className="h-64 w-full">
+    <ChartContainer
+      config={chartConfig}
+      className={`h-full w-full ${shouldScroll ? ' w-[1000px]' : ''}`}
+    >
       <BarChart accessibilityLayer data={costosEconomicos} margin={{ top: 20 }}>
         {/* Grilla */}
         <CartesianGrid vertical={false} />
@@ -41,11 +47,12 @@ export function Chart({ costosEconomicos }: { costosEconomicos: CostoEconomico[]
           // fill="var(--color-desktop)"
           fill={'#3b82f6'}
           radius={4}
-          barSize={40}
+          barSize={30}
+          cursor="pointer"
         />
       </BarChart>
     </ChartContainer>
   ) : (
-    <Alert text="No hay conjuntos para mostrar." className="h-full" />
+    <Alert text="No hay conjuntos para mostrar." />
   );
 }

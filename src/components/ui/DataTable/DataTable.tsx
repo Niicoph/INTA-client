@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import {
   type ColumnDef,
   type SortingState,
@@ -16,12 +16,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  // DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import Alert from '../alert';
 
 interface DataTableProps<TData, TValue> {
@@ -30,9 +24,9 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
   const table = useReactTable({
     data,
     columns,
@@ -49,9 +43,9 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
   });
 
   return (
-    <>
+    <div className="h-full">
       {table.getRowModel().rows?.length ? (
-        <div className="w-full h-64 overflow-y-scroll table-fixed overflow-x-auto no-scrollbar">
+        <div className="w-full">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
@@ -80,8 +74,8 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
           </Table>
         </div>
       ) : (
-        <Alert text="No hay conjuntos para mostrar." className="h-full " />
+        <Alert text="No hay conjuntos para mostrar." />
       )}
-    </>
+    </div>
   );
 }
