@@ -56,7 +56,7 @@ export default function ContainerCotizaciones() {
               date={date}
               time={time}
               icon={<DollarSignIcon color="#ffffff" size={22} />}
-              color="96C1AC"
+              color="006936"
             />
           );
         })}
@@ -82,7 +82,7 @@ export default function ContainerCotizaciones() {
               date={gasoil.direccion}
               time={date}
               icon={<Fuel color="#ffffff" size={22} />}
-              color="96C1AC"
+              color="E86C2A"
             />
           );
         })}

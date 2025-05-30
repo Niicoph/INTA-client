@@ -116,7 +116,7 @@ export default function FormMaquinaria() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleFormSubmit)}
-          className="w-full h-full p-4 gap-4 flex flex-col justify-between"
+          className="w-full p-4 gap-4 flex flex-col justify-between"
         >
           <div className="col-span-full">
             <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2">

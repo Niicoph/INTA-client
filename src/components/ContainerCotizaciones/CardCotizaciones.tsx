@@ -7,7 +7,7 @@ interface InfoCardProps {
   time: string;
   date: string;
   icon: string | JSX.Element;
-  color: string;
+  color?: string;
   isLoading?: boolean;
 }
 
@@ -18,6 +18,7 @@ export default function CotizacionesCard({
   icon,
   date,
   isLoading,
+  color,
 }: InfoCardProps) {
   return (
     <div className="w-full flex items-stretch justify-between border-b border-border md:border-r">
@@ -28,8 +29,8 @@ export default function CotizacionesCard({
           <div className="w-full ">
             <div className="flex gap-2">
               <div
-                className="p-3 rounded-md flex justify-center items-center bg-black"
-                // style={{ backgroundColor: `#${color}` }}
+                className="p-3 rounded-md flex justify-center items-center"
+                style={{ backgroundColor: `#${color}` }}
               >
                 {icon}
               </div>

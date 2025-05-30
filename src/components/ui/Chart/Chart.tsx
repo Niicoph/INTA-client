@@ -36,14 +36,14 @@ export function Chart({ costosEconomicos }: { costosEconomicos: CostoEconomico[]
         <XAxis
           dataKey="id_conjunto"
           tickLine={false}
-          tickMargin={10}
+          tickMargin={7}
           axisLine={false}
           tickFormatter={(value) => value.slice(0, 3)}
         />
         <ChartTooltip content={<ChartTooltipContent indicator="dashed" />} />
         <Bar
           dataKey="costo_total_hora"
-          name="Costo $/hora"
+          name="Costo $/hora "
           // fill="var(--color-desktop)"
           fill={'#3b82f6'}
           radius={4}

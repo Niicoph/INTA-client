@@ -8,12 +8,17 @@ import FormSanidad from './components/SectionSanidad/FormSanidad/FormSanidad';
 import ChartSanidad from './components/SectionSanidad/ChartSanidad/ChartSanidad';
 import FormFertilizacion from './components/SectionFertilizacion/FormFertilizacion/FormFertilizacion';
 
+import SipanLogo from '../src/assets/Sipan.png';
+
 function App() {
   return (
-    <main className="flex flex-col items-center w-full p-4 min-h-screen min-w-[350px] bg-background 2xl:h-screen">
+    <main className="flex flex-col items-center w-full   min-h-screen min-w-[350px] bg-background">
+      <header className="w-full flex justify-center  py-4">
+        <img src={SipanLogo} alt="Sipan Logo" className="h-10" />
+      </header>
       <Tabs
         defaultValue="tab1"
-        className="w-full flex h-full flex-col gap-4 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-[1400px]"
+        className="w-full flex h-full flex-col px-4 gap-4 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-[1400px]"
       >
         <MaquinariaProvider>
           <TabsList className="rounded-sm w-full h-12 text-lg ">
@@ -48,7 +53,7 @@ function App() {
             <ContainerCotizaciones />
             <div className="h-full w-full gap-4 grid xl:grid-cols-2 overflow-hidden">
               <FormSanidad />
-              {/* <ChartSanidad /> */}
+              <ChartSanidad />
             </div>
           </TabsContent>
 
