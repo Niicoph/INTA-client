@@ -21,6 +21,12 @@ export const MaquinariaSchema = z.object({
     invalid_type_error: 'Debe seleccionar una opción',
   }),
 
+  nombre_t: z
+  .string({
+    required_error: 'La selección de nombre de tractor es obligatoria',
+    invalid_type_error: 'Debe seleccionar una opción',
+  }),
+
   potencia_CV: z
   .number({
     required_error: 'La potencia del tractor es obligatoria',
@@ -60,6 +66,12 @@ export const MaquinariaSchema = z.object({
   .string({
     required_error: 'El implemento es obligatorio',
     invalid_type_error: 'Debe ser un texto',
+  }),
+
+  nombre_i: z
+  .string({
+    required_error: 'La selección de nombre de implemento es obligatorio',
+    invalid_type_error: 'Debe seleccionar una opción',
   }),
   
   precio_usd_i: z

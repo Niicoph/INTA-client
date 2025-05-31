@@ -19,14 +19,14 @@ const colLabels = {
     cotizacion_usd: 'USD $',
     cotizacion_gasoil_litro: 'Gasoil $/lt',
 
-    tractor: 'Tractor',
+    nombre_t: 'Tractor',
     potencia_CV: 'CV',
     precio_usd_t: 'USD',
     coef_gastos_conservacion_t: 'Coef Conservación',
     horas_utiles_t: 'Horas Útiles',
     valor_residual_pct_t: '$ Residual %',
 
-    implemento: 'Implemento',
+    nombre_i: 'Implemento',
     consumo_litros_hora_CV: 'Consumo lt/h CV',
     precio_usd_i: 'USD',
     coef_gastos_conservacion_i: 'Coef Conservacion',
@@ -163,7 +163,7 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
 
   //COLUMNAS DE TRACTOR
   {
-    accessorKey: 'conjunto.tractor',
+    accessorKey: 'conjunto.nombre_t',
     header: ({ column }) => {
       return (
         <Button
@@ -171,7 +171,7 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           className={`w-full text-left text-xs justify-start ${colClasses.tractor} flex has-[>svg]:px-0`}
         >
-          {colLabels.conjunto.tractor}
+          {colLabels.conjunto.nombre_t}
           {/* <ArrowUpDown className="h-4 w-4" /> */}
         </Button>
       );
@@ -286,7 +286,7 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
 
   //COLUMNAS DE IMPLEMENTO
   {
-    accessorKey: 'conjunto.implemento',
+    accessorKey: 'conjunto.nombre_i',
     header: ({ column }) => {
       return (
         <Button
@@ -294,7 +294,7 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           className={`w-full text-left text-xs justify-start ${colClasses.implemento} flex has-[>svg]:px-0`}
         >
-          {colLabels.conjunto.implemento}
+          {colLabels.conjunto.nombre_i}
           {/* <ArrowUpDown className="h-4 w-4" /> */}
         </Button>
       );

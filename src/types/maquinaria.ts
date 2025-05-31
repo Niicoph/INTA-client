@@ -1,16 +1,15 @@
 export type Tractor = {
   id: string;
-  marca: string;
-  modelo: string;
+  nombre: string;
   potencia_CV: number;
   precio_usd: number;
   coef_gastos_conservacion: number;
   horas_utiles: number;
   valor_residual_pct: number;
-  implementos: Implemento[];
 };
 
 export type Implemento = {
+  id: string;
   nombre: string;
   precio_usd: number;
   coef_gastos_conservacion: number;
@@ -19,6 +18,16 @@ export type Implemento = {
   consumo_litros_hora_CV: number;
 };
 
+export type Maquinaria = {
+  tractor: Tractor,
+  implemento: Implemento
+}
+
+export type MaquinariaList = {
+    tractores: Tractor[],
+    implementos: Implemento[]
+}
+
 export type CostoEconomico = {
   id_conjunto?: string,
 
@@ -26,14 +35,14 @@ export type CostoEconomico = {
     cotizacion_usd: number;
     cotizacion_gasoil_litro: number;
 
-    tractor: string;
+    nombre_t: string;
     potencia_CV: number;
     precio_usd_t: number;
     coef_gastos_conservacion_t: number;
     horas_utiles_t: number;
     valor_residual_pct_t: number;
 
-    implemento: string,
+    nombre_i: string,
     precio_usd_i: number,
     coef_gastos_conservacion_i: number,
     horas_utiles_i: number,

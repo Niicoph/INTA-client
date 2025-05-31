@@ -1,20 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMaquinaria } from "@/services/maquinariaService";
-import { type Tractor } from "@/types/maquinaria";
+import { getMaquinariaList } from "@/services/maquinariaService";
+import { type MaquinariaList } from "@/types/maquinaria";
 
 export function useMaquinaria() {
-  const query = useQuery<Tractor[]>({
+  const query = useQuery<MaquinariaList>({
     queryKey: ["maquinariaData"],
-    queryFn: () => getMaquinaria(),
+    queryFn: () => getMaquinariaList(),
     staleTime: 1000 * 60 * 10, // 10 minutos
     refetchOnWindowFocus: false,
   });
 
   // Podés filtrar o transformar según lo que necesites
-  const tractors = query.data;
+  const maquinaria = query.data;
 
   return {
-    data: tractors,
+    data: maquinaria,
     isLoading: query.isLoading,
     isError: query.isError,
   };

@@ -1,9 +1,9 @@
-import { type Tractor } from "@/types/maquinaria";
+import { type MaquinariaList } from "@/types/maquinaria";
 
-export async function getMaquinaria(): Promise<Tractor[]> {
+export async function getMaquinariaList(): Promise<MaquinariaList> {
     const response = await fetch("/src/utils/maquinaria.json");
     if (!response.ok) {
-        throw new Error("No se pudo obtener la lista de tractores");
+        throw new Error("No se pudo obtener la lista de maquinarias");
     }
     const data = await response.json();
     return data;

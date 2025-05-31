@@ -1,111 +1,60 @@
- [
-    {
-        "id": "Tractor A",
-        "marca": "Tractor A",
-        "modelo": "(60 CV)",
-        "potencia_CV": 60,
-        "precio_usd": 54286,
-        "coef_gastos_conservacion": 0.00007,
-        "horas_utiles": 12000,
-        "valor_residual_pct": 20,
-
-        "implementos": [
-            {
-                "nombre": "Arado",
-                "precio_usd": 5714,
-                "coef_gastos_conservacion": 0.0004,
-                "horas_utiles": 5000,
-                "valor_residual_pct": 10,
-                "consumo_litros_hora_CV": 0.14
-            },
-            {
-                "nombre": "Rastra De Disco",
-                "precio_usd": 9524,
-                "coef_gastos_conservacion": 0.0003,
-                "horas_utiles": 5000,
-                "valor_residual_pct": 10,
-                "consumo_litros_hora_CV": 0.15
-            },
-            {
-                "nombre": "Pulverizadora",
-                "precio_usd": 15000,
-                "coef_gastos_conservacion": 0.0003,
-                "horas_utiles": 3000,
-                "valor_residual_pct": 20,
-                "consumo_litros_hora_CV": 0.16
-            }
-        ]
-    },
-    {
-        "id": "Tractor B",
-        "marca": "Tractor B",
-        "modelo": "(100 CV)",
-        "potencia_CV": 100,
-        "precio_usd": 76000,
-        "coef_gastos_conservacion": 0.00006,
-        "horas_utiles": 15000,
-        "valor_residual_pct": 25,
-        "implementos": [
-            {
-                "nombre": "Arado",
-                "precio_usd": 6500,
-                "coef_gastos_conservacion": 0.00035,
-                "horas_utiles": 6000,
-                "valor_residual_pct": 12,
-                "consumo_litros_hora_CV": 0.13
-            },
-            {
-                "nombre": "Rastra De Disco",
-                "precio_usd": 11000,
-                "coef_gastos_conservacion": 0.00028,
-                "horas_utiles": 6000,
-                "valor_residual_pct": 15,
-                "consumo_litros_hora_CV": 0.14
-            },
-            {
-                "nombre": "Pulverizadora",
-                "precio_usd": 18000,
-                "coef_gastos_conservacion": 0.00032,
-                "horas_utiles": 4000,
-                "valor_residual_pct": 18,
-                "consumo_litros_hora_CV": 0.17
-            }
-        ]
-    },
-    {
-        "id": "Tractor C",
-        "marca": "Tractor C",
-        "modelo": "(150 CV)",
-        "potencia_CV": 150,
-        "precio_usd": 120000,
-        "coef_gastos_conservacion": 0.00005,
-        "horas_utiles": 18000,
-        "valor_residual_pct": 30,
-        "implementos": [
-            {
-                "nombre": "Arado",
-                "precio_usd": 8000,
-                "coef_gastos_conservacion": 0.0004,
-                "horas_utiles": 8000,
-                "valor_residual_pct": 10,
-                "consumo_litros_hora_CV": 0.12
-            },
-            {
-                "nombre": "Rastra De Disco",
-                "precio_usd": 13500,
-                "coef_gastos_conservacion": 0.00025,
-                "horas_utiles": 7000,
-                "valor_residual_pct": 18,
-                "consumo_litros_hora_CV": 0.13
-            },
-            {
-                "nombre": "Pulverizadora",
-                "precio_usd": 22000,
-                "coef_gastos_conservacion": 0.00029,
-                "horas_utiles": 5000,
-                "valor_residual_pct": 20,
-                "consumo_litros_hora_CV": 0.18
-            }
-        ]
-    }
-]
+{
+    "tractores": [
+        {
+            "id": "1",
+            "nombre": "Tractor A",
+            "potencia_CV": 60,
+            "precio_usd": 54286,
+            "coef_gastos_conservacion": 0.00007,
+            "horas_utiles": 12000,
+            "valor_residual_pct": 20
+        },
+        {
+            "id": "2",
+            "nombre": "Tractor B",
+            "potencia_CV": 100,
+            "precio_usd": 76000,
+            "coef_gastos_conservacion": 0.00006,
+            "horas_utiles": 15000,
+            "valor_residual_pct": 25        
+        },
+        {
+            "id": "3",
+            "nombre": "Tractor C",
+            "potencia_CV": 150,
+            "precio_usd": 120000,
+            "coef_gastos_conservacion": 0.00005,
+            "horas_utiles": 18000,
+            "valor_residual_pct": 30
+        }
+    ],
+    "implementos": [
+        {
+            "id": "1",
+            "nombre": "Arado",
+            "precio_usd": 6500,
+            "coef_gastos_conservacion": 0.00035,
+            "horas_utiles": 6000,
+            "valor_residual_pct": 12,
+            "consumo_litros_hora_CV": 0.13
+        },
+        {
+            "id": "2",
+            "nombre": "Rastra De Disco",
+            "precio_usd": 11000,
+            "coef_gastos_conservacion": 0.00028,
+            "horas_utiles": 6000,
+            "valor_residual_pct": 15,
+            "consumo_litros_hora_CV": 0.14
+        },
+        {
+            "id": "3",
+            "nombre": "Pulverizadora",
+            "precio_usd": 18000,
+            "coef_gastos_conservacion": 0.00032,
+            "horas_utiles": 4000,
+            "valor_residual_pct": 18,
+            "consumo_litros_hora_CV": 0.17
+        }
+    ]
+}

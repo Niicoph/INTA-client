@@ -26,6 +26,7 @@ import { MaquinariaSchema } from '@/schemas/MaquinariaNew/schema';
 import { useMaquinaria } from '@/hooks/useMaquinaria';
 import { type MaquinariaFormData } from '@/schemas/MaquinariaNew/types';
 import { type Implemento, type Tractor } from '@/types/maquinaria';
+import { type Dollar } from '@/types/dollar';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
 import { useDollar } from '@/hooks/useDollar';
 
@@ -59,6 +60,7 @@ export default function FormMaquinaria() {
 
       //Datos del tractor
       tractor: '',
+      nombre_t: undefined,
       potencia_CV: undefined,
       precio_usd_t: undefined,
       coef_gastos_conservacion_t: undefined,
@@ -67,6 +69,7 @@ export default function FormMaquinaria() {
 
       //Datos del implemento
       implemento: '',
+      nombre_i: undefined,
       precio_usd_i: undefined,
       coef_gastos_conservacion_i: undefined,
       valor_residual_pct_i: undefined,
@@ -144,7 +147,7 @@ export default function FormMaquinaria() {
                           <SelectValue placeholder="Selecciona cotización" />
                         </SelectTrigger>
                         <SelectContent>
-                          {dollarCollection.data?.map((dollar) => {
+                          {dollarCollection.data?.map((dollar: Dollar) => {
                             return (
                               <SelectItem key={dollar.venta} value={dollar.venta.toString()}>
                                 {dollar.nombre} - ${dollar.venta}
@@ -229,20 +232,17 @@ export default function FormMaquinaria() {
                     <FormLabel>Tractor</FormLabel>
                     <Select
                       value={field.value ?? ''}
-                      defaultValue="Tractor A (60 CV)"
                       onValueChange={(value) => {
                         field.onChange(value);
-                        const tractor = maquinaria.data?.find((t) => t.id === value) || null;
-
+                        const tractor = maquinaria.data?.tractores.find((t) => t.id === value) || null;
                         setSelectedTractor(tractor);
-                        setSelectedImplemento(null);
-                        form.setValue('implemento', '', {
-                          shouldValidate: true,
-                          shouldDirty: true,
-                          shouldTouch: true,
-                        });
 
                         if (tractor) {
+                          form.setValue('nombre_t', tractor.nombre, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
                           form.setValue('potencia_CV', tractor.potencia_CV, {
                             shouldValidate: true,
                             shouldDirty: true,
@@ -272,14 +272,6 @@ export default function FormMaquinaria() {
                             shouldDirty: true,
                             shouldTouch: true,
                           });
-
-                          //Reinicia inputs de implemento al cambiar de tractor
-                          form.resetField('implemento');
-                          form.resetField('precio_usd_i');
-                          form.resetField('coef_gastos_conservacion_i');
-                          form.resetField('valor_residual_pct_i');
-                          form.resetField('consumo_litros_hora_CV');
-                          form.resetField('horas_utiles_i');
                         }
                       }}
                     >
@@ -289,9 +281,9 @@ export default function FormMaquinaria() {
                         <SelectValue placeholder="Selecciona tractor" />
                       </SelectTrigger>
                       <SelectContent>
-                        {maquinaria.data?.map((tractor: Tractor) => (
-                          <SelectItem key={tractor.id} value={tractor.id}>
-                            {tractor.marca} {tractor.modelo}
+                        {maquinaria.data?.tractores.map((tractor: Tractor) => (
+                          <SelectItem key={`${tractor.id} ${tractor.nombre}`} value={tractor.id}>
+                            {tractor.nombre} ({tractor.potencia_CV} CV)
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -403,23 +395,24 @@ export default function FormMaquinaria() {
                   <FormItem className="flex flex-col">
                     <FormLabel>Implemento</FormLabel>
                     <Select
-                      value={selectedTractor ? (field.value ?? '') : ''}
+                      value={(field.value ?? '')}
                       onValueChange={(value) => {
                         field.onChange(value);
-                        const implemento =
-                          selectedTractor?.implementos.find((i) => i.nombre === value) || null;
+                        const implemento = maquinaria.data?.implementos.find((i) => i.id === value) || null;                                           
                         setSelectedImplemento(implemento);
 
                         if (implemento) {
+                          form.setValue('nombre_i', implemento.nombre, {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          });
                           form.setValue('precio_usd_i', implemento.precio_usd, {
                             shouldValidate: true,
                             shouldDirty: true,
                             shouldTouch: true,
                           });
-                          form.setValue(
-                            'coef_gastos_conservacion_i',
-                            implemento.coef_gastos_conservacion,
-                            {
+                          form.setValue('coef_gastos_conservacion_i', implemento.coef_gastos_conservacion, {
                               shouldValidate: true,
                               shouldDirty: true,
                               shouldTouch: true,
@@ -430,10 +423,7 @@ export default function FormMaquinaria() {
                             shouldDirty: true,
                             shouldTouch: true,
                           });
-                          form.setValue(
-                            'consumo_litros_hora_CV',
-                            implemento.consumo_litros_hora_CV,
-                            {
+                          form.setValue('consumo_litros_hora_CV', implemento.consumo_litros_hora_CV, {
                               shouldValidate: true,
                               shouldDirty: true,
                               shouldTouch: true,
@@ -451,14 +441,12 @@ export default function FormMaquinaria() {
                         className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
                         <SelectValue
-                          placeholder={
-                            selectedTractor ? 'Selecciona un implemento' : 'Selecciona un tractor'
-                          }
+                          placeholder={'Selecciona un implemento'}
                         />
                       </SelectTrigger>
                       <SelectContent>
-                        {selectedTractor?.implementos.map((implemento: Implemento) => (
-                          <SelectItem key={implemento.nombre} value={implemento.nombre}>
+                        {maquinaria.data?.implementos.map((implemento: Implemento) => (
+                          <SelectItem key={`${implemento.id} ${implemento.nombre}`} value={implemento.id}>
                             {implemento.nombre}
                           </SelectItem>
                         ))}
