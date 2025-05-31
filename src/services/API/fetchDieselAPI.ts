@@ -1,10 +1,10 @@
 import { type Gasoil } from "@/types/gasoil";
 
 interface filtros {
-  province: string
+  localidad: string
 }
 
-export async function fetchDieselAPI({province}:filtros) : Promise<Gasoil[]> {
+export async function fetchDieselAPI({localidad}:filtros) : Promise<Gasoil[]> {
 
   const today = new Date();
   const year = today.getFullYear();
@@ -16,11 +16,11 @@ export async function fetchDieselAPI({province}:filtros) : Promise<Gasoil[]> {
     empresabandera: "YPF",
     indice_tiempo: yearMonth,
     idtipohorario: "2",
-    provincia: province,
+    localidad: localidad,
   };
-  
+
   const resource_id = "80ac25de-a44a-4445-9215-090cf55cfda5";
-  const API_URL = `http://datos.energia.gob.ar/api/3/action/datastore_search?resource_id=${resource_id}&filters=${encodeURIComponent(JSON.stringify(filters))}&sort=localidad asc`;
+  const API_URL = `http://datos.energia.gob.ar/api/3/action/datastore_search?resource_id=${resource_id}&filters=${encodeURIComponent(JSON.stringify(filters))}`;
 
   const response = await fetch(API_URL);
   const data = await response.json();

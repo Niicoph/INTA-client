@@ -22,7 +22,7 @@ export default function CotizacionesCard({ name, value, time, icon, date, color 
               {icon}
             </div>
             <div className="w-full flex flex-col justify-between">
-              <span className="text-sm inter-semibold text-foreground truncate inline-block max-w-[120px] sm:max-w-[160px] md:max-w-[200px] lg:max-w-[250px]">
+              <span className="text-md inter-semibold text-foreground truncate inline-block max-w-[120px] sm:max-w-[160px] md:max-w-[200px] lg:max-w-[250px]">
                 {name}
               </span>
               <span className="text-xs inter-regular text-zinc-400 truncate inline-block max-w-[120px] sm:max-w-[160px] md:max-w-[200px] lg:max-w-[250px]">

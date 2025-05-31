@@ -16,6 +16,8 @@ export function useDollar() {
       "Contado con liquidación",
       "Mayorista",
       "Cripto",
+      "Blue",
+      "Tarjeta",
     ];
     return !excludedTypes.includes(dollar.nombre);
   });
