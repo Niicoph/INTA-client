@@ -15,77 +15,85 @@ import { type Dollar } from '@/types/dollar';
 import { type Gasoil } from '@/types/gasoil';
 import { Fuel } from 'lucide-react';
 import { DollarSignIcon } from 'lucide-react';
+import { CardSkeleton } from '../ui/CardSkeleton/CardSkeleton';
 
 export default function ContainerCotizaciones() {
   const dollarCollection = useDollar();
   const gasoilCollectionNQN = useGasoil('NEUQUEN');
-  const gasoilCollectionRN = useGasoil('RIO NEGRO');
-
-  if (dollarCollection.isError || gasoilCollectionNQN.isError || gasoilCollectionRN.isError)
-    return <div>Ocurrió un error</div>;
-  if (!dollarCollection.data || !gasoilCollectionNQN.data || !gasoilCollectionRN.data) return null;
+  // const gasoilCollectionRN = useGasoil('RIO NEGRO');
 
   return (
     <div className="rounded-md flex flex-col border border-border">
       <TitleContainer icon={CotizacionesIcon} title="Cotizaciones" />
+
+      {/* Dólar cards */}
       <div className="grid grid-cols-1 lg:grid-cols-3">
-        {dollarCollection.data.map((dollar: Dollar) => {
-          const dateObj = new Date(dollar.fechaActualizacion);
-          const time = dateObj.toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: true,
-          });
+        {dollarCollection.isLoading &&
+          Array.from({ length: 3 }).map((_, index) => <CardSkeleton key={index} />)}
 
-          const rawDate = dateObj.toLocaleDateString('es-ES', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          });
-          const [day, , monthRaw, , year] = rawDate.split(' ');
-          const capitalizedMonth = monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
-          const date = `${capitalizedMonth} ${day}, ${year}`;
+        {!dollarCollection.isLoading &&
+          dollarCollection.data?.map((dollar: Dollar) => {
+            const dateObj = new Date(dollar.fechaActualizacion);
 
-          return (
-            <CardCotizaciones
-              isLoading={dollarCollection.isLoading}
-              key={dollar.casa}
-              name={dollar.nombre}
-              value={dollar.venta}
-              date={date}
-              time={time}
-              icon={<DollarSignIcon color="#ffffff" size={22} />}
-              color="006936"
-            />
-          );
-        })}
+            const time = dateObj.toLocaleTimeString('en-US', {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              hour12: true,
+            });
+
+            const rawDate = dateObj.toLocaleDateString('es-ES', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            });
+            const [day, , monthRaw, , year] = rawDate.split(' ');
+            const capitalizedMonth = monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
+            const date = `${capitalizedMonth} ${day}, ${year}`;
+
+            return (
+              <CardCotizaciones
+                key={dollar.casa}
+                name={dollar.nombre}
+                value={dollar.venta}
+                date={date}
+                time={time}
+                icon={<DollarSignIcon color="#ffffff" size={22} />}
+                color="006936"
+              />
+            );
+          })}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3">
-        {gasoilCollectionNQN.data.slice(0, 3).map((gasoil: Gasoil, index) => {
-          const dateObj = new Date(gasoil.fecha_vigencia);
-          const rawDate = dateObj.toLocaleDateString('es-ES', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          });
-          const [day, , monthRaw, , year] = rawDate.split(' ');
-          const capitalizedMonth = monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
-          const date = `${capitalizedMonth} ${day}, ${year}`;
 
-          return (
-            <CardCotizaciones
-              isLoading={dollarCollection.isLoading}
-              key={gasoil.empresabandera + index}
-              name={gasoil.empresabandera + ' - ' + gasoil.localidad}
-              value={gasoil.precio}
-              date={gasoil.direccion}
-              time={date}
-              icon={<Fuel color="#ffffff" size={22} />}
-              color="E86C2A"
-            />
-          );
-        })}
+      {/* Gasoil NEUQUÉN cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-3">
+        {gasoilCollectionNQN.isLoading &&
+          Array.from({ length: 3 }).map((_, index) => <CardSkeleton key={index} />)}
+
+        {!gasoilCollectionNQN.isLoading &&
+          gasoilCollectionNQN.data?.slice(0, 3).map((gasoil: Gasoil, index) => {
+            const dateObj = new Date(gasoil.fecha_vigencia);
+            const rawDate = dateObj.toLocaleDateString('es-ES', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            });
+            const [day, , monthRaw, , year] = rawDate.split(' ');
+            const capitalizedMonth = monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
+            const date = `${capitalizedMonth} ${day}, ${year}`;
+
+            return (
+              <CardCotizaciones
+                key={gasoil.localidad + index}
+                name={`${gasoil.empresabandera} - ${gasoil.localidad}`}
+                value={gasoil.precio}
+                date={gasoil.direccion}
+                time={date}
+                icon={<Fuel color="#ffffff" size={22} />}
+                color="E86C2A"
+              />
+            );
+          })}
       </div>
     </div>
   );

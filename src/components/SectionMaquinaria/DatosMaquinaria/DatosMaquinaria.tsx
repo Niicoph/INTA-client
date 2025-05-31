@@ -83,10 +83,13 @@ export default function ChartMaquinaria() {
   };
 
   return (
-    <div className="rounded-md flex flex-col border border-border overflow-hidden">
+    <div className="rounded-md flex flex-col border border-border overflow-hidden ">
       <TitleContainer icon={VisualizacionesIcon} title="Visualización Gráfica" />
-      <div className="w-full h-full rounded-b-lg p-4 gap-4 flex flex-col overflow-hidden">
-        <Tabs defaultValue="tab1" className="w-full flex flex-col flex-1 min-h-0 justify-between">
+      <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col overflow-hidden h-[600px] xl:h-full">
+        <Tabs
+          defaultValue="tab1"
+          className="w-full flex flex-col flex-1 justify-between gap-4 h-full"
+        >
           <div className="w-full flex flex-col gap-4 md:flex-row">
             <TabsList className="rounded-sm h-10 text-lg w-full md:w-fit">
               <TabsTrigger value="tab1" className="rounded-sm">
@@ -111,7 +114,7 @@ export default function ChartMaquinaria() {
           <TabsContent
             value="tab1"
             aria-label="GraficoTabla"
-            className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-[31rem]"
+            className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
             <div ref={captureRef} className=" overflow-x-auto">
               <Chart costosEconomicos={costosEconomicos} />
@@ -124,7 +127,7 @@ export default function ChartMaquinaria() {
           <TabsContent
             value="tab2"
             aria-label="Tabla"
-            className="flex flex-col gap-4  overflow-y-auto h-[31rem]"
+            className="flex flex-col gap-4 overflow-y-auto h-full"
           >
             <div className="overflow-x-auto h-full">
               <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
@@ -134,7 +137,7 @@ export default function ChartMaquinaria() {
           <TabsContent
             value="tab3"
             aria-label="Grafico"
-            className="flex flex-col gap-4  overflow-y-auto h-[31rem]"
+            className="flex flex-col gap-4  overflow-y-auto h-full"
           >
             <Chart costosEconomicos={costosEconomicos} />
           </TabsContent>
