@@ -22,9 +22,9 @@ import {
 } from '@/components/ui/select';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 
-import { MaquinariaSchema } from '@/schemas/MaquinariaNew/schema';
+import { MaquinariaSchema } from '@/schemas/Maquinaria/schema';
 import { useMaquinaria } from '@/hooks/useMaquinaria';
-import { type MaquinariaFormData } from '@/schemas/MaquinariaNew/types';
+import { type MaquinariaFormData } from '@/schemas/Maquinaria/types';
 import { type Implemento, type Tractor } from '@/types/maquinaria';
 import { type Dollar } from '@/types/dollar';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
@@ -39,7 +39,7 @@ export default function FormMaquinaria() {
 
   const { setData } = maquinariaContext;
   const dollarCollection = useDollar();
-  const [valorDolar, setValorDolar] = useState('');
+  const [valorDolar, setValorDolar] = useState<string | undefined>('');
   const [customDolarValue, setCustomDolarValue] = useState(0);
   const [valorGasoil, setValorGasoil] = useState('');
   const [customGasoilValue, setCustomGasoilValue] = useState(0);
@@ -119,7 +119,7 @@ export default function FormMaquinaria() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleFormSubmit)}
-          className="w-full p-4 gap-4 flex flex-col justify-between"
+          className="w-full h-full p-4 gap-4 flex flex-col justify-between"
         >
           <div className="col-span-full">
             <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2">
@@ -135,7 +135,7 @@ export default function FormMaquinaria() {
                         onValueChange={(val) => {
                           setValorDolar(val);
                           if (val === 'custom') {
-                            field.onChange('');
+                            field.onChange(undefined);
                           } else {
                             field.onChange(Number(val));
                           }
@@ -162,8 +162,7 @@ export default function FormMaquinaria() {
                         disabled={!isCustomDolar}
                         placeholder="Especificar"
                         type="number"
-                        //   value={customDolarValue}
-                        value={!isCustomDolar ? '' : field.value}
+                        value={!isCustomDolar ? '' : (field.value ?? '')}
                         onChange={(e) => {
                           const value = Number(e.target.value);
                           setCustomDolarValue(value);
@@ -187,7 +186,7 @@ export default function FormMaquinaria() {
                         onValueChange={(val) => {
                           setValorGasoil(val);
                           if (val === 'custom') {
-                            field.onChange('');
+                            field.onChange(undefined);
                           } else {
                             field.onChange(Number(val));
                           }
@@ -208,7 +207,7 @@ export default function FormMaquinaria() {
                         disabled={!isCustomGasoil}
                         placeholder="Especificar"
                         type="number"
-                        value={!isCustomGasoil ? '' : field.value}
+                        value={!isCustomGasoil ? '' : (field.value ?? '')}
                         onChange={(e) => {
                           const value = Number(e.target.value);
                           setCustomGasoilValue(value);
@@ -234,7 +233,8 @@ export default function FormMaquinaria() {
                       value={field.value ?? ''}
                       onValueChange={(value) => {
                         field.onChange(value);
-                        const tractor = maquinaria.data?.tractores.find((t) => t.id === value) || null;
+                        const tractor =
+                          maquinaria.data?.tractores.find((t) => t.id === value) || null;
                         setSelectedTractor(tractor);
 
                         if (tractor) {
@@ -395,10 +395,11 @@ export default function FormMaquinaria() {
                   <FormItem className="flex flex-col">
                     <FormLabel>Implemento</FormLabel>
                     <Select
-                      value={(field.value ?? '')}
+                      value={field.value ?? ''}
                       onValueChange={(value) => {
                         field.onChange(value);
-                        const implemento = maquinaria.data?.implementos.find((i) => i.id === value) || null;                                           
+                        const implemento =
+                          maquinaria.data?.implementos.find((i) => i.id === value) || null;
                         setSelectedImplemento(implemento);
 
                         if (implemento) {
@@ -412,7 +413,10 @@ export default function FormMaquinaria() {
                             shouldDirty: true,
                             shouldTouch: true,
                           });
-                          form.setValue('coef_gastos_conservacion_i', implemento.coef_gastos_conservacion, {
+                          form.setValue(
+                            'coef_gastos_conservacion_i',
+                            implemento.coef_gastos_conservacion,
+                            {
                               shouldValidate: true,
                               shouldDirty: true,
                               shouldTouch: true,
@@ -423,7 +427,10 @@ export default function FormMaquinaria() {
                             shouldDirty: true,
                             shouldTouch: true,
                           });
-                          form.setValue('consumo_litros_hora_CV', implemento.consumo_litros_hora_CV, {
+                          form.setValue(
+                            'consumo_litros_hora_CV',
+                            implemento.consumo_litros_hora_CV,
+                            {
                               shouldValidate: true,
                               shouldDirty: true,
                               shouldTouch: true,
@@ -440,13 +447,14 @@ export default function FormMaquinaria() {
                       <SelectTrigger
                         className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
-                        <SelectValue
-                          placeholder={'Selecciona un implemento'}
-                        />
+                        <SelectValue placeholder={'Selecciona un implemento'} />
                       </SelectTrigger>
                       <SelectContent>
                         {maquinaria.data?.implementos.map((implemento: Implemento) => (
-                          <SelectItem key={`${implemento.id} ${implemento.nombre}`} value={implemento.id}>
+                          <SelectItem
+                            key={`${implemento.id} ${implemento.nombre}`}
+                            value={implemento.id}
+                          >
                             {implemento.nombre}
                           </SelectItem>
                         ))}

@@ -24,7 +24,7 @@ export default function ContainerCotizaciones() {
           Array.from({ length: 1 }).map((_, index) => <CardSkeleton key={index} />)}
 
         {!dollarCollection.isLoading &&
-          dollarCollection.data?.map((dollar: Dollar) => {
+          dollarCollection.data?.map((dollar: Dollar, index: number) => {
             const dateObj = new Date(dollar.fechaActualizacion);
 
             const time = dateObj.toLocaleTimeString('en-US', {
@@ -46,7 +46,7 @@ export default function ContainerCotizaciones() {
             return (
               <>
                 <CardCotizaciones
-                  key={dollar.casa}
+                  key={dollar.casa + index}
                   name="Dólar Oficial - Venta"
                   value={dollar.venta}
                   date={date}
@@ -55,7 +55,7 @@ export default function ContainerCotizaciones() {
                   color="006936"
                 />
                 <CardCotizaciones
-                  key={dollar.casa}
+                  key={dollar.casa + index + 1}
                   name="Dólar Oficial - Compra"
                   value={dollar.compra}
                   date={date}

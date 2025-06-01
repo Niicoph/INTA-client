@@ -1,5 +1,5 @@
 import { createContext, useState, type Dispatch } from 'react'; // import del type del dispatch (set)
-import { type MaquinariaFormData } from '@/schemas/MaquinariaNew/types';
+import { type MaquinariaFormData } from '@/schemas/Maquinaria/types';
 
 type MaquinariaContextInterface = {
   data: MaquinariaFormData[];

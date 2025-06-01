@@ -4,10 +4,8 @@ import ContainerCotizaciones from './components/ContainerCotizaciones/ContainerC
 import FormMaquinaria from './components/SectionMaquinaria/FormMaquinaria/FormMaquinaria';
 import DatosMaquinaria from './components/SectionMaquinaria/DatosMaquinaria/DatosMaquinaria';
 
-import FormSanidad from './components/SectionSanidad/FormSanidad/FormSanidad';
-import ChartSanidad from './components/SectionSanidad/ChartSanidad/ChartSanidad';
 import FormFertilizacion from './components/SectionFertilizacion/FormFertilizacion/FormFertilizacion';
-
+import FormPresentacion from './components/SectionSanidad/FormPresentacion';
 import SipanLogo from '../src/assets/Sipan.png';
 
 function App() {
@@ -52,8 +50,8 @@ function App() {
           >
             <ContainerCotizaciones />
             <div className="h-full w-full gap-4 grid xl:grid-cols-2 xl:h-[720px] 2xl:h-[640px] overflow-hidden">
-              <FormSanidad />
-              <ChartSanidad />
+              <FormPresentacion />
+              {/* <ChartSanidad /> */}
             </div>
           </TabsContent>
 

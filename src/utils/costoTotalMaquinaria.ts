@@ -1,4 +1,4 @@
-import { type MaquinariaFormData } from '@/schemas/MaquinariaNew/types';
+import { type MaquinariaFormData } from '@/schemas/Maquinaria/types';
 import { type CostoEconomico } from '@/types/maquinaria';
 
 export const calcularCostoTotalMaquinaria = ( data: MaquinariaFormData[] ): CostoEconomico[] => {
@@ -32,7 +32,7 @@ export const calcularCostoTotalMaquinaria = ( data: MaquinariaFormData[] ): Cost
       amortizacion_i: amortizacion_i,
       costo_combustible: costo_combustible,
       costo_mantenimiento_i: costo_mantenimiento_i,
-      
+
       amortizacion_t: amortizacion_t,
       costo_mantenimiento_t: costo_mantenimiento_t,
 
