@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
 import { PresentacionSchema } from '@/schemas/Sanidad/schema';
@@ -25,10 +25,16 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import type { Sanitizante } from '@/types/Sanitizante';
+import { PresentacionesContext } from '@/context/PresentacionesContext';
 
 export default function FormPresentacion() {
+  const presentacionesContext = useContext(PresentacionesContext);
+  if (!presentacionesContext) {
+    return null;
+  }
+  const { setData } = presentacionesContext;
   const [sanitizante, setSanitizante] = useState<Sanitizante | null>(null);
-  const [isFormComplete, setIsFormComplete] = useState<boolean>(true);
+  const [isFormComplete, setIsFormComplete] = useState<boolean>(false);
   const sanitizantes = useSanitizantes();
   const [cantEnvase, setCantEnvase] = useState<number | undefined>(undefined);
 
@@ -45,19 +51,25 @@ export default function FormPresentacion() {
   });
 
   const handleFormSubmit = (data: PresentacionFormData) => {
-    console.log('Datos del formulario:', data);
-    form.reset();
-    resetValues();
+    setData((prevData) => [...prevData, data]);
+    resetForm();
   };
-  const resetValues = () => {
+
+  function resetForm() {
+    form.reset();
     setSanitizante(null);
     setCantEnvase(undefined);
     setIsFormComplete(false);
-  };
+  }
+
+  useEffect(() => {
+    const isFormComplete = sanitizante !== null && cantEnvase !== undefined && cantEnvase > 0;
+    setIsFormComplete(isFormComplete);
+  }, [sanitizante, cantEnvase]);
 
   return (
-    <div className="rounded-md flex flex-col border border-border">
-      <TitleContainer title="Carga de datos" icon={CargaDatosIcon} />
+    <div className="rounded-md flex flex-col border border-border w-full">
+      <TitleContainer title="Carga Producto" icon={CargaDatosIcon} />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleFormSubmit)}
@@ -177,11 +189,11 @@ export default function FormPresentacion() {
             name="cant_envase"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Cantidad de envase</FormLabel>
+                <FormLabel>Magnitud del envase</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
-                    placeholder="Cantidad de envase"
+                    placeholder="Magnitud del envase"
                     value={field.value ?? ''}
                     onChange={(e) => {
                       const value = e.target.value ? parseFloat(e.target.value) : undefined;
@@ -191,6 +203,7 @@ export default function FormPresentacion() {
                     }}
                   />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />

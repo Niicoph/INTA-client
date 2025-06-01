@@ -55,7 +55,7 @@ export default function ContainerCotizaciones() {
                   color="006936"
                 />
                 <CardCotizaciones
-                  key={dollar.casa + index + 1}
+                  key={dollar.casa + index + 'compra'}
                   name="Dólar Oficial - Compra"
                   value={dollar.compra}
                   date={date}
