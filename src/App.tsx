@@ -11,7 +11,7 @@ import SipanLogo from '../src/assets/Sipan.png';
 
 function App() {
   return (
-    <main className="flex flex-col justify-center items-center w-full min-h-screen min-w-[350px] bg-background gap-2 p-4 2xl:py-0">
+    <main className="flex flex-col  items-center w-full min-h-screen min-w-[350px] bg-background gap-4 p-4">
       <header className="w-full flex justify-center">
         <img src={SipanLogo} alt="Sipan Logo" className="h-10" />
       </header>

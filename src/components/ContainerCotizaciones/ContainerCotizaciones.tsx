@@ -21,7 +21,7 @@ export default function ContainerCotizaciones() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {dollarCollection.isLoading &&
-          Array.from({ length: 1 }).map((_, index) => <CardSkeleton key={index} />)}
+          Array.from({ length: 2 }).map((_, index) => <CardSkeleton key={index} />)}
 
         {!dollarCollection.isLoading &&
           dollarCollection.data?.map((dollar: Dollar, index: number) => {
@@ -44,30 +44,20 @@ export default function ContainerCotizaciones() {
             const date = `${capitalizedMonth} ${day}, ${year}`;
 
             return (
-              <>
-                <CardCotizaciones
-                  key={dollar.casa + index}
-                  name="Dólar Oficial - Venta"
-                  value={dollar.venta}
-                  date={date}
-                  time={time}
-                  icon={<DollarSignIcon color="#ffffff" size={22} />}
-                  color="006936"
-                />
-                <CardCotizaciones
-                  key={dollar.casa + index + 'compra'}
-                  name="Dólar Oficial - Compra"
-                  value={dollar.compra}
-                  date={date}
-                  time={time}
-                  icon={<DollarSignIcon color="#ffffff" size={22} />}
-                  color="006936"
-                />
-              </>
+              <CardCotizaciones
+                key={dollar.nombre + index}
+                name={dollar.nombre}
+                value={dollar.venta}
+                date={date}
+                time={time}
+                icon={<DollarSignIcon color="#ffffff" size={22} />}
+                color="006936"
+              />
             );
           })}
+
         {gasoilCollectionNQN.isLoading &&
-          Array.from({ length: 1 }).map((_, index) => <CardSkeleton key={index} />)}
+          Array.from({ length: 2 }).map((_, index) => <CardSkeleton key={index} />)}
 
         {!gasoilCollectionNQN.isLoading &&
           gasoilCollectionNQN.data?.slice(0, 1).map((gasoil: Gasoil, index) => {
@@ -83,7 +73,7 @@ export default function ContainerCotizaciones() {
 
             return (
               <CardCotizaciones
-                key={gasoil.localidad + index}
+                key={'neuquen' + index}
                 name={`${gasoil.empresabandera} - ${gasoil.localidad}`}
                 value={gasoil.precio}
                 date={gasoil.direccion}
@@ -110,7 +100,7 @@ export default function ContainerCotizaciones() {
 
             return (
               <CardCotizaciones
-                key={gasoil.localidad + index}
+                key={'rio negro' + index}
                 name={gasoil.empresabandera + ' - ' + gasoil.localidad}
                 value={gasoil.precio}
                 date={gasoil.direccion}

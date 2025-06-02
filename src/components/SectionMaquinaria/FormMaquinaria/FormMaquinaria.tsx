@@ -29,9 +29,16 @@ import { type Implemento, type Tractor } from '@/types/maquinaria';
 import { type Dollar } from '@/types/dollar';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
 import { useDollar } from '@/hooks/useDollar';
+import { useGasoil } from '@/hooks/useGasoil';
 
 export default function FormMaquinaria() {
   const maquinariaContext = useContext(MaquinariaContext);
+  const gasoilCollectionNQN = useGasoil('NEUQUEN');
+  const gasoilCollectionRN = useGasoil('VIEDMA');
+
+  const gasoilNQN = gasoilCollectionNQN.data?.slice(0, 1);
+  const gasoilRN = gasoilCollectionRN.data?.slice(0, 1);
+  const gasoilCollection = gasoilNQN?.concat(gasoilRN || []);
 
   if (!maquinariaContext) {
     return null;
@@ -198,7 +205,14 @@ export default function FormMaquinaria() {
                           <SelectValue placeholder="Selecciona cotización" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="1100">YPF - $1100</SelectItem>
+                          {gasoilCollection?.map((gasoil, index) => (
+                            <SelectItem
+                              key={gasoil.localidad + index}
+                              value={gasoil.precio.toString()}
+                            >
+                              {gasoil.localidad} - ${gasoil.precio}
+                            </SelectItem>
+                          ))}
                           <SelectItem value="custom">Otro (especificar)</SelectItem>
                         </SelectContent>
                       </Select>

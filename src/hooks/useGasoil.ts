@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchDieselAPI } from "../services/API/fetchDieselAPI";
+import { getGasoils } from "@/services/gasoilService";
+
 
 export function useGasoil(localidad: string) {
   const query = useQuery({
     queryKey: ["gasoilRate", localidad],
-    queryFn: () => fetchDieselAPI({localidad}),
+    queryFn: () => getGasoils({localidad}),
     staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
   });
 
   return {
