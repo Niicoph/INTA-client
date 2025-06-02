@@ -58,34 +58,3 @@ export const AplicacionSchema = z.object({
 export const PlanSchema = z.object({
   aplicaciones: z.array(AplicacionSchema).nonempty('Debe incluir al menos una aplicación'),
 });
-
-// {
-//     Aplicacion: [
-//       {
-//         presentacion: {
-//           id_sanitizante,
-//           nombre,
-//           precio_usd_unidad,
-//           dosis,
-//           unidad,
-//           cant_envase
-//         },
-//         volumen_hl_ha,
-//         cant_tratamientos
-//       },
-//       {
-//         presentacion: {
-//           id_sanitizante,
-//           nombre,
-//           precio_usd_unidad,
-//           dosis,
-//           unidad,
-//           cant_envase
-//         },
-//         volumen_hl_ha,
-//         cant_tratamientos
-//       },
-//     ]
-//   }
-
-// luego Plan va a ser un array de Aplicaciones

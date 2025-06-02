@@ -1,8 +1,8 @@
 'use client';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AplicacionSchema, PlanSchema } from '@/schemas/Sanidad/schema';
-import { type AplicacionFormData, type PlanFormData } from '@/schemas/Sanidad/types';
+import { PlanSchema } from '@/schemas/Sanidad/schema';
+import { type PlanFormData } from '@/schemas/Sanidad/types';
 import { PresentacionesContext } from '@/context/PresentacionesContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -16,80 +16,118 @@ import {
 } from '@/components/ui/form';
 import TitleContainer from '../ui/TitleContainer/TitleContainer';
 import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 export default function FormPlan() {
+  const [isFormComplete, setIsFormComplete] = useState<boolean>(false);
   const presentacionesContext = useContext(PresentacionesContext);
   if (!presentacionesContext) return null;
 
-  const { data: presentaciones } = presentacionesContext;
+  const { data, setData } = presentacionesContext;
 
-  const form = useForm<PlanFormData>({
+  const formPlan = useForm<PlanFormData>({
     resolver: zodResolver(PlanSchema),
     defaultValues: {
       aplicaciones: [],
     },
   });
 
-  const { fields, append } = useFieldArray({
+  const aplicaciones = useWatch({
+    control: formPlan.control,
     name: 'aplicaciones',
-    control: form.control,
   });
 
-  // Cada vez que cambian las presentaciones, agregamos nuevas aplicaciones al form
+  const { fields, append } = useFieldArray({
+    control: formPlan.control,
+    name: 'aplicaciones',
+  });
+
   useEffect(() => {
-    const faltantes = presentaciones.length - fields.length;
-    if (faltantes > 0) {
-      const nuevos = Array(faltantes).fill({
-        volumen_hl_ha: undefined,
-        cant_tratamientos: undefined,
-      });
-      nuevos.forEach((item) => append(item));
+    const completo =
+      aplicaciones?.length > 0 &&
+      aplicaciones.every(
+        (a) => a?.volumen_hl_ha !== undefined && a?.cant_tratamientos !== undefined
+      );
+
+    setIsFormComplete(completo);
+  }, [aplicaciones]);
+
+  useEffect(() => {
+    if (data.length > fields.length) {
+      const nuevas = data.slice(fields.length);
+      nuevas.forEach((presentacion) =>
+        append({
+          presentacion,
+          volumen_hl_ha: undefined,
+          cant_tratamientos: undefined,
+        })
+      );
     }
-  }, [presentaciones, fields, append]);
+  }, [data, fields.length, append]);
 
   const handleFormSubmit = (data: PlanFormData) => {
     console.log('Plan completo:', data);
-    form.reset();
+    resetForm();
   };
+
+  function resetForm() {
+    formPlan.reset();
+    setData([]);
+    setIsFormComplete(false);
+  }
 
   return (
     <div className="rounded-md flex flex-col border border-border w-full">
       <TitleContainer title="Carga de plan" icon={CargaDatosIcon} />
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-4 p-4">
+      <Form {...formPlan}>
+        {/* form principal */}
+        <form onSubmit={formPlan.handleSubmit(handleFormSubmit)} className="p-4 space-y-4">
           {fields.map((field, index) => (
-            <>
-              <FormLabel>{presentaciones[index]?.nombre}</FormLabel>
-              <div key={field.id} className="grid grid-cols-2 gap-4 border-t pt-4">
-                <FormField
-                  name={`aplicaciones.${index}.volumen_hl_ha`}
-                  control={form.control}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input type="number" placeholder="Volumen HL/Ha" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  name={`aplicaciones.${index}.cant_tratamientos`}
-                  control={form.control}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input type="number" placeholder="Cantidad de tratamientos" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </>
+            <div key={field.id}>
+              <FormLabel>{field.presentacion?.nombre ?? 'Presentación'}</FormLabel>
+
+              <FormField
+                control={formPlan.control}
+                name={`aplicaciones.${index}.volumen_hl_ha`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Volumen HL/Ha"
+                        value={field.value ?? ''}
+                        onChange={(e) =>
+                          field.onChange(e.target.value === '' ? undefined : Number(e.target.value))
+                        }
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={formPlan.control}
+                name={`aplicaciones.${index}.cant_tratamientos`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Cantidad de tratamientos"
+                        value={field.value ?? ''}
+                        onChange={(e) =>
+                          field.onChange(e.target.value === '' ? undefined : Number(e.target.value))
+                        }
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           ))}
-          <Button type="submit" className="w-full" variant="submit">
+          <Button className="w-full" type="submit" variant={'submit'} disabled={!isFormComplete}>
             Agregar Plan
           </Button>
         </form>
