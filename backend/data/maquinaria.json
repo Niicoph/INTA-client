@@ -1,0 +1,60 @@
+{
+  "tractores": [
+    {
+      "id": "2",
+      "nombre": "Tractor B",
+      "potencia_CV": 100,
+      "precio_usd": 76000,
+      "coef_gastos_conservacion": 0.00006,
+      "horas_utiles": 15000,
+      "valor_residual_pct": 25
+    },
+    {
+      "id": "3",
+      "nombre": "Tractor C",
+      "potencia_CV": 150,
+      "precio_usd": 120000,
+      "coef_gastos_conservacion": 0.00005,
+      "horas_utiles": 18000,
+      "valor_residual_pct": 30
+    }
+  ],
+  "implementos": [
+    {
+      "id": "1",
+      "nombre": "Arado",
+      "precio_usd": 6500,
+      "coef_gastos_conservacion": 0.00035,
+      "horas_utiles": 6000,
+      "valor_residual_pct": 12,
+      "consumo_litros_hora_CV": 0.13
+    },
+    {
+      "id": "2",
+      "nombre": "Rastra De Disco",
+      "precio_usd": 11000,
+      "coef_gastos_conservacion": 0.00028,
+      "horas_utiles": 6000,
+      "valor_residual_pct": 15,
+      "consumo_litros_hora_CV": 0.14
+    },
+    {
+      "id": "3",
+      "nombre": "Pulverizadora",
+      "precio_usd": 18000,
+      "coef_gastos_conservacion": 0.00032,
+      "horas_utiles": 4000,
+      "valor_residual_pct": 18,
+      "consumo_litros_hora_CV": 0.17
+    },
+    {
+      "id": 4,
+      "nombre": "Palini modificado desde el form",
+      "precio_usd": 999,
+      "coef_gastos_conservacion": 0.09,
+      "horas_utiles": 9600,
+      "valor_residual_pct": 0.99,
+      "consumo_litros_hora_CV": 0.5
+    }
+  ]
+}

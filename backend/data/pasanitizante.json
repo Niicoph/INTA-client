@@ -1,0 +1,42 @@
+[
+    {
+        "id": "1",
+        "nombre": "Aceite de verano",
+        "precio_usd_unidad": 2,
+        "dosis": 0.25,
+        
+        "unidad": "Litro"
+    },
+    {
+        "id": "2",
+        "nombre": "Abamectina",
+        "precio_usd_unidad": 168,
+        "dosis": 0.05,
+        
+        "unidad": "Kilo"
+    },
+    {
+        "id": "3",
+        "nombre": "Polisulfuro calcio",
+        "precio_usd_unidad": 1,
+        "dosis": 3.00,
+        
+        "unidad": "Kilo"
+    },
+    {
+        "id": "4",
+        "nombre": "Carbaryl",
+        "precio_usd_unidad": 57,
+        "dosis": 0.12,
+        
+        "unidad": "Kilo"
+    },
+    {
+        "id": "5",
+        "nombre": "CYANTRANILIPROLE",
+        "precio_usd_unidad": 180,
+        "dosis": 0.075,
+        
+        "unidad": "Litro"
+    }
+]

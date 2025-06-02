@@ -1,0 +1,46 @@
+[
+    {
+        "id": "1",
+        "nombre": "ACIDO BORICO",
+        "precio_usd_unidad": 2.46,
+        "dosis": 0.25,
+        
+        "unidad": "Litro"
+    },
+    {
+        "id": "2",
+        "nombre": "ACIDO FOSFORICO",
+        "precio_usd_unidad": 8.01,
+        "dosis": 0.05,
+        
+        "unidad": "Kilo"
+    },
+    {
+        "id": "3",
+        "nombre": "AMINOQUELANT HIERRO",
+        "precio_usd_unidad": 18.04,
+        "dosis": 3.00,
+        
+        "unidad": "Litro"
+    },
+    {
+        "id": "4",
+        "nombre": "BASAFER PLUS",
+        "precio_usd_unidad": 0,
+        "dosis": 0.12,
+        
+        "unidad": "Kilo"
+    },
+    {
+        "id": "5",
+        "nombre": "BASF FOLIAR (ZN MN 35:25)",
+        "precio_usd_unidad": 14.37,
+        "dosis": 0.075,
+        
+        "unidad": "Kilo"
+    }
+]  
+  
+  
+
+  
