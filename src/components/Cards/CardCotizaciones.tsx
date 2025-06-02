@@ -9,7 +9,7 @@ interface InfoCardProps {
   color?: string;
 }
 
-export default function CotizacionesCard({ name, value, time, icon, date, color }: InfoCardProps) {
+export default function CardCotizaciones({ name, value, time, icon, date, color }: InfoCardProps) {
   return (
     <div className="w-full flex items-stretch justify-between border-b border-border md:border-r">
       <div className="flex w-full p-4 justify-between items-stretch">

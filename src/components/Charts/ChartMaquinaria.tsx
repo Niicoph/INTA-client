@@ -6,7 +6,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import Alert from '../alert';
+import Alert from '../ui/alert';
 
 const chartConfig = {
   desktop: {
@@ -15,7 +15,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function Chart({ costosEconomicos }: { costosEconomicos: CostoEconomico[] }) {
+export function ChartMaquinaria({ costosEconomicos }: { costosEconomicos: CostoEconomico[] }) {
   const scrollThreshold = 12; // Número de barras que activa el scroll
   const shouldScroll = costosEconomicos.length > scrollThreshold;
 

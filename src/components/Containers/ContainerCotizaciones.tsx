@@ -1,6 +1,6 @@
 import CotizacionesIcon from '../../assets/Icons/Outlined/cotizaciones.png';
 import TitleContainer from '../ui/TitleContainer/TitleContainer';
-import CardCotizaciones from './CardCotizaciones';
+import CardCotizaciones from '../Cards/CardCotizaciones';
 
 import { useDollar } from '@/hooks/useDollar';
 import { useGasoil } from '@/hooks/useGasoil';

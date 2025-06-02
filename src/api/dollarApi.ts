@@ -7,6 +7,4 @@ const dollarApi = axios.create({
   },
 });
 
-// *aca pueden ir los interceptors
-
 export default dollarApi;

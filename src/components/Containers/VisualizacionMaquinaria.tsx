@@ -1,5 +1,5 @@
-import VisualizacionesIcon from '../../../assets/Icons/Outlined/graficoBarras.png';
-import { Chart } from '@/components/ui/Chart/Chart';
+import VisualizacionesIcon from '@/assets/Icons/Outlined/graficoBarras.png';
+import { ChartMaquinaria } from '@/components/Charts/ChartMaquinaria';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { DataTable } from '@/components/ui/DataTable/DataTable';
 import { columnsMaquinaria } from '@/components/ui/DataTable/columnsMaquinaria';
@@ -17,9 +17,9 @@ pdfMake.vfs = pdfFonts.vfs;
 import type { CostoEconomico } from '@/types/maquinaria';
 import { mejorarImagenPDF } from '@/utils/mejorarImagenPDF';
 
-export default function ChartMaquinaria() {
+export default function VisualizacionMaquinaria() {
   const maquinariaContext = useContext(MaquinariaContext);
-  const captureRef = useRef<HTMLDivElement>(null); // useRef para capturar el div del gráfico y la tabla
+  const captureRef = useRef<HTMLDivElement>(null);
 
   if (!maquinariaContext) {
     return null;
@@ -117,7 +117,7 @@ export default function ChartMaquinaria() {
             className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
             <div ref={captureRef} className=" overflow-x-auto">
-              <Chart costosEconomicos={costosEconomicos} />
+              <ChartMaquinaria costosEconomicos={costosEconomicos} />
             </div>
             <div className=" overflow-x-auto">
               <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
@@ -139,7 +139,7 @@ export default function ChartMaquinaria() {
             aria-label="Grafico"
             className="flex flex-col gap-4  overflow-y-auto h-full"
           >
-            <Chart costosEconomicos={costosEconomicos} />
+            <ChartMaquinaria costosEconomicos={costosEconomicos} />
           </TabsContent>
         </Tabs>
       </div>

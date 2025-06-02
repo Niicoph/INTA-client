@@ -1,5 +1,5 @@
 'use client';
-import CargaDatosIcon from '../../../assets/Icons/Outlined/cargaDatos.png';
+import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
 import { useState, useEffect, useContext } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';

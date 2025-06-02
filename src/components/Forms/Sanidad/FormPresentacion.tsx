@@ -193,7 +193,7 @@ export default function FormPresentacion() {
                 <FormControl>
                   <Input
                     type="number"
-                    placeholder="Magnitud del envase"
+                    placeholder="Magnitud del envase (kg,l)"
                     value={field.value ?? ''}
                     onChange={(e) => {
                       const value = e.target.value ? parseFloat(e.target.value) : undefined;
@@ -210,7 +210,7 @@ export default function FormPresentacion() {
 
           <div className="col-span-full">
             <Button className="w-full" type="submit" variant={'submit'} disabled={!isFormComplete}>
-              Agregar Conjunto
+              Agregar Producto
             </Button>
           </div>
         </form>

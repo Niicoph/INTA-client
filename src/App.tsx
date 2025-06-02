@@ -1,13 +1,15 @@
 import { MaquinariaProvider } from './context/MaquinariaContext';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import ContainerCotizaciones from './components/ContainerCotizaciones/ContainerCotizaciones';
-import FormMaquinaria from './components/SectionMaquinaria/FormMaquinaria/FormMaquinaria';
-import DatosMaquinaria from './components/SectionMaquinaria/DatosMaquinaria/DatosMaquinaria';
-
-import FormPresentacion from './components/SectionSanidad/FormPresentacion';
 import { PresentacionesProvider } from './context/PresentacionesContext';
-import FormPlan from './components/SectionSanidad/FormPlan';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import ContainerCotizaciones from './components/Containers/ContainerCotizaciones';
+import FormMaquinaria from './components/Forms/Maquinaria/FormMaquinaria';
+import VisualizacionMaquinaria from './components/Containers/VisualizacionMaquinaria';
+import VisualizacionSanidad from './components/Containers/VisualizacionSanidad';
+import VisualiacionFertilizacion from './components/Containers/VisualizacionFertilizacion';
+import FormPresentacion from './components/Forms/Sanidad/FormPresentacion';
+import FormPlan from './components/Forms/Sanidad/FormPlan';
 import SipanLogo from '../src/assets/Sipan.png';
+import FormFertilizacion from './components/Forms/Fertilizacion/FormFertilizacion';
 
 function App() {
   return (
@@ -40,7 +42,7 @@ function App() {
             <ContainerCotizaciones />
             <div className="h-full w-full gap-4 grid xl:grid-cols-2 xl:h-[720px] 2xl:h-[640px] overflow-hidden">
               <FormMaquinaria />
-              <DatosMaquinaria />
+              <VisualizacionMaquinaria />
             </div>
           </TabsContent>
 
@@ -57,7 +59,7 @@ function App() {
                   <FormPlan />
                 </PresentacionesProvider>
               </div>
-              {/* <ChartSanidad /> */}
+              <VisualizacionSanidad />
             </div>
           </TabsContent>
 
@@ -68,7 +70,8 @@ function App() {
           >
             <ContainerCotizaciones />
             <div className="h-full w-full gap-4 grid xl:grid-cols-2 xl:h-[720px] 2xl:h-[640px] overflow-hidden">
-              {/* form fertilizacion */}
+              <FormFertilizacion />
+              <VisualiacionFertilizacion />
             </div>
           </TabsContent>
         </MaquinariaProvider>
