@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { type Sanitizante } from "@/types/Sanitizante";
+import { type Sanitizante } from "@/types/sanitizante";
 import { getSanitizantes } from "@/services/sanidadService";
 
 export function useSanitizantes() {

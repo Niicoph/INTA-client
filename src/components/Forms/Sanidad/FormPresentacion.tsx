@@ -24,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import type { Sanitizante } from '@/types/Sanitizante';
+import type { Sanitizante } from '@/types/sanitizante';
 import { PresentacionesContext } from '@/context/PresentacionesContext';
 
 export default function FormPresentacion() {

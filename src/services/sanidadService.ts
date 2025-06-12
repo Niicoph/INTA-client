@@ -1,4 +1,4 @@
-import { type Sanitizante } from "@/types/Sanitizante";
+import { type Sanitizante } from "@/types/sanitizante";
 
 export async function getSanitizantes(): Promise<Sanitizante[]> {
     const response = await fetch("/src/utils/pasanitizante.json");

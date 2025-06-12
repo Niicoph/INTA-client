@@ -1,15 +1,12 @@
 import { MaquinariaProvider } from './context/MaquinariaContext';
-import { PresentacionesProvider } from './context/PresentacionesContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import ContainerCotizaciones from './components/Containers/ContainerCotizaciones';
-import FormMaquinaria from './components/Forms/Maquinaria/FormMaquinaria';
-import VisualizacionMaquinaria from './components/Containers/VisualizacionMaquinaria';
-import VisualizacionSanidad from './components/Containers/VisualizacionSanidad';
-import VisualiacionFertilizacion from './components/Containers/VisualizacionFertilizacion';
-import FormPresentacion from './components/Forms/Sanidad/FormPresentacion';
-import FormPlan from './components/Forms/Sanidad/FormPlan';
+import SectionSkeleton from './components/Loadings/SectionSkeleton/SectionSkeleton';
 import SipanLogo from '/Sipan.png';
-import FormFertilizacion from './components/Forms/Fertilizacion/FormFertilizacion';
+import { lazy, Suspense } from 'react';
+
+const Sanidad = lazy(() => import('@/pages/Sanidad/Sanidad'));
+const Fertilizacion = lazy(() => import('@/pages/Fertilizacion/Fertilizacion'));
+const Maquinaria = lazy(() => import('@/pages/Maquinaria/Maquinaria'));
 
 function App() {
   return (
@@ -22,57 +19,28 @@ function App() {
         className="w-full flex h-full flex-col gap-4 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-[1400px]"
       >
         <MaquinariaProvider>
-          <TabsList className="rounded-sm w-full h-12 text-lg ">
-            <TabsTrigger value="tab1" className="rounded-sm">
-              Maquinaria
-            </TabsTrigger>
-            <TabsTrigger value="tab2" className="rounded-sm">
-              Sanidad
-            </TabsTrigger>
-            <TabsTrigger value="tab3" className="rounded-sm">
-              Fertilización
-            </TabsTrigger>
+          <TabsList className="w-full h-12 text-lg ">
+            <TabsTrigger value="tab1">Maquinaria</TabsTrigger>
+            <TabsTrigger value="tab2">Sanidad</TabsTrigger>
+            <TabsTrigger value="tab3">Fertilización</TabsTrigger>
           </TabsList>
 
-          <TabsContent
-            value="tab1"
-            aria-label="Maquinaria"
-            className="flex flex-col gap-4 w-full h-full overflow-hidden"
-          >
-            <ContainerCotizaciones />
-            <div className="h-full w-full gap-4 grid xl:grid-cols-2 xl:h-[720px] 2xl:h-[640px] overflow-hidden">
-              <FormMaquinaria />
-              <VisualizacionMaquinaria />
-            </div>
+          <TabsContent value="tab1" aria-label="Sección Maquinaria">
+            <Suspense fallback={<SectionSkeleton />}>
+              <Maquinaria />
+            </Suspense>
           </TabsContent>
 
-          <TabsContent
-            value="tab2"
-            aria-label="Sanidad"
-            className="flex flex-col gap-4 w-full h-full overflow-hidden"
-          >
-            <ContainerCotizaciones />
-            <div className="h-full w-full gap-4 grid xl:grid-cols-2 xl:h-[720px] 2xl:h-[640px] overflow-hidden">
-              <div className="flex gap-4">
-                <PresentacionesProvider>
-                  <FormPresentacion />
-                  <FormPlan />
-                </PresentacionesProvider>
-              </div>
-              <VisualizacionSanidad />
-            </div>
+          <TabsContent value="tab2" aria-label="Sección Sanidad">
+            <Suspense fallback={<SectionSkeleton />}>
+              <Sanidad />
+            </Suspense>
           </TabsContent>
 
-          <TabsContent
-            value="tab3"
-            aria-label="Fertilizacion"
-            className="flex flex-col gap-4 w-full h-full overflow-hidden"
-          >
-            <ContainerCotizaciones />
-            <div className="h-full w-full gap-4 grid xl:grid-cols-2 xl:h-[720px] 2xl:h-[640px] overflow-hidden">
-              <FormFertilizacion />
-              <VisualiacionFertilizacion />
-            </div>
+          <TabsContent value="tab3" aria-label="Sección Fertilizacion">
+            <Suspense fallback={<SectionSkeleton />}>
+              <Fertilizacion />
+            </Suspense>
           </TabsContent>
         </MaquinariaProvider>
       </Tabs>

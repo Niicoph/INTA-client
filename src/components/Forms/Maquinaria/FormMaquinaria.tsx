@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
+import Legend from '@/components/ui/Legend/Legend';
 
 import { MaquinariaSchema } from '@/schemas/Maquinaria/schema';
 import { useMaquinaria } from '@/hooks/useMaquinaria';
@@ -34,11 +35,7 @@ import { useGasoil } from '@/hooks/useGasoil';
 export default function FormMaquinaria() {
   const maquinariaContext = useContext(MaquinariaContext);
   const gasoilCollectionNQN = useGasoil('NEUQUEN');
-  const gasoilCollectionRN = useGasoil('VIEDMA');
-
-  const gasoilNQN = gasoilCollectionNQN.data?.slice(0, 1);
-  const gasoilRN = gasoilCollectionRN.data?.slice(0, 1);
-  const gasoilCollection = gasoilNQN?.concat(gasoilRN || []);
+  const gasoilCollection = gasoilCollectionNQN.data?.slice(0, 1);
 
   if (!maquinariaContext) {
     return null;
@@ -121,7 +118,7 @@ export default function FormMaquinaria() {
   }, [selectedTractor, selectedImplemento, valorDolar]);
 
   return (
-    <div className="rounded-md flex flex-col border border-border">
+    <div className="rounded-md flex flex-col border  border-border">
       <TitleContainer icon={CargaDatosIcon} title="Carga de datos" />
       <Form {...form}>
         <form
@@ -129,14 +126,14 @@ export default function FormMaquinaria() {
           className="w-full h-full p-4 gap-4 flex flex-col justify-between"
         >
           <div className="col-span-full">
-            <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2">
+            <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
               <FormField
                 control={form.control}
                 name="cotizacion_usd"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
                     <FormLabel>Dólar</FormLabel>
-                    <div className="flex flex-col gap-1 md:flex-row">
+                    <div className="flex flex-col gap-1 md:flex-row ">
                       <Select
                         value={valorDolar ?? ''}
                         onValueChange={(val) => {
@@ -185,7 +182,7 @@ export default function FormMaquinaria() {
                 control={form.control}
                 name="cotizacion_gasoil_litro"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem className="flex flex-col ">
                     <FormLabel>Gasoil</FormLabel>
                     <div className="flex flex-col gap-1 md:flex-row">
                       <Select
@@ -306,7 +303,7 @@ export default function FormMaquinaria() {
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="potencia_CV"
                 render={({ field }) => (
@@ -317,14 +314,14 @@ export default function FormMaquinaria() {
                         type="number"
                         placeholder="Selecciona tractor"
                         value={field.value ?? ''}
-                        className="cursor-not-allowed text-xs"
+                        className="cursor-not-allowed text-xs "
                         readOnly
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               <FormField
                 control={form.control}
                 name="precio_usd_t"
@@ -344,7 +341,7 @@ export default function FormMaquinaria() {
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="coef_gastos_conservacion_t"
                 render={({ field }) => (
@@ -362,7 +359,7 @@ export default function FormMaquinaria() {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               <FormField
                 control={form.control}
                 name="valor_residual_pct_t"
@@ -382,7 +379,7 @@ export default function FormMaquinaria() {
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="horas_utiles_t"
                 render={({ field }) => (
@@ -399,7 +396,7 @@ export default function FormMaquinaria() {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
             </div>
             <div className="w-full flex flex-col gap-4 ">
               <FormField
@@ -478,7 +475,7 @@ export default function FormMaquinaria() {
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="consumo_litros_hora_CV"
                 render={({ field }) => (
@@ -496,7 +493,7 @@ export default function FormMaquinaria() {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               <FormField
                 control={form.control}
                 name="precio_usd_i"
@@ -516,7 +513,7 @@ export default function FormMaquinaria() {
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="coef_gastos_conservacion_i"
                 render={({ field }) => (
@@ -534,7 +531,7 @@ export default function FormMaquinaria() {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               <FormField
                 control={form.control}
                 name="valor_residual_pct_i"
@@ -554,7 +551,7 @@ export default function FormMaquinaria() {
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="horas_utiles_i"
                 render={({ field }) => (
@@ -571,9 +568,10 @@ export default function FormMaquinaria() {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
             </div>
           </div>
+          <Legend text="El valor residual es calculado en base a x " />
           <div className="col-span-full">
             <Button className="w-full" type="submit" variant={'submit'} disabled={!isFormComplete}>
               Agregar Conjunto

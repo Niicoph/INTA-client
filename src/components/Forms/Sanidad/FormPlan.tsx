@@ -60,8 +60,8 @@ export default function FormPlan() {
       nuevas.forEach((presentacion) =>
         append({
           presentacion,
-          volumen_hl_ha: undefined,
-          cant_tratamientos: undefined,
+          volumen_hl_ha: 0,
+          cant_tratamientos: 0,
         })
       );
     }

@@ -1,19 +1,24 @@
-import type { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowUpDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { type Sanidad } from "@/types/sanidad";
+import type { ColumnDef } from '@tanstack/react-table';
+import { MoreHorizontal } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
+import { ArrowUpDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { type Sanitizante } from '@/types/sanitizante';
 
-export const columnsSanidad: ColumnDef<Sanidad>[] = [
+export const columnsSanidad: ColumnDef<Sanitizante>[] = [
   {
-    id: "select",
+    id: 'select',
     header: ({ table }) => (
       <Checkbox
         checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
+          table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Marcar todas"
@@ -32,12 +37,12 @@ export const columnsSanidad: ColumnDef<Sanidad>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "conjunto",
+    accessorKey: 'conjunto',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Conjunto
@@ -47,12 +52,12 @@ export const columnsSanidad: ColumnDef<Sanidad>[] = [
     },
   },
   {
-    accessorKey: "ppioActivo",
+    accessorKey: 'ppioActivo',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Principio Activo
@@ -62,12 +67,12 @@ export const columnsSanidad: ColumnDef<Sanidad>[] = [
     },
   },
   {
-    accessorKey: "unidad",
+    accessorKey: 'unidad',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Unidad
@@ -77,27 +82,27 @@ export const columnsSanidad: ColumnDef<Sanidad>[] = [
     },
   },
   {
-    accessorKey: "precioDolar",
+    accessorKey: 'precioDolar',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
-         Precio en dolares
+          Precio en dolares
           <ArrowUpDown className="h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "dosis",
+    accessorKey: 'dosis',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Dosis hl
@@ -107,12 +112,12 @@ export const columnsSanidad: ColumnDef<Sanidad>[] = [
     },
   },
   {
-    accessorKey: "volumen",
+    accessorKey: 'volumen',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Volumen
@@ -122,12 +127,12 @@ export const columnsSanidad: ColumnDef<Sanidad>[] = [
     },
   },
   {
-    accessorKey: "tratamientos",
+    accessorKey: 'tratamientos',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Tratamientos
@@ -136,13 +141,13 @@ export const columnsSanidad: ColumnDef<Sanidad>[] = [
       );
     },
   },
-    {
-    accessorKey: "costohora",
+  {
+    accessorKey: 'costohora',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
         >
           Costo/hora
@@ -152,7 +157,7 @@ export const columnsSanidad: ColumnDef<Sanidad>[] = [
     },
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => {
       const sanidad = row.original;
 
@@ -170,7 +175,7 @@ export const columnsSanidad: ColumnDef<Sanidad>[] = [
               onClick={() => {
                 const formattedData = Object.entries(sanidad)
                   .map(([key, value]) => `${key}: ${value}`)
-                  .join(", ");
+                  .join(', ');
                 navigator.clipboard.writeText(formattedData);
               }}
             >

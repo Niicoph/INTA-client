@@ -56,3 +56,5 @@ export function ChartMaquinaria({ costosEconomicos }: { costosEconomicos: CostoE
     <Alert text="No hay conjuntos para mostrar." />
   );
 }
+
+export default ChartMaquinaria;

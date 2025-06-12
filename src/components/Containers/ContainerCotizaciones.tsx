@@ -8,7 +8,7 @@ import { type Dollar } from '@/types/dollar';
 import { type Gasoil } from '@/types/gasoil';
 import { Fuel } from 'lucide-react';
 import { DollarSignIcon } from 'lucide-react';
-import { CardSkeleton } from '../ui/CardSkeleton/CardSkeleton';
+import { CardSkeleton } from '../Loadings/CardSkeleton/CardSkeleton';
 
 export default function ContainerCotizaciones() {
   const dollarCollection = useDollar();
