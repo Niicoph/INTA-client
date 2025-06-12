@@ -17,6 +17,7 @@ export function useDollar() {
       "Mayorista",
       "Cripto",
       "Blue",
+      "Tarjeta",
     ];
     return !excludedTypes.includes(dollar.nombre);
   });

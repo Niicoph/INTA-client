@@ -13,15 +13,13 @@ import { CardSkeleton } from '../ui/CardSkeleton/CardSkeleton';
 export default function ContainerCotizaciones() {
   const dollarCollection = useDollar();
   const gasoilCollectionNQN = useGasoil('NEUQUEN');
-  const gasoilCollectionRN = useGasoil('VIEDMA');
-
   return (
     <div className="rounded-md flex flex-col border border-border">
       <TitleContainer icon={CotizacionesIcon} title="Cotizaciones" />
 
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {dollarCollection.isLoading &&
-          Array.from({ length: 2 }).map((_, index) => <CardSkeleton key={index} />)}
+          Array.from({ length: 1 }).map((_, index) => <CardSkeleton key={index} />)}
 
         {!dollarCollection.isLoading &&
           dollarCollection.data?.map((dollar: Dollar, index: number) => {
@@ -57,7 +55,7 @@ export default function ContainerCotizaciones() {
           })}
 
         {gasoilCollectionNQN.isLoading &&
-          Array.from({ length: 2 }).map((_, index) => <CardSkeleton key={index} />)}
+          Array.from({ length: 1 }).map((_, index) => <CardSkeleton key={index} />)}
 
         {!gasoilCollectionNQN.isLoading &&
           gasoilCollectionNQN.data?.slice(0, 1).map((gasoil: Gasoil, index) => {
@@ -75,33 +73,6 @@ export default function ContainerCotizaciones() {
               <CardCotizaciones
                 key={'neuquen' + index}
                 name={`${gasoil.empresabandera} - ${gasoil.localidad}`}
-                value={gasoil.precio}
-                date={gasoil.direccion}
-                time={date}
-                icon={<Fuel color="#ffffff" size={22} />}
-                color="E86C2A"
-              />
-            );
-          })}
-        {gasoilCollectionRN.isLoading &&
-          Array.from({ length: 1 }).map((_, index) => <CardSkeleton key={index} />)}
-
-        {!gasoilCollectionRN.isLoading &&
-          gasoilCollectionRN.data?.slice(0, 1).map((gasoil: Gasoil, index) => {
-            const dateObj = new Date(gasoil.fecha_vigencia);
-            const rawDate = dateObj.toLocaleDateString('es-ES', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            });
-            const [day, , monthRaw, , year] = rawDate.split(' ');
-            const capitalizedMonth = monthRaw.charAt(0).toUpperCase() + monthRaw.slice(1);
-            const date = `${capitalizedMonth} ${day}, ${year}`;
-
-            return (
-              <CardCotizaciones
-                key={'rio negro' + index}
-                name={gasoil.empresabandera + ' - ' + gasoil.localidad}
                 value={gasoil.precio}
                 date={gasoil.direccion}
                 time={date}

@@ -8,7 +8,7 @@ import VisualizacionSanidad from './components/Containers/VisualizacionSanidad';
 import VisualiacionFertilizacion from './components/Containers/VisualizacionFertilizacion';
 import FormPresentacion from './components/Forms/Sanidad/FormPresentacion';
 import FormPlan from './components/Forms/Sanidad/FormPlan';
-import SipanLogo from '../src/assets/Sipan.png';
+import SipanLogo from '/Sipan.png';
 import FormFertilizacion from './components/Forms/Fertilizacion/FormFertilizacion';
 
 function App() {
