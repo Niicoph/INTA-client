@@ -80,6 +80,17 @@ export default function VisualizacionMaquinaria() {
   //     }
   //   };
 
+  // exportar a excel (solo maquinaria por ahora, con el resto cambian las columnas solamente -posible modularización-)
+  // comando para instalar componente en ExportToXLS, a veces no lo instala con 'npm install' automáticamente.
+const exportToXLS = async () => {
+    try {
+    const { default: ExportToXLS } = await import('../../utils/SectionXLS/ExportToXLS');
+    ExportToXLS(costosEconomicos);
+  } catch (error) {
+    console.error('Error al generar el archivo de Excel', error);
+  } 
+};
+
   return (
     <div className="rounded-md flex flex-col border border-border overflow-hidden  ">
       <TitleContainer icon={VisualizacionesIcon} title="Visualización Gráfica" />
@@ -98,8 +109,8 @@ export default function VisualizacionMaquinaria() {
               PDF
               <Download size={24} strokeWidth={2} />
             </Button>
-            <Button variant="outline" className="h-10 w-full md:w-fit ">
-              Excel
+            <Button variant="outline" className="h-10 w-full md:w-fit " onClick={exportToXLS} >
+              Excel          
               <Download size={24} strokeWidth={2} />
             </Button>
           </div>
