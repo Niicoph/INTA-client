@@ -4,10 +4,12 @@ import VisualizacionMaquinaria from '@/components/Containers/VisualizacionMaquin
 
 export default function Maquinaria() {
   return (
-    <section className="gap-4 flex flex-col w-full h-full ">
-      <ContainerCotizaciones />
-      <div className="h-full w-full gap-4 grid xl:grid-cols-2 xl:h-[760px] overflow-hidden ">
-        <FormMaquinaria />
+    <section className="grid grid-cols-1 gap-4 w-full h-full xl:flex xl:flex-row">
+      <div className="flex flex-col gap-4 h-full w-full xl:w-2/5">
+        <ContainerCotizaciones />
+        <FormMaquinaria />  
+      </div>
+      <div className='w-full xl:flex xl:flex-row xl:w-3/5'>
         <VisualizacionMaquinaria />
       </div>
     </section>

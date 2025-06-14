@@ -17,7 +17,7 @@ export default function ContainerCotizaciones() {
     <div className="rounded-md flex flex-col border border-border">
       <TitleContainer icon={CotizacionesIcon} title="Cotizaciones" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="flex flex-col">
         {dollarCollection.isLoading &&
           Array.from({ length: 1 }).map((_, index) => <CardSkeleton key={index} />)}
 

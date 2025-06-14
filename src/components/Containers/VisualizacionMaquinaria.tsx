@@ -92,7 +92,7 @@ const exportToXLS = async () => {
 };
 
   return (
-    <div className="rounded-md flex flex-col border border-border overflow-hidden  ">
+    <div className="rounded-md flex flex-col border border-border overflow-hidden w-full xl:h-[810px]"> {/* HEIGH HARDCODEADO */}
       <TitleContainer icon={VisualizacionesIcon} title="Visualización Gráfica" />
       <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col overflow-hidden h-[600px] xl:h-full">
         <Tabs
