@@ -11,7 +11,7 @@ interface InfoCardProps {
 
 export default function CardCotizaciones({ name, value, time, icon, date, color }: InfoCardProps) {
   return (
-    <div className="w-full flex items-stretch justify-between lg:border-r border-b border-border last:border-b-0 lg:border-b-0  lg:last:border-r-0">
+    <div className="w-full flex items-stretch justify-between">
       <div className="flex w-full p-4 justify-between items-stretch">
         <div className="w-full ">
           <div className="flex gap-2">
