@@ -130,7 +130,7 @@ const exportToXLS = async () => {
           <TabsContent
             value="tab2"
             aria-label="Tabla"
-            className="flex flex-col gap-4 overflow-y-auto h-full"
+            className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto h-full">
               <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
@@ -140,7 +140,7 @@ const exportToXLS = async () => {
           <TabsContent
             value="tab3"
             aria-label="Grafico"
-            className="flex flex-col gap-4  overflow-y-auto h-full"
+            className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
             <ChartMaquinaria costosEconomicos={costosEconomicos} />
           </TabsContent>
