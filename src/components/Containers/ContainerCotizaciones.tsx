@@ -10,7 +10,12 @@ import { Fuel } from 'lucide-react';
 import { DollarSignIcon } from 'lucide-react';
 import { CardSkeleton } from '../Loadings/CardSkeleton/CardSkeleton';
 
-export default function ContainerCotizaciones() {
+interface Props {
+  dollar?: boolean;
+  gasoil?: boolean;
+}
+
+export default function ContainerCotizaciones({dollar = false, gasoil = false,}: Props) {
   const dollarCollection = useDollar();
   const gasoilCollectionNQN = useGasoil('NEUQUEN');
   return (
@@ -18,10 +23,11 @@ export default function ContainerCotizaciones() {
       <TitleContainer icon={CotizacionesIcon} title="Cotizaciones" />
 
       <div className="flex flex-col">
-        {dollarCollection.isLoading &&
+
+        {dollar && dollarCollection.isLoading &&
           Array.from({ length: 1 }).map((_, index) => <CardSkeleton key={index} />)}
 
-        {!dollarCollection.isLoading &&
+        {dollar && !dollarCollection.isLoading &&
           dollarCollection.data?.map((dollar: Dollar, index: number) => {
             const dateObj = new Date(dollar.fechaActualizacion);
 
@@ -54,10 +60,10 @@ export default function ContainerCotizaciones() {
             );
           })}
 
-        {gasoilCollectionNQN.isLoading &&
+        {gasoil && gasoilCollectionNQN.isLoading &&
           Array.from({ length: 1 }).map((_, index) => <CardSkeleton key={index} />)}
 
-        {!gasoilCollectionNQN.isLoading &&
+        {gasoil && !gasoilCollectionNQN.isLoading &&
           gasoilCollectionNQN.data?.slice(0, 1).map((gasoil: Gasoil, index) => {
             const dateObj = new Date(gasoil.fecha_vigencia);
             const rawDate = dateObj.toLocaleDateString('es-ES', {

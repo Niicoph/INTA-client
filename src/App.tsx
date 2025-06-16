@@ -4,7 +4,7 @@ import SectionSkeleton from './components/Loadings/SectionSkeleton/SectionSkelet
 import SipanLogo from '/Sipan.png';
 import { lazy, Suspense } from 'react';
 
-const Sanidad = lazy(() => import('@/pages/Sanidad/Sanidad'));
+const Sanitizacion = lazy(() => import('@/pages/Sanitizacion/Sanitizacion'));
 const Fertilizacion = lazy(() => import('@/pages/Fertilizacion/Fertilizacion'));
 const Maquinaria = lazy(() => import('@/pages/Maquinaria/Maquinaria'));
 
@@ -21,7 +21,7 @@ function App() {
         <MaquinariaProvider>
           <TabsList className="w-full h-12 text-lg ">
             <TabsTrigger value="tab1">Maquinaria</TabsTrigger>
-            <TabsTrigger value="tab2">Sanidad</TabsTrigger>
+            <TabsTrigger value="tab2">Sanitización</TabsTrigger>
             <TabsTrigger value="tab3">Fertilización</TabsTrigger>
           </TabsList>
 
@@ -31,9 +31,9 @@ function App() {
             </Suspense>
           </TabsContent>
 
-          <TabsContent value="tab2" aria-label="Sección Sanidad">
+          <TabsContent value="tab2" aria-label="Sección Sanitizacion">
             <Suspense fallback={<SectionSkeleton />}>
-              <Sanidad />
+              <Sanitizacion />
             </Suspense>
           </TabsContent>
 

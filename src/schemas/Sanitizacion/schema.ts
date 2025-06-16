@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const PresentacionSchema = z.object({
+export const ProductoSchema = z.object({
   id_sanitizante: z.string({
     required_error: 'El principio activo es obligatorio',
     invalid_type_error: 'Debe seleccionar un principio activo',
@@ -10,17 +10,15 @@ export const PresentacionSchema = z.object({
     required_error: 'El principio activo es obligatorio',
     invalid_type_error: 'Debe seleccionar un principio activo',
   }),
-  // Precarga.precio_usd_unidad
-  precio_usd_unidad: z
-    .number({
+  // Precarga.precio_usd_envase
+  precio_usd_envase: z.number({
       required_error: 'El precio en dólares es obligatorio',
       invalid_type_error: 'Debe ser un número',
     })
     .positive('Debe ser un valor positivo'),
-  // Precarga.dosis
-  dosis: z
-    .number({
-      required_error: 'La dosis es obligatoria',
+  // Precarga.volumen_envase
+  volumen_envase: z.number({
+      required_error: 'La cantidad del envase es obligatoria',
       invalid_type_error: 'Debe ser un número',
     })
     .positive('Debe ser un valor positivo'),
@@ -29,32 +27,25 @@ export const PresentacionSchema = z.object({
     required_error: 'La unidad es obligatoria',
     invalid_type_error: 'Debe seleccionar una unidad',
   }),
-  // Usuario
-  cant_envase: z
-    .number({
-      required_error: 'La cantidad del envase es obligatoria',
+  // Precarga.dosis_x_hl
+  dosis_x_hl: z.number({
+      required_error: 'La dosis es obligatoria',
       invalid_type_error: 'Debe ser un número',
     })
     .positive('Debe ser un valor positivo'),
+  // Precarga.tipo
+  tipo: z.string({
+      required_error: 'El tipo de sanitizante es obligatorio',
+      invalid_type_error: 'Debe seleccionar un tipo',
+    }),
 });
 
-export const AplicacionSchema = z.object({
-  presentacion: PresentacionSchema,
-  volumen_hl_ha: z
-    .number({
-      required_error: 'El volumen es obligatorio',
-      invalid_type_error: 'Debe ser un número',
-    })
-    .positive('Debe ser un valor positivo'),
-  cant_tratamientos: z
-    .number({
-      required_error: 'La cantidad de tratamientos es obligatoria',
-      invalid_type_error: 'Debe ser un número',
-    })
-    .int('Debe ser un número entero')
-    .positive('Debe ser un valor positivo'),
+export const TratamientoSchema = z.object({
+  productos: z.array(ProductoSchema)
+    .nonempty('Debe incluir al menos un producto'),
 });
 
 export const PlanSchema = z.object({
-  aplicaciones: z.array(AplicacionSchema).nonempty('Debe incluir al menos una aplicación'),
+  tratamientos: z.array(TratamientoSchema)
+  .nonempty('Debe incluir al menos un tratamiento'),
 });

@@ -1,37 +1,1370 @@
 [
     {
-        "id" : "1",
-        "nombre" : "Aceite de verano",
-        "precio_usd_unidad" :  2,
-        "dosis" : 0.25,
-        "unidad" : "Litro"
+        "id": "1",
+        "nombre": "ABAMECTINA/AVERMECTINA",
+        "precio_usd_envase": 186,
+        "volumen_envase": 1,
+        "unidad": "kg",
+        "dosis_x_hl": 0.25,
+        "tipo": "plaguicida"
     },
     {
-        "id" : "2",
-        "nombre" : "Abamectina",
-        "precio_usd_unidad" :  168,
-        "dosis" : 0.05,
-        "unidad" : "Kilo"
+        "id": "2",
+        "nombre": "ACEITE MINERAL",
+        "precio_usd_envase": 2.80,
+        "volumen_envase": 1,
+        "unidad": "lts",
+        "dosis_x_hl": 0.25,
+        "tipo": "plaguicida"
     },
     {
-        "id" : "3",
-        "nombre" : "Polisulfuro calcio",
-        "precio_usd_unidad" :  1,
-        "dosis" : 3.00,
-        "unidad" : "Kilo"
+        "id": "3",
+        "nombre": "ACEQUINOCYL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
     },
     {
-        "id" : "4",
-        "nombre" : "Carbaryl",
-        "precio_usd_unidad" :  57,
-        "dosis" : 0.12,
-        "unidad" : "Kilo"
+        "id": "4",
+        "nombre": "ACETAMIPRID",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
     },
     {
-        "id" : "5",
-        "nombre" : "CYANTRANILIPROLE",
-        "precio_usd_unidad" :  180,
-        "dosis" : 0.075,
-        "unidad" : "Litro"
+        "id": "5",
+        "nombre": "ÁCIDO FOSFÓRICO",
+        "precio_usd_envase": 7.20,
+        "volumen_envase": 1,
+        "unidad": "lts",
+        "dosis_x_hl": 0.30,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "6",
+        "nombre": "ACRINATRINA",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "7",
+        "nombre": "AMITRAZ",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "8",
+        "nombre": "AZADIRACTINA",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "9",
+        "nombre": "BENZOATO DE EMAMECTINA",
+        "precio_usd_envase": 158.40,
+        "volumen_envase": 1,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "10",
+        "nombre": "BIFENAZATE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "11",
+        "nombre": "BIFENTRIN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "12",
+        "nombre": "BROMOPROPILATO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "13",
+        "nombre": "BROMURO DE METILO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "14",
+        "nombre": "BUPROFEZIN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "15",
+        "nombre": "BUPROFEZIN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "16",
+        "nombre": "BUPROFEZIN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "17",
+        "nombre": "CARBARIL",
+        "precio_usd_envase": 60.20,
+        "volumen_envase": 1,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "18",
+        "nombre": "CIPERMETRINA",
+        "precio_usd_envase": 127,
+        "volumen_envase": 5,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "19",
+        "nombre": "CLOFENTEZINE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "20",
+        "nombre": "CLORANTRANILIPROLE",
+        "precio_usd_envase": 257,
+        "volumen_envase": 1,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "21",
+        "nombre": "CLORANTRANILIPROLE + LAMBDACIALOTRINA",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "22",
+        "nombre": "CLORANTRANILIPROLE + TIAMETOXAM",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "23",
+        "nombre": "CYANTRANILIPROLE (CYAZYPYR)",
+        "precio_usd_envase": 144,
+        "volumen_envase": 1,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "24",
+        "nombre": "CYFLUMETOFEN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "25",
+        "nombre": "CYFLUTRIN / CYFLUTRINA",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "26",
+        "nombre": "CYFLUTRIN / CYFLUTRINA",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "27",
+        "nombre": "CYHEXATIN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "28",
+        "nombre": "DELTAMETRINA / DECAMETRINA",
+        "precio_usd_envase": 79,
+        "volumen_envase": 5,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "29",
+        "nombre": "DIFLUBENZURON",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "30",
+        "nombre": "DIMETOATO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "31",
+        "nombre": "ESFENVALERATO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "32",
+        "nombre": "ETION",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "33",
+        "nombre": "FENAMIFOS",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "34",
+        "nombre": "FENAZAQUIN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "35",
+        "nombre": "FENBUTATIN OXIDO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "36",
+        "nombre": "FENITROTION",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "37",
+        "nombre": "FENPIROXIMATO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "38",
+        "nombre": "FENVALERATO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "39",
+        "nombre": "FLONICAMID",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "40",
+        "nombre": "FLUBENDIAMIDE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "41",
+        "nombre": "FLUFENOXURON",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "42",
+        "nombre": "FORMETANATO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "43",
+        "nombre": "FOSFINA",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "44",
+        "nombre": "FOSMET",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "45",
+        "nombre": "GAMMACIALOTRINA",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "46",
+        "nombre": "HEXITIAZOX",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "47",
+        "nombre": "IMIDACLOPRID",
+        "precio_usd_envase": 41.50,
+        "volumen_envase": 1,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "48",
+        "nombre": "INDOXACARB",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "49",
+        "nombre": "ISOCYCLOSERAM",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "50",
+        "nombre": "LAMBDACIALOTRINA",
+        "precio_usd_envase": 86.60,
+        "volumen_envase": 1,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "51",
+        "nombre": "MERCAPTOTION / MALATION",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "52",
+        "nombre": "METIDATION",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "53",
+        "nombre": "METIOCARB / METMERCAPTURON",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "54",
+        "nombre": "METOMIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "55",
+        "nombre": "METOXIFENOCIDE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "56",
+        "nombre": "NOVALURON",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "57",
+        "nombre": "NOVALURON + ACETAMIPRID",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "58",
+        "nombre": "PERMETRINA",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "59",
+        "nombre": "PIRIDAFENTION",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "60",
+        "nombre": "PIRIMICARB",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "61",
+        "nombre": "PIRIMIFOS METIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "62",
+        "nombre": "POLISULFURO DE CALCIO",
+        "precio_usd_envase": 1.27,
+        "volumen_envase": 1,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "63",
+        "nombre": "PROPARGITE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "64",
+        "nombre": "PYRIPROXIFEN ",
+        "precio_usd_envase": 73.20,
+        "volumen_envase": 1,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "65",
+        "nombre": "PYRIDABEN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "66",
+        "nombre": "SPINETORAM",
+        "precio_usd_envase": 305,
+        "volumen_envase": 1,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "67",
+        "nombre": "SPINOSAD",
+        "precio_usd_envase": 487.20,
+        "volumen_envase": 1,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "68",
+        "nombre": "SPIRODICLOFEN",
+        "precio_usd_envase": 102.60,
+        "volumen_envase": 1,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "69",
+        "nombre": "SPIROTETRAMAT",
+        "precio_usd_envase": 104.25,
+        "volumen_envase": 1,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "70",
+        "nombre": "SULFATO DE COBRE PENTAHIDRATADO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "71",
+        "nombre": "SULFOXAFLOR",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "72",
+        "nombre": "TEBUFENOZIDE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "73",
+        "nombre": "TEFLUBENZURON",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "74",
+        "nombre": "TETRADIFON",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "75",
+        "nombre": "TIACLOPRID",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "76",
+        "nombre": "TIAMETOXAM",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "77",
+        "nombre": "PYRACLOSTROBIN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "78",
+        "nombre": "PYRIPROPXIFEN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "79",
+        "nombre": "TRAMPA CARPOCAPSA",
+        "precio_usd_envase": 31.86,
+        "volumen_envase": 1,
+        "unidad": "unidad",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "80",
+        "nombre": "DISPENSER DE FEROMONA 180 DIAS 550/HA",
+        "precio_usd_envase": 0.41,
+        "volumen_envase": 1,
+        "unidad": "unidad",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "81",
+        "nombre": "DISPENSER DE FEROMONA 120 DIAS 550/HA",
+        "precio_usd_envase": 0.35,
+        "volumen_envase": 1,
+        "unidad": "unidad",
+        "dosis_x_hl": 0,
+        "tipo": "plaguicida"
+    },
+    {
+        "id": "82",
+        "nombre": "ACIDO FOSFORICO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "83",
+        "nombre": "ACEITE MINERAL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "84",
+        "nombre": "AMETOCTRADIN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "85",
+        "nombre": "AZOXISTROBINA",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "86",
+        "nombre": "AZUFRE MICRONIZADO",
+        "precio_usd_envase": 198,
+        "volumen_envase": 25,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "87",
+        "nombre": "BACILLUS AMYLOLIQUEFACIENS",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "88",
+        "nombre": "BACILLUS SUBTILIS",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "89",
+        "nombre": "BENALAXIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "90",
+        "nombre": "BENOMIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "91",
+        "nombre": "BOSCALID",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "92",
+        "nombre": "BOSCALID + PYRACLOSTROBIN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "93",
+        "nombre": "BROMURO DE METILO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "94",
+        "nombre": "BUPIRIMATO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "95",
+        "nombre": "CAPTAN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "96",
+        "nombre": "CARBENDAZIM",
+        "precio_usd_envase": 195,
+        "volumen_envase": 20,
+        "unidad": "lts",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "97",
+        "nombre": "CLOROTALONIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "98",
+        "nombre": "CYMOXANIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "99",
+        "nombre": "CYPRODINIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "100",
+        "nombre": "DIFENOCONAZOLE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "101",
+        "nombre": "DIMETOMORF",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "102",
+        "nombre": "DITIANON",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "103",
+        "nombre": "FENARIMOL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "104",
+        "nombre": "FENBUCONAZOLE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "105",
+        "nombre": "FENHEXAMID",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "106",
+        "nombre": "FERBAM",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "107",
+        "nombre": "FLUAZINAM",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "108",
+        "nombre": "FLUDIOXONIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "109",
+        "nombre": "FLUSILAZOLE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "110",
+        "nombre": "FLUTRIAFOL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "111",
+        "nombre": "FLUXAPYROXAD",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "112",
+        "nombre": "FOLPET",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "113",
+        "nombre": "FOSETIL ALUMINIO",
+        "precio_usd_envase": 46,
+        "volumen_envase": 1,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "114",
+        "nombre": "HEXACONAZOLE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "115",
+        "nombre": "HIDROXIDO DE COBRE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "116",
+        "nombre": "IMAZALIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "117",
+        "nombre": "IPRODIONE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "118",
+        "nombre": "IPROVALICARB",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "119",
+        "nombre": "KASUGAMICINA",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "120",
+        "nombre": "KRESOXIM  METIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "121",
+        "nombre": "MANCOZEB",
+        "precio_usd_envase": 19,
+        "volumen_envase": 1,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "122",
+        "nombre": "MEPTYL DINOCAP",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "123",
+        "nombre": "METALAXIL – M -ISOMERO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "124",
+        "nombre": "METIL TIOFANATO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "125",
+        "nombre": "METRAFENONE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "126",
+        "nombre": "MYCLOBUTANIL",
+        "precio_usd_envase": 92.50,
+        "volumen_envase": 0.5,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "127",
+        "nombre": "OXICLORURO DE COBRE",
+        "precio_usd_envase": 13.45,
+        "volumen_envase": 1,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "128",
+        "nombre": "OXIDO CUPROSO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "129",
+        "nombre": "PENCONAZOLE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "130",
+        "nombre": "POLISULFURO DE CALCIO",
+        "precio_usd_envase": 1.27,
+        "volumen_envase": 1,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "131",
+        "nombre": "PROCIMIDONE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "132",
+        "nombre": "PROPINEB",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "133",
+        "nombre": "PYDIFLUMETOFEN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "134",
+        "nombre": "PYRACLOSTROBIN",
+        "precio_usd_envase": 146.76,
+        "volumen_envase": 1,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "135",
+        "nombre": "PYRIMETANIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "136",
+        "nombre": "QUINOXYFEN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "137",
+        "nombre": "SULFATO CUPRICO PENTAHIDRATADO",
+        "precio_usd_envase": 177,
+        "volumen_envase": 25,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "138",
+        "nombre": "SULFATO TETRACUPICO TRICALCICO",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "139",
+        "nombre": "SULFATO TRIBÁSICO DE COBRE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "140",
+        "nombre": "TEBUCONAZOLE /  FENETRAZOLE",
+        "precio_usd_envase": 32.50,
+        "volumen_envase": 1,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "141",
+        "nombre": "TEBUCONAZOLE + TRIFLOXISTROBIN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "142",
+        "nombre": "TEBUCONAZOLE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "143",
+        "nombre": "TIABENDAZOL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "144",
+        "nombre": "TIOFANATO METIL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "145",
+        "nombre": "TIRAM",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "146",
+        "nombre": "TOLYFLUANID",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "147",
+        "nombre": "TRIADIMEFON",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "148",
+        "nombre": "TRIFLOXISTROBIN",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "149",
+        "nombre": "TRIFORINE",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "150",
+        "nombre": "VALIPHENAL",
+        "precio_usd_envase": 0,
+        "volumen_envase": 0,
+        "unidad": "null",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "151",
+        "nombre": "ZINEB",
+        "precio_usd_envase": 19,
+        "volumen_envase": 0.5,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
+    },
+    {
+        "id": "152",
+        "nombre": "ZIRAM",
+        "precio_usd_envase": 9.40,
+        "volumen_envase": 1,
+        "unidad": "kg",
+        "dosis_x_hl": 0,
+        "tipo": "fungicida"
     }
 ]

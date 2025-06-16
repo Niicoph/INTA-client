@@ -1,7 +1,7 @@
 import { type Sanitizante } from "@/types/sanitizante";
 
 export async function getSanitizantes(): Promise<Sanitizante[]> {
-    const response = await fetch("/src/utils/pasanitizante.json");
+    const response = await fetch("/pasanitizante.json");
     if (!response.ok) {
         throw new Error("No se pudo obtener la lista de sanitizantes.");
     }

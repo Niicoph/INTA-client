@@ -1,22 +1,17 @@
-export type Sanitizante = {
-  id: string;
+export type Producto = {
+  id_sanitizante: string;
   nombre: string;
-  precio_usd_unidad: number;
+  precio_usd_envase: number;
+  volumen_envase: number;
   unidad: string;
-  dosis: number;
+  dosis_x_hl: number;
+  tipo: string;
 };
 
-export type PresentacionSanitizante = {
-  sanitizante: Sanitizante;
-  cant_envase: number;
-};
-
-export type Aplicacion = {
-  presentacion: PresentacionSanitizante;
-  volumen_hl_ha: number;
-  cant_tratamientos: number;
+export type Tratamiento = {
+  productos: Producto[];
 };
 
 export type Plan = {
-    aplicaciones: Aplicacion[]
+  tratamientos: Tratamiento[]
 }
