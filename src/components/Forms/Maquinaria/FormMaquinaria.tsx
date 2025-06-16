@@ -130,7 +130,7 @@ export default function FormMaquinaria() {
   }, [selectedTractor, selectedImplemento, valorDolar]);
 
   return (
-    <div className="rounded-md flex flex-col border  border-border">
+    <div className="rounded-md flex flex-col border h-full border-border">
       <TitleContainer icon={CargaDatosIcon} title="Carga de Conjuntos" />
       <Form {...form}>
         <form
@@ -377,7 +377,7 @@ export default function FormMaquinaria() {
                           readOnly={!customTractorUSD}
                           placeholder="Selecciona tractor"
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-4 py-2 border rounded transition-all duration-200 ${
+                          className={`w-full pr-10 px-4 py-2 border rounded-md transition-all duration-200 ${
                             customTractorUSD
                               ? 'bg-white text-black border-gray-300'
                               : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'

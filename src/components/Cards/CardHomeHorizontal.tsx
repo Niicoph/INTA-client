@@ -7,6 +7,7 @@ interface CardHomeHorizontalProps {
   color: string;
   title: string;
   description: string;
+  path: string;
 }
 
 export default function CardHomeHorizontal({
@@ -15,6 +16,7 @@ export default function CardHomeHorizontal({
   color,
   title,
   description,
+  path,
 }: CardHomeHorizontalProps) {
   return (
     <div className="w-full h-44 rounded-xl relative flex shadow-card">
@@ -32,7 +34,7 @@ export default function CardHomeHorizontal({
         </h2>
         <p className="gilroy-regular text-xs text-left text-[#8C8C8C]">{description}</p>
         <Link
-          to="/dashboard#maquinaria"
+          to={path}
           className="gilroy-semibold text-sm text-white px-4 py-2 rounded-lg mt-2 flex w-fit items-center gap-2"
           style={{ backgroundColor: color }}
         >

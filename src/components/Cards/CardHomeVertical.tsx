@@ -7,6 +7,7 @@ interface CardHomeVerticalProps {
   title: string;
   description: string;
   color: string;
+  path: string;
 }
 
 export default function CardHomeVertical({
@@ -15,6 +16,7 @@ export default function CardHomeVertical({
   title,
   description,
   color,
+  path,
 }: CardHomeVerticalProps) {
   return (
     <div className="w-[170px] h-[270px] rounded-xl flex flex-col shadow-card relative bg-white mdd:w-[200px] mdd:h-[300px] lgg:w-[220px] lgg:h-[320px] xl:w-[250px] xl:h-[350px]  ">
@@ -32,7 +34,7 @@ export default function CardHomeVertical({
         </h2>
         <p className="gilroy-regular text-xs text-left text-[#8C8C8C]">{description}</p>
         <Link
-          to="/dashboard#maquinaria"
+          to={path}
           className="gilroy-semibold text-sm text-white px-4 justify-center py-2 rounded-lg mt-2 flex w-full items-center gap-2"
           style={{ backgroundColor: color }}
         >

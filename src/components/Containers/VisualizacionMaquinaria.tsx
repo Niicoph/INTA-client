@@ -82,17 +82,17 @@ export default function VisualizacionMaquinaria() {
 
   // exportar a excel (solo maquinaria por ahora, con el resto cambian las columnas solamente -posible modularización-)
   // comando para instalar componente en ExportToXLS, a veces no lo instala con 'npm install' automáticamente.
-const exportToXLS = async () => {
+  const exportToXLS = async () => {
     try {
-    const { default: ExportToXLS } = await import('../../utils/SectionXLS/ExportToXLS');
-    ExportToXLS(costosEconomicos);
-  } catch (error) {
-    console.error('Error al generar el archivo de Excel', error);
-  } 
-};
+      const { default: ExportToXLS } = await import('../../utils/SectionXLS/ExportToXLS');
+      ExportToXLS(costosEconomicos);
+    } catch (error) {
+      console.error('Error al generar el archivo de Excel', error);
+    }
+  };
 
   return (
-    <div className="rounded-md flex flex-col border border-border overflow-hidden w-full xl:h-[810px]"> {/* HEIGH HARDCODEADO */}
+    <div className="rounded-md flex flex-col border border-border overflow-hidden w-full xl:h-full">
       <TitleContainer icon={VisualizacionesIcon} title="Visualización Gráfica" />
       <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col overflow-hidden h-[600px] xl:h-full">
         <Tabs
@@ -109,8 +109,8 @@ const exportToXLS = async () => {
               PDF
               <Download size={24} strokeWidth={2} />
             </Button>
-            <Button variant="outline" className="h-10 w-full md:w-fit " onClick={exportToXLS} >
-              Excel          
+            <Button variant="outline" className="h-10 w-full md:w-fit " onClick={exportToXLS}>
+              Excel
               <Download size={24} strokeWidth={2} />
             </Button>
           </div>
@@ -119,10 +119,10 @@ const exportToXLS = async () => {
             aria-label="GraficoTabla"
             className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
-            <div ref={captureRef} className=" overflow-x-auto">
+            <div ref={captureRef} className="overflow-x-auto">
               <ChartMaquinaria costosEconomicos={costosEconomicos} />
             </div>
-            <div className=" overflow-x-auto">
+            <div className="overflow-x-auto">
               <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
             </div>
           </TabsContent>
@@ -130,7 +130,7 @@ const exportToXLS = async () => {
           <TabsContent
             value="tab2"
             aria-label="Tabla"
-            className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
+            className="w-full min-w-0 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto h-full">
               <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
@@ -140,7 +140,7 @@ const exportToXLS = async () => {
           <TabsContent
             value="tab3"
             aria-label="Grafico"
-            className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
+            className="w-full min-w-0 gap-4 overflow-hidden h-full"
           >
             <ChartMaquinaria costosEconomicos={costosEconomicos} />
           </TabsContent>

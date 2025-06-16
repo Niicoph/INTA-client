@@ -10,6 +10,7 @@ const cards = [
     color: '#F18813',
     title: 'Maquinaria',
     description: 'Este módulo estima',
+    path: '/maquinaria',
   },
   {
     src: 'src/assets/utils/Sanidad.png',
@@ -17,6 +18,7 @@ const cards = [
     color: '#28A635',
     title: 'Sanidad',
     description: 'Este módulo calcula',
+    path: '/sanitizacion',
   },
   {
     src: 'src/assets/utils/Fertilizacion.png',
@@ -24,6 +26,7 @@ const cards = [
     color: '#2D64A2',
     title: 'Fertilización',
     description: 'Este módulo estima',
+    path: '/fertilizacion',
   },
 ];
 
@@ -106,6 +109,7 @@ export default function Home() {
                           color={card.color}
                           title={card.title}
                           description={card.description}
+                          path={card.path}
                         />
                       ))}
                     </div>
@@ -142,6 +146,7 @@ export default function Home() {
               color={card.color}
               title={card.title}
               description={card.description}
+              path={card.path}
             />
           ))}
         </section>
