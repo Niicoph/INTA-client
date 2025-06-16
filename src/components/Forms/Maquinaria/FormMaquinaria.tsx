@@ -60,7 +60,7 @@ export default function FormMaquinaria() {
   const [customImplementoConsumo, setCustomImplementoConsumo] = useState(false);
   const [customImplementoUSD, setCustomImplementoUSD] = useState(false);
   const [customImplementoResiduoPCT, setCustomImplementoResiduoPCT] = useState(false);
-  
+
   const form = useForm<MaquinariaFormData>({
     resolver: zodResolver(MaquinariaSchema),
     defaultValues: {
@@ -166,7 +166,7 @@ export default function FormMaquinaria() {
                           {dollarCollection.data?.map((dollar: Dollar) => {
                             return (
                               <SelectItem key={dollar.venta} value={dollar.venta.toString()}>
-                                 ${dollar.venta} - {dollar.nombre}
+                                ${dollar.venta} - {dollar.nombre}
                               </SelectItem>
                             );
                           })}
@@ -174,11 +174,11 @@ export default function FormMaquinaria() {
                         </SelectContent>
                       </Select>
                       <Input
-                        className={`text-xs w-full pr-10 px-3 py-2 border transition-all duration-200 ${isCustomDolar
-                                ? "bg-white text-black border-gray-300"
-                                : "bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed"
-                              }`
-                            }
+                        className={`text-xs w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                          isCustomDolar
+                            ? 'bg-white text-black border-gray-300'
+                            : 'bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
+                        }`}
                         hidden={!isCustomDolar}
                         placeholder="Especifique precio de USD"
                         type="number"
@@ -230,11 +230,11 @@ export default function FormMaquinaria() {
                         </SelectContent>
                       </Select>
                       <Input
-                       className={`text-xs w-full pr-10 px-3 py-2 border transition-all duration-200 ${isCustomGasoil
-                                ? "bg-white text-black border-gray-300"
-                                : "bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed"
-                              }`
-                            }
+                        className={`text-xs w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                          isCustomGasoil
+                            ? 'bg-white text-black border-gray-300'
+                            : 'bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
+                        }`}
                         hidden={!isCustomGasoil}
                         placeholder="Especifique precio de gasoil"
                         type="number"
@@ -252,8 +252,8 @@ export default function FormMaquinaria() {
               />
             </div>
           </div>
-          <div className="col-span-full h-full flex flex-col gap-4 md:flex-row">
-            <div className="w-full flex flex-col gap-4 ">
+          <div className="col-span-full h-full flex flex-col gap-4 md:flex-row xl:grid grid-cols-2">
+            <div className="w-full flex flex-col gap-4">
               <FormField
                 control={form.control}
                 name="tractor"
@@ -324,8 +324,6 @@ export default function FormMaquinaria() {
                 )}
               />
 
-
-
               <FormField
                 control={form.control}
                 name="potencia_CV"
@@ -339,33 +337,32 @@ export default function FormMaquinaria() {
                           readOnly={!customTractorCV}
                           placeholder="Selecciona tractor"
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${customTractorCV
-                                ? "bg-white text-black border-gray-300"
-                                : "text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed"
-                              }`
-                            }
+                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                            customTractorCV
+                              ? 'bg-white text-black border-gray-300'
+                              : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
+                          }`}
                           onChange={(e) => {
                             const value = e.target.valueAsNumber;
                             field.onChange(isNaN(value) ? '' : value);
                           }}
                         />
 
-                        <Button 
-                          type='button'
+                        <Button
+                          type="button"
                           variant="outline"
                           onClick={() => setCustomTractorCV((prev) => !prev)}
                           className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
                           hidden={selectedTractor == null}
-                        > 
-                          ✏️ 
-                        </Button>                      
+                        >
+                          ✏️
+                        </Button>
                       </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
 
               <FormField
                 control={form.control}
@@ -380,25 +377,24 @@ export default function FormMaquinaria() {
                           readOnly={!customTractorUSD}
                           placeholder="Selecciona tractor"
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-4 py-2 border rounded transition-all duration-200 ${customTractorUSD
-                              ? "bg-white text-black border-gray-300"
-                              : "text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed"
-                            }`
-                          }
+                          className={`w-full pr-10 px-4 py-2 border rounded transition-all duration-200 ${
+                            customTractorUSD
+                              ? 'bg-white text-black border-gray-300'
+                              : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
+                          }`}
                           onChange={(e) => {
                             const value = e.target.valueAsNumber;
                             field.onChange(isNaN(value) ? '' : value);
                           }}
-                          
                         />
-                        <Button 
-                            type='button'
-                            variant="outline"
-                            onClick={() => setCustomTractorUSD((prev) => !prev)}
-                            className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
-                            hidden={selectedTractor == null}
-                          >
-                            ✏️ 
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCustomTractorUSD((prev) => !prev)}
+                          className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
+                          hidden={selectedTractor == null}
+                        >
+                          ✏️
                         </Button>
                       </div>
                     </FormControl>
@@ -438,24 +434,24 @@ export default function FormMaquinaria() {
                           readOnly={!customTractorResiduoPCT}
                           placeholder="Selecciona tractor"
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${customTractorResiduoPCT
-                                ? "bg-white text-black border-gray-300"
-                                : "text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed"
-                              }`
-                            }
-                            onChange={(e) => {
-                              const value = e.target.valueAsNumber;
-                              field.onChange(isNaN(value) ? '' : value);
-                            }}
+                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                            customTractorResiduoPCT
+                              ? 'bg-white text-black border-gray-300'
+                              : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
+                          }`}
+                          onChange={(e) => {
+                            const value = e.target.valueAsNumber;
+                            field.onChange(isNaN(value) ? '' : value);
+                          }}
                         />
-                        <Button 
-                            type='button'
-                            variant="outline"
-                            onClick={() => setCustomTractorResiduoPCT((prev) => !prev)}
-                            className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
-                            hidden={selectedTractor == null}
-                          >
-                            ✏️ 
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCustomTractorResiduoPCT((prev) => !prev)}
+                          className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
+                          hidden={selectedTractor == null}
+                        >
+                          ✏️
                         </Button>
                       </div>
                     </FormControl>
@@ -540,9 +536,9 @@ export default function FormMaquinaria() {
                       }}
                     >
                       <SelectTrigger
-                        className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
+                        className={`text-xs w-full  border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
-                        <SelectValue placeholder={'Selecciona un implemento'} />
+                        <SelectValue placeholder={'Selecciona implemento'} />
                       </SelectTrigger>
                       <SelectContent>
                         {maquinaria.data?.implementos.map((implemento: Implemento) => (
@@ -572,24 +568,24 @@ export default function FormMaquinaria() {
                           readOnly={!customImplementoConsumo}
                           placeholder="Selecciona implemento"
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${customImplementoConsumo
-                                ? "bg-white text-black border-gray-300"
-                                : "text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed"
-                              }`
-                            }
+                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                            customImplementoConsumo
+                              ? 'bg-white text-black border-gray-300'
+                              : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
+                          }`}
                           onChange={(e) => {
                             const value = e.target.valueAsNumber;
                             field.onChange(isNaN(value) ? '' : value);
                           }}
                         />
-                        <Button 
-                            type='button'
-                            variant="outline"
-                            onClick={() => setCustomImplementoConsumo((prev) => !prev)}
-                            className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
-                            hidden={selectedImplemento == null}
-                          >
-                            ✏️ 
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCustomImplementoConsumo((prev) => !prev)}
+                          className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
+                          hidden={selectedImplemento == null}
+                        >
+                          ✏️
                         </Button>
                       </div>
                     </FormControl>
@@ -610,24 +606,24 @@ export default function FormMaquinaria() {
                           readOnly={!customImplementoUSD}
                           placeholder="Selecciona implemento"
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${customImplementoUSD
-                                ? "bg-white text-black border-gray-300"
-                                : "text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed"
-                              }`
-                            }
+                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                            customImplementoUSD
+                              ? 'bg-white text-black border-gray-300'
+                              : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
+                          }`}
                           onChange={(e) => {
                             const value = e.target.valueAsNumber;
                             field.onChange(isNaN(value) ? '' : value);
                           }}
                         />
-                        <Button 
-                            type='button'
-                            variant="outline"
-                            onClick={() => setCustomImplementoUSD((prev) => !prev)}
-                            className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
-                            hidden={selectedImplemento == null}
-                          >
-                            ✏️
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCustomImplementoUSD((prev) => !prev)}
+                          className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
+                          hidden={selectedImplemento == null}
+                        >
+                          ✏️
                         </Button>
                       </div>
                     </FormControl>
@@ -667,24 +663,24 @@ export default function FormMaquinaria() {
                           readOnly={!customImplementoResiduoPCT}
                           placeholder="Selecciona implemento"
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${customImplementoResiduoPCT
-                                ? "bg-white text-black border-gray-300"
-                                : "text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed"
-                              }`
-                            }
+                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                            customImplementoResiduoPCT
+                              ? 'bg-white text-black border-gray-300'
+                              : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
+                          }`}
                           onChange={(e) => {
                             const value = e.target.valueAsNumber;
                             field.onChange(isNaN(value) ? '' : value);
                           }}
                         />
-                        <Button 
-                            type='button'
-                            variant="outline"
-                            onClick={() => setCustomImplementoResiduoPCT((prev) => !prev)}
-                            className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
-                            hidden={selectedImplemento == null}
-                          >
-                            ✏️ 
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCustomImplementoResiduoPCT((prev) => !prev)}
+                          className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
+                          hidden={selectedImplemento == null}
+                        >
+                          ✏️
                         </Button>
                       </div>
                     </FormControl>
@@ -712,7 +708,7 @@ export default function FormMaquinaria() {
               /> */}
             </div>
           </div>
-          <Legend text="Valor residual (%): valor estimado de Tractor/Implemento al fin de su vida útil."/>
+          <Legend text="Valor residual (%): valor estimado de Tractor/Implemento al fin de su vida útil." />
           <div className="col-span-full">
             <Button className="w-full" type="submit" variant={'submit'} disabled={!isFormComplete}>
               Agregar Conjunto
