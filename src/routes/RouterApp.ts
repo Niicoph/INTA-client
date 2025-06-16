@@ -1,4 +1,6 @@
 export const router = {
     home: "/",
-    calculator: "/calculadora",
+    maquinaria: "/maquinaria",
+    sanitizacion: "/sanitizacion",
+    fertilizacion: "/fertilizacion",
 }

@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { type Sanitizante } from "@/types/sanitizante";
+import { type Producto } from "@/types/sanitizante";
 import { getSanitizantes } from "@/services/sanidadService";
 
 export function useSanitizantes() {
-    const query = useQuery<Sanitizante[]>({
+    const query = useQuery<Producto[]>({
         queryKey: ["sanidadData"],
         queryFn: () => getSanitizantes(),
         staleTime: 1000 * 60 * 10,

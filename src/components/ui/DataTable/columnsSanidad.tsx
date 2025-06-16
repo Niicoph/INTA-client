@@ -10,9 +10,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { type Sanitizante } from '@/types/sanitizante';
+import { type Producto } from '@/types/sanitizante';
 
-export const columnsSanidad: ColumnDef<Sanitizante>[] = [
+export const columnsSanidad: ColumnDef<Producto>[] = [
   {
     id: 'select',
     header: ({ table }) => (
