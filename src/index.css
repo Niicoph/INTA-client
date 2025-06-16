@@ -18,6 +18,9 @@ input[type='number'] {
   .bg-gradient-custom {
     background: linear-gradient(180deg, rgba(94, 193, 105, 1) 0%, rgba(44, 91, 50, 1) 100%);
   }
+  .shadow-card {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
 }
 
 @layer utilities {
@@ -28,6 +31,13 @@ input[type='number'] {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+@theme {
+  --breakpoint-smm: 700px;
+  --breakpoint-mdd: 900px;
+  --breakpoint-lgg: 1200px;
+  --breakpoint-xxl: 2300px;
 }
 
 @theme inline {
@@ -191,6 +201,13 @@ input[type='number'] {
 }
 
 @font-face {
+  font-family: 'Gilroy-SemiBold';
+  src: url('public/Fonts/Gilroy-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Gilroy-Bold';
   src: url('public/Fonts/Gilroy-Bold.ttf');
   font-weight: 700;
@@ -198,17 +215,17 @@ input[type='number'] {
 }
 
 font-face {
-    font-family: 'Gilroy-Regular';
-    src: url('public/Fonts/Gilroy-Regular.ttf');
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Gilroy-Regular';
+  src: url('public/Fonts/Gilroy-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
 }
 
 .gilroy-regular {
-    font-family: 'Gilroy-Regular', sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Gilroy-Regular', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .gilroy-extrabold {
@@ -222,5 +239,12 @@ font-face {
   font-family: ' Gilroy-Bold', sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
+  font-style: normal;
+}
+
+.gilroy-semibold {
+  font-family: 'Gilroy-SemiBold', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
   font-style: normal;
 }
