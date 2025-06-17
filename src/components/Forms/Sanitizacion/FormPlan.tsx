@@ -6,7 +6,8 @@ import { type PlanFormData } from '@/schemas/Sanitizacion/types';
 import { ProductosContext } from '@/context/ProductosContext';
 //import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-
+import { Plus } from "lucide-react";
+import Legend from '@/components/ui/Legend/Legend';
 import {
   Form,
   /*FormField,
@@ -18,14 +19,18 @@ import {
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
 import { useContext, /*useEffect,*/ useState } from 'react';
+import type { Tratamiento } from '@/types/sanitizante';
 //import Alert from '@/components/ui/alert';
 
 export default function FormPlan() {
-  const [isFormComplete, setIsFormComplete] = useState<boolean>(false);
   const productosContext = useContext(ProductosContext);
-  if (!productosContext) return null;
+  if (!productosContext) {
+    return null;
+  }
+  const productos  = productosContext.data;
 
-  //const { data, setData } = productosContext;
+  const [tratamientos, setTratamientos] = useState<Tratamiento[]>([]);
+  const [isFormComplete, setIsFormComplete] = useState<boolean>(false);
 
   const formPlan = useForm<PlanFormData>({
     resolver: zodResolver(PlanSchema),
@@ -42,8 +47,12 @@ export default function FormPlan() {
 
   function resetForm() {
     formPlan.reset();
-    //setData([]);
+    //setData((prevData) => [...prevData, finalData]);
     setIsFormComplete(false);
+  }
+
+  function agregarFormTratamiento() {
+    console.log("Tratamiento aniadido")
   }
 
   return (
@@ -52,8 +61,15 @@ export default function FormPlan() {
       <Form {...formPlan}>
         <form
           onSubmit={formPlan.handleSubmit(handleFormSubmit)}
-          className="w-full h-full p-4 gap-4 flex flex-col justify-between"
+          className="w-full h-full p-4 gap-4 flex flex-col"
         >
+          <div className='flex flex-row-reverse'>
+            <Button className='h-fit w-fit' variant={'outline'} onClick={()=> agregarFormTratamiento()}>
+              <Plus/> Agregar tratamiento
+            </Button>
+          </div>
+          <Legend text="Para agregar un plan debes añadirle al menos un tratamiento." />
+          <Legend text="Cada tratamiento debe tener al menos un producto." />
           <Button className="w-full" type="submit" variant={'submit'} disabled={!isFormComplete}>
             Agregar Plan
           </Button>
