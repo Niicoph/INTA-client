@@ -15,3 +15,5 @@ export type Tratamiento = {
 export type Plan = {
   tratamientos: Tratamiento[]
 }
+
+export const unidades: string[] = ["lts", "kg"];

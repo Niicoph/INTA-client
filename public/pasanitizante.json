@@ -1,6 +1,6 @@
 [
     {
-        "id": "1",
+        "id_sanitizante": "1",
         "nombre": "ABAMECTINA/AVERMECTINA",
         "precio_usd_envase": 186,
         "volumen_envase": 1,
@@ -9,7 +9,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "2",
+        "id_sanitizante": "2",
         "nombre": "ACEITE MINERAL",
         "precio_usd_envase": 2.80,
         "volumen_envase": 1,
@@ -18,7 +18,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "3",
+        "id_sanitizante": "3",
         "nombre": "ACEQUINOCYL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -27,7 +27,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "4",
+        "id_sanitizante": "4",
         "nombre": "ACETAMIPRID",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -36,7 +36,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "5",
+        "id_sanitizante": "5",
         "nombre": "ÁCIDO FOSFÓRICO",
         "precio_usd_envase": 7.20,
         "volumen_envase": 1,
@@ -45,7 +45,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "6",
+        "id_sanitizante": "6",
         "nombre": "ACRINATRINA",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -54,7 +54,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "7",
+        "id_sanitizante": "7",
         "nombre": "AMITRAZ",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -63,7 +63,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "8",
+        "id_sanitizante": "8",
         "nombre": "AZADIRACTINA",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -72,7 +72,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "9",
+        "id_sanitizante": "9",
         "nombre": "BENZOATO DE EMAMECTINA",
         "precio_usd_envase": 158.40,
         "volumen_envase": 1,
@@ -81,7 +81,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "10",
+        "id_sanitizante": "10",
         "nombre": "BIFENAZATE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -90,7 +90,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "11",
+        "id_sanitizante": "11",
         "nombre": "BIFENTRIN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -99,7 +99,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "12",
+        "id_sanitizante": "12",
         "nombre": "BROMOPROPILATO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -108,7 +108,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "13",
+        "id_sanitizante": "13",
         "nombre": "BROMURO DE METILO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -117,7 +117,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "14",
+        "id_sanitizante": "14",
         "nombre": "BUPROFEZIN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -126,7 +126,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "15",
+        "id_sanitizante": "15",
         "nombre": "BUPROFEZIN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -135,7 +135,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "16",
+        "id_sanitizante": "16",
         "nombre": "BUPROFEZIN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -144,7 +144,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "17",
+        "id_sanitizante": "17",
         "nombre": "CARBARIL",
         "precio_usd_envase": 60.20,
         "volumen_envase": 1,
@@ -153,7 +153,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "18",
+        "id_sanitizante": "18",
         "nombre": "CIPERMETRINA",
         "precio_usd_envase": 127,
         "volumen_envase": 5,
@@ -162,7 +162,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "19",
+        "id_sanitizante": "19",
         "nombre": "CLOFENTEZINE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -171,7 +171,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "20",
+        "id_sanitizante": "20",
         "nombre": "CLORANTRANILIPROLE",
         "precio_usd_envase": 257,
         "volumen_envase": 1,
@@ -180,7 +180,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "21",
+        "id_sanitizante": "21",
         "nombre": "CLORANTRANILIPROLE + LAMBDACIALOTRINA",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -189,7 +189,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "22",
+        "id_sanitizante": "22",
         "nombre": "CLORANTRANILIPROLE + TIAMETOXAM",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -198,7 +198,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "23",
+        "id_sanitizante": "23",
         "nombre": "CYANTRANILIPROLE (CYAZYPYR)",
         "precio_usd_envase": 144,
         "volumen_envase": 1,
@@ -207,7 +207,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "24",
+        "id_sanitizante": "24",
         "nombre": "CYFLUMETOFEN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -216,7 +216,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "25",
+        "id_sanitizante": "25",
         "nombre": "CYFLUTRIN / CYFLUTRINA",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -225,7 +225,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "26",
+        "id_sanitizante": "26",
         "nombre": "CYFLUTRIN / CYFLUTRINA",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -234,7 +234,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "27",
+        "id_sanitizante": "27",
         "nombre": "CYHEXATIN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -243,7 +243,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "28",
+        "id_sanitizante": "28",
         "nombre": "DELTAMETRINA / DECAMETRINA",
         "precio_usd_envase": 79,
         "volumen_envase": 5,
@@ -252,7 +252,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "29",
+        "id_sanitizante": "29",
         "nombre": "DIFLUBENZURON",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -261,7 +261,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "30",
+        "id_sanitizante": "30",
         "nombre": "DIMETOATO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -270,7 +270,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "31",
+        "id_sanitizante": "31",
         "nombre": "ESFENVALERATO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -279,7 +279,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "32",
+        "id_sanitizante": "32",
         "nombre": "ETION",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -288,7 +288,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "33",
+        "id_sanitizante": "33",
         "nombre": "FENAMIFOS",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -297,7 +297,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "34",
+        "id_sanitizante": "34",
         "nombre": "FENAZAQUIN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -306,7 +306,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "35",
+        "id_sanitizante": "35",
         "nombre": "FENBUTATIN OXIDO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -315,7 +315,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "36",
+        "id_sanitizante": "36",
         "nombre": "FENITROTION",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -324,7 +324,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "37",
+        "id_sanitizante": "37",
         "nombre": "FENPIROXIMATO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -333,7 +333,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "38",
+        "id_sanitizante": "38",
         "nombre": "FENVALERATO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -342,7 +342,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "39",
+        "id_sanitizante": "39",
         "nombre": "FLONICAMID",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -351,7 +351,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "40",
+        "id_sanitizante": "40",
         "nombre": "FLUBENDIAMIDE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -360,7 +360,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "41",
+        "id_sanitizante": "41",
         "nombre": "FLUFENOXURON",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -369,7 +369,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "42",
+        "id_sanitizante": "42",
         "nombre": "FORMETANATO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -378,7 +378,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "43",
+        "id_sanitizante": "43",
         "nombre": "FOSFINA",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -387,7 +387,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "44",
+        "id_sanitizante": "44",
         "nombre": "FOSMET",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -396,7 +396,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "45",
+        "id_sanitizante": "45",
         "nombre": "GAMMACIALOTRINA",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -405,7 +405,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "46",
+        "id_sanitizante": "46",
         "nombre": "HEXITIAZOX",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -414,7 +414,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "47",
+        "id_sanitizante": "47",
         "nombre": "IMIDACLOPRID",
         "precio_usd_envase": 41.50,
         "volumen_envase": 1,
@@ -423,7 +423,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "48",
+        "id_sanitizante": "48",
         "nombre": "INDOXACARB",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -432,7 +432,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "49",
+        "id_sanitizante": "49",
         "nombre": "ISOCYCLOSERAM",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -441,7 +441,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "50",
+        "id_sanitizante": "50",
         "nombre": "LAMBDACIALOTRINA",
         "precio_usd_envase": 86.60,
         "volumen_envase": 1,
@@ -450,7 +450,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "51",
+        "id_sanitizante": "51",
         "nombre": "MERCAPTOTION / MALATION",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -459,7 +459,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "52",
+        "id_sanitizante": "52",
         "nombre": "METIDATION",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -468,7 +468,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "53",
+        "id_sanitizante": "53",
         "nombre": "METIOCARB / METMERCAPTURON",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -477,7 +477,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "54",
+        "id_sanitizante": "54",
         "nombre": "METOMIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -486,7 +486,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "55",
+        "id_sanitizante": "55",
         "nombre": "METOXIFENOCIDE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -495,7 +495,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "56",
+        "id_sanitizante": "56",
         "nombre": "NOVALURON",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -504,7 +504,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "57",
+        "id_sanitizante": "57",
         "nombre": "NOVALURON + ACETAMIPRID",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -513,7 +513,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "58",
+        "id_sanitizante": "58",
         "nombre": "PERMETRINA",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -522,7 +522,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "59",
+        "id_sanitizante": "59",
         "nombre": "PIRIDAFENTION",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -531,7 +531,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "60",
+        "id_sanitizante": "60",
         "nombre": "PIRIMICARB",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -540,7 +540,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "61",
+        "id_sanitizante": "61",
         "nombre": "PIRIMIFOS METIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -549,7 +549,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "62",
+        "id_sanitizante": "62",
         "nombre": "POLISULFURO DE CALCIO",
         "precio_usd_envase": 1.27,
         "volumen_envase": 1,
@@ -558,7 +558,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "63",
+        "id_sanitizante": "63",
         "nombre": "PROPARGITE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -567,7 +567,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "64",
+        "id_sanitizante": "64",
         "nombre": "PYRIPROXIFEN ",
         "precio_usd_envase": 73.20,
         "volumen_envase": 1,
@@ -576,7 +576,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "65",
+        "id_sanitizante": "65",
         "nombre": "PYRIDABEN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -585,7 +585,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "66",
+        "id_sanitizante": "66",
         "nombre": "SPINETORAM",
         "precio_usd_envase": 305,
         "volumen_envase": 1,
@@ -594,7 +594,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "67",
+        "id_sanitizante": "67",
         "nombre": "SPINOSAD",
         "precio_usd_envase": 487.20,
         "volumen_envase": 1,
@@ -603,7 +603,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "68",
+        "id_sanitizante": "68",
         "nombre": "SPIRODICLOFEN",
         "precio_usd_envase": 102.60,
         "volumen_envase": 1,
@@ -612,7 +612,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "69",
+        "id_sanitizante": "69",
         "nombre": "SPIROTETRAMAT",
         "precio_usd_envase": 104.25,
         "volumen_envase": 1,
@@ -621,7 +621,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "70",
+        "id_sanitizante": "70",
         "nombre": "SULFATO DE COBRE PENTAHIDRATADO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -630,7 +630,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "71",
+        "id_sanitizante": "71",
         "nombre": "SULFOXAFLOR",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -639,7 +639,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "72",
+        "id_sanitizante": "72",
         "nombre": "TEBUFENOZIDE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -648,7 +648,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "73",
+        "id_sanitizante": "73",
         "nombre": "TEFLUBENZURON",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -657,7 +657,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "74",
+        "id_sanitizante": "74",
         "nombre": "TETRADIFON",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -666,7 +666,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "75",
+        "id_sanitizante": "75",
         "nombre": "TIACLOPRID",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -675,7 +675,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "76",
+        "id_sanitizante": "76",
         "nombre": "TIAMETOXAM",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -684,7 +684,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "77",
+        "id_sanitizante": "77",
         "nombre": "PYRACLOSTROBIN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -693,7 +693,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "78",
+        "id_sanitizante": "78",
         "nombre": "PYRIPROPXIFEN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -702,7 +702,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "79",
+        "id_sanitizante": "79",
         "nombre": "TRAMPA CARPOCAPSA",
         "precio_usd_envase": 31.86,
         "volumen_envase": 1,
@@ -711,7 +711,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "80",
+        "id_sanitizante": "80",
         "nombre": "DISPENSER DE FEROMONA 180 DIAS 550/HA",
         "precio_usd_envase": 0.41,
         "volumen_envase": 1,
@@ -720,7 +720,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "81",
+        "id_sanitizante": "81",
         "nombre": "DISPENSER DE FEROMONA 120 DIAS 550/HA",
         "precio_usd_envase": 0.35,
         "volumen_envase": 1,
@@ -729,7 +729,7 @@
         "tipo": "plaguicida"
     },
     {
-        "id": "82",
+        "id_sanitizante": "82",
         "nombre": "ACIDO FOSFORICO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -738,7 +738,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "83",
+        "id_sanitizante": "83",
         "nombre": "ACEITE MINERAL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -747,7 +747,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "84",
+        "id_sanitizante": "84",
         "nombre": "AMETOCTRADIN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -756,7 +756,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "85",
+        "id_sanitizante": "85",
         "nombre": "AZOXISTROBINA",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -765,7 +765,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "86",
+        "id_sanitizante": "86",
         "nombre": "AZUFRE MICRONIZADO",
         "precio_usd_envase": 198,
         "volumen_envase": 25,
@@ -774,7 +774,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "87",
+        "id_sanitizante": "87",
         "nombre": "BACILLUS AMYLOLIQUEFACIENS",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -783,7 +783,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "88",
+        "id_sanitizante": "88",
         "nombre": "BACILLUS SUBTILIS",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -792,7 +792,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "89",
+        "id_sanitizante": "89",
         "nombre": "BENALAXIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -801,7 +801,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "90",
+        "id_sanitizante": "90",
         "nombre": "BENOMIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -810,7 +810,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "91",
+        "id_sanitizante": "91",
         "nombre": "BOSCALID",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -819,7 +819,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "92",
+        "id_sanitizante": "92",
         "nombre": "BOSCALID + PYRACLOSTROBIN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -828,7 +828,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "93",
+        "id_sanitizante": "93",
         "nombre": "BROMURO DE METILO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -837,7 +837,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "94",
+        "id_sanitizante": "94",
         "nombre": "BUPIRIMATO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -846,7 +846,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "95",
+        "id_sanitizante": "95",
         "nombre": "CAPTAN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -855,7 +855,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "96",
+        "id_sanitizante": "96",
         "nombre": "CARBENDAZIM",
         "precio_usd_envase": 195,
         "volumen_envase": 20,
@@ -864,7 +864,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "97",
+        "id_sanitizante": "97",
         "nombre": "CLOROTALONIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -873,7 +873,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "98",
+        "id_sanitizante": "98",
         "nombre": "CYMOXANIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -882,7 +882,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "99",
+        "id_sanitizante": "99",
         "nombre": "CYPRODINIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -891,7 +891,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "100",
+        "id_sanitizante": "100",
         "nombre": "DIFENOCONAZOLE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -900,7 +900,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "101",
+        "id_sanitizante": "101",
         "nombre": "DIMETOMORF",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -909,7 +909,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "102",
+        "id_sanitizante": "102",
         "nombre": "DITIANON",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -918,7 +918,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "103",
+        "id_sanitizante": "103",
         "nombre": "FENARIMOL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -927,7 +927,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "104",
+        "id_sanitizante": "104",
         "nombre": "FENBUCONAZOLE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -936,7 +936,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "105",
+        "id_sanitizante": "105",
         "nombre": "FENHEXAMID",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -945,7 +945,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "106",
+        "id_sanitizante": "106",
         "nombre": "FERBAM",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -954,7 +954,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "107",
+        "id_sanitizante": "107",
         "nombre": "FLUAZINAM",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -963,7 +963,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "108",
+        "id_sanitizante": "108",
         "nombre": "FLUDIOXONIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -972,7 +972,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "109",
+        "id_sanitizante": "109",
         "nombre": "FLUSILAZOLE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -981,7 +981,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "110",
+        "id_sanitizante": "110",
         "nombre": "FLUTRIAFOL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -990,7 +990,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "111",
+        "id_sanitizante": "111",
         "nombre": "FLUXAPYROXAD",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -999,7 +999,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "112",
+        "id_sanitizante": "112",
         "nombre": "FOLPET",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1008,7 +1008,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "113",
+        "id_sanitizante": "113",
         "nombre": "FOSETIL ALUMINIO",
         "precio_usd_envase": 46,
         "volumen_envase": 1,
@@ -1017,7 +1017,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "114",
+        "id_sanitizante": "114",
         "nombre": "HEXACONAZOLE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1026,7 +1026,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "115",
+        "id_sanitizante": "115",
         "nombre": "HIDROXIDO DE COBRE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1035,7 +1035,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "116",
+        "id_sanitizante": "116",
         "nombre": "IMAZALIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1044,7 +1044,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "117",
+        "id_sanitizante": "117",
         "nombre": "IPRODIONE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1053,7 +1053,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "118",
+        "id_sanitizante": "118",
         "nombre": "IPROVALICARB",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1062,7 +1062,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "119",
+        "id_sanitizante": "119",
         "nombre": "KASUGAMICINA",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1071,7 +1071,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "120",
+        "id_sanitizante": "120",
         "nombre": "KRESOXIM  METIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1080,7 +1080,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "121",
+        "id_sanitizante": "121",
         "nombre": "MANCOZEB",
         "precio_usd_envase": 19,
         "volumen_envase": 1,
@@ -1089,7 +1089,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "122",
+        "id_sanitizante": "122",
         "nombre": "MEPTYL DINOCAP",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1098,7 +1098,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "123",
+        "id_sanitizante": "123",
         "nombre": "METALAXIL – M -ISOMERO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1107,7 +1107,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "124",
+        "id_sanitizante": "124",
         "nombre": "METIL TIOFANATO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1116,7 +1116,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "125",
+        "id_sanitizante": "125",
         "nombre": "METRAFENONE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1125,7 +1125,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "126",
+        "id_sanitizante": "126",
         "nombre": "MYCLOBUTANIL",
         "precio_usd_envase": 92.50,
         "volumen_envase": 0.5,
@@ -1134,7 +1134,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "127",
+        "id_sanitizante": "127",
         "nombre": "OXICLORURO DE COBRE",
         "precio_usd_envase": 13.45,
         "volumen_envase": 1,
@@ -1143,7 +1143,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "128",
+        "id_sanitizante": "128",
         "nombre": "OXIDO CUPROSO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1152,7 +1152,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "129",
+        "id_sanitizante": "129",
         "nombre": "PENCONAZOLE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1161,7 +1161,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "130",
+        "id_sanitizante": "130",
         "nombre": "POLISULFURO DE CALCIO",
         "precio_usd_envase": 1.27,
         "volumen_envase": 1,
@@ -1170,7 +1170,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "131",
+        "id_sanitizante": "131",
         "nombre": "PROCIMIDONE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1179,7 +1179,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "132",
+        "id_sanitizante": "132",
         "nombre": "PROPINEB",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1188,7 +1188,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "133",
+        "id_sanitizante": "133",
         "nombre": "PYDIFLUMETOFEN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1197,7 +1197,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "134",
+        "id_sanitizante": "134",
         "nombre": "PYRACLOSTROBIN",
         "precio_usd_envase": 146.76,
         "volumen_envase": 1,
@@ -1206,7 +1206,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "135",
+        "id_sanitizante": "135",
         "nombre": "PYRIMETANIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1215,7 +1215,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "136",
+        "id_sanitizante": "136",
         "nombre": "QUINOXYFEN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1224,7 +1224,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "137",
+        "id_sanitizante": "137",
         "nombre": "SULFATO CUPRICO PENTAHIDRATADO",
         "precio_usd_envase": 177,
         "volumen_envase": 25,
@@ -1233,7 +1233,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "138",
+        "id_sanitizante": "138",
         "nombre": "SULFATO TETRACUPICO TRICALCICO",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1242,7 +1242,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "139",
+        "id_sanitizante": "139",
         "nombre": "SULFATO TRIBÁSICO DE COBRE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1251,7 +1251,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "140",
+        "id_sanitizante": "140",
         "nombre": "TEBUCONAZOLE /  FENETRAZOLE",
         "precio_usd_envase": 32.50,
         "volumen_envase": 1,
@@ -1260,7 +1260,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "141",
+        "id_sanitizante": "141",
         "nombre": "TEBUCONAZOLE + TRIFLOXISTROBIN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1269,7 +1269,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "142",
+        "id_sanitizante": "142",
         "nombre": "TEBUCONAZOLE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1278,7 +1278,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "143",
+        "id_sanitizante": "143",
         "nombre": "TIABENDAZOL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1287,7 +1287,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "144",
+        "id_sanitizante": "144",
         "nombre": "TIOFANATO METIL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1296,7 +1296,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "145",
+        "id_sanitizante": "145",
         "nombre": "TIRAM",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1305,7 +1305,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "146",
+        "id_sanitizante": "146",
         "nombre": "TOLYFLUANID",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1314,7 +1314,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "147",
+        "id_sanitizante": "147",
         "nombre": "TRIADIMEFON",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1323,7 +1323,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "148",
+        "id_sanitizante": "148",
         "nombre": "TRIFLOXISTROBIN",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1332,7 +1332,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "149",
+        "id_sanitizante": "149",
         "nombre": "TRIFORINE",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1341,7 +1341,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "150",
+        "id_sanitizante": "150",
         "nombre": "VALIPHENAL",
         "precio_usd_envase": 0,
         "volumen_envase": 0,
@@ -1350,7 +1350,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "151",
+        "id_sanitizante": "151",
         "nombre": "ZINEB",
         "precio_usd_envase": 19,
         "volumen_envase": 0.5,
@@ -1359,7 +1359,7 @@
         "tipo": "fungicida"
     },
     {
-        "id": "152",
+        "id_sanitizante": "152",
         "nombre": "ZIRAM",
         "precio_usd_envase": 9.40,
         "volumen_envase": 1,

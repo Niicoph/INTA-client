@@ -1,5 +1,5 @@
 import { z } from 'zod';
-
+import { unidades } from '@/types/sanitizante';
 export const ProductoSchema = z.object({
   id_sanitizante: z.string({
     required_error: 'El principio activo es obligatorio',
@@ -26,6 +26,8 @@ export const ProductoSchema = z.object({
   unidad: z.string({
     required_error: 'La unidad es obligatoria',
     invalid_type_error: 'Debe seleccionar una unidad',
+  }).refine((val) => unidades.includes(val), {
+    message: "La unidad no es válida",
   }),
   // Precarga.dosis_x_hl
   dosis_x_hl: z.number({

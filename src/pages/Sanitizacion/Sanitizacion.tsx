@@ -1,6 +1,6 @@
 import ContainerCotizaciones from '@/components/Containers/ContainerCotizaciones';
 import { ProductosProvider } from '@/context/ProductosContext';
-import FormProductos from '@/components/Forms/Sanitizacion/FormProducto';
+import FormProducto from '@/components/Forms/Sanitizacion/FormProducto';
 import FormPlan from '@/components/Forms/Sanitizacion/FormPlan';
 import VisualizacionSanitizacion from '@/components/Containers/VisualizacionSanitizacion';
 
@@ -18,7 +18,7 @@ export default function Sanitizacion() {
             <ProductosProvider>
               <div className="flex flex-col gap-4 2xl:w-2/5">
                 <ContainerCotizaciones dollar={true} />
-                <FormProductos />
+                <FormProducto />
               </div>
               <div className="grid grid-cols-1 gap-4 2xl:w-3/5">
                 <FormPlan />
