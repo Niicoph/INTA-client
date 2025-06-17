@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState, useContext } from 'react';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
+import Legend from '@/components/ui/Legend/Legend';
 import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
 import { ProductoSchema } from '@/schemas/Sanitizacion/schema';
 import { type ProductoFormData } from '@/schemas/Sanitizacion/types';
@@ -309,6 +310,7 @@ export default function FormProducto() {
               </FormItem>
             )}
           />
+          <Legend text="Productos agregados estarán disponibles para la carga de planes." />
           <div className="col-span-full">
             <Button className="w-full" type="submit" variant={'submit'} disabled={!isFormProductoComplete}>
               Agregar Producto
