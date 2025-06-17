@@ -97,14 +97,12 @@ export default function FormMaquinaria() {
         : data.cotizacion_gasoil_litro,
     };
     setData((prevData) => [...prevData, finalData]);
-    resetValues();
-    form.reset();
+    resetForm();
   };
 
-  /**
-   * Reinicia valores no accesibles por el formulario
-   */
-  function resetValues() {
+  function resetForm() {
+    form.reset();
+    //Reinicia valores no accesibles por el formulario
     setSelectedTractor(null);
     setSelectedImplemento(null);
     setValorDolar('');
@@ -124,10 +122,11 @@ export default function FormMaquinaria() {
     const isFormComplete = !(
       selectedTractor === null ||
       selectedImplemento === null ||
-      valorDolar === ''
+      valorDolar === '' ||
+      valorGasoil === ''
     );
     setIsFormComplete(isFormComplete);
-  }, [selectedTractor, selectedImplemento, valorDolar]);
+  }, [selectedTractor, selectedImplemento, valorDolar, valorGasoil]);
 
   return (
     <div className="rounded-md flex flex-col border h-full border-border">
