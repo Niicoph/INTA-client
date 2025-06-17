@@ -1,19 +1,19 @@
 /**
- * Contexto contiene una lista de tratamientos unicos a un plan.
+ * Contexto contiene una lista de planes.
  */
 
 import { createContext, useState, type Dispatch } from 'react';
-import { type Tratamiento } from '@/types/sanitizante';
+import type { PlanFormData } from '@/schemas/Sanitizacion/types';
 
 type PlanContextInterface = {
-  data: Tratamiento[];
-  setData: Dispatch<React.SetStateAction<Tratamiento[]>>;
+  data: PlanFormData[];
+  setData: Dispatch<React.SetStateAction<PlanFormData[]>>;
 };
 
 const PlanContext = createContext<PlanContextInterface | null>(null);
 
 const PlanProvider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = useState<Tratamiento[]>([]);
+  const [data, setData] = useState<PlanFormData[]>([]);
 
   return <PlanContext.Provider value={{ data, setData }}>{children}</PlanContext.Provider>;
 };

@@ -14,11 +14,8 @@ export type Tratamiento = {
 };
 
 export type Plan = {
+  id_plan: string;
   tratamientos: Tratamiento[];
 };
-
-// export type Planes = {
-//     planes: Plan[];
-// }
 
 export const unidades: string[] = ['lts', 'kg'];

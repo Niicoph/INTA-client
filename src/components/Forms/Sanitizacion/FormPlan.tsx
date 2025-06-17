@@ -9,15 +9,22 @@ import Legend from '@/components/ui/Legend/Legend';
 import { Form } from '@/components/ui/form';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import FormTratamiento from './FormTratamiento';
+import { PlanContext } from '@/context/PlanContext';
 
 export default function FormPlan() {
   const [isFormComplete, setIsFormComplete] = useState(false);
+  const planContext = useContext(PlanContext);
+  if (!planContext) {
+    return null;
+  }
+  const { setData } = planContext;
 
   const formPlan = useForm<PlanFormData>({
     resolver: zodResolver(PlanSchema),
     defaultValues: {
+      id_plan: '',
       tratamientos: [],
     },
   });
@@ -30,7 +37,12 @@ export default function FormPlan() {
   });
 
   const handleFormSubmit = (data: PlanFormData) => {
-    console.log('Plan completo:', data);
+    const index = planContext.data.length;
+    const finalData = {
+      ...data,
+      id_plan: `${index}`,
+    };
+    setData((prevData) => [...prevData, finalData]);
     reset();
     setIsFormComplete(false);
   };

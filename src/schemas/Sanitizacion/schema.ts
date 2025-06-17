@@ -45,10 +45,11 @@ export const ProductoSchema = z.object({
 export const TratamientoSchema = z.object({
     id_tratamiento: z.string(),
     productos: z.array(ProductoSchema).min(1, 'Debe incluir al menos un producto en el tratamiento')
-  });
+});
 
 
 export const PlanSchema = z.object({
+  id_plan: z.string(),
   tratamientos: z.array(TratamientoSchema)
   .nonempty('Debe incluir al menos un tratamiento'),
 });

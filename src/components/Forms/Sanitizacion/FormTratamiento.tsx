@@ -24,7 +24,6 @@ export default function FormTratamiento({ index }: FormTratamientoProps) {
   const { control, setValue } = useFormContext();
 
   const { data: productos } = productosContext ?? {};
-
   const { fields, append } = useFieldArray({
     control,
     name: `tratamientos.${index}.productos`,
