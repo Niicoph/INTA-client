@@ -9,11 +9,16 @@ export type Producto = {
 };
 
 export type Tratamiento = {
+  id_tratamiento: string;
   productos: Producto[];
 };
 
 export type Plan = {
-  tratamientos: Tratamiento[]
-}
+  tratamientos: Tratamiento[];
+};
 
-export const unidades: string[] = ["lts", "kg"];
+// export type Planes = {
+//     planes: Plan[];
+// }
+
+export const unidades: string[] = ['lts', 'kg'];

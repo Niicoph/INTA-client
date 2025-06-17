@@ -130,7 +130,7 @@ export default function VisualizacionMaquinaria() {
           <TabsContent
             value="tab2"
             aria-label="Tabla"
-            className="w-full min-w-0 gap-4 overflow-hidden h-full"
+            className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto h-full">
               <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
@@ -140,7 +140,7 @@ export default function VisualizacionMaquinaria() {
           <TabsContent
             value="tab3"
             aria-label="Grafico"
-            className="w-full min-w-0 gap-4 overflow-hidden h-full"
+            className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
             <ChartMaquinaria costosEconomicos={costosEconomicos} />
           </TabsContent>
