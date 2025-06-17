@@ -41,7 +41,7 @@ const CustomTooltip = ({ active, payload }: any) => {
 };
 
 export function ChartMaquinaria({ costosEconomicos }: { costosEconomicos: CostoEconomico[] }) {
-  const scrollThreshold = 12; // Número de barras que activa el scroll
+  const scrollThreshold = 12;
   const shouldScroll = costosEconomicos.length > scrollThreshold;
 
   return costosEconomicos && costosEconomicos.length > 0 ? (
@@ -73,10 +73,23 @@ export function ChartMaquinaria({ costosEconomicos }: { costosEconomicos: CostoE
           radius={4}
           barSize={30}
           cursor="pointer"
-        ><LabelList position="top" offset={6} className="fill-foreground" fontSize={11} content={(props: any) => {
+        >
+          <LabelList
+            position="top"
+            offset={6}
+            className="fill-foreground"
+            fontSize={11}
+            content={(props: any) => {
               const { x, y, value } = props;
               return (
-                <text x={x} y={y} dy={-6} dx={12} textAnchor="middle" className="fill-foreground font-mono ">
+                <text
+                  x={x}
+                  y={y}
+                  dy={-6}
+                  dx={12}
+                  textAnchor="middle"
+                  className="fill-foreground font-mono "
+                >
                   ${Number(value).toLocaleString('es-AR')}
                 </text>
               );

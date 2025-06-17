@@ -42,9 +42,18 @@ export const ProductoSchema = z.object({
     }),
 });
 
+export const AplicacionSchema = z.object({
+    producto : ProductoSchema,
+    volumen_aplicado : z.number({
+        required_error: 'El volumen aplicado es obligatorio',
+        invalid_type_error: 'Debe ser un número'
+    },).positive('Debe ser un valor positivo'),
+
+})
+
 export const TratamientoSchema = z.object({
     id_tratamiento: z.string(),
-    productos: z.array(ProductoSchema).min(1, 'Debe incluir al menos un producto en el tratamiento')
+    aplicaciones: z.array(AplicacionSchema).min(1, 'Debe incluir al menos una aplicación')
 });
 
 

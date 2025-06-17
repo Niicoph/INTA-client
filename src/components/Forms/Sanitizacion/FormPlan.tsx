@@ -11,15 +11,18 @@ import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
 import { useState, useContext } from 'react';
 import FormTratamiento from './FormTratamiento';
-import { PlanContext } from '@/context/PlanContext';
+import { CostoPlanContext } from '@/context/CostoPlanContext';
+import { calcularCostoTotalSanitizacion } from '@/utils/costoTotalSanitizacion';
 
 export default function FormPlan() {
   const [isFormComplete, setIsFormComplete] = useState(false);
-  const planContext = useContext(PlanContext);
-  if (!planContext) {
+  const costPlanContext = useContext(CostoPlanContext);
+  if (!costPlanContext) {
     return null;
   }
-  const { setData } = planContext;
+  const { data, setData } = costPlanContext;
+
+  console.log(data);
 
   const formPlan = useForm<PlanFormData>({
     resolver: zodResolver(PlanSchema),
@@ -37,12 +40,15 @@ export default function FormPlan() {
   });
 
   const handleFormSubmit = (data: PlanFormData) => {
-    const index = planContext.data.length;
+    const index = costPlanContext.data.length + 1;
     const finalData = {
       ...data,
       id_plan: `${index}`,
     };
-    setData((prevData) => [...prevData, finalData]);
+    // realizo el calculo
+    const costoPlan = calcularCostoTotalSanitizacion(finalData);
+    // setData en el CostoPlanContext.
+    setData((prev) => [...prev, costoPlan]);
     reset();
     setIsFormComplete(false);
   };
@@ -63,7 +69,7 @@ export default function FormPlan() {
               onClick={() => {
                 append({
                   id_tratamiento: crypto.randomUUID(),
-                  productos: [],
+                  aplicaciones: [],
                 });
                 setIsFormComplete(true);
               }}

@@ -8,14 +8,32 @@ export type Producto = {
   tipo: string;
 };
 
+export type Aplicacion = {
+    producto : Producto;
+    volumen_aplicado : number;
+}
+
 export type Tratamiento = {
   id_tratamiento: string;
-  productos: Producto[];
+  aplicaciones: Aplicacion[];
 };
 
 export type Plan = {
   id_plan: string;
   tratamientos: Tratamiento[];
 };
+
+export type CostoTratamiento = {
+    tratamiento: Tratamiento;
+    costo_total: number;
+};
+
+export type CostoPlan = {
+    plan: Plan;
+    costos_tratamientos: CostoTratamiento[];
+    costo_total: number;
+}
+
+
 
 export const unidades: string[] = ['lts', 'kg'];

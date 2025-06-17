@@ -30,7 +30,6 @@ export type MaquinariaList = {
 
 export type CostoEconomico = {
   id_conjunto?: string,
-
   conjunto: {
     cotizacion_usd: number;
     cotizacion_gasoil_litro: number;
@@ -52,7 +51,7 @@ export type CostoEconomico = {
 
   amortizacion_t: number,
   costo_mantenimiento_t: number,
-  
+
   amortizacion_i: number,
   costo_combustible: number,
   costo_mantenimiento_i: number,

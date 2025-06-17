@@ -6,7 +6,7 @@ import VisualizacionSanitizacion from '@/components/Containers/VisualizacionSani
 
 import Header from '@/components/Header/Header';
 import TabsNav from '@/components/TabsNav/TabsNav';
-import { PlanProvider } from '@/context/PlanContext';
+import { CostoPlanProvider } from '@/context/CostoPlanContext';
 
 export default function Sanitizacion() {
   return (
@@ -17,16 +17,16 @@ export default function Sanitizacion() {
         <section className="grid grid-cols-1 gap-4 w-full h-full xl:flex">
           <div className="flex flex-col gap-4 h-full w-full xl:w-1/3 justify-between">
             <ContainerCotizaciones dollar={true} />
-            <PlanProvider>
+            <CostoPlanProvider>
               <ProductosProvider>
                 <div className="flex flex-col h-full gap-4">
                   <FormProducto />
                   <FormPlan />
                 </div>
               </ProductosProvider>
-            </PlanProvider>
+            </CostoPlanProvider>
           </div>
-          <div className="w-full xl:flex xl:flex-col  xl:w-2/3 gap-4">
+          <div className="w-full xl:flex xl:flex-col xl:w-2/3 gap-4">
             <VisualizacionSanitizacion />
           </div>
         </section>
