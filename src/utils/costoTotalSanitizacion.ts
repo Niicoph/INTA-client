@@ -1,14 +1,6 @@
 import type { PlanFormData } from "@/schemas/Sanitizacion/types";
 import { type CostoPlan } from "@/types/sanitizante";
-// export type CostoPlan = {
-//     plan: Plan;
-//     costos_tratamientos: CostoTratamiento[];
-//     costo_total: number;
-// }
-// export type Tratamiento = {
-//   id_tratamiento: string;
-//   aplicaciones: Aplicacion[];
-// };
+
 
 export const calcularCostoTotalSanitizacion = ( data: PlanFormData ): CostoPlan => {
     // 1. Calcular costo por unidad de cada producto

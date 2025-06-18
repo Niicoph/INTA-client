@@ -19,7 +19,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from '@/components/ui/carousel';
 
 export default function FormPlan() {
   const [isFormComplete, setIsFormComplete] = useState(false);
@@ -27,9 +27,7 @@ export default function FormPlan() {
   if (!costPlanContext) {
     return null;
   }
-  const { data, setData } = costPlanContext;
-
-  console.log(data);
+  const { setData } = costPlanContext;
 
   const formPlan = useForm<PlanFormData>({
     resolver: zodResolver(PlanSchema),
@@ -69,23 +67,22 @@ export default function FormPlan() {
           className="w-full flex-1 p-4 gap-4 flex flex-col justify-between"
         >
           <div className="grid grid-cols-2 gap-4">
-            
             <Button type="button" className="h-fit w-full" variant="outline">
               <Minus className="w-4 h-4" /> Eliminar tratamiento
             </Button>
           </div>
 
           <div className="h-[190px] gap-4 grid grid-cols-8">
-            <Carousel className='mx-5 col-span-7 bg-accent rounded-lg border-1'>
-              <CarouselContent className='-ml-1'>
+            <Carousel className="mx-5 col-span-7 bg-accent rounded-lg border-1">
+              <CarouselContent className="-ml-1">
                 {fields.map((field, index) => (
-                  <CarouselItem className='p-0 pl-1'>
+                  <CarouselItem className="p-0 pl-1">
                     <FormTratamiento key={field.id} index={index} />
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className='-left-8.5'/>
-              <CarouselNext className='-right-8.5'/>
+              <CarouselPrevious className="-left-8.5" />
+              <CarouselNext className="-right-8.5" />
             </Carousel>
             <Button
               type="button"
@@ -99,7 +96,10 @@ export default function FormPlan() {
                 setIsFormComplete(true);
               }}
             >
-              <div className='flex flex-row rotate-90 gap-4'> <Plus className="w-4 h-4" /> Tratamiento </div>
+              <div className="flex flex-row rotate-90 gap-4">
+                {' '}
+                <Plus className="w-4 h-4" /> Tratamiento{' '}
+              </div>
             </Button>
           </div>
 

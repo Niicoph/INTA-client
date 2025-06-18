@@ -48,19 +48,15 @@ export default function FormTratamiento({ index }: FormTratamientoProps) {
                 <FormItem className="flex flex-col">
                   <FormLabel>Producto #{aplicacionIndex + 1}</FormLabel>
                   <Select
-                    value={field.value}
+                    value={field.value?.id_sanitizante}
                     onValueChange={(selectedId) => {
                       const selectedProducto = productos?.find(
                         (p) => p.id_sanitizante === selectedId
                       );
 
                       if (selectedProducto) {
-                        setValue(`tratamientos.${index}.aplicaciones.${aplicacionIndex}`, {
-                          ...selectedProducto,
-                        });
+                        field.onChange(selectedProducto);
                       }
-
-                      field.onChange(selectedId);
                     }}
                   >
                     <SelectTrigger className="text-xs w-full border-2">

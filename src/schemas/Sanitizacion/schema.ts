@@ -53,7 +53,7 @@ export const AplicacionSchema = z.object({
 
 export const TratamientoSchema = z.object({
     id_tratamiento: z.string(),
-    aplicaciones: z.array(AplicacionSchema).min(1, 'Debe incluir al menos una aplicación')
+    aplicaciones: z.array(AplicacionSchema)
 });
 
 
