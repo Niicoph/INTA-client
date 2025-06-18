@@ -38,11 +38,10 @@ export default function FormTratamiento({ index }: FormTratamientoProps) {
           <Plus className="mr-1 w-4 h-4" /> producto
         </Button>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="">
         {fields.map((field, aplicacionIndex) => (
-          <>
+          <div className="grid grid-cols-2 gap-1" key={field.id}>
             <FormField
-              key={field.id}
               control={control}
               name={`tratamientos.${index}.aplicaciones.${aplicacionIndex}.producto`}
               render={({ field }) => (
@@ -78,8 +77,7 @@ export default function FormTratamiento({ index }: FormTratamientoProps) {
                 </FormItem>
               )}
             />
-            {/* <FormField
-              key={field.id}
+            <FormField
               control={control}
               name={`tratamientos.${index}.aplicaciones.${aplicacionIndex}.volumen_aplicado`}
               render={({ field }) => (
@@ -88,7 +86,7 @@ export default function FormTratamiento({ index }: FormTratamientoProps) {
                   <FormControl>
                     <Input
                       type="number"
-                      placeholder="Selecciona tractor"
+                      placeholder="Volumen a aplicar"
                       value={field.value ?? ''}
                       className={`w-full pr-10 px-3 py-2 border transition-all duration-200 bg-white text-black border-gray-300`}
                       onChange={(e) => {
@@ -100,8 +98,8 @@ export default function FormTratamiento({ index }: FormTratamientoProps) {
                   <FormMessage />
                 </FormItem>
               )}
-            /> */}
-          </>
+            />
+          </div>
         ))}
       </div>
     </div>

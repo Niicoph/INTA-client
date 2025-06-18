@@ -13,6 +13,13 @@ import { useState, useContext } from 'react';
 import FormTratamiento from './FormTratamiento';
 import { CostoPlanContext } from '@/context/CostoPlanContext';
 import { calcularCostoTotalSanitizacion } from '@/utils/costoTotalSanitizacion';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 export default function FormPlan() {
   const [isFormComplete, setIsFormComplete] = useState(false);
@@ -61,10 +68,28 @@ export default function FormPlan() {
           onSubmit={handleSubmit(handleFormSubmit)}
           className="w-full flex-1 p-4 gap-4 flex flex-col justify-between"
         >
-          <div className="grid grid-cols-2 gap-4 w-full">
+          <div className="grid grid-cols-2 gap-4">
+            
+            <Button type="button" className="h-fit w-full" variant="outline">
+              <Minus className="w-4 h-4" /> Eliminar tratamiento
+            </Button>
+          </div>
+
+          <div className="h-[190px] gap-4 grid grid-cols-8">
+            <Carousel className='mx-5 col-span-7 bg-accent rounded-lg border-1'>
+              <CarouselContent className='-ml-1'>
+                {fields.map((field, index) => (
+                  <CarouselItem className='p-0 pl-1'>
+                    <FormTratamiento key={field.id} index={index} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className='-left-8.5'/>
+              <CarouselNext className='-right-8.5'/>
+            </Carousel>
             <Button
               type="button"
-              className="h-fit w-full"
+              className="h-[200px]"
               variant="outline"
               onClick={() => {
                 append({
@@ -74,17 +99,8 @@ export default function FormPlan() {
                 setIsFormComplete(true);
               }}
             >
-              <Plus className="w-4 h-4" /> Agregar tratamiento
+              <div className='flex flex-row rotate-90 gap-4'> <Plus className="w-4 h-4" /> Tratamiento </div>
             </Button>
-            <Button type="button" className="h-fit w-full" variant="outline">
-              <Minus className="w-4 h-4" /> Eliminar tratamiento
-            </Button>
-          </div>
-
-          <div className="h-[190px] flex w-full overflow-scroll gap-4">
-            {fields.map((field, index) => (
-              <FormTratamiento key={field.id} index={index} />
-            ))}
           </div>
 
           <Legend text="Para agregar un plan debes añadirle al menos un tratamiento con productos" />
