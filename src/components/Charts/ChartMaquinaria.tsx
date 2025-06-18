@@ -1,12 +1,8 @@
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis, Tooltip } from 'recharts';
 import { type CostoEconomico } from '@/types/maquinaria';
-import {
-  type ChartConfig,
-  ChartContainer,
-  // ChartTooltip,
-  // ChartTooltipContent,
-} from '@/components/ui/chart';
+import { type ChartConfig, ChartContainer } from '@/components/ui/chart';
 import Alert from '../ui/alert';
+import { type TooltipProps } from 'recharts';
 
 const chartConfig = {
   costo_total_hora: {
@@ -15,7 +11,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const CustomTooltip = ({ active, payload }: any) => {
+const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
   if (!active || !payload || !payload.length) return null;
 
   const data = payload[0].payload;
@@ -50,7 +46,6 @@ export function ChartMaquinaria({ costosEconomicos }: { costosEconomicos: CostoE
       className={`h-full w-full ${shouldScroll ? ' w-[1000px]' : ''}`}
     >
       <BarChart accessibilityLayer data={costosEconomicos} margin={{ top: 20 }}>
-        {/* Grilla */}
         <CartesianGrid vertical={false} />
         <YAxis
           tickLine={false}
@@ -66,20 +61,13 @@ export function ChartMaquinaria({ costosEconomicos }: { costosEconomicos: CostoE
           tickFormatter={(value) => value.slice(0, 3)}
         />
         <Tooltip content={<CustomTooltip />} />
-        <Bar
-          dataKey="costo_total_hora"
-          // fill="var(--color-desktop)"
-          fill={'#3b82f6'}
-          radius={4}
-          barSize={30}
-          cursor="pointer"
-        >
+        <Bar dataKey="costo_total_hora" fill={'#3b82f6'} radius={4} barSize={30} cursor="pointer">
           <LabelList
             position="top"
             offset={6}
             className="fill-foreground"
             fontSize={11}
-            content={(props: any) => {
+            content={(props) => {
               const { x, y, value } = props;
               return (
                 <text

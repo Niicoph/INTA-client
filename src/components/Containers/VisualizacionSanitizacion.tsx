@@ -3,8 +3,19 @@ import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
+import { CostoPlanContext } from '@/context/CostoPlanContext';
+import { useContext } from 'react';
+
+import ChartSanidad from '../Charts/ChartSanidad';
 
 export default function VisualizacionSanitizacion() {
+  const costoPlanContext = useContext(CostoPlanContext);
+  if (!costoPlanContext) {
+    return null;
+  }
+
+  const { data } = costoPlanContext;
+
   return (
     <div className="rounded-md flex flex-col border border-border overflow-hidden w-full xl:h-full">
       <TitleContainer icon={VisualizacionesIcon} title="Visualización Gráfica" />
@@ -34,7 +45,7 @@ export default function VisualizacionSanitizacion() {
             className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto">
-              {/* <ChartMaquinaria costosEconomicos={costosEconomicos} /> */}
+              <ChartSanidad costosPlanes={data} />
             </div>
             <div className="overflow-x-auto">
               {/* <DataTable columns={columnsMaquinaria} data={costosEconomicos} /> */}
@@ -56,7 +67,7 @@ export default function VisualizacionSanitizacion() {
             aria-label="Grafico"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            {/* <ChartMaquinaria costosEconomicos={costosEconomicos} /> */}
+            <ChartSanidad costosPlanes={data} />
           </TabsContent>
         </Tabs>
       </div>
