@@ -1,11 +1,11 @@
 'use client';
+import * as React from "react";
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PlanSchema } from '@/schemas/Sanitizacion/schema';
 import { type PlanFormData } from '@/schemas/Sanitizacion/types';
 import { Button } from '@/components/ui/button';
 import { Minus, Plus } from 'lucide-react';
-import Legend from '@/components/ui/Legend/Legend';
 import { Form } from '@/components/ui/form';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
@@ -19,7 +19,9 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from '@/components/ui/carousel';
+import Alert from "@/components/ui/alert";
 
 export default function FormPlan() {
   const [isFormComplete, setIsFormComplete] = useState(false);
@@ -28,6 +30,24 @@ export default function FormPlan() {
     return null;
   }
   const { setData } = costPlanContext;
+
+  /* Carousel */
+  const [api, setApi] = React.useState<CarouselApi>()
+  const [current, setCurrent] = React.useState(0)
+  const [count, setCount] = React.useState(0)
+  React.useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
+
 
   const formPlan = useForm<PlanFormData>({
     resolver: zodResolver(PlanSchema),
@@ -64,29 +84,33 @@ export default function FormPlan() {
       <Form {...formPlan}>
         <form
           onSubmit={handleSubmit(handleFormSubmit)}
-          className="w-full flex-1 p-4 gap-4 flex flex-col justify-between"
+          className="w-full flex-1 p-4 gap-4 flex flex-col"
         >
-          <div className="grid grid-cols-2 gap-4">
-            <Button type="button" className="h-fit w-full" variant="outline">
-              <Minus className="w-4 h-4" /> Eliminar tratamiento
-            </Button>
-          </div>
-
-          <div className="h-[190px] gap-4 grid grid-cols-8">
-            <Carousel className="mx-5 col-span-7 bg-accent rounded-lg border-1">
-              <CarouselContent className="-ml-1">
-                {fields.map((field, index) => (
-                  <CarouselItem className="p-0 pl-1">
-                    <FormTratamiento key={field.id} index={index} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="-left-8.5" />
-              <CarouselNext className="-right-8.5" />
-            </Carousel>
+          <div className="h-full gap-4 grid grid-cols-8">
+            {fields.length > 0 ?
+              <div className="col-span-7 mx-5 rounded-lg border-1 bg-accent">
+                <Carousel setApi={setApi}>
+                  <CarouselContent className="m-0 p-0 md:w-1/2 xl:w-full h-[276px]">
+                    {fields.map((field, index) => (
+                      <CarouselItem key={field.id} className="p-0 m-0 bg-white">
+                        <FormTratamiento planControl={formPlan.control} index={index} />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="-left-8.5" />
+                  <CarouselNext className="-right-8.5" />
+                </Carousel>
+                <div className="text-muted-foreground text-center text-sm">
+                  Tto. {current} de {count}
+                </div>
+              </div> :
+              <div className="col-span-7 mx-5 rounded-lg border-1">
+                <Alert text="Tratamientos no agregados." />
+              </div>
+            }
             <Button
               type="button"
-              className="h-[200px]"
+              className="h-full"
               variant="outline"
               onClick={() => {
                 append({
@@ -94,16 +118,15 @@ export default function FormPlan() {
                   aplicaciones: [],
                 });
                 setIsFormComplete(true);
+                setCount(count+1);
               }}
             >
-              <div className="flex flex-row rotate-90 gap-4">
+              <div className="flex flex-row">
                 {' '}
-                <Plus className="w-4 h-4" /> Tratamiento{' '}
+                <Plus className="" />{' '}
               </div>
             </Button>
           </div>
-
-          <Legend text="Para agregar un plan debes añadirle al menos un tratamiento con productos" />
           <Button className="w-full" type="submit" variant="submit" disabled={!isFormComplete}>
             Agregar Plan
           </Button>
