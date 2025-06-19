@@ -68,6 +68,7 @@ export default function FormPlan() {
     defaultValues: {
       id_plan: '',
       tratamientos: [],
+      cotizacion_usd: undefined,
     },
   });
 
@@ -89,9 +90,15 @@ export default function FormPlan() {
     const costoPlan = calcularCostoTotalSanitizacion(finalData);
     // setData en el CostoPlanContext.
     setData((prev) => [...prev, costoPlan]);
-    reset();
-    setIsFormComplete(false);
+    resetForm();    
   };
+
+  function resetForm() {
+    reset();
+    setValorDolar('');    
+    setCustomDolarValue(0);
+    setIsFormComplete(false);
+  }
 
   return (
     <div className="rounded-md flex flex-col justify-between w-full h-full border border-border ">
@@ -162,7 +169,9 @@ export default function FormPlan() {
                 <div className="text-muted-foreground h-8 flex justify-center items-center  text-sm">
                   Tto. {current} de {count}
                 </div>
-                <Carousel setApi={setApi}>
+                <Carousel setApi={setApi} opts={{                  
+                  loop: true,
+                }}>
                   <CarouselContent className="m-0 p-0 md:w-1/2 xl:w-full h-[270px]">
                     {fields.map((field, index) => (
                       <CarouselItem key={field.id} className="p-0 m-0  bg-white rounded-b-lg">
@@ -170,8 +179,8 @@ export default function FormPlan() {
                       </CarouselItem>
                     ))}
                   </CarouselContent>
-                  <CarouselPrevious className="left-10 xl:left-10 2xl:left-30 -top-4 bg-none" />
-                  <CarouselNext className="right-10 xl:right-10 2xl:right-30 -top-4" />
+                  <CarouselPrevious type="button" className="left-10 xl:left-10 2xl:left-30 -top-4 bg-none" />
+                  <CarouselNext type="button" className="right-10 xl:right-10 2xl:right-30 -top-4" />
                 </Carousel>
               </div>
             ) : (
