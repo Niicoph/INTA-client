@@ -14,7 +14,7 @@ export default function TabsNav() {
   return (
     <Tabs
       value={tabValue}
-      className="w-full flex h-full flex-col gap-4 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-[1400px]"
+      className="w-full flex h-full flex-col gap-4 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-[1600px] "
     >
       <TabsList className="w-full h-12 text-lg">
         <TabsTrigger asChild value="Maquinaria">

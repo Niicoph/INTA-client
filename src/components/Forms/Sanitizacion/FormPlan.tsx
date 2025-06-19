@@ -1,11 +1,11 @@
 'use client';
-import * as React from "react";
+import * as React from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PlanSchema } from '@/schemas/Sanitizacion/schema';
 import { type PlanFormData } from '@/schemas/Sanitizacion/types';
 import { Button } from '@/components/ui/button';
-import { Minus, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Form } from '@/components/ui/form';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
@@ -21,7 +21,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
-import Alert from "@/components/ui/alert";
+import Alert from '@/components/ui/alert';
 
 export default function FormPlan() {
   const [isFormComplete, setIsFormComplete] = useState(false);
@@ -32,22 +32,21 @@ export default function FormPlan() {
   const { setData } = costPlanContext;
 
   /* Carousel */
-  const [api, setApi] = React.useState<CarouselApi>()
-  const [current, setCurrent] = React.useState(0)
-  const [count, setCount] = React.useState(0)
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
   React.useEffect(() => {
     if (!api) {
-      return
+      return;
     }
 
-    setCount(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap() + 1)
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
 
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1)
-    })
-  }, [api])
-
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
 
   const formPlan = useForm<PlanFormData>({
     resolver: zodResolver(PlanSchema),
@@ -87,27 +86,28 @@ export default function FormPlan() {
           className="w-full flex-1 p-4 gap-4 flex flex-col"
         >
           <div className="h-full gap-4 grid grid-cols-8">
-            {fields.length > 0 ?
-              <div className="col-span-7 mx-5 rounded-lg border-1 bg-accent">
+            {fields.length > 0 ? (
+              <div className="col-span-7 rounded-lg border-1 bg-accent">
+                <div className="text-muted-foreground h-8 flex justify-center items-center  text-sm">
+                  Tto. {current} de {count}
+                </div>
                 <Carousel setApi={setApi}>
                   <CarouselContent className="m-0 p-0 md:w-1/2 xl:w-full h-[276px]">
                     {fields.map((field, index) => (
-                      <CarouselItem key={field.id} className="p-0 m-0 bg-white">
+                      <CarouselItem key={field.id} className="p-0 m-0  bg-white rounded-b-lg">
                         <FormTratamiento planControl={formPlan.control} index={index} />
                       </CarouselItem>
                     ))}
                   </CarouselContent>
-                  <CarouselPrevious className="-left-8.5" />
-                  <CarouselNext className="-right-8.5" />
+                  <CarouselPrevious className="left-10 xl:left-10 2xl:left-30 -top-4 bg-none" />
+                  <CarouselNext className="right-10 xl:right-10 2xl:right-30 -top-4" />
                 </Carousel>
-                <div className="text-muted-foreground text-center text-sm">
-                  Tto. {current} de {count}
-                </div>
-              </div> :
+              </div>
+            ) : (
               <div className="col-span-7 mx-5 rounded-lg border-1">
                 <Alert text="Tratamientos no agregados." />
               </div>
-            }
+            )}
             <Button
               type="button"
               className="h-full"
@@ -118,7 +118,7 @@ export default function FormPlan() {
                   aplicaciones: [],
                 });
                 setIsFormComplete(true);
-                setCount(count+1);
+                setCount(count + 1);
               }}
             >
               <div className="flex flex-row">

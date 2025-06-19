@@ -630,25 +630,6 @@ export default function FormMaquinaria() {
                   </FormItem>
                 )}
               />
-              {/* <FormField
-                control={form.control}
-                name="coef_gastos_conservacion_i"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Coeficiente de gastos de conservación</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="Selecciona implemento"
-                        value={field.value ?? ''}
-                        className="cursor-not-allowed text-xs"
-                        readOnly
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
               <FormField
                 control={form.control}
                 name="valor_residual_pct_i"
@@ -687,29 +668,18 @@ export default function FormMaquinaria() {
                   </FormItem>
                 )}
               />
-              {/* <FormField
-                control={form.control}
-                name="horas_utiles_i"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Horas útiles</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Selecciona implemento"
-                        value={field.value ?? ''}
-                        className="cursor-not-allowed text-xs"
-                        readOnly
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
             </div>
           </div>
           <Legend text="Valor residual (%): valor estimado de Tractor/Implemento al fin de su vida útil." />
           <div className="col-span-full">
-            <Button className="w-full" type="submit" variant={'submit'} disabled={!isFormComplete}>
+            <Button
+              className={`w-full ${
+                Object.keys(form.formState.errors).length > 0 ? 'bg-red-500' : ''
+              }`}
+              type="submit"
+              variant="submit"
+              disabled={!isFormComplete}
+            >
               Agregar Conjunto
             </Button>
           </div>
