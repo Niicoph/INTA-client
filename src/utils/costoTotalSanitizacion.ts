@@ -3,13 +3,9 @@ import { type CostoPlan } from "@/types/sanitizante";
 
 
 export const calcularCostoTotalSanitizacion = ( data: PlanFormData ): CostoPlan => {
-    // 1. Calcular costo por unidad de cada producto
-    // 2. Calcular costo total por tratamiento
-    // 3. Calcular costo total por plan
-
     const costosTratamientos = data.tratamientos.map(tratamiento => {
         const costoTotal = tratamiento.aplicaciones.reduce((total, aplicacion) => {
-            const costoPorUnidad = aplicacion.producto.precio_usd_envase / aplicacion.producto.volumen_envase;
+            const costoPorUnidad = (aplicacion.producto.precio_usd_envase * data.cotizacion_usd ) / aplicacion.producto.volumen_envase;
             return total + (costoPorUnidad * aplicacion.producto.dosis_x_hl* aplicacion.volumen_aplicado);
         }, 0);
         return {

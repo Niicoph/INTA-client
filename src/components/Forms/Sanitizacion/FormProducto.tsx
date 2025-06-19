@@ -85,111 +85,73 @@ export default function FormProducto() {
           onSubmit={formProducto.handleSubmit(handleFormProductoSubmit)}
           className="w-full h-full p-4 gap-4 flex flex-col justify-between"
         >
-          <FormField
-            control={formProducto.control}
-            name="id_sanitizante"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Sanitizante</FormLabel>
-                <Select
-                  value={field.value ?? ''}
-                  onValueChange={(value) => {
-                    field.onChange(value);
-                    const sanitizante =
-                      sanitizantes.data?.find((s) => s.id_sanitizante === value) || null;
-                    setSelectedSanitizante(sanitizante);
-
-                    if (sanitizante) {
-                      formProducto.setValue('id_sanitizante', sanitizante.id_sanitizante, {
-                        shouldValidate: true,
-                        shouldDirty: true,
-                        shouldTouch: true,
-                      });
-                      formProducto.setValue('nombre', sanitizante.nombre, {
-                        shouldValidate: true,
-                        shouldDirty: true,
-                        shouldTouch: true,
-                      });
-                      formProducto.setValue('precio_usd_envase', sanitizante.precio_usd_envase, {
-                        shouldValidate: true,
-                        shouldDirty: true,
-                        shouldTouch: true,
-                      });
-                      formProducto.setValue('dosis_x_hl', sanitizante.dosis_x_hl, {
-                        shouldValidate: true,
-                        shouldDirty: true,
-                        shouldTouch: true,
-                      });
-                      formProducto.setValue('unidad', sanitizante.unidad, {
-                        shouldValidate: true,
-                        shouldDirty: true,
-                        shouldTouch: true,
-                      });
-                      formProducto.setValue('volumen_envase', sanitizante.volumen_envase, {
-                        shouldValidate: true,
-                        shouldDirty: true,
-                        shouldTouch: true,
-                      });
-                      formProducto.setValue('tipo', sanitizante.tipo, {
-                        shouldValidate: true,
-                        shouldDirty: true,
-                        shouldTouch: true,
-                      });
-                    }
-                  }}
-                >
-                  <SelectTrigger
-                    className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
-                  >
-                    <SelectValue placeholder="Selecciona un sanitizante" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {sanitizantes.data?.map((s: Producto) => (
-                      <SelectItem key={`${s.id_sanitizante}${s.nombre}`} value={s.id_sanitizante}>
-                        {s.nombre} ({s.tipo})
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="grid grid-cols-2 gap-4 p-0">
+          <div className="grid grid-cols-2 gap-4">
             <FormField
               control={formProducto.control}
-              name="precio_usd_envase"
+              name="id_sanitizante"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>USD por envase</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        type="number"
-                        readOnly={!customUsdEnvase}
-                        placeholder="Selecciona sanitizante"
-                        value={field.value ?? ''}
-                        className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
-                          customUsdEnvase
-                            ? 'bg-white text-black border-gray-300'
-                            : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
-                        }`}
-                        onChange={(e) => {
-                          const value = e.target.valueAsNumber;
-                          field.onChange(isNaN(value) ? '' : value);
-                        }}
-                      />
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={() => setCustomUsdEnvase((prev) => !prev)}
-                        className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
-                        hidden={selectedSanitizante == null}
-                      >
-                        ✏️
-                      </Button>
-                    </div>
-                  </FormControl>
+                <FormItem className="flex flex-col">
+                  <FormLabel>Sanitizante</FormLabel>
+                  <Select
+                    value={field.value ?? ''}
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      const sanitizante =
+                        sanitizantes.data?.find((s) => s.id_sanitizante === value) || null;
+                      setSelectedSanitizante(sanitizante);
+
+                      if (sanitizante) {
+                        formProducto.setValue('id_sanitizante', sanitizante.id_sanitizante, {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                          shouldTouch: true,
+                        });
+                        formProducto.setValue('nombre', sanitizante.nombre, {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                          shouldTouch: true,
+                        });
+                        formProducto.setValue('precio_usd_envase', sanitizante.precio_usd_envase, {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                          shouldTouch: true,
+                        });
+                        formProducto.setValue('dosis_x_hl', sanitizante.dosis_x_hl, {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                          shouldTouch: true,
+                        });
+                        formProducto.setValue('unidad', sanitizante.unidad, {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                          shouldTouch: true,
+                        });
+                        formProducto.setValue('volumen_envase', sanitizante.volumen_envase, {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                          shouldTouch: true,
+                        });
+                        formProducto.setValue('tipo', sanitizante.tipo, {
+                          shouldValidate: true,
+                          shouldDirty: true,
+                          shouldTouch: true,
+                        });
+                      }
+                    }}
+                  >
+                    <SelectTrigger
+                      className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
+                    >
+                      <SelectValue placeholder="Selecciona un sanitizante" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {sanitizantes.data?.map((s: Producto) => (
+                        <SelectItem key={`${s.id_sanitizante}${s.nombre}`} value={s.id_sanitizante}>
+                          {s.nombre} ({s.tipo})
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -233,8 +195,45 @@ export default function FormProducto() {
               )}
             />
           </div>
-          <div className="grid grid-cols-2 gap-4 p-0">
-            {/* volumen_envase */}
+          <div className="grid grid-cols-3 gap-4 p-0">
+            <FormField
+              control={formProducto.control}
+              name="precio_usd_envase"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>USD por envase</FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                      <Input
+                        type="number"
+                        readOnly={!customUsdEnvase}
+                        placeholder="Selecciona sanitizante"
+                        value={field.value ?? ''}
+                        className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                          customUsdEnvase
+                            ? 'bg-white text-black border-gray-300'
+                            : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
+                        }`}
+                        onChange={(e) => {
+                          const value = e.target.valueAsNumber;
+                          field.onChange(isNaN(value) ? '' : value);
+                        }}
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => setCustomUsdEnvase((prev) => !prev)}
+                        className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
+                        hidden={selectedSanitizante == null}
+                      >
+                        ✏️
+                      </Button>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={formProducto.control}
               name="volumen_envase"

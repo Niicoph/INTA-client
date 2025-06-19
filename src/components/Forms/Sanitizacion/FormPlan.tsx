@@ -6,7 +6,6 @@ import { PlanSchema } from '@/schemas/Sanitizacion/schema';
 import { type PlanFormData } from '@/schemas/Sanitizacion/types';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { Form } from '@/components/ui/form';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
 import { useState, useContext } from 'react';
@@ -22,9 +21,25 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import Alert from '@/components/ui/alert';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useDollar } from '@/hooks/useDollar';
+import { type Dollar } from '@/types/dollar';
 
 export default function FormPlan() {
   const [isFormComplete, setIsFormComplete] = useState(false);
+  const dollarCollection = useDollar();
+  const [valorDolar, setValorDolar] = useState<string | undefined>('');
+  const [customDolarValue, setCustomDolarValue] = useState(0);
+  const isCustomDolar = valorDolar === 'custom';
+
   const costPlanContext = useContext(CostoPlanContext);
   if (!costPlanContext) {
     return null;
@@ -68,6 +83,7 @@ export default function FormPlan() {
     const finalData = {
       ...data,
       id_plan: `${index}`,
+      cotizacion_usd: isCustomDolar ? Number(customDolarValue) : data.cotizacion_usd,
     };
     // realizo el calculo
     const costoPlan = calcularCostoTotalSanitizacion(finalData);
@@ -85,6 +101,61 @@ export default function FormPlan() {
           onSubmit={handleSubmit(handleFormSubmit)}
           className="w-full flex-1 p-4 gap-4 flex flex-col"
         >
+          <FormField
+            control={formPlan.control}
+            name="cotizacion_usd"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Dólar</FormLabel>
+                <div className="flex flex-col gap-1 md:flex-row ">
+                  <Select
+                    value={valorDolar ?? ''}
+                    onValueChange={(val) => {
+                      setValorDolar(val);
+                      if (val === 'custom') {
+                        field.onChange(undefined);
+                      } else {
+                        field.onChange(Number(val));
+                      }
+                    }}
+                  >
+                    <SelectTrigger
+                      className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
+                    >
+                      <SelectValue placeholder="Selecciona cotización" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {dollarCollection.data?.map((dollar: Dollar) => {
+                        return (
+                          <SelectItem key={dollar.venta} value={dollar.venta.toString()}>
+                            ${dollar.venta} - {dollar.nombre}
+                          </SelectItem>
+                        );
+                      })}
+                      <SelectItem value="custom">Otro (especificar)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Input
+                    className={`text-xs w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                      isCustomDolar
+                        ? 'bg-white text-black border-gray-300'
+                        : 'bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
+                    }`}
+                    hidden={!isCustomDolar}
+                    placeholder="Especifique precio de USD"
+                    type="number"
+                    value={!isCustomDolar ? '' : (field.value ?? '')}
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
+                      setCustomDolarValue(value);
+                      field.onChange(value);
+                    }}
+                  />
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <div className="h-full gap-4 grid grid-cols-8">
             {fields.length > 0 ? (
               <div className="col-span-7 rounded-lg border-1 bg-accent">
@@ -92,7 +163,7 @@ export default function FormPlan() {
                   Tto. {current} de {count}
                 </div>
                 <Carousel setApi={setApi}>
-                  <CarouselContent className="m-0 p-0 md:w-1/2 xl:w-full h-[276px]">
+                  <CarouselContent className="m-0 p-0 md:w-1/2 xl:w-full h-[270px]">
                     {fields.map((field, index) => (
                       <CarouselItem key={field.id} className="p-0 m-0  bg-white rounded-b-lg">
                         <FormTratamiento planControl={formPlan.control} index={index} />
@@ -104,7 +175,7 @@ export default function FormPlan() {
                 </Carousel>
               </div>
             ) : (
-              <div className="col-span-7 mx-5 rounded-lg border-1">
+              <div className="col-span-7  rounded-lg w-full">
                 <Alert text="Tratamientos no agregados." />
               </div>
             )}
@@ -122,8 +193,7 @@ export default function FormPlan() {
               }}
             >
               <div className="flex flex-row">
-                {' '}
-                <Plus className="" />{' '}
+                <Plus className="" />
               </div>
             </Button>
           </div>

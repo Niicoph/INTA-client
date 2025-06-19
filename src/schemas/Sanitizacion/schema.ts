@@ -62,6 +62,11 @@ export const TratamientoSchema = z.object({
 
 export const PlanSchema = z.object({
   id_plan: z.string(),
-  tratamientos: z.array(TratamientoSchema)
-  .nonempty('Debe incluir al menos un tratamiento'),
+  tratamientos: z.array(TratamientoSchema).nonempty('Debe incluir al menos un tratamiento'),
+  cotizacion_usd: z
+  .number({
+    required_error: 'La cotización del dólar es obligatoria',
+    invalid_type_error: 'Debe ser un número',
+  })
+  .positive('Debe ser un valor positivo'),
 });
