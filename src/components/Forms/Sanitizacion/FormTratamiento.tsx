@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import { useFormContext, useFieldArray, type Control } from 'react-hook-form';
+import { useFormContext, useFieldArray, type Control, type UseFieldArrayRemove } from 'react-hook-form';
 import { ProductosContext } from '@/context/ProductosContext';
 import {
   Select,
@@ -13,15 +13,16 @@ import {
 import { FormField, FormItem, FormLabel, FormMessage, FormControl } from '@/components/ui/form';
 import { type Producto } from '@/types/sanitizante';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { Plus , Trash } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { type PlanFormData } from '@/schemas/Sanitizacion/types';
 interface FormTratamientoProps {
   planControl: Control<PlanFormData>;
   index: number;
+  remove: (index: number) => void;
 }
 
-export default function FormTratamiento({ planControl, index }: FormTratamientoProps) {
+export default function FormTratamiento({ planControl, index, remove }: FormTratamientoProps) {
   const productosContext = useContext(ProductosContext);
   const { control } = useFormContext();
 
@@ -40,10 +41,21 @@ export default function FormTratamiento({ planControl, index }: FormTratamientoP
           (/*{ field }*/) => (
             <FormItem>
               <div className="w-full flex justify-between items-center">
-                <p className="font-semibold">Tratamiento #{index + 1}</p>
-                <Button type="button" variant="outline" onClick={() => append({ id_producto: '' })}>
-                  <Plus className="mr-1 w-4 h-4" /> producto
-                </Button>
+                <div className='flex flex-row gap-2 mb-1'>
+                  <p className="font-semibold">Tratamiento #{index + 1}</p>  
+                  <Button
+                    type="button"
+                    className="w-fit h-fit p-1"
+                    variant="destructive"
+                    onClick={() => {                            
+                      remove(index);
+                    }}
+                  >
+                    <div className="flex flex-row">
+                      <Trash className="" />
+                    </div>
+                  </Button>
+                </div>
               </div>
               <div className="flex flex-col gap-2">
                 {fields.map((field, aplicacionIndex) => (
@@ -109,6 +121,9 @@ export default function FormTratamiento({ planControl, index }: FormTratamientoP
                     />
                   </div>
                 ))}
+                <Button type="button" variant="outline" onClick={() => append({ id_producto: '' })}>
+                  <Plus className="mr-1 w-4 h-4" /> prod.
+                </Button>
               </div>
               <FormMessage />
             </FormItem>

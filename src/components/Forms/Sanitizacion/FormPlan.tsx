@@ -1,5 +1,5 @@
 'use client';
-import * as React from 'react';
+import { useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PlanSchema } from '@/schemas/Sanitizacion/schema';
@@ -46,23 +46,6 @@ export default function FormPlan() {
   }
   const { setData } = costPlanContext;
 
-  /* Carousel */
-  const [api, setApi] = React.useState<CarouselApi>();
-  const [current, setCurrent] = React.useState(0);
-  const [count, setCount] = React.useState(0);
-  React.useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
-
-    api.on('select', () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
-  }, [api]);
-
   const formPlan = useForm<PlanFormData>({
     resolver: zodResolver(PlanSchema),
     defaultValues: {
@@ -74,10 +57,33 @@ export default function FormPlan() {
 
   const { control, handleSubmit, reset } = formPlan;
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: 'tratamientos',
   });
+
+  /* Carousel */
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+    setCurrent(api.selectedScrollSnap() + 1);
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+
+  const handleRemove = (index: number) => {
+    remove(index);
+    setTimeout(() => {
+      if (!api) return;
+      const newIndex = Math.max(0, index - 1); // siempre ir al anterior, o al 0 si era el primero
+      api.scrollTo(newIndex);
+      setCurrent(newIndex + 1);
+    }, 0);
+  };
 
   const handleFormSubmit = (data: PlanFormData) => {
     const index = costPlanContext.data.length + 1;
@@ -167,15 +173,15 @@ export default function FormPlan() {
             {fields.length > 0 ? (
               <div className="col-span-7 rounded-lg border-1 bg-accent">
                 <div className="text-muted-foreground h-8 flex justify-center items-center  text-sm">
-                  Tto. {current} de {count}
+                  Tto. {current} de {fields.length}
                 </div>
                 <Carousel setApi={setApi} opts={{                  
                   loop: true,
                 }}>
-                  <CarouselContent className="m-0 p-0 md:w-1/2 xl:w-full h-[270px]">
+                  <CarouselContent className="m-0 p-0 gap-1 md:w-1/2 xl:w-full h-[270px]">
                     {fields.map((field, index) => (
-                      <CarouselItem key={field.id} className="p-0 m-0  bg-white rounded-b-lg">
-                        <FormTratamiento planControl={formPlan.control} index={index} />
+                      <CarouselItem key={field.id} className="p-0 m-0 flex-row  bg-white rounded-b-lg">
+                        <FormTratamiento planControl={formPlan.control} index={index} remove={handleRemove}/>
                       </CarouselItem>
                     ))}
                   </CarouselContent>
@@ -198,7 +204,6 @@ export default function FormPlan() {
                   aplicaciones: [],
                 });
                 setIsFormComplete(true);
-                setCount(count + 1);
               }}
             >
               <div className="flex flex-row">
