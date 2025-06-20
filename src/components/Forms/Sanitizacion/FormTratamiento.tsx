@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import { useFormContext, useFieldArray, type Control, type UseFieldArrayRemove } from 'react-hook-form';
+import { useFormContext, useFieldArray, type Control } from 'react-hook-form';
 import { ProductosContext } from '@/context/ProductosContext';
 import {
   Select,
