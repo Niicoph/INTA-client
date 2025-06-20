@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useFormContext, useFieldArray, type Control } from 'react-hook-form';
 import { ProductosContext } from '@/context/ProductosContext';
 import {
@@ -13,27 +13,37 @@ import {
 import { FormField, FormItem, FormLabel, FormMessage, FormControl } from '@/components/ui/form';
 import { type Producto } from '@/types/sanitizante';
 import { Button } from '@/components/ui/button';
-import { Plus , Trash } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { Plus , Trash, ChevronDownIcon } from 'lucide-react';
 import { type PlanFormData } from '@/schemas/Sanitizacion/types';
 interface FormTratamientoProps {
   planControl: Control<PlanFormData>;
   index: number;
-  remove: (index: number) => void;
+  removeTrat: (index: number) => void;
 }
 
-export default function FormTratamiento({ planControl, index, remove }: FormTratamientoProps) {
+
+
+export default function FormTratamiento({ planControl, index, removeTrat }: FormTratamientoProps) {
   const productosContext = useContext(ProductosContext);
   const { control } = useFormContext();
 
   const { data: productos } = productosContext ?? {};
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
-    name: `tratamientos.${index}.productos`,
+    name: `tratamientos.${index}.aplicaciones`,
   });
 
+   const [open, setOpen] = useState(false)
+
   return (
-    <div className="w-full h-full rounded-b-lg  p-4 gap-4 shrink-0 overflow-scroll flex flex-col ">
+    <div className="w-full h-full rounded-b-lg  p-3 gap-4 shrink-0 overflow-scroll flex flex-col ">      
       <FormField
         control={planControl}
         name={`tratamientos.${index}.aplicaciones`}
@@ -41,20 +51,58 @@ export default function FormTratamiento({ planControl, index, remove }: FormTrat
           (/*{ field }*/) => (
             <FormItem>
               <div className="w-full flex justify-between items-center">
-                <div className='flex flex-row gap-2 mb-1'>
-                  <p className="font-semibold">Tratamiento #{index + 1}</p>  
-                  <Button
-                    type="button"
-                    className="w-fit h-fit p-1"
-                    variant="destructive"
-                    onClick={() => {                            
-                      remove(index);
-                    }}
-                  >
-                    <div className="flex flex-row">
-                      <Trash className="" />
-                    </div>
-                  </Button>
+                <div className='w-full flex flex-row justify-between  mb-1 gap-1'>
+                  <div className='flex flex-row gap-2 '>
+                    <p className="font-semibold">Tratamiento #{index + 1}</p>  
+                    <Button
+                      type="button"
+                      className="w-fit h-fit p-2"
+                      variant="destructive"
+                      onClick={() => {                            
+                        removeTrat(index);
+                      }}
+                    >
+                      <div className="flex flex-row">
+                        <Trash/>
+                      </div>
+                    </Button>  
+                  </div>
+                  <div>
+                    <FormField
+                      control={planControl}
+                      name={`tratamientos.${index}.fecha`}
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col">                        
+                          <FormControl>                          
+                            <Popover open={open} onOpenChange={setOpen}>
+                              <PopoverTrigger asChild>
+                                <Button
+                                  variant="outline"
+                                  id="date"
+                                  className="w-fit font-normal"
+                                >
+                                  {field.value ? field.value.toLocaleDateString() : "Fecha Tto."}
+                                  <ChevronDownIcon />
+                                </Button>
+                              </PopoverTrigger>
+                              <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+                                <Calendar
+                                  mode="single"
+                                  selected={field.value}
+                                  captionLayout="dropdown"
+                                  onSelect={(date) => {
+                                    field.onChange(date)
+                                    setOpen(false)
+                                  }}
+                                />
+                              </PopoverContent>
+                            </Popover>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col gap-2">
@@ -63,36 +111,50 @@ export default function FormTratamiento({ planControl, index, remove }: FormTrat
                     <FormField
                       control={control}
                       name={`tratamientos.${index}.aplicaciones.${aplicacionIndex}.producto`}
-                      render={({ field }) => (
+                      render={({ field }) => (                        
                         <FormItem className="flex flex-col">
                           <FormLabel>Producto #{aplicacionIndex + 1}</FormLabel>
-                          <Select
-                            value={field.value?.id_sanitizante ?? ''}
-                            onValueChange={(selectedId) => {
-                              const selectedProducto = productos?.find(
-                                (p) => p.id_sanitizante === selectedId
-                              );
+                          <div className='flex flex-row gap-1 items-center mr-6'>
+                            <Button
+                              type="button"
+                              className="w-fit h-fit p-1"
+                              variant="default"
+                              onClick={() => {                            
+                                remove(aplicacionIndex);
+                              }}
+                            >
+                              <div className="flex flex-row">
+                                <Trash/>
+                              </div>
+                            </Button>
+                            <Select
+                              value={field.value?.id_sanitizante ?? ''}
+                              onValueChange={(selectedId) => {
+                                const selectedProducto = productos?.find(
+                                  (p) => p.id_sanitizante === selectedId
+                                );
 
-                              if (selectedProducto) {
-                                field.onChange(selectedProducto);
-                              }
-                            }}
-                          >
-                            <SelectTrigger className="text-xs w-full border-2">
-                              <SelectValue placeholder="Selecciona un producto" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {productos?.map((producto: Producto) => (
-                                <SelectItem
-                                  key={producto.id_sanitizante}
-                                  value={producto.id_sanitizante}
-                                >
-                                  {producto.nombre} ({producto.tipo}) {producto.volumen_envase}
-                                  {producto.unidad}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
+                                if (selectedProducto) {
+                                  field.onChange(selectedProducto);
+                                }
+                              }}
+                            >
+                              <SelectTrigger className="text-xs w-full border-2">
+                                <SelectValue placeholder="Selecciona un producto" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {productos?.map((producto: Producto) => (
+                                  <SelectItem
+                                    key={producto.id_sanitizante}
+                                    value={producto.id_sanitizante}
+                                  >
+                                    {producto.nombre} ({producto.tipo}) {producto.volumen_envase}
+                                    {producto.unidad}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </div>
                           <FormMessage />
                         </FormItem>
                       )}

@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PlanSchema } from '@/schemas/Sanitizacion/schema';
+import { PlanSchema  } from '@/schemas/Sanitizacion/schema';
 import { type PlanFormData } from '@/schemas/Sanitizacion/types';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
@@ -181,7 +181,7 @@ export default function FormPlan() {
                   <CarouselContent className="m-0 p-0 gap-1 md:w-1/2 xl:w-full h-[270px]">
                     {fields.map((field, index) => (
                       <CarouselItem key={field.id} className="p-0 m-0 flex-row  bg-white rounded-b-lg">
-                        <FormTratamiento planControl={formPlan.control} index={index} remove={handleRemove}/>
+                        <FormTratamiento planControl={formPlan.control} index={index} removeTrat={handleRemove}/>
                       </CarouselItem>
                     ))}
                   </CarouselContent>
@@ -202,6 +202,7 @@ export default function FormPlan() {
                 append({
                   id_tratamiento: crypto.randomUUID(),
                   aplicaciones: [],
+                  fecha: undefined as unknown as Date,  
                 });
                 setIsFormComplete(true);
               }}
