@@ -93,15 +93,15 @@ export default function FormPlan() {
       cotizacion_usd: isCustomDolar ? Number(customDolarValue) : data.cotizacion_usd,
     };
     // realizo el calculo
-    const costoPlan = calcularCostoTotalSanitizacion(finalData);
+    const finalFinalData = calcularCostoTotalSanitizacion(finalData);
     // setData en el CostoPlanContext.
-    setData((prev) => [...prev, costoPlan]);
-    resetForm();    
+    setData((prev) => [...prev, finalFinalData]);
+    resetForm();
   };
 
   function resetForm() {
     reset();
-    setValorDolar('');    
+    setValorDolar('');
     setCustomDolarValue(0);
     setIsFormComplete(false);
   }
@@ -200,7 +200,7 @@ export default function FormPlan() {
               variant="outline"
               onClick={() => {
                 append({
-                  id_tratamiento: crypto.randomUUID(),
+                  id_tratamiento: `${fields.length + 1}`,
                   aplicaciones: [],
                   fecha: undefined as unknown as Date,  
                 });

@@ -1,191 +1,325 @@
 import type { ColumnDef } from '@tanstack/react-table';
-import { MoreHorizontal } from 'lucide-react';
-import { Checkbox } from '@/components/ui/checkbox';
-import { ArrowUpDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { type Producto } from '@/types/sanitizante';
+import { type FilaPlan } from '@/types/sanitizante';
 
-export const columnsSanidad: ColumnDef<Producto>[] = [
+const colLabels = {
+  /* PLAN */
+  id_plan: 'Plan',
+  cotizacion_usd: 'USD $',
+  costo_x_ha: 'Costo total $/ha',
+    /* TRATAMIENTO */
+    id_tratamiento: 'Tratamiento',
+    tratamiento_fecha: 'Fecha',
+    tratamiento_costo: '$ tratamiento',
+      /* APLICACION */
+      app_producto_nombre: 'Producto',  
+      volumen_envase: 'Vol. Envase',
+      unidad: 'Unidad',
+      precio_usd_envase: '$ Envase USD',
+      app_volumen: 'Vol. Aplicado',
+      dosis_x_hl: 'Dosis/hl',
+      app_costo: '$ Aplicacion',
+      tipo: 'Tipo',
+      /* APLICACION */
+    /* TRATAMIENTO */
+  /* PLAN */
+};
+
+const colClasses = {
+  /* PLAN */
+  id_plan: 'px-4  bg-blue-100',
+  cotizacion_usd: 'px-4  bg-blue-100',
+  costo_x_ha: 'px-4  bg-blue-100',
+    /* TRATAMIENTO */
+    id_tratamiento: 'px-4  bg-blue-100',
+    tratamiento_fecha: 'px-4  bg-blue-100',
+    tratamiento_costo: 'px-4  bg-blue-100',
+      /* APLICACION */
+      app_producto_nombre: 'px-4  bg-blue-100',
+      volumen_envase: 'px-4  bg-blue-100',
+      unidad: 'px-4  bg-blue-100',
+      precio_usd_envase: 'px-4  bg-blue-100',
+      app_volumen: 'px-4  bg-blue-100',
+      dosis_x_hl: 'px-4  bg-blue-100',
+      app_costo: 'px-4  bg-blue-100',
+      tipo: 'px-4  bg-blue-100',
+      /* APLICACION */
+    /* TRATAMIENTO */
+  /* PLAN */
+};
+
+export const columnsSanidad: ColumnDef<FilaPlan>[] = [
   {
-    id: 'select',
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Marcar todas"
-        className="m-1"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Marcar fila"
-        className="m-1"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: 'conjunto',
+    id: 'plan',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.id_plan} flex has-[>svg]:px-0`}
         >
-          Conjunto
-          <ArrowUpDown className="h-4 w-4" />
+          {colLabels.id_plan}
         </Button>
       );
     },
-  },
-  {
-    accessorKey: 'ppioActivo',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Principio Activo
-          <ArrowUpDown className="h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: 'unidad',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Unidad
-          <ArrowUpDown className="h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: 'precioDolar',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Precio en dolares
-          <ArrowUpDown className="h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: 'dosis',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Dosis hl
-          <ArrowUpDown className="h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: 'volumen',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Volumen
-          <ArrowUpDown className="h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: 'tratamientos',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Tratamientos
-          <ArrowUpDown className="h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: 'costohora',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className="w-full text-left justify-start p-0 flex has-[>svg]:px-0"
-        >
-          Costo/hora
-          <ArrowUpDown className="h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    id: 'actions',
     cell: ({ row }) => {
-      const sanidad = row.original;
+      const data = row.original as FilaPlan;
+      if (data.plan_rowspan > 0) {
+        return (
+          <td rowSpan={data.tratamiento_rowspan} className="align-top">
+            {data.id_plan}
+          </td>
+        );
+      }
+      return null;
+    },
+  },
 
+  {
+    id: 'cotizacion_usd',
+    header: ({ column }) => {
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Abrir menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.cotizacion_usd} flex has-[>svg]:px-0`}
+        >
+          {colLabels.cotizacion_usd}
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const data = row.original as FilaPlan;
+      if (data.plan_rowspan > 0) {
+        return (
+          <td rowSpan={data.plan_rowspan} className="align-top">
+            {data.cotizacion_usd}
+          </td>
+        );
+      }
+      return null;
+    },
+  },
 
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              onClick={() => {
-                const formattedData = Object.entries(sanidad)
-                  .map(([key, value]) => `${key}: ${value}`)
-                  .join(', ');
-                navigator.clipboard.writeText(formattedData);
-              }}
-            >
-              Copiar datos de fila
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Editar fila</DropdownMenuItem>
-            <DropdownMenuItem>Eliminar fila</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+  {
+    id: 'costo_x_ha',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.costo_x_ha} flex has-[>svg]:px-0`}
+        >
+          {colLabels.costo_x_ha}
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const data = row.original as FilaPlan;
+      if (data.plan_rowspan > 0) {
+        return (
+          <td rowSpan={data.tratamiento_rowspan} className="align-top">
+            {data.costo_x_ha}
+          </td>
+        );
+      }
+      return null;
+    },
+  },
+
+  {
+    id: 'tratamiento',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.id_tratamiento} flex has-[>svg]:px-0`}
+        >
+          {colLabels.id_tratamiento}
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const data = row.original as FilaPlan;
+      if (data.tratamiento_rowspan > 0) {
+        return (
+          <td rowSpan={data.tratamiento_rowspan} className="align-top">
+            {data.id_tratamiento}
+          </td>
+        );
+      }
+      return null;
+    },
+  },
+
+  {
+    id: 'fecha_tratamiento',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.tratamiento_fecha} flex has-[>svg]:px-0`}
+        >
+          {colLabels.tratamiento_fecha}
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const data = row.original as FilaPlan;
+      if (data.tratamiento_rowspan > 0) {
+        return (
+          <td rowSpan={data.tratamiento_rowspan} className="align-top">
+            {data.tratamiento_fecha.toLocaleDateString()}
+          </td>
+        );
+      }
+      return null;
+    },
+  },
+
+  {
+    id: 'costo_tratamiento',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.tratamiento_costo} flex has-[>svg]:px-0`}
+        >
+          {colLabels.tratamiento_costo}
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const data = row.original as FilaPlan;
+      if (data.tratamiento_rowspan > 0) {
+        return (
+          <td rowSpan={data.tratamiento_rowspan} className="align-top">
+            {data.costo_tratamiento}
+          </td>
+        );
+      }
+      return null;
+    },
+  },
+
+  {
+    accessorKey: 'aplicacion.producto.nombre',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.app_producto_nombre} flex has-[>svg]:px-0`}
+        >
+          {colLabels.app_producto_nombre}
+        </Button>
+      );
+    },
+  },
+
+  {
+    accessorKey: 'aplicacion.producto.volumen_envase',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.volumen_envase} flex has-[>svg]:px-0`}
+        >
+          {colLabels.volumen_envase}
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: 'aplicacion.producto.unidad',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.unidad} flex has-[>svg]:px-0`}
+        >
+          {colLabels.unidad}
+        </Button>
+      );
+    },
+  },
+
+  {
+    accessorKey: 'aplicacion.producto.precio_usd_envase',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.precio_usd_envase} flex has-[>svg]:px-0`}
+        >
+          {colLabels.precio_usd_envase}
+        </Button>
+      );
+    },
+  },
+
+  {
+    accessorKey: 'aplicacion.volumen_aplicado',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.app_volumen} flex has-[>svg]:px-0`}
+        >
+          {colLabels.app_volumen}
+        </Button>
+      );
+    },
+  },
+
+  {
+    accessorKey: 'aplicacion.producto.dosis_x_hl',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.dosis_x_hl} flex has-[>svg]:px-0`}
+        >
+          {colLabels.dosis_x_hl}
+        </Button>
+      );
+    },
+  },
+
+  {
+    accessorKey: 'aplicacion.costo_total',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.app_costo} flex has-[>svg]:px-0`}
+        >
+          {colLabels.app_costo}
+        </Button>
+      );
+    },
+  },
+
+  {
+    accessorKey: 'aplicacion.producto.tipo',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.tipo} flex has-[>svg]:px-0`}
+        >
+          {colLabels.tipo}
+        </Button>
       );
     },
   },

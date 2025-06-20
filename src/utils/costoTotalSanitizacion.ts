@@ -1,28 +1,37 @@
 import type { PlanFormData } from "@/schemas/Sanitizacion/types";
-import { type CostoPlan } from "@/types/sanitizante";
+import { type Plan } from "@/types/sanitizante";
 
 
-export const calcularCostoTotalSanitizacion = ( data: PlanFormData ): CostoPlan => {
-    const costosTratamientos = data.tratamientos.map(tratamiento => {
-        const costoTotal = tratamiento.aplicaciones.reduce((total, aplicacion) => {
+export const calcularCostoTotalSanitizacion = ( data: PlanFormData ): Plan => {
+    const tratamientos = data.tratamientos.map(tratamiento => {
+        let costoTotal = 0;
+        const aplicaciones = tratamiento.aplicaciones.map((aplicacion) => {
             const costoPorUnidad = (aplicacion.producto.precio_usd_envase * data.cotizacion_usd ) / aplicacion.producto.volumen_envase;
-            return total + (costoPorUnidad * aplicacion.producto.dosis_x_hl* aplicacion.volumen_aplicado);
+            costoTotal += costoPorUnidad;
+            return {
+                producto: aplicacion.producto,
+                volumen_aplicado: aplicacion.volumen_aplicado,
+                costo_total: (costoPorUnidad * aplicacion.producto.dosis_x_hl * aplicacion.volumen_aplicado)
+            };
         }, 0);
         return {
-            tratamiento,
+            id_tratamiento: tratamiento.id_tratamiento,
+            aplicaciones: aplicaciones,
             costo_total: costoTotal,
+            fecha: tratamiento.fecha,
+            cotizacion_usd: data.cotizacion_usd
         };
     });
 
-    const costoTotalPlan = costosTratamientos.reduce((total, costo_tratamiento) => {
-        return total + costo_tratamiento.costo_total;
+    const costoTotalPlan = tratamientos.reduce((total, tratamiento) => {
+        return total + tratamiento.costo_total;
     }, 0);
 
-    const costoPlan = {
-        plan: data,
-        costos_tratamientos: costosTratamientos,
-        costo_total: costoTotalPlan
+    const plan = {
+        id_plan: data.id_plan,
+        tratamientos: tratamientos,
+        costo_total: costoTotalPlan,
+        cotizacion_usd: data.cotizacion_usd
     }
-
-    return costoPlan;
+    return plan;
 };

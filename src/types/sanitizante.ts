@@ -9,31 +9,36 @@ export type Producto = {
 };
 
 export type Aplicacion = {
-    producto : Producto;
-    volumen_aplicado : number;
+  producto : Producto;
+  volumen_aplicado : number;
+  costo_total: number;
 }
 
 export type Tratamiento = {
   id_tratamiento: string;
   aplicaciones: Aplicacion[];
+  costo_total: number;
+  fecha: Date;
 };
 
 export type Plan = {
   id_plan: string;
   tratamientos: Tratamiento[];
+  costo_total: number;
+  cotizacion_usd: number;
 };
 
-export type CostoTratamiento = {
-    tratamiento: Tratamiento;
-    costo_total: number;
+export type FilaPlan = {
+  id_plan: string;
+  id_tratamiento: string;
+  plan_rowspan: number;
+  tratamiento_rowspan: number;
+  tratamiento_fecha: Date;
+  aplicacion: Aplicacion;
+  costo_tratamiento: number;
+  costo_x_ha: number;
+  cotizacion_usd: number
 };
-
-export type CostoPlan = {
-    plan: Plan;
-    costos_tratamientos: CostoTratamiento[];
-    costo_total: number;
-}
-
-
 
 export const unidades: string[] = ['lts', 'kg'];
+

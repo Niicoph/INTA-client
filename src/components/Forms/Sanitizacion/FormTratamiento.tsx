@@ -49,7 +49,7 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
                   <p className="font-semibold flex items-center">Tratamiento #{index + 1}</p>
                   <div className="flex gap-2 items-end">
                     <FormField
-                      control={planControl}
+                      control={control}
                       name={`tratamientos.${index}.fecha`}
                       render={({ field }) => (
                         <FormItem className="flex flex-col">
@@ -77,6 +77,7 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
                           <FormMessage />
                         </FormItem>
                       )}
+                      
                     />
                     <Button
                       type="button"

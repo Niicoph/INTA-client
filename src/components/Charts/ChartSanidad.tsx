@@ -1,7 +1,7 @@
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis, Tooltip } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart';
 import Alert from '../ui/alert';
-import type { CostoPlan } from '@/types/sanitizante';
+import type { Plan } from '@/types/sanitizante';
 import { type TooltipProps } from 'recharts';
 
 import { useMemo } from 'react';
@@ -37,17 +37,17 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
   );
 };
 
-export default function ChartSanidad({ costosPlanes }: { costosPlanes: CostoPlan[] }) {
+export default function ChartSanidad({ planes }: { planes: Plan[] }) {
   const { chartData, tratamientoKeys } = useMemo(() => {
     const keys = new Set<string>();
 
-    const data = costosPlanes?.map((plan, index) => {
+    const data = planes?.map((plan, index) => {
       const row: Record<string, string | number> = {
         plan: `Plan ${index + 1}`,
         costo_plan: plan.costo_total,
       };
 
-      plan.costos_tratamientos.forEach((ct, idx) => {
+      plan.tratamientos.forEach((ct, idx) => {
         const key = `Tto. ${idx + 1}`;
         row[key] = ct.costo_total;
         keys.add(key);
@@ -60,12 +60,12 @@ export default function ChartSanidad({ costosPlanes }: { costosPlanes: CostoPlan
       chartData: data,
       tratamientoKeys: Array.from(keys),
     };
-  }, [costosPlanes]);
+  }, [planes]);
 
-  return costosPlanes?.length > 0 ? (
+  return planes?.length > 0 ? (
     <ChartContainer
       config={{}}
-      className={`h-full w-full ${costosPlanes.length > 12 ? 'w-[1000px]' : ''}`}
+      className={`h-full w-full ${planes.length > 12 ? 'w-[1000px]' : ''}`}
     >
       <BarChart data={chartData} margin={{ top: 20 }}>
         <CartesianGrid vertical={false} />

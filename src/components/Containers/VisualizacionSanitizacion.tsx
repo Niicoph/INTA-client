@@ -5,6 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { CostoPlanContext } from '@/context/CostoPlanContext';
 import { useContext } from 'react';
+import { columnsSanidad } from '../ui/DataTable/columnsSanidad';
+import DataTable from '../ui/DataTable/DataTable';
+import { flattenPlanes } from '@/utils/flattenPlanesSanitizacion';
 
 import ChartSanidad from '../Charts/ChartSanidad';
 
@@ -15,6 +18,8 @@ export default function VisualizacionSanitizacion() {
   }
 
   const { data } = costoPlanContext;
+
+  const filasTabla = flattenPlanes(data);
 
   return (
     <div className="rounded-md flex flex-col border border-border overflow-hidden w-full xl:h-full">
@@ -45,10 +50,10 @@ export default function VisualizacionSanitizacion() {
             className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto">
-              <ChartSanidad costosPlanes={data} />
+              <ChartSanidad planes={data} />
             </div>
             <div className="overflow-x-auto">
-              {/* <DataTable columns={columnsMaquinaria} data={costosEconomicos} /> */}
+               <DataTable columns={columnsSanidad} data={filasTabla} /> 
             </div>
           </TabsContent>
 
@@ -58,7 +63,7 @@ export default function VisualizacionSanitizacion() {
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto h-full">
-              {/* <DataTable columns={columnsMaquinaria} data={costosEconomicos} /> */}
+               {/* <DataTable columns={columnsSanidad} data={data} /> */}
             </div>
           </TabsContent>
 
@@ -67,7 +72,7 @@ export default function VisualizacionSanitizacion() {
             aria-label="Grafico"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            <ChartSanidad costosPlanes={data} />
+            <ChartSanidad planes={data} />
           </TabsContent>
         </Tabs>
       </div>
