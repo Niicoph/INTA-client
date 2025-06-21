@@ -53,7 +53,7 @@ export default function VisualizacionSanitizacion() {
               <ChartSanidad planes={data} />
             </div>
             <div className="overflow-x-auto">
-               <DataTable columns={columnsSanidad} data={filasTabla} /> 
+              <DataTable columns={columnsSanidad} data={filasTabla} />
             </div>
           </TabsContent>
 
@@ -63,7 +63,7 @@ export default function VisualizacionSanitizacion() {
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto h-full">
-               {/* <DataTable columns={columnsSanidad} data={data} /> */}
+              <DataTable columns={columnsSanidad} data={filasTabla} />
             </div>
           </TabsContent>
 

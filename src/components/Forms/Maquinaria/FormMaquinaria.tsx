@@ -31,6 +31,7 @@ import { type Dollar } from '@/types/dollar';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
 import { useDollar } from '@/hooks/useDollar';
 import { useGasoil } from '@/hooks/useGasoil';
+import { calcularCostoTotalMaquinaria } from '@/utils/costoTotalMaquinaria';
 
 export default function FormMaquinaria() {
   const maquinariaContext = useContext(MaquinariaContext);
@@ -41,7 +42,7 @@ export default function FormMaquinaria() {
     return null;
   }
 
-  const { setData } = maquinariaContext;
+  const { data, setData } = maquinariaContext;
   const dollarCollection = useDollar();
   const [valorDolar, setValorDolar] = useState<string | undefined>('');
   const [customDolarValue, setCustomDolarValue] = useState(0);
@@ -96,7 +97,10 @@ export default function FormMaquinaria() {
         ? Number(customGasoilValue)
         : data.cotizacion_gasoil_litro,
     };
-    setData((prevData) => [...prevData, finalData]);
+    const nextIndex = maquinariaContext.data.length + 1;
+    // calculo los datos y los envio al context.
+    const costoEconomico = calcularCostoTotalMaquinaria(finalData, nextIndex);
+    setData((prevData) => [...prevData, costoEconomico]);
     resetForm();
   };
 

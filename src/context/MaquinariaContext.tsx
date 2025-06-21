@@ -1,15 +1,15 @@
 import { createContext, useState, type Dispatch } from 'react'; // import del type del dispatch (set)
-import { type MaquinariaFormData } from '@/schemas/Maquinaria/types';
+import { type CostoEconomico } from '@/types/maquinaria';
 
 type MaquinariaContextInterface = {
-  data: MaquinariaFormData[];
-  setData: Dispatch<React.SetStateAction<MaquinariaFormData[]>>;
+  data: CostoEconomico[];
+  setData: Dispatch<React.SetStateAction<CostoEconomico[]>>;
 };
 
 const MaquinariaContext = createContext<MaquinariaContextInterface | null>(null);
 
 const MaquinariaProvider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = useState<MaquinariaFormData[]>([]);
+  const [data, setData] = useState<CostoEconomico[]>([]);
 
   return (
     <MaquinariaContext.Provider value={{ data, setData }}>{children}</MaquinariaContext.Provider>

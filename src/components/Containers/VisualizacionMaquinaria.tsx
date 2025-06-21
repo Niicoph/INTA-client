@@ -7,9 +7,7 @@ import { DataTable } from '@/components/ui/DataTable/DataTable';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
-import { calcularCostoTotalMaquinaria } from '@/utils/costoTotalMaquinaria';
 import { useContext, useRef } from 'react';
-import type { CostoEconomico } from '@/types/maquinaria';
 // import pdfMake from 'pdfmake/build/pdfmake';
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
 // pdfMake.vfs = pdfFonts.vfs;
@@ -24,7 +22,6 @@ export default function VisualizacionMaquinaria() {
   }
 
   const { data } = maquinariaContext;
-  const costosEconomicos: CostoEconomico[] = calcularCostoTotalMaquinaria(data);
 
   // exportar a pdf
   //   const exportToPDF = async () => {
@@ -85,7 +82,7 @@ export default function VisualizacionMaquinaria() {
   const exportToXLS = async () => {
     try {
       const { default: ExportToXLS } = await import('../../utils/SectionXLS/ExportToXLS');
-      ExportToXLS(costosEconomicos);
+      ExportToXLS(data);
     } catch (error) {
       console.error('Error al generar el archivo de Excel', error);
     }
@@ -120,10 +117,10 @@ export default function VisualizacionMaquinaria() {
             className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
             <div ref={captureRef} className="overflow-x-auto">
-              <ChartMaquinaria costosEconomicos={costosEconomicos} />
+              <ChartMaquinaria costosEconomicos={data} />
             </div>
             <div className="overflow-x-auto">
-              <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
+              <DataTable columns={columnsMaquinaria} data={data} />
             </div>
           </TabsContent>
 
@@ -133,7 +130,7 @@ export default function VisualizacionMaquinaria() {
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto h-full">
-              <DataTable columns={columnsMaquinaria} data={costosEconomicos} />
+              <DataTable columns={columnsMaquinaria} data={data} />
             </div>
           </TabsContent>
 
@@ -142,7 +139,7 @@ export default function VisualizacionMaquinaria() {
             aria-label="Grafico"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            <ChartMaquinaria costosEconomicos={costosEconomicos} />
+            <ChartMaquinaria costosEconomicos={data} />
           </TabsContent>
         </Tabs>
       </div>
