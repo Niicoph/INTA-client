@@ -69,7 +69,10 @@ export default function FormProducto() {
     formProducto.reset();
     //Reinicia valores no accesibles por el formulario
     setSelectedSanitizante(null);
-    setIsFormProductoComplete(false);
+    setIsFormProductoComplete(false);    
+    setCustomDosisHl(false);
+    setCustomVolumenEnvase(false);
+    setCustomUsdEnvase(false);
   }
 
   useEffect(() => {

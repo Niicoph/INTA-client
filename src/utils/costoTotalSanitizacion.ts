@@ -4,20 +4,21 @@ import { type Plan } from "@/types/sanitizante";
 
 export const calcularCostoTotalSanitizacion = ( data: PlanFormData ): Plan => {
     const tratamientos = data.tratamientos.map(tratamiento => {
-        let costoTotal = 0;
+        let costo_tto = 0;
         const aplicaciones = tratamiento.aplicaciones.map((aplicacion) => {
             const costoPorUnidad = (aplicacion.producto.precio_usd_envase * data.cotizacion_usd ) / aplicacion.producto.volumen_envase;
-            costoTotal += costoPorUnidad;
+            const costo_app = (costoPorUnidad * aplicacion.producto.dosis_x_hl * aplicacion.volumen_aplicado);
+            costo_tto += costo_app;
             return {
                 producto: aplicacion.producto,
                 volumen_aplicado: aplicacion.volumen_aplicado,
-                costo_total: (costoPorUnidad * aplicacion.producto.dosis_x_hl * aplicacion.volumen_aplicado)
+                costo_total: costo_app,
             };
         }, 0);
         return {
             id_tratamiento: tratamiento.id_tratamiento,
             aplicaciones: aplicaciones,
-            costo_total: costoTotal,
+            costo_total: costo_tto,
             fecha: tratamiento.fecha,
             cotizacion_usd: data.cotizacion_usd
         };

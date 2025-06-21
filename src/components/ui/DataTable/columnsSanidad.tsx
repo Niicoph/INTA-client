@@ -1,24 +1,34 @@
 import type { ColumnDef } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
 import { type FilaPlan } from '@/types/sanitizante';
+import {
+  DropdownMenu,  
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { MoreHorizontal } from "lucide-react"
+
+import { CostoPlanContext } from '@/context/CostoPlanContext';
+import { useContext } from 'react';
 
 const colLabels = {
   /* PLAN */
   id_plan: 'Plan',
-  cotizacion_usd: 'USD $',
-  costo_x_ha: 'Costo total $/ha',
+  cotizacion_usd: 'USD',
+  costo_x_ha: 'Costo Plan',
     /* TRATAMIENTO */
-    id_tratamiento: 'Tratamiento',
+    id_tratamiento: 'Tto.',
     tratamiento_fecha: 'Fecha',
-    tratamiento_costo: '$ tratamiento',
+    tratamiento_costo: 'Costo Tto.',
       /* APLICACION */
       app_producto_nombre: 'Producto',  
       volumen_envase: 'Vol. Envase',
       unidad: 'Unidad',
-      precio_usd_envase: '$ Envase USD',
+      precio_usd_envase: 'USD Envase',
       app_volumen: 'Vol. Aplicado',
       dosis_x_hl: 'Dosis/hl',
-      app_costo: '$ Aplicacion',
+      app_costo: 'Costo Aplicacion',
       tipo: 'Tipo',
       /* APLICACION */
     /* TRATAMIENTO */
@@ -28,27 +38,57 @@ const colLabels = {
 const colClasses = {
   /* PLAN */
   id_plan: 'px-4  bg-blue-100',
-  cotizacion_usd: 'px-4  bg-blue-100',
-  costo_x_ha: 'px-4  bg-blue-100',
+  cotizacion_usd: 'px-4  bg-orange-100',
+  costo_x_ha: 'px-4  bg-green-100',
     /* TRATAMIENTO */
-    id_tratamiento: 'px-4  bg-blue-100',
-    tratamiento_fecha: 'px-4  bg-blue-100',
-    tratamiento_costo: 'px-4  bg-blue-100',
+    id_tratamiento: 'px-4  bg-red-100',
+    tratamiento_fecha: 'px-4  bg-red-100',
+    tratamiento_costo: 'px-4  bg-red-100',
       /* APLICACION */
-      app_producto_nombre: 'px-4  bg-blue-100',
-      volumen_envase: 'px-4  bg-blue-100',
-      unidad: 'px-4  bg-blue-100',
-      precio_usd_envase: 'px-4  bg-blue-100',
-      app_volumen: 'px-4  bg-blue-100',
-      dosis_x_hl: 'px-4  bg-blue-100',
-      app_costo: 'px-4  bg-blue-100',
-      tipo: 'px-4  bg-blue-100',
+      app_producto_nombre: 'px-4  bg-purple-100',
+      volumen_envase: 'px-4  bg-purple-100',
+      unidad: 'px-4  bg-purple-100',
+      precio_usd_envase: 'px-4  bg-purple-100',
+      app_volumen: 'px-4  bg-yellow-100',
+      dosis_x_hl: 'px-4  bg-purple-100',
+      app_costo: 'px-4  bg-purple-100',
+      tipo: 'px-4  bg-purple-100',
       /* APLICACION */
     /* TRATAMIENTO */
   /* PLAN */
 };
 
 export const columnsSanidad: ColumnDef<FilaPlan>[] = [
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const data = row.original;
+      const { remove } = useContext(CostoPlanContext)!;      
+      if (data.plan_rowspan > 0) {
+        return (        
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Eliminar plan</span>
+                <MoreHorizontal />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className='bg-accent'>
+              <DropdownMenuItem
+                onClick={() => {
+                  remove(data.id_plan);
+                }}
+              >
+                Eliminar Plan {data.id_plan}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>        
+        )
+      }
+      return null;
+    },
+  },
   {
     id: 'plan',
     header: ({ column }) => {
@@ -63,12 +103,12 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original as FilaPlan;
+      const data = row.original;
       if (data.plan_rowspan > 0) {
         return (
-          <td rowSpan={data.tratamiento_rowspan} className="align-top">
+          <div className={`align-top`}>
             {data.id_plan}
-          </td>
+          </div>
         );
       }
       return null;
@@ -89,12 +129,12 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original as FilaPlan;
+      const data = row.original;
       if (data.plan_rowspan > 0) {
         return (
-          <td rowSpan={data.plan_rowspan} className="align-top">
-            {data.cotizacion_usd}
-          </td>
+          <div className="align-top">
+            ${data.cotizacion_usd.toLocaleString('es-AR')}
+          </div>
         );
       }
       return null;
@@ -115,12 +155,12 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original as FilaPlan;
+      const data = row.original;
       if (data.plan_rowspan > 0) {
         return (
-          <td rowSpan={data.tratamiento_rowspan} className="align-top">
-            {data.costo_x_ha}
-          </td>
+          <div className="align-top">
+            ${data.costo_x_ha.toLocaleString('es-AR')}/ha
+          </div>
         );
       }
       return null;
@@ -141,12 +181,12 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original as FilaPlan;
+      const data = row.original;
       if (data.tratamiento_rowspan > 0) {
         return (
-          <td rowSpan={data.tratamiento_rowspan} className="align-top">
+          <div className="align-top">
             {data.id_tratamiento}
-          </td>
+          </div>
         );
       }
       return null;
@@ -167,12 +207,12 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original as FilaPlan;
+      const data = row.original;
       if (data.tratamiento_rowspan > 0) {
         return (
-          <td rowSpan={data.tratamiento_rowspan} className="align-top">
+          <div className="align-top">
             {data.tratamiento_fecha.toLocaleDateString()}
-          </td>
+          </div>
         );
       }
       return null;
@@ -193,12 +233,12 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original as FilaPlan;
+      const data = row.original;
       if (data.tratamiento_rowspan > 0) {
         return (
-          <td rowSpan={data.tratamiento_rowspan} className="align-top">
-            {data.costo_tratamiento}
-          </td>
+          <div className="align-top">
+            ${data.costo_tratamiento.toLocaleString('es-AR')}/ha
+          </div>
         );
       }
       return null;
@@ -221,7 +261,7 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
   },
 
   {
-    accessorKey: 'aplicacion.producto.volumen_envase',
+    id: 'aplicacion.producto.volumen_envase',
     header: ({ column }) => {
       return (
         <Button
@@ -233,24 +273,18 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
         </Button>
       );
     },
-  },
-  {
-    accessorKey: 'aplicacion.producto.unidad',
-    header: ({ column }) => {
+    cell: ({ row }) => {
+      const data = row.original;      
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.unidad} flex has-[>svg]:px-0`}
-        >
-          {colLabels.unidad}
-        </Button>
+        <div className="align-top">
+          {data.aplicacion.producto.volumen_envase} {data.aplicacion.producto.unidad}
+        </div>
       );
     },
   },
 
   {
-    accessorKey: 'aplicacion.producto.precio_usd_envase',
+    id: 'aplicacion.producto.precio_usd_envase',
     header: ({ column }) => {
       return (
         <Button
@@ -262,25 +296,18 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
         </Button>
       );
     },
-  },
-
-  {
-    accessorKey: 'aplicacion.volumen_aplicado',
-    header: ({ column }) => {
+    cell: ({ row }) => {
+      const data = row.original;      
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.app_volumen} flex has-[>svg]:px-0`}
-        >
-          {colLabels.app_volumen}
-        </Button>
+        <div className="align-top">
+          USD {data.aplicacion.producto.precio_usd_envase.toLocaleString('es-AR')}
+        </div>
       );
     },
   },
 
   {
-    accessorKey: 'aplicacion.producto.dosis_x_hl',
+    id: 'aplicacion.producto.dosis_x_hl',
     header: ({ column }) => {
       return (
         <Button
@@ -292,10 +319,41 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          {data.aplicacion.producto.dosis_x_hl.toLocaleString('es-AR')} {data.aplicacion.producto.unidad}/hl
+        </div>
+      );
+    },
   },
 
   {
-    accessorKey: 'aplicacion.costo_total',
+    id: 'aplicacion.volumen_aplicado',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.app_volumen} flex has-[>svg]:px-0`}
+        >
+          {colLabels.app_volumen}
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          {data.aplicacion.volumen_aplicado.toLocaleString('es-AR')} hl
+        </div>
+      );
+    },
+  },
+
+  {
+    id: 'aplicacion.costo_total',
     header: ({ column }) => {
       return (
         <Button
@@ -305,6 +363,14 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
         >
           {colLabels.app_costo}
         </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          ${data.aplicacion.costo_total.toLocaleString('es-AR')}
+        </div>
       );
     },
   },

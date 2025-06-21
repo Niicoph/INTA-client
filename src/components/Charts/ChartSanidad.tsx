@@ -41,15 +41,15 @@ export default function ChartSanidad({ planes }: { planes: Plan[] }) {
   const { chartData, tratamientoKeys } = useMemo(() => {
     const keys = new Set<string>();
 
-    const data = planes?.map((plan, index) => {
+    const data = planes?.map((plan) => {
       const row: Record<string, string | number> = {
-        plan: `Plan ${index + 1}`,
+        plan: `Plan ${plan.id_plan}`,
         costo_plan: plan.costo_total,
       };
 
-      plan.tratamientos.forEach((ct, idx) => {
-        const key = `Tto. ${idx + 1}`;
-        row[key] = ct.costo_total;
+      plan.tratamientos.forEach((tto) => {
+        const key = `Tto. ${tto.id_tratamiento}`;
+        row[key] = tto.costo_total;
         keys.add(key);
       });
 

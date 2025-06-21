@@ -40,11 +40,11 @@ export default function FormPlan() {
   const [customDolarValue, setCustomDolarValue] = useState(0);
   const isCustomDolar = valorDolar === 'custom';
 
-  const costPlanContext = useContext(CostoPlanContext);
-  if (!costPlanContext) {
+  const costoPlanContext = useContext(CostoPlanContext);
+  if (!costoPlanContext) {
     return null;
   }
-  const { setData } = costPlanContext;
+  const { setData } = costoPlanContext;
 
   const formPlan = useForm<PlanFormData>({
     resolver: zodResolver(PlanSchema),
@@ -79,22 +79,26 @@ export default function FormPlan() {
     remove(index);
     setTimeout(() => {
       if (!api) return;
-      const newIndex = Math.max(0, index - 1); // siempre ir al anterior, o al 0 si era el primero
+      const newIndex = Math.max(0, index - 1);
       api.scrollTo(newIndex);
       setCurrent(newIndex + 1);
     }, 0);
   };
 
   const handleFormSubmit = (data: PlanFormData) => {
-    const index = costPlanContext.data.length + 1;
+    /* Manejo de index para evitar que al eliminar, se intente usar un id utilizado */
+    let index =  costoPlanContext.data.length + 1;
+    if (index > 1) {      
+      index = parseInt(costoPlanContext.data[index-2].id_plan) + 1;
+    }
+    
     const finalData = {
       ...data,
       id_plan: `${index}`,
       cotizacion_usd: isCustomDolar ? Number(customDolarValue) : data.cotizacion_usd,
     };
-    // realizo el calculo
     const finalFinalData = calcularCostoTotalSanitizacion(finalData);
-    // setData en el CostoPlanContext.
+    
     setData((prev) => [...prev, finalFinalData]);
     resetForm();
   };
@@ -108,7 +112,7 @@ export default function FormPlan() {
 
   return (
     <div className="rounded-md flex flex-col justify-between w-full h-full border border-border ">
-      <TitleContainer title="Carga de plan" icon={CargaDatosIcon} />
+      <TitleContainer title="Carga de Plan Fitosanitario" icon={CargaDatosIcon} />
       <Form {...formPlan}>
         <form
           onSubmit={handleSubmit(handleFormSubmit)}

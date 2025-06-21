@@ -6,32 +6,32 @@ const colLabels = {
   id_conjunto: 'Conjunto',
 
   conjunto: {
-    cotizacion_usd: 'USD $',
-    cotizacion_gasoil_litro: 'Gasoil $/lt',
+    cotizacion_usd: 'USD',
+    cotizacion_gasoil_litro: 'Gasoil',
 
     nombre_t: 'Tractor',
-    potencia_CV: 'CV',
+    potencia_CV: 'Potencia',
     precio_usd_t: 'USD',
     coef_gastos_conservacion_t: 'Coef Conservación',
     horas_utiles_t: 'Horas Útiles',
-    valor_residual_pct_t: '$ Residual %',
+    valor_residual_pct_t: 'Valor Residual',
 
     nombre_i: 'Implemento',
     consumo_litros_hora_CV: 'Consumo lt/h CV',
     precio_usd_i: 'USD',
     coef_gastos_conservacion_i: 'Coef Conservacion',
     horas_utiles_i: 'Horas Útiles',
-    valor_residual_pct_i: 'Residual %',
+    valor_residual_pct_i: 'Valor Residual',
   },
 
-  amortizacion_t: 'Amortización $/h',
-  costo_mantenimiento_t: 'Mantenimiento $/h',
+  amortizacion_t: 'Costo Amortización',
+  costo_mantenimiento_t: 'Costo Mantenimiento',
 
-  amortizacion_i: 'Amortizacion $/h',
-  costo_combustible: 'Combustible $/h',
-  costo_mantenimiento_i: 'Mantenimiento $/h',
+  amortizacion_i: 'Costo Amortizacion',
+  costo_combustible: 'Costo Combustible',
+  costo_mantenimiento_i: 'Costo Mantenimiento',
 
-  costo_total_hora: 'Costo Total $/h',
+  costo_total_hora: 'Costo Conjunto',
 };
 
 const colClasses = {
@@ -56,9 +56,9 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
-  },
-  {
-    accessorKey: 'conjunto.cotizacion_usd',
+  },  
+  {    
+    id: 'conjunto.cotizacion_usd',
     header: ({ column }) => {
       return (
         <Button
@@ -70,9 +70,17 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          ${data.conjunto.cotizacion_usd}
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'conjunto.cotizacion_gasoil_litro',
+    id: 'conjunto.cotizacion_gasoil_litro',
     header: ({ column }) => {
       return (
         <Button
@@ -82,6 +90,36 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         >
           {colLabels.conjunto.cotizacion_gasoil_litro}
         </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          ${data.conjunto.cotizacion_gasoil_litro}/lt
+        </div>
+      );
+    },
+  },
+  {
+    id: 'costo_total_hora',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.costo_total} flex has-[>svg]:px-0`}
+        >
+          {colLabels.costo_total_hora}
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          ${data.costo_total_hora.toLocaleString('es-AR')}/h
+        </div>
       );
     },
   },
@@ -100,7 +138,7 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
     },
   },
   {
-    accessorKey: 'conjunto.potencia_CV',
+    id: 'conjunto.potencia_CV',
     header: ({ column }) => {
       return (
         <Button
@@ -112,9 +150,17 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          {data.conjunto.potencia_CV} CV
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'conjunto.precio_usd_t',
+    id: 'conjunto.precio_usd_t',
     header: ({ column }) => {
       return (
         <Button
@@ -126,9 +172,17 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          USD {data.conjunto.precio_usd_t.toLocaleString('es-AR')}
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'conjunto.coef_gastos_conservacion_t',
+    id: 'conjunto.coef_gastos_conservacion_t',
     header: ({ column }) => {
       return (
         <Button
@@ -140,9 +194,19 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          {data.conjunto.coef_gastos_conservacion_t.toLocaleString('es-AR', {            
+            maximumFractionDigits: 10,
+          })}
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'conjunto.horas_utiles_t',
+    id: 'conjunto.horas_utiles_t',
     header: ({ column }) => {
       return (
         <Button
@@ -154,9 +218,17 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          {data.conjunto.horas_utiles_t.toLocaleString('es-AR')} hs
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'conjunto.valor_residual_pct_t',
+    id: 'conjunto.valor_residual_pct_t',
     header: ({ column }) => {
       return (
         <Button
@@ -168,9 +240,17 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          {data.conjunto.valor_residual_pct_t.toLocaleString('es-AR')}%
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'amortizacion_t',
+    id: 'amortizacion_t',
     header: ({ column }) => {
       return (
         <Button
@@ -182,9 +262,17 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          ${data.amortizacion_t.toLocaleString('es-AR')}/h
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'costo_mantenimiento_t',
+    id: 'costo_mantenimiento_t',
     header: ({ column }) => {
       return (
         <Button
@@ -194,6 +282,14 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         >
           {colLabels.costo_mantenimiento_t}
         </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          ${data.costo_mantenimiento_t.toLocaleString('es-AR')}/h
+        </div>
       );
     },
   },
@@ -212,7 +308,7 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
     },
   },
   {
-    accessorKey: 'conjunto.consumo_litros_hora_CV',
+    id: 'conjunto.consumo_litros_hora_CV',
     header: ({ column }) => {
       return (
         <Button
@@ -224,9 +320,17 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          {data.conjunto.consumo_litros_hora_CV.toLocaleString('es-AR')} lt/h.CV
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'conjunto.precio_usd_i',
+    id: 'conjunto.precio_usd_i',
     header: ({ column }) => {
       return (
         <Button
@@ -238,9 +342,18 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          USD {data.conjunto.precio_usd_i.toLocaleString('es-AR')}
+        </div>
+      );
+    },
+    
   },
   {
-    accessorKey: 'conjunto.coef_gastos_conservacion_i',
+    id: 'conjunto.coef_gastos_conservacion_i',
     header: ({ column }) => {
       return (
         <Button
@@ -252,9 +365,19 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          {data.conjunto.coef_gastos_conservacion_i.toLocaleString('es-AR', {            
+            maximumFractionDigits: 10,
+          })}
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'conjunto.horas_utiles_i',
+    id: 'conjunto.horas_utiles_i',
     header: ({ column }) => {
       return (
         <Button
@@ -266,9 +389,17 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          {data.conjunto.horas_utiles_i.toLocaleString('es-AR')} hs
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'conjunto.valor_residual_pct_i',
+    id: 'conjunto.valor_residual_pct_i',
     header: ({ column }) => {
       return (
         <Button
@@ -280,9 +411,17 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          {data.conjunto.valor_residual_pct_i.toLocaleString('es-AR')}%
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'amortizacion_i',
+    id: 'amortizacion_i',
     header: ({ column }) => {
       return (
         <Button
@@ -294,9 +433,17 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          ${data.amortizacion_i.toLocaleString('es-AR')}/h
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'costo_combustible',
+    id: 'costo_combustible',
     header: ({ column }) => {
       return (
         <Button
@@ -308,9 +455,17 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const data = row.original;      
+      return (
+        <div className="align-top">
+          ${data.costo_combustible.toLocaleString('es-AR')}/h
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'costo_mantenimiento_i',
+    id: 'costo_mantenimiento_i',
     header: ({ column }) => {
       return (
         <Button
@@ -322,19 +477,13 @@ export const columnsMaquinaria: ColumnDef<CostoEconomico>[] = [
         </Button>
       );
     },
-  },
-  {
-    accessorKey: 'costo_total_hora',
-    header: ({ column }) => {
+    cell: ({ row }) => {
+      const data = row.original;      
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.costo_total} flex has-[>svg]:px-0`}
-        >
-          {colLabels.costo_total_hora}
-        </Button>
+        <div className="align-top">
+          ${data.costo_mantenimiento_i.toLocaleString('es-AR')}/h
+        </div>
       );
     },
-  },
+  },  
 ];

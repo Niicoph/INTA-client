@@ -61,15 +61,32 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
               ))}
             </TableHeader>
             <TableBody>
-              {table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="w-32 truncate py-2 px-4">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
+              {table.getRowModel().rows.map((row) => {
+                const data = row.original as Record<string, any>;
+                const claves = ['id_plan', 'id_conjunto'];
+                const clavePresente = claves.find((clave) => Object.prototype.hasOwnProperty.call(data, clave));
+                let id_number = 0;
+
+                if (clavePresente) {
+                  const valor = data[clavePresente];                  
+                  if (typeof valor === 'string' || typeof valor === 'number') {
+                    id_number = parseInt(String(valor));                  }
+                }
+
+                return (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && 'selected'}
+                    className={id_number % 2 === 0 ? 'bg-muted' : 'bg-background'}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </div>
