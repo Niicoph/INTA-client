@@ -42,7 +42,7 @@ export default function FormMaquinaria() {
     return null;
   }
 
-  const { data, setData } = maquinariaContext;
+  const { setData } = maquinariaContext;
   const dollarCollection = useDollar();
   const [valorDolar, setValorDolar] = useState<string | undefined>('');
   const [customDolarValue, setCustomDolarValue] = useState(0);
@@ -166,14 +166,18 @@ export default function FormMaquinaria() {
                           <SelectValue placeholder="Selecciona cotización" />
                         </SelectTrigger>
                         <SelectContent>
-                          {dollarCollection.data?.map((dollar: Dollar) => {
-                            return (
-                              <SelectItem key={dollar.venta} value={dollar.venta.toString()}>
-                                ${dollar.venta} - {dollar.nombre}
-                              </SelectItem>
-                            );
-                          })}
-                          <SelectItem value="custom">Otro (especificar)</SelectItem>
+                          {dollarCollection.data?.value && dollarCollection.data?.name && (
+                            <SelectItem
+                              value={String(dollarCollection.data.value)}
+                              key={`dollar-${dollarCollection.data.value}`}
+                            >
+                              {`$${dollarCollection.data.value} - ${dollarCollection.data.name}`}
+                            </SelectItem>
+                          )}
+
+                          <SelectItem key="custom-option" value="custom">
+                            Otro (especificar)
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                       <Input
@@ -677,9 +681,7 @@ export default function FormMaquinaria() {
           <Legend text="Valor residual (%): valor estimado de Tractor/Implemento al fin de su vida útil." />
           <div className="col-span-full">
             <Button
-              className={`w-full ${
-                Object.keys(form.formState.errors).length > 0 ? 'bg-red-500' : ''
-              }`}
+              className={`w-full ${Object.keys(form.formState.errors).length > 0 ? 'bg-red-500 hover:bg-red-900 hover:border hover:border-red-900' : ''}`}
               type="submit"
               variant="submit"
               disabled={!isFormComplete}

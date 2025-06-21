@@ -69,7 +69,7 @@ export default function FormProducto() {
     formProducto.reset();
     //Reinicia valores no accesibles por el formulario
     setSelectedSanitizante(null);
-    setIsFormProductoComplete(false);    
+    setIsFormProductoComplete(false);
     setCustomDosisHl(false);
     setCustomVolumenEnvase(false);
     setCustomUsdEnvase(false);
@@ -314,7 +314,7 @@ export default function FormProducto() {
           <Legend text="Productos agregados estarán disponibles para la carga de planes." />
           <div className="col-span-full">
             <Button
-              className="w-full"
+              className={`w-full ${Object.keys(formProducto.formState.errors).length > 0 ? 'bg-red-500 hover:bg-red-900 hover:border hover:border-red-900' : ''}`}
               type="submit"
               variant={'submit'}
               disabled={!isFormProductoComplete}

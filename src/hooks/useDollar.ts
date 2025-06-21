@@ -1,29 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import { getDollars } from "@/services/dollarService";
-import { type Dollar } from "@/types/dollar";
+import { getDollar } from "@/services/dollarService";
 
 export function useDollar() {
   const query = useQuery({
     queryKey: ["dollarRate"],
-    queryFn: () => getDollars(),
-    staleTime: 1000 * 60 * 5, // 5 minutos
+    queryFn: () => getDollar(),
+    staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
   });
 
-  const filteredData = query.data?.filter((dollar : Dollar) => {
-    const excludedTypes = [
-      "Bolsa",
-      "Contado con liquidación",
-      "Mayorista",
-      "Cripto",
-      "Blue",
-      "Tarjeta",
-    ];
-    return !excludedTypes.includes(dollar.nombre);
-  });
+
+    const dollarRate = {
+        name: "Dolar Oficial",
+        value: query.data?.results[0].detalle[0].tipoCotizacion,
+        date: query.data?.results[0].fecha,
+    }
 
   return {
-    data: filteredData,
+    data: dollarRate,
     isLoading: query.isLoading,
     isError: query.isError,
   };

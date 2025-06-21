@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PlanSchema  } from '@/schemas/Sanitizacion/schema';
+import { PlanSchema } from '@/schemas/Sanitizacion/schema';
 import { type PlanFormData } from '@/schemas/Sanitizacion/types';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
@@ -87,18 +87,18 @@ export default function FormPlan() {
 
   const handleFormSubmit = (data: PlanFormData) => {
     /* Manejo de index para evitar que al eliminar, se intente usar un id utilizado */
-    let index =  costoPlanContext.data.length + 1;
-    if (index > 1) {      
-      index = parseInt(costoPlanContext.data[index-2].id_plan) + 1;
+    let index = costoPlanContext.data.length + 1;
+    if (index > 1) {
+      index = parseInt(costoPlanContext.data[index - 2].id_plan) + 1;
     }
-    
+
     const finalData = {
       ...data,
       id_plan: `${index}`,
       cotizacion_usd: isCustomDolar ? Number(customDolarValue) : data.cotizacion_usd,
     };
     const finalFinalData = calcularCostoTotalSanitizacion(finalData);
-    
+
     setData((prev) => [...prev, finalFinalData]);
     resetForm();
   };
@@ -142,14 +142,18 @@ export default function FormPlan() {
                       <SelectValue placeholder="Selecciona cotización" />
                     </SelectTrigger>
                     <SelectContent>
-                      {dollarCollection.data?.map((dollar: Dollar) => {
-                        return (
-                          <SelectItem key={dollar.venta} value={dollar.venta.toString()}>
-                            ${dollar.venta} - {dollar.nombre}
-                          </SelectItem>
-                        );
-                      })}
-                      <SelectItem value="custom">Otro (especificar)</SelectItem>
+                      {dollarCollection.data?.value && dollarCollection.data?.name && (
+                        <SelectItem
+                          value={String(dollarCollection.data.value)}
+                          key={`dollar-${dollarCollection.data.value}`}
+                        >
+                          {`$${dollarCollection.data.value} - ${dollarCollection.data.name}`}
+                        </SelectItem>
+                      )}
+
+                      <SelectItem key="custom-option" value="custom">
+                        Otro (especificar)
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                   <Input
@@ -179,18 +183,34 @@ export default function FormPlan() {
                 <div className="text-muted-foreground h-8 flex justify-center items-center  text-sm">
                   Tto. {current} de {fields.length}
                 </div>
-                <Carousel setApi={setApi} opts={{                  
-                  loop: true,
-                }}>
-                  <CarouselContent className="m-0 p-0 gap-1 md:w-1/2 xl:w-full h-[270px]">
+                <Carousel
+                  setApi={setApi}
+                  opts={{
+                    loop: true,
+                  }}
+                >
+                  <CarouselContent className="m-0 p-0 gap-1 md:w-1/2 xl:w-full h-[260px]">
                     {fields.map((field, index) => (
-                      <CarouselItem key={field.id} className="p-0 m-0 flex-row  bg-white rounded-b-lg">
-                        <FormTratamiento planControl={formPlan.control} index={index} removeTrat={handleRemove}/>
+                      <CarouselItem
+                        key={`${field.id}-${index}`}
+                        className="p-0 m-0 flex-row  bg-white rounded-b-lg"
+                      >
+                        <FormTratamiento
+                          planControl={formPlan.control}
+                          index={index}
+                          removeTrat={handleRemove}
+                        />
                       </CarouselItem>
                     ))}
                   </CarouselContent>
-                  <CarouselPrevious type="button" className="left-10 xl:left-10 2xl:left-30 -top-4 bg-none" />
-                  <CarouselNext type="button" className="right-10 xl:right-10 2xl:right-30 -top-4" />
+                  <CarouselPrevious
+                    type="button"
+                    className="left-10 xl:left-10 2xl:left-30 -top-4 bg-none"
+                  />
+                  <CarouselNext
+                    type="button"
+                    className="right-10 xl:right-10 2xl:right-30 -top-4"
+                  />
                 </Carousel>
               </div>
             ) : (
@@ -206,7 +226,7 @@ export default function FormPlan() {
                 append({
                   id_tratamiento: `${fields.length + 1}`,
                   aplicaciones: [],
-                  fecha: undefined as unknown as Date,  
+                  fecha: undefined as unknown as Date,
                 });
                 setIsFormComplete(true);
               }}
@@ -216,7 +236,12 @@ export default function FormPlan() {
               </div>
             </Button>
           </div>
-          <Button className="w-full" type="submit" variant="submit" disabled={!isFormComplete}>
+          <Button
+            className={`w-full ${Object.keys(formPlan.formState.errors).length > 0 ? 'bg-red-500 hover:bg-red-900 hover:border hover:border-red-900' : ''}`}
+            type="submit"
+            variant="submit"
+            disabled={!isFormComplete}
+          >
             Agregar Plan
           </Button>
         </form>

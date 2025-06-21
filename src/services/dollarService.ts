@@ -1,9 +1,6 @@
 import dollarApi from "@/api/dollarApi";
 
-/**
- * Obtains a list of availables dollars
- */
-export async function getDollars() {
-    const response = await dollarApi.get("/v1/dolares");
+export async function getDollar() {
+    const response = await dollarApi.get("/estadisticascambiarias/v1.0/Cotizaciones/USD");
     return response.data;
 }

@@ -3,7 +3,7 @@ import { type JSX } from 'react';
 interface InfoCardProps {
   name: string;
   value: number;
-  time: string;
+  time?: string;
   date: string;
   icon: string | JSX.Element;
   color?: string;
