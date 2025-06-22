@@ -4,12 +4,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { CostoPlanFertilizacionContext } from '@/context/CostoPlanFertilizacionContext';
-import { useContext } from 'react';
-import DataTable from '../ui/DataTable/DataTable';
+import { useContext, lazy, Suspense } from 'react';
 import { flattenPlanes } from '@/utils/flattenPlanesFertilizacion';
 import { columnsFertilizacion } from '../ui/DataTable/columnsFertilizacion';
+import Alert from '@/components/ui/alert';
+import { type ColumnDef } from '@tanstack/react-table';
 
-import ChartFertilizacion from '../Charts/ChartFertilizacion';
+const ChartFertilizacion = lazy(() => import('@/components/Charts/ChartFertilizacion'));
+const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
 
 export default function VisualizacionFertilizacion() {
   const costoPlanContext = useContext(CostoPlanFertilizacionContext);
@@ -50,10 +52,25 @@ export default function VisualizacionFertilizacion() {
             className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto">
-              <ChartFertilizacion planes={data} />
+              {data.length > 0 ? (
+                <Suspense fallback={<div>Cargando gráfico...</div>}>
+                  <ChartFertilizacion planes={data} />
+                </Suspense>
+              ) : (
+                <Alert text="No hay conjuntos para mostrar." />
+              )}
             </div>
             <div className="overflow-x-auto">
-              <DataTable columns={columnsFertilizacion} data={filasTabla} />
+              {data.length > 0 ? (
+                <Suspense fallback={<div>Cargando tabla...</div>}>
+                  <DataTable
+                    columns={columnsFertilizacion as ColumnDef<unknown, unknown>[]}
+                    data={filasTabla}
+                  />
+                </Suspense>
+              ) : (
+                <Alert text="No hay conjuntos para mostrar." />
+              )}
             </div>
           </TabsContent>
 
@@ -63,7 +80,16 @@ export default function VisualizacionFertilizacion() {
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto h-full">
-              <DataTable columns={columnsFertilizacion} data={filasTabla} />
+              {data.length > 0 ? (
+                <Suspense fallback={<div>Cargando tabla...</div>}>
+                  <DataTable
+                    columns={columnsFertilizacion as ColumnDef<unknown, unknown>[]}
+                    data={filasTabla}
+                  />
+                </Suspense>
+              ) : (
+                <Alert text="No hay conjuntos para mostrar." />
+              )}
             </div>
           </TabsContent>
 
@@ -72,7 +98,13 @@ export default function VisualizacionFertilizacion() {
             aria-label="Grafico"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            <ChartFertilizacion planes={data} />
+            {data.length > 0 ? (
+              <Suspense fallback={<div>Cargando gráfico...</div>}>
+                <ChartFertilizacion planes={data} />
+              </Suspense>
+            ) : (
+              <Alert text="No hay conjuntos para mostrar." />
+            )}
           </TabsContent>
         </Tabs>
       </div>

@@ -4,12 +4,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { CostoPlanContext } from '@/context/CostoPlanContext';
-import { useContext } from 'react';
+import { useContext, lazy, Suspense } from 'react';
 import { columnsSanidad } from '../ui/DataTable/columnsSanidad';
-import DataTable from '../ui/DataTable/DataTable';
 import { flattenPlanes } from '@/utils/flattenPlanesSanitizacion';
 
-import ChartSanidad from '../Charts/ChartSanidad';
+import Alert from '@/components/ui/alert';
+const ChartSanidad = lazy(() => import('@/components/Charts/ChartSanidad'));
+const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
+import { type ColumnDef } from '@tanstack/react-table';
 
 export default function VisualizacionSanitizacion() {
   const costoPlanContext = useContext(CostoPlanContext);
@@ -50,10 +52,25 @@ export default function VisualizacionSanitizacion() {
             className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto">
-              <ChartSanidad planes={data} />
+              {data.length > 0 ? (
+                <Suspense fallback={<div>Cargando gráfico...</div>}>
+                  <ChartSanidad planes={data} />
+                </Suspense>
+              ) : (
+                <Alert text="No hay conjuntos para mostrar." />
+              )}
             </div>
             <div className="overflow-x-auto">
-              <DataTable columns={columnsSanidad} data={filasTabla} />
+              {data.length > 0 ? (
+                <Suspense fallback={<div>Cargando tabla...</div>}>
+                  <DataTable
+                    columns={columnsSanidad as ColumnDef<unknown, unknown>[]}
+                    data={filasTabla}
+                  />
+                </Suspense>
+              ) : (
+                <Alert text="No hay conjuntos para mostrar." />
+              )}
             </div>
           </TabsContent>
 
@@ -63,7 +80,16 @@ export default function VisualizacionSanitizacion() {
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto h-full">
-              <DataTable columns={columnsSanidad} data={filasTabla} />
+              {data.length > 0 ? (
+                <Suspense fallback={<div>Cargando tabla...</div>}>
+                  <DataTable
+                    columns={columnsSanidad as ColumnDef<unknown, unknown>[]}
+                    data={filasTabla}
+                  />
+                </Suspense>
+              ) : (
+                <Alert text="No hay conjuntos para mostrar." />
+              )}
             </div>
           </TabsContent>
 
@@ -72,7 +98,13 @@ export default function VisualizacionSanitizacion() {
             aria-label="Grafico"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            <ChartSanidad planes={data} />
+            {data.length > 0 ? (
+              <Suspense fallback={<div>Cargando gráfico...</div>}>
+                <ChartSanidad planes={data} />
+              </Suspense>
+            ) : (
+              <Alert text="No hay conjuntos para mostrar." />
+            )}
           </TabsContent>
         </Tabs>
       </div>
