@@ -1,13 +1,18 @@
 import VisualizacionesIcon from '@/assets/Icons/Outlined/graficoBarras.png';
-import { ChartMaquinaria } from '@/components/Charts/ChartMaquinaria';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { columnsMaquinaria } from '@/components/ui/DataTable/columnsMaquinaria';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
-import { DataTable } from '@/components/ui/DataTable/DataTable';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
-import { useContext, useRef } from 'react';
+import Alert from '@/components/ui/alert';
+import { columnsMaquinaria } from '@/components/ui/DataTable/columnsMaquinaria';
+import { lazy, Suspense, useContext, useRef } from 'react';
+
+const ChartMaquinaria = lazy(() => import('@/components/Charts/ChartMaquinaria'));
+const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
+
+import { type ColumnDef } from '@tanstack/react-table';
+
 // import pdfMake from 'pdfmake/build/pdfmake';
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
 // pdfMake.vfs = pdfFonts.vfs;
@@ -115,10 +120,25 @@ export default function VisualizacionMaquinaria() {
             className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
             <div ref={captureRef} className="overflow-x-auto">
-              <ChartMaquinaria conjuntosMaquinaria={data} />
+              {data.length > 0 ? (
+                <Suspense fallback={<div>Cargando gráfico...</div>}>
+                  <ChartMaquinaria conjuntosMaquinaria={data} />
+                </Suspense>
+              ) : (
+                <Alert text="No hay conjuntos para mostrar." />
+              )}
             </div>
             <div className="overflow-x-auto">
-              <DataTable columns={columnsMaquinaria} data={data} />
+              {data.length > 0 ? (
+                <Suspense fallback={<div>Cargando tabla...</div>}>
+                  <DataTable
+                    columns={columnsMaquinaria as ColumnDef<unknown, unknown>[]}
+                    data={data}
+                  />
+                </Suspense>
+              ) : (
+                <Alert text="No hay conjuntos para mostrar." />
+              )}
             </div>
           </TabsContent>
 
@@ -128,7 +148,16 @@ export default function VisualizacionMaquinaria() {
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
             <div className="overflow-x-auto h-full">
-              <DataTable columns={columnsMaquinaria} data={data} />
+              {data.length > 0 ? (
+                <Suspense fallback={<div>Cargando tabla...</div>}>
+                  <DataTable
+                    columns={columnsMaquinaria as ColumnDef<unknown, unknown>[]}
+                    data={data}
+                  />
+                </Suspense>
+              ) : (
+                <Alert text="No hay conjuntos para mostrar." />
+              )}
             </div>
           </TabsContent>
 
@@ -137,7 +166,13 @@ export default function VisualizacionMaquinaria() {
             aria-label="Grafico"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            <ChartMaquinaria conjuntosMaquinaria={data} />
+            {data.length > 0 ? (
+              <Suspense fallback={<div>Cargando gráfico...</div>}>
+                <ChartMaquinaria conjuntosMaquinaria={data} />
+              </Suspense>
+            ) : (
+              <Alert text="No hay conjuntos para mostrar." />
+            )}
           </TabsContent>
         </Tabs>
       </div>

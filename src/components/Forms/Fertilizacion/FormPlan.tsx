@@ -44,8 +44,7 @@ export default function FormPlan() {
   if (!costoPlanContext) {
     return null;
   }
-  const { data, setData } = costoPlanContext;
-  console.log(data);
+  const { setData } = costoPlanContext;
 
   const formPlan = useForm<PlanFormData>({
     resolver: zodResolver(PlanSchema),

@@ -16,7 +16,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import Alert from '../alert';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -44,55 +43,54 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
 
   return (
     <div className="h-full">
-      {table.getRowModel().rows?.length ? (
-        <div className="w-full">
-          <Table>
-            <TableHeader>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
+      <div className="w-full">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.map((row) => {
+              const data = row.original as Record<string, any>;
+              const claves = ['id_plan', 'id_conjunto'];
+              const clavePresente = claves.find((clave) =>
+                Object.prototype.hasOwnProperty.call(data, clave)
+              );
+              let id_number = 0;
+
+              if (clavePresente) {
+                const valor = data[clavePresente];
+                if (typeof valor === 'string' || typeof valor === 'number') {
+                  id_number = parseInt(String(valor));
+                }
+              }
+
+              return (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && 'selected'}
+                  className={id_number % 2 === 0 ? 'bg-muted' : 'bg-background'}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
                   ))}
                 </TableRow>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {table.getRowModel().rows.map((row) => {
-                const data = row.original as Record<string, any>;
-                const claves = ['id_plan', 'id_conjunto'];
-                const clavePresente = claves.find((clave) => Object.prototype.hasOwnProperty.call(data, clave));
-                let id_number = 0;
-
-                if (clavePresente) {
-                  const valor = data[clavePresente];                  
-                  if (typeof valor === 'string' || typeof valor === 'number') {
-                    id_number = parseInt(String(valor));                  }
-                }
-
-                return (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && 'selected'}
-                    className={id_number % 2 === 0 ? 'bg-muted' : 'bg-background'}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </div>
-      ) : (
-        <Alert text="No hay conjuntos para mostrar." />
-      )}
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }

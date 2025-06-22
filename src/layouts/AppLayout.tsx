@@ -1,0 +1,21 @@
+import { type ReactNode } from 'react';
+
+interface AppLayoutProps {
+  ContainerCotizaciones: ReactNode;
+  Form: ReactNode;
+  Visualizacion: ReactNode;
+}
+
+export default function AppLayout({ ContainerCotizaciones, Form, Visualizacion }: AppLayoutProps) {
+  return (
+    <div className="w-full flex h-full flex-col gap-4 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl xl:h-[950px] 2xl:max-w-[1600px]">
+      <section className="grid grid-cols-1 gap-4 w-full h-full xl:flex">
+        <div className="flex flex-col gap-4 h-full w-full xl:w-1/3 justify-between">
+          {ContainerCotizaciones}
+          {Form}
+        </div>
+        <div className="w-full xl:flex xl:flex-row xl:w-2/3">{Visualizacion}</div>
+      </section>
+    </div>
+  );
+}

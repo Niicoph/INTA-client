@@ -13,7 +13,6 @@ import {
 import { FormField, FormItem, FormLabel, FormMessage, FormControl } from '@/components/ui/form';
 import { type Producto } from '@/types/fertilizacion';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Plus, Trash, ChevronDownIcon } from 'lucide-react';
@@ -132,28 +131,6 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
                           </FormItem>
                         )}
                       />
-                      {/* <FormField
-                        control={control}
-                        name={`tratamientos.${index}.aplicaciones.${aplicacionIndex}.volumen_aplicado`}
-                        render={({ field }) => (
-                          <FormItem className="flex flex-col w-4/9">
-                            <FormLabel>Volumen</FormLabel>
-                            <FormControl>
-                              <Input
-                                type="number"
-                                placeholder="Vol. aplicado"
-                                value={field.value ?? ''}
-                                className="pr-10 px-3 py-2 border transition-all duration-200 bg-white text-black border-gray-300"
-                                onChange={(e) => {
-                                  const value = e.target.valueAsNumber;
-                                  field.onChange(isNaN(value) ? '' : value);
-                                }}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      /> */}
                     </div>
                     <div className="py-5.5">
                       <Button

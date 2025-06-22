@@ -4,7 +4,6 @@ import CardCotizaciones from '../Cards/CardCotizaciones';
 
 import { useDollar } from '@/hooks/useDollar';
 import { useGasoil } from '@/hooks/useGasoil';
-import { type Dollar } from '@/types/dollar';
 import { type Gasoil } from '@/types/gasoil';
 import { Fuel } from 'lucide-react';
 import { DollarSignIcon } from 'lucide-react';
