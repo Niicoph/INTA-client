@@ -1371,12 +1371,164 @@
     ],
     "fertilizantes": [
         {
+            "id_fertilizante": "1",
+            "nombre": "ACIDO BORICO",
+            "precio_usd_envase": 2.46,
+            "volumen_envase": 1,
+            "unidad": "lts",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "2",
+            "nombre": "ACIDO FOSFORICO",
+            "precio_usd_envase": 8.01,
+            "volumen_envase": 1,
+            "unidad": "kg",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "3",
+            "nombre": "AMINOQUELANT HIERRO",
+            "precio_usd_envase": 18.04,
+            "volumen_envase": 1,
+            "unidad": "lts",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "4",
+            "nombre": "BASAFER PLUS",
+            "precio_usd_envase": 0,
+            "volumen_envase": 1,
+            "unidad": "kg",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "5",
+            "nombre": "BAF FOLAIT (ZN MN 35:25)",
+            "precio_usd_envase": 14.37,
+            "volumen_envase": 1,
+            "unidad": "kg",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "6",
+            "nombre": "BORO FOLIAR",
+            "precio_usd_envase": 11.16,
+            "volumen_envase": 1,
+            "unidad": "lts",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "7",
+            "nombre": "CLORURO DE CALCIO",
+            "precio_usd_envase": 70.00,
+            "volumen_envase": 25,
+            "unidad": "kg",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "8",
+            "nombre": "FOSFATO DIAMONICO (18-46-0)",
+            "precio_usd_envase": 1.43,
+            "volumen_envase": 1,
+            "unidad": "kg",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "9",
+            "nombre": "GOEMAR CALIBRA BIOESTIMULANTE",
+            "precio_usd_envase": 28.31,
+            "volumen_envase": 1,
+            "unidad": "lts",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "10",
+            "nombre": "HIERRO",
+            "precio_usd_envase": 10.49,
+            "volumen_envase": 1,
+            "unidad": "lts",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "11",
+            "nombre": "LEFINGWELL 35-15",
+            "precio_usd_envase": 17.08,
+            "volumen_envase": 1,
+            "unidad": "lts",
+            "dosis_x_ha": 0
+        },
+        {
             "id_fertilizante": "12",
             "nombre": "NITRATO DE CALCIO",
-            "precio_usd_envase": 21.5,
+            "precio_usd_envase": 21.50,
             "volumen_envase": 5,
             "unidad": "kg",
-            "dosis_x_ha": 65
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "13",
+            "nombre": "NITRATO DE POTASIO",
+            "precio_usd_envase": 81.00,
+            "volumen_envase": 25,
+            "unidad": "kg",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "14",
+            "nombre": "PHYTNESS BIOESTIMULANTE",
+            "precio_usd_envase": 31.29,
+            "volumen_envase": 1,
+            "unidad": "lts",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "15",
+            "nombre": "SOL K S",
+            "precio_usd_envase": 2.73,
+            "volumen_envase": 1,
+            "unidad": "kg",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "16",
+            "nombre": "SOL MX",
+            "precio_usd_envase": 1.19,
+            "volumen_envase": 1,
+            "unidad": "lts",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "17",
+            "nombre": "SULFONITRATO DE AMONIO",
+            "precio_usd_envase": 38.00,
+            "volumen_envase": 25,
+            "unidad": "kg",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "18",
+            "nombre": "UREA",
+            "precio_usd_envase": 23.00,
+            "volumen_envase": 25,
+            "unidad": "kg",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "19",
+            "nombre": "WUXAL CALCIO",
+            "precio_usd_envase": 10.53,
+            "volumen_envase": 1,
+            "unidad": "lts",
+            "dosis_x_ha": 0
+        },
+        {
+            "id_fertilizante": "20",
+            "nombre": "WUXAL MAGNESIO",
+            "precio_usd_envase": 10.02,
+            "volumen_envase": 1,
+            "unidad": "lts",
+            "dosis_x_ha": 0
         }
     ]
 }

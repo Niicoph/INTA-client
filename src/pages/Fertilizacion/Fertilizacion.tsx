@@ -1,8 +1,9 @@
 import ContainerCotizaciones from '@/components/Containers/ContainerCotizaciones';
-import FormFertilizacion from '@/components/Forms/Fertilizacion/FormFertilizacion';
-import VisualiacionFertilizacion from '@/components/Containers/VisualizacionFertilizacion';
+import VisualizacionFertilizacion from '@/components/Containers/VisualizacionFertilizacion';
 import Header from '@/components/Header/Header';
 import TabsNav from '@/components/TabsNav/TabsNav';
+import FormProducto from '@/components/Forms/Fertilizacion/FormProducto';
+import FormPlan from '@/components/Forms/Fertilizacion/FormPlan';
 
 export default function Fertilizacion() {
   return (
@@ -14,12 +15,12 @@ export default function Fertilizacion() {
           <div className="flex flex-col gap-4 h-full w-full xl:w-1/3 justify-between">
             <ContainerCotizaciones dollar={true} />
             <div className="flex flex-col h-full gap-4">
-              {/* <FormProducto />
-                  <FormPlan /> */}
+              <FormProducto />
+              <FormPlan />
             </div>
           </div>
           <div className="w-full xl:flex xl:flex-col xl:w-2/3 gap-4">
-            <VisualiacionFertilizacion />
+            <VisualizacionFertilizacion />
           </div>
         </section>
       </div>
