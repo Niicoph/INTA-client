@@ -1,5 +1,5 @@
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis, Tooltip } from 'recharts';
-import { type CostoEconomico } from '@/types/maquinaria';
+import { type ConjuntoMaquinaria } from '@/types/maquinaria';
 import { type ChartConfig, ChartContainer } from '@/components/ui/chart';
 import Alert from '../ui/alert';
 import { type TooltipProps } from 'recharts';
@@ -14,51 +14,93 @@ const chartConfig = {
 const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
   if (!active || !payload || !payload.length) return null;
 
-  const data = payload[0].payload;
-
+  const cjto: ConjuntoMaquinaria = payload[0].payload;  
   return (
-    <div className="rounded-md bg-white p-1 shadow-md">
-      <div className="border-l-2 border-dashed border-blue-500 pl-1.5">
-        <div className="text-foreground font-mono font-medium tabular-nums ">
-          Conjunto {data.id_conjunto}
+    <div className="rounded-md bg-white p-2 shadow-md">
+      <div className="border-l-2 border-dashed border-blue-500 pl-2 flex flex-col gap-1">
+        {/* KEYS DE TRACTOR */}
+        <div className="text-red-500 font-mono font-medium mb-1">
+          {cjto.tractor.nombre}
         </div>
-        <div className="text-muted-foreground font-mono font-medium tabular-nums ">
-          Costo $/hora
+        <div
+          className="flex justify-between gap-4 text-foreground font-medium tabular-nums"
+        >
+          <span>Amortizacion</span>
+          <span>${Number(cjto.tractor.amortizacion).toLocaleString('es-AR', { maximumFractionDigits: 2 })}/h</span>
         </div>
-        <div className="text-foreground font-mono font-medium tabular-nums ">
-          $
-          {data.costo_total_hora.toLocaleString('es-AR', {
-            maximumFractionDigits: 0,
-          })}
+        <div
+          className="flex justify-between gap-4 text-foreground font-medium tabular-nums"
+        >
+          <span>Mantenimiento</span>
+          <span>${Number(cjto.tractor.costo_mantenimiento).toLocaleString('es-AR', { maximumFractionDigits: 2 })}/h</span>
+        </div>
+
+        {/* KEYS DE IMPLEMENTO */}
+        <div className="flex justify-between gap-4 text-foreground font-medium tabular-nums border-t border-dashed border-blue-500"></div>
+        <div className="text-yellow-500 font-mono font-medium mb-1">
+          {cjto.implemento.nombre}
+        </div>
+        <div
+          className="flex justify-between gap-4 text-foreground font-medium tabular-nums"
+        >
+          <span>Amortizacion</span>
+          <span>${Number(cjto.implemento.amortizacion).toLocaleString('es-AR', { maximumFractionDigits: 2 })}/h</span>
+        </div>
+        <div
+          className="flex justify-between gap-4 text-foreground font-medium tabular-nums"
+        >
+          <span>Mantenimiento</span>
+          <span>${Number(cjto.implemento.costo_mantenimiento).toLocaleString('es-AR', { maximumFractionDigits: 2 })}/h</span>
+        </div>
+
+        {/* Costo combustible Cjto */}
+        <div className="flex justify-between gap-4 text-foreground font-medium tabular-nums border-t border-dashed border-blue-500"></div>
+        <div
+          className="flex justify-between gap-4 text-foreground font-medium tabular-nums"
+        >
+          <span>Combustible</span>
+          <span>${Number(cjto.costo_combustible).toLocaleString('es-AR', { maximumFractionDigits: 2 })}/h</span>
+        </div>
+
+        {/* Total Cjto */}
+        <div className="flex justify-between gap-4 text-foreground font-medium tabular-nums border-t border-dashed border-blue-500">
+          <span className="text-[#3b82f6]">Total </span>
+          <span className="text-[#3b82f6]">
+            $
+            {cjto.costo_total_hora.toLocaleString('es-AR', {
+              maximumFractionDigits: 2,
+            })}/h
+          </span>
         </div>
       </div>
     </div>
+    
   );
 };
 
-export function ChartMaquinaria({ costosEconomicos }: { costosEconomicos: CostoEconomico[] }) {
+export function ChartMaquinaria({ conjuntosMaquinaria }: { conjuntosMaquinaria: ConjuntoMaquinaria[] }) {
   const scrollThreshold = 12;
-  const shouldScroll = costosEconomicos.length > scrollThreshold;
+  const shouldScroll = conjuntosMaquinaria.length > scrollThreshold;
 
-  return costosEconomicos && costosEconomicos.length > 0 ? (
+  return conjuntosMaquinaria?.length > 0 ? (
     <ChartContainer
       config={chartConfig}
       className={`h-full w-full ${shouldScroll ? ' w-[1000px]' : ''}`}
     >
-      <BarChart accessibilityLayer data={costosEconomicos} margin={{ top: 20 }}>
+      <BarChart accessibilityLayer data={conjuntosMaquinaria} margin={{ top: 20 }}>
         <CartesianGrid vertical={false} />
         <YAxis
           tickLine={false}
           axisLine={false}
           tickMargin={1}
-          tickFormatter={(value) => `$${value.toLocaleString('es-AR')}`}
+          tickFormatter={(value) => `$${value.toLocaleString('es-AR')}/h`}
         />
         <XAxis
           dataKey="id_conjunto"
           tickLine={false}
           tickMargin={7}
           axisLine={false}
-          tickFormatter={(value) => value.slice(0, 3)}
+          tickFormatter={(value) => `Cjto. ${value}`}
         />
         <Tooltip content={<CustomTooltip />} />
         <Bar dataKey="costo_total_hora" fill={'#3b82f6'} radius={4} barSize={30} cursor="pointer">
@@ -78,7 +120,7 @@ export function ChartMaquinaria({ costosEconomicos }: { costosEconomicos: CostoE
                   textAnchor="middle"
                   className="fill-foreground font-mono "
                 >
-                  ${Number(value).toLocaleString('es-AR')}
+                  ${Number(value).toLocaleString('es-AR')}/h
                 </text>
               );
             }}

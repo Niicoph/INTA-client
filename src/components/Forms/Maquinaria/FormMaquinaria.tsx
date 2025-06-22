@@ -27,7 +27,6 @@ import { MaquinariaSchema } from '@/schemas/Maquinaria/schema';
 import { useMaquinaria } from '@/hooks/useMaquinaria';
 import { type MaquinariaFormData } from '@/schemas/Maquinaria/types';
 import { type Implemento, type Tractor } from '@/types/maquinaria';
-import { type Dollar } from '@/types/dollar';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
 import { useDollar } from '@/hooks/useDollar';
 import { useGasoil } from '@/hooks/useGasoil';
@@ -64,13 +63,15 @@ export default function FormMaquinaria() {
 
   const form = useForm<MaquinariaFormData>({
     resolver: zodResolver(MaquinariaSchema),
-    defaultValues: {
+    defaultValues: {      
+      id_conjunto: '',
+
       //Cotizaciones
       cotizacion_usd: undefined,
       cotizacion_gasoil_litro: undefined,
 
       //Datos del tractor
-      tractor: '',
+      id_tractor: '',
       nombre_t: undefined,
       potencia_CV: undefined,
       precio_usd_t: undefined,
@@ -79,7 +80,7 @@ export default function FormMaquinaria() {
       horas_utiles_t: undefined,
 
       //Datos del implemento
-      implemento: '',
+      id_implemento: '',
       nombre_i: undefined,
       precio_usd_i: undefined,
       coef_gastos_conservacion_i: undefined,
@@ -90,17 +91,24 @@ export default function FormMaquinaria() {
   });
 
   const handleFormSubmit = (data: MaquinariaFormData) => {
+    /* Manejo de index para evitar que al eliminar, se intente usar un id utilizado */
+    let index = maquinariaContext.data.length + 1;
+    if (index > 1) {
+      index = parseInt(maquinariaContext.data[index - 2].id_conjunto) + 1;
+    }
+
     const finalData = {
       ...data,
+      id_conjunto: `${index}`,
       cotizacion_usd: isCustomDolar ? Number(customDolarValue) : data.cotizacion_usd,
       cotizacion_gasoil_litro: isCustomGasoil
         ? Number(customGasoilValue)
         : data.cotizacion_gasoil_litro,
     };
-    const nextIndex = maquinariaContext.data.length + 1;
-    // calculo los datos y los envio al context.
-    const costoEconomico = calcularCostoTotalMaquinaria(finalData, nextIndex);
-    setData((prevData) => [...prevData, costoEconomico]);
+    // calcula datos faltantes y los envia al context como ConjuntoMaquinaria[].
+    const finalFinalData = calcularCostoTotalMaquinaria(finalData);
+    
+    setData((prev) => [...prev, finalFinalData]);
     resetForm();
   };
 
@@ -263,19 +271,19 @@ export default function FormMaquinaria() {
             <div className="w-full flex flex-col gap-4">
               <FormField
                 control={form.control}
-                name="tractor"
+                name="id_tractor"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Tractor</FormLabel>
                     <Select
                       value={field.value ?? ''}
                       onValueChange={(value) => {
-                        field.onChange(value);
                         const tractor =
-                          maquinaria.data?.tractores.find((t) => t.id === value) || null;
+                          maquinaria.data?.tractores.find((t) => t.id_tractor === value) || null;                          
                         setSelectedTractor(tractor);
 
                         if (tractor) {
+                          field.onChange(value);
                           form.setValue('nombre_t', tractor.nombre, {
                             shouldValidate: true,
                             shouldDirty: true,
@@ -320,7 +328,7 @@ export default function FormMaquinaria() {
                       </SelectTrigger>
                       <SelectContent>
                         {maquinaria.data?.tractores.map((tractor: Tractor) => (
-                          <SelectItem key={`${tractor.id} ${tractor.nombre}`} value={tractor.id}>
+                          <SelectItem key={`${tractor.id_tractor} ${tractor.nombre}`} value={tractor.id_tractor}>
                             {tractor.nombre} ({tractor.potencia_CV} CV)
                           </SelectItem>
                         ))}
@@ -409,25 +417,6 @@ export default function FormMaquinaria() {
                   </FormItem>
                 )}
               />
-              {/* <FormField
-                control={form.control}
-                name="coef_gastos_conservacion_t"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Coeficiente de gastos de conservación</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="Selecciona tractor"
-                        value={field.value ?? ''}
-                        className="cursor-not-allowed text-xs"
-                        readOnly
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
               <FormField
                 control={form.control}
                 name="valor_residual_pct_t"
@@ -466,41 +455,23 @@ export default function FormMaquinaria() {
                   </FormItem>
                 )}
               />
-              {/* <FormField
-                control={form.control}
-                name="horas_utiles_t"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Horas útiles</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Selecciona tractor"
-                        value={field.value ?? ''}
-                        className="cursor-not-allowed text-xs"
-                        readOnly
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
             </div>
             <div className="w-full flex flex-col gap-4 ">
               <FormField
                 control={form.control}
-                name="implemento"
+                name="id_implemento"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
                     <FormLabel>Implemento</FormLabel>
                     <Select
                       value={field.value ?? ''}
                       onValueChange={(value) => {
-                        field.onChange(value);
                         const implemento =
-                          maquinaria.data?.implementos.find((i) => i.id === value) || null;
+                          maquinaria.data?.implementos.find((i) => i.id_implemento === value) || null;
                         setSelectedImplemento(implemento);
 
                         if (implemento) {
+                          field.onChange(value);
                           form.setValue('nombre_i', implemento.nombre, {
                             shouldValidate: true,
                             shouldDirty: true,
@@ -550,8 +521,8 @@ export default function FormMaquinaria() {
                       <SelectContent>
                         {maquinaria.data?.implementos.map((implemento: Implemento) => (
                           <SelectItem
-                            key={`${implemento.id} ${implemento.nombre}`}
-                            value={implemento.id}
+                            key={`${implemento.id_implemento} ${implemento.nombre}`}
+                            value={implemento.id_implemento}
                           >
                             {implemento.nombre}
                           </SelectItem>

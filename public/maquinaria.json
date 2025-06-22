@@ -1,7 +1,7 @@
 {
     "tractores": [
         {
-            "id": "1",
+            "id_tractor": "1",
             "nombre": "Tractor A",
             "potencia_CV": 60,
             "precio_usd": 54286,
@@ -10,7 +10,7 @@
             "valor_residual_pct": 20
         },
         {
-            "id": "2",
+            "id_tractor": "2",
             "nombre": "Tractor B",
             "potencia_CV": 100,
             "precio_usd": 76000,
@@ -19,7 +19,7 @@
             "valor_residual_pct": 25        
         },
         {
-            "id": "3",
+            "id_tractor": "3",
             "nombre": "Tractor C",
             "potencia_CV": 150,
             "precio_usd": 120000,
@@ -30,7 +30,7 @@
     ],
     "implementos": [
         {
-            "id": "1",
+            "id_implemento": "1",
             "nombre": "Arado",
             "precio_usd": 6500,
             "coef_gastos_conservacion": 0.00035,
@@ -39,7 +39,7 @@
             "consumo_litros_hora_CV": 0.13
         },
         {
-            "id": "2",
+            "id_implemento": "2",
             "nombre": "Rastra De Disco",
             "precio_usd": 11000,
             "coef_gastos_conservacion": 0.00028,
@@ -48,7 +48,7 @@
             "consumo_litros_hora_CV": 0.14
         },
         {
-            "id": "3",
+            "id_implemento": "3",
             "nombre": "Pulverizadora",
             "precio_usd": 18000,
             "coef_gastos_conservacion": 0.00032,

@@ -15,14 +15,12 @@ import { useContext, useRef } from 'react';
 
 export default function VisualizacionMaquinaria() {
   const maquinariaContext = useContext(MaquinariaContext);
-  const captureRef = useRef<HTMLDivElement>(null);
-
   if (!maquinariaContext) {
     return null;
   }
-
   const { data } = maquinariaContext;
 
+  const captureRef = useRef<HTMLDivElement>(null);
   // exportar a pdf
   //   const exportToPDF = async () => {
   //     if (!captureRef.current) {
@@ -117,7 +115,7 @@ export default function VisualizacionMaquinaria() {
             className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
             <div ref={captureRef} className="overflow-x-auto">
-              <ChartMaquinaria costosEconomicos={data} />
+              <ChartMaquinaria conjuntosMaquinaria={data} />
             </div>
             <div className="overflow-x-auto">
               <DataTable columns={columnsMaquinaria} data={data} />
@@ -139,7 +137,7 @@ export default function VisualizacionMaquinaria() {
             aria-label="Grafico"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            <ChartMaquinaria costosEconomicos={data} />
+            <ChartMaquinaria conjuntosMaquinaria={data} />
           </TabsContent>
         </Tabs>
       </div>

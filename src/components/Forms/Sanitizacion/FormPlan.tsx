@@ -31,7 +31,6 @@ import {
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useDollar } from '@/hooks/useDollar';
-import { type Dollar } from '@/types/dollar';
 
 export default function FormPlan() {
   const [isFormComplete, setIsFormComplete] = useState(false);

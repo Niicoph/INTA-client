@@ -1,39 +1,63 @@
 import { type MaquinariaFormData } from '@/schemas/Maquinaria/types';
-import { type CostoEconomico } from '@/types/maquinaria';
+import { type ConjuntoMaquinaria } from '@/types/maquinaria';
 
-export const calcularCostoTotalMaquinaria = (conjunto: MaquinariaFormData , nextIndex : number): CostoEconomico => {
-  const valor_residual_i = Number(((conjunto.valor_residual_pct_i * conjunto.precio_usd_i) / 100).toFixed(2));
+export const calcularCostoTotalMaquinaria = (data: MaquinariaFormData): ConjuntoMaquinaria => {
+
+  const valor_residual_i = Number(((data.valor_residual_pct_i * data.precio_usd_i) / 100).toFixed(2));
 
   const amortizacion_i = Number(
-    (((conjunto.precio_usd_i - valor_residual_i) / conjunto.horas_utiles_i) * conjunto.cotizacion_usd).toFixed(2)
+    (((data.precio_usd_i - valor_residual_i) / data.horas_utiles_i) * data.cotizacion_usd).toFixed(2)
   );
 
   const costo_combustible = Number(
-    (conjunto.potencia_CV * conjunto.consumo_litros_hora_CV * conjunto.cotizacion_gasoil_litro).toFixed(2)
+    (data.potencia_CV * data.consumo_litros_hora_CV * data.cotizacion_gasoil_litro).toFixed(2)
   );
 
   const costo_mantenimiento_i = Number(
-    (conjunto.coef_gastos_conservacion_i * conjunto.precio_usd_i * conjunto.cotizacion_usd).toFixed(2)
+    (data.coef_gastos_conservacion_i * data.precio_usd_i * data.cotizacion_usd).toFixed(2)
   );
 
-  const valor_residual_t = Number(((conjunto.valor_residual_pct_t * conjunto.precio_usd_t) / 100).toFixed(2));
+  const valor_residual_t = Number(((data.valor_residual_pct_t * data.precio_usd_t) / 100).toFixed(2));
 
   const amortizacion_t = Number(
-    (((conjunto.precio_usd_t - valor_residual_t) / conjunto.horas_utiles_t) * conjunto.cotizacion_usd).toFixed(2)
+    (((data.precio_usd_t - valor_residual_t) / data.horas_utiles_t) * data.cotizacion_usd).toFixed(2)
   );
 
   const costo_mantenimiento_t = Number(
-    (conjunto.coef_gastos_conservacion_t * conjunto.precio_usd_t * conjunto.cotizacion_usd).toFixed(2)
+    (data.coef_gastos_conservacion_t * data.precio_usd_t * data.cotizacion_usd).toFixed(2)
   );
 
   return {
-    id_conjunto: String(nextIndex),
-    conjunto: conjunto,
-    amortizacion_i,
-    costo_combustible,
-    costo_mantenimiento_i,
-    amortizacion_t,
-    costo_mantenimiento_t,
+    id_conjunto: data.id_conjunto,
+    cotizacion_usd: data.cotizacion_usd,
+    cotizacion_gasoil_litro: data.cotizacion_gasoil_litro,
+    tractor: {  
+      id_tractor: data.id_tractor,
+      nombre: data.nombre_t,
+      potencia_CV: data.potencia_CV,
+      precio_usd: data.precio_usd_t,
+      coef_gastos_conservacion: data.coef_gastos_conservacion_t,
+      horas_utiles: data.horas_utiles_t,
+      valor_residual_pct: data.valor_residual_pct_t,
+
+      //Resultado de calculos
+      amortizacion: amortizacion_t,
+      costo_mantenimiento: costo_mantenimiento_t,
+    },
+    implemento: {  
+      id_implemento: data.id_tractor,
+      nombre: data.nombre_i,
+      consumo_litros_hora_CV: data.consumo_litros_hora_CV,
+      precio_usd: data.precio_usd_i,
+      coef_gastos_conservacion: data.coef_gastos_conservacion_i,
+      horas_utiles: data.horas_utiles_i,
+      valor_residual_pct: data.valor_residual_pct_i,
+
+      //Resultado de calculos
+      amortizacion: amortizacion_i,
+      costo_mantenimiento: costo_mantenimiento_i,
+    },    
+    costo_combustible: costo_combustible,
     costo_total_hora: Number((amortizacion_i + costo_combustible + costo_mantenimiento_i + amortizacion_t + costo_mantenimiento_t).toFixed(2)),
   };
 };

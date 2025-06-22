@@ -1,6 +1,8 @@
 import { z } from 'zod';
 
 export const MaquinariaSchema = z.object({
+  id_conjunto: z.string(),
+  
   cotizacion_usd: z
   .number({
     required_error: 'La cotización del dólar es obligatoria',
@@ -15,11 +17,7 @@ export const MaquinariaSchema = z.object({
   })
   .positive('Debe ser un valor positivo'),
 
-  tractor: z
-  .string({
-    required_error: 'La selección de tractor es obligatoria',
-    invalid_type_error: 'Debe seleccionar una opción',
-  }),
+  id_tractor: z.string(),
 
   nombre_t: z
   .string({
@@ -60,13 +58,10 @@ export const MaquinariaSchema = z.object({
     required_error: 'El valor residual del tractor es obligatorio',
     invalid_type_error: 'Debe ser un número',
   })
-  .min(0, 'Debe ser un valor positivo o cero'),
+  .min(0, 'Debe ser un valor entre 0 y 100')
+  .max(100, 'Debe ser un valor entre 0 y 100'),
 
-  implemento: z
-  .string({
-    required_error: 'El implemento es obligatorio',
-    invalid_type_error: 'Debe ser un texto',
-  }),
+  id_implemento: z.string(),
 
   nombre_i: z
   .string({
@@ -100,12 +95,13 @@ export const MaquinariaSchema = z.object({
     required_error: 'El valor residual del implemento es obligatorio',
     invalid_type_error: 'Debe ser un número',
   })
-  .min(0, 'Debe ser un valor positivo o cero'),
+  .min(0, 'Debe ser un valor entre 0 y 100')
+  .max(100, 'Debe ser un valor entre 0 y 100'),
 
   consumo_litros_hora_CV: z
   .number({
     required_error: 'El consumo es obligatorio',
     invalid_type_error: 'Debe ser un número',
   })
-  .min(0.01, 'Debe ser mayor que cero'),
+  .min(0.001, 'Debe ser mayor que cero'),
 });
