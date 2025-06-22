@@ -369,7 +369,7 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
       const data = row.original;      
       return (
         <div className="align-top">
-          ${data.aplicacion.costo_total.toLocaleString('es-AR')}
+          ${data.aplicacion.costo_total.toLocaleString('es-AR')}/ha
         </div>
       );
     },
