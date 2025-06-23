@@ -13,9 +13,18 @@ export default function exportMaquinariaToXLS(ConjuntoMaquinaria: ConjuntoMaquin
     costo_combustible: 'Combustible $/h',
     nombre_t: 'Tractor',
     potencia_CV: 'CV',
+    precio_usd_t: 'Precio USD Tractor',
+    coef_conservacion_t: 'Coef. Conserv. Tractor',
+    horas_utiles_t: 'Horas Útiles Tractor',
+    valor_residual_pct_t: 'Valor Residual Tractor',
     amortizacion_t: 'Amortización Tractor $/h',
     costo_mantenimiento_t: 'Mantenimiento Tractor $/h',
     nombre_i: 'Implemento',
+    consumo_litros_hora_CV_i: 'Consumo lt/h CV',
+    precio_usd_i: 'Precio USD Implemento',
+    coef_gastos_conservacion_i: 'Coef. Conserv. Implemento',
+    horas_utiles_i: 'Horas Útiles Implemento',
+    valor_residual_pct_i: 'Valor Residual Implemento',
     amortizacion_i: 'Amortización Implemento $/h',
     costo_mantenimiento_i: 'Mantenimiento Implemento $/h',
   };
@@ -26,11 +35,22 @@ export default function exportMaquinariaToXLS(ConjuntoMaquinaria: ConjuntoMaquin
     cotizacion_gasoil_litro: item.cotizacion_gasoil_litro,
     costo_total_hora: item.costo_total_hora,
     costo_combustible: item.costo_combustible,
+
     nombre_t: item.tractor.nombre,
     potencia_CV: item.tractor.potencia_CV,
+    precio_usd_t: item.tractor.precio_usd,
+    coef_conservacion_t: item.tractor.coef_gastos_conservacion,
+    horas_utiles_t: item.tractor.horas_utiles,
+    valor_residual_pct_t: item.tractor.valor_residual_pct,
     amortizacion_t: item.tractor.amortizacion,
     costo_mantenimiento_t: item.tractor.costo_mantenimiento,
+
     nombre_i: item.implemento.nombre,
+    consumo_litros_hora_CV_i: item.implemento.consumo_litros_hora_CV,
+    precio_usd_i: item.implemento.precio_usd,
+    coef_gastos_conservacion_i: item.implemento.coef_gastos_conservacion,
+    horas_utiles_i: item.implemento.horas_utiles,
+    valor_residual_pct_i: item.implemento.valor_residual_pct,
     amortizacion_i: item.implemento.amortizacion,
     costo_mantenimiento_i: item.implemento.costo_mantenimiento,
   }));
@@ -64,8 +84,10 @@ export default function exportMaquinariaToXLS(ConjuntoMaquinaria: ConjuntoMaquin
     'Precio Gasoil',
     'Costo Total $/h',
     'Combustible $/h',
+    'Precio USD Tractor',
     'Amortización Tractor $/h',
     'Mantenimiento Tractor $/h',
+    'Precio USD Implemento',
     'Amortización Implemento $/h',
     'Mantenimiento Implemento $/h',
   ];
@@ -81,6 +103,23 @@ export default function exportMaquinariaToXLS(ConjuntoMaquinaria: ConjuntoMaquin
       const cell = worksheet[cellAddress];
       if (cell && typeof cell.v === 'number') {
         cell.z = '[$$-es-AR]#,##0.00';
+      }
+    });
+  });
+
+  const percentColumns = ['Valor Residual Tractor', 'Valor Residual Implemento'];
+
+  const percentIndexes = headers
+    .map((header, idx) => (percentColumns.includes(header) ? idx : -1))
+    .filter((idx) => idx !== -1);
+
+  renamedData.forEach((_, rowIdx) => {
+    percentIndexes.forEach((colIdx) => {
+      const cellAddress = XLSX.utils.encode_cell({ c: colIdx, r: rowIdx + 1 });
+      const cell = worksheet[cellAddress];
+      if (cell && typeof cell.v === 'number') {
+        cell.v = cell.v / 100;
+        cell.z = '0.00%';
       }
     });
   });

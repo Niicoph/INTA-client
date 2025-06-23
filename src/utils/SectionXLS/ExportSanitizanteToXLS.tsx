@@ -93,6 +93,50 @@ export default function exportSanitizanteToXLS(planes: Plan[]) {
     });
   });
 
+const mergeConfig: Record<string, string[]> = {
+  'Plan': [],
+  'Cotización USD': ['Plan'],
+  'Costo Total Plan': ['Plan'],
+  'Tto.': ['Plan', 'Tto.'],
+  'Fecha': ['Plan', 'Tto.', 'Fecha'],
+  'Costo Tratamiento': ['Plan', 'Tto.', 'Fecha'],
+};
+
+function getMergeRanges(data: Record<string, any>[], headers: string[]) {
+  const merges: XLSX.Range[] = [];
+
+  function isSameGroup(a: any, b: any, keys: string[]) {
+    return keys.every((key) => a[key] === b[key]);
+  }
+
+  Object.entries(mergeConfig).forEach(([colName, groupKeys]) => {
+    const colIdx = headers.indexOf(colName);
+    if (colIdx === -1) return;
+
+    let start = 0;
+    while (start < data.length) {
+      let end = start;
+      while (
+        end + 1 < data.length &&
+        isSameGroup(data[start], data[end + 1], [...groupKeys, colName])
+      ) {
+        end++;
+      }
+      if (end > start) {
+        merges.push({
+          s: { r: start + 1, c: colIdx },
+          e: { r: end + 1, c: colIdx },
+        });
+      }
+      start = end + 1;
+    }
+  });
+
+  return merges;
+}
+
+worksheet['!merges'] = getMergeRanges(renamedData, headers);
+
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, 'Sanitizantes');
 

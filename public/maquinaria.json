@@ -12,49 +12,220 @@
         {
             "id_tractor": "2",
             "nombre": "Tractor B",
-            "potencia_CV": 100,
-            "precio_usd": 76000,
-            "coef_gastos_conservacion": 0.00006,
-            "horas_utiles": 15000,
-            "valor_residual_pct": 25        
-        },
-        {
-            "id_tractor": "3",
-            "nombre": "Tractor C",
-            "potencia_CV": 150,
-            "precio_usd": 120000,
-            "coef_gastos_conservacion": 0.00005,
-            "horas_utiles": 18000,
-            "valor_residual_pct": 30
+            "potencia_CV": 80,
+            "precio_usd": 82875,
+            "coef_gastos_conservacion": 0.00007,
+            "horas_utiles": 12000,
+            "valor_residual_pct": 20
         }
     ],
     "implementos": [
         {
             "id_implemento": "1",
-            "nombre": "Arado",
-            "precio_usd": 6500,
-            "coef_gastos_conservacion": 0.00035,
-            "horas_utiles": 6000,
-            "valor_residual_pct": 12,
-            "consumo_litros_hora_CV": 0.13
+            "nombre": "Acoplado Metálico",
+            "precio_usd": 8287.5,
+            "coef_gastos_conservacion": 0.0004,
+            "horas_utiles": 10000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.1
         },
         {
             "id_implemento": "2",
-            "nombre": "Rastra De Disco",
-            "precio_usd": 11000,
-            "coef_gastos_conservacion": 0.00028,
-            "horas_utiles": 6000,
-            "valor_residual_pct": 15,
-            "consumo_litros_hora_CV": 0.14
+            "nombre": "Aporcador ",
+            "precio_usd": 2320.5,
+            "coef_gastos_conservacion": 0.00025,
+            "horas_utiles": 4000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.11
         },
         {
             "id_implemento": "3",
-            "nombre": "Pulverizadora",
-            "precio_usd": 18000,
-            "coef_gastos_conservacion": 0.00032,
+            "nombre": "Arado",
+            "precio_usd": 6409,
+            "coef_gastos_conservacion": 0.0004,
+            "horas_utiles": 5000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.14
+        },
+        {
+            "id_implemento": "4",
+            "nombre": "Arado subsolador",
+            "precio_usd": 7182.5,
+            "coef_gastos_conservacion": 0.00015,
+            "horas_utiles": 5000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.16
+        },
+        {
+            "id_implemento": "5",
+            "nombre": "Bordeador",
+            "precio_usd": 3315,
+            "coef_gastos_conservacion": 0.00025,
+            "horas_utiles": 5000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.11
+        },
+        {
+            "id_implemento": "6",
+            "nombre": "Cincel 3 puntos",
+            "precio_usd": 4972.5,
+            "coef_gastos_conservacion": 0.00025,
+            "horas_utiles": 5000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.14
+        },
+        {
+            "id_implemento": "7",
+            "nombre": "Desmalezadora",
+            "precio_usd": 8950.5,
+            "coef_gastos_conservacion": 0.00025,
             "horas_utiles": 4000,
-            "valor_residual_pct": 18,
-            "consumo_litros_hora_CV": 0.17
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.12
+        },
+        {
+            "id_implemento": "8",
+            "nombre": "Desmalezadora (brazo retractil)",
+            "precio_usd": 4972.5,
+            "coef_gastos_conservacion": 0.0003,
+            "horas_utiles": 3000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.12
+        },
+        {
+            "id_implemento": "9",
+            "nombre": "Fertilizadora de frutales (liquidos)",
+            "precio_usd": 16575,
+            "coef_gastos_conservacion": 0.00018,
+            "horas_utiles": 5000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.11
+        },
+        {
+            "id_implemento": "10",
+            "nombre": "Fertilizadora de frutales (solidos)",
+            "precio_usd": 7735,
+            "coef_gastos_conservacion": 0.0002,
+            "horas_utiles": 4000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.12
+        },
+        {
+            "id_implemento": "11",
+            "nombre": "Hiladora de podos ",
+            "precio_usd": 5967,
+            "coef_gastos_conservacion": 0.0002,
+            "horas_utiles": 10000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.1
+        },
+        {
+            "id_implemento": "12",
+            "nombre": "Hoja niveladora de tres puntos",
+            "precio_usd": 3867.5,
+            "coef_gastos_conservacion": 0.0002,
+            "horas_utiles": 10000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.16
+        },
+        {
+            "id_implemento": "13",
+            "nombre": "Motoguadaña",
+            "precio_usd": 884,
+            "coef_gastos_conservacion": 0.0002,
+            "horas_utiles": 10000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 1.2
+        },
+        {
+            "id_implemento": "14",
+            "nombre": "Palón nivelador ",
+            "precio_usd": 17127.5,
+            "coef_gastos_conservacion": 0.0002,
+            "horas_utiles": 3000,
+            "valor_residual_pct": 20,
+            "consumo_litros_hora_CV": 0.14
+        },
+        {
+            "id_implemento": "15",
+            "nombre": "Pulverizadora  2000 lts",
+            "precio_usd": 26520,
+            "coef_gastos_conservacion": 0.0003,
+            "horas_utiles": 3000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.16
+        },
+        {
+            "id_implemento": "16",
+            "nombre": "Pulverizadora Botalon 500 lts ",
+            "precio_usd": 3646.5,
+            "coef_gastos_conservacion": 0.0003,
+            "horas_utiles": 3000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.14
+        },
+        {
+            "id_implemento": "17",
+            "nombre": "Rastra excentrica de arrastre (frutera)",
+            "precio_usd": 9282,
+            "coef_gastos_conservacion": 0.0003,
+            "horas_utiles": 5000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.15
+        },
+        {
+            "id_implemento": "18",
+            "nombre": "Removedora de compost ",
+            "precio_usd": 26520,
+            "coef_gastos_conservacion": 0.00015,
+            "horas_utiles": 5000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.15
+        },
+        {
+            "id_implemento": "19",
+            "nombre": "Subsolador ",
+            "precio_usd": 3646.5,
+            "coef_gastos_conservacion": 0.00015,
+            "horas_utiles": 5000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.16
+        },
+        {
+            "id_implemento": "20",
+            "nombre": "Tracto elevador (cosecha)",
+            "precio_usd": 9282,
+            "coef_gastos_conservacion": 0.0005,
+            "horas_utiles": 5000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.14
+        },
+        {
+            "id_implemento": "21",
+            "nombre": "Trituradora de podos",
+            "precio_usd": 6630,
+            "coef_gastos_conservacion": 0.0004,
+            "horas_utiles": 5000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.1
+        },
+        {
+            "id_implemento": "22",
+            "nombre": "Vibrocultivador 3 Puntos ",
+            "precio_usd": 2762.5,
+            "coef_gastos_conservacion": 0.00025,
+            "horas_utiles": 3000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.16
+        },
+        {
+            "id_implemento": "23",
+            "nombre": "Zanjador de 3 puntos",
+            "precio_usd": 4972.5,
+            "coef_gastos_conservacion": 0.0002,
+            "horas_utiles": 10000,
+            "valor_residual_pct": 10,
+            "consumo_litros_hora_CV": 0.15
         }
     ]
 }
