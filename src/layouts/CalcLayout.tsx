@@ -1,12 +1,12 @@
 import { type ReactNode } from 'react';
 
-interface AppLayoutProps {
+interface CalcLayoutProps {
   ContainerCotizaciones: ReactNode;
   Form: ReactNode;
   Visualizacion: ReactNode;
 }
 
-export default function AppLayout({ ContainerCotizaciones, Form, Visualizacion }: AppLayoutProps) {
+export default function CalcLayout({ ContainerCotizaciones, Form, Visualizacion }: CalcLayoutProps) {
   return (
     <div className="w-full flex h-full flex-col gap-4 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl xl:h-[950px] 2xl:max-w-[1600px]">
       <section className="grid grid-cols-1 gap-4 w-full h-full xl:flex">

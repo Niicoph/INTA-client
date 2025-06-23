@@ -6,7 +6,11 @@ interface CardHomeVerticalProps {
   alt: string;
   title: string;
   description: string;
-  color: string;
+  color: {
+    bg: string,
+    text: string,
+    border: string,
+  };
   path: string;
 }
 
@@ -19,24 +23,27 @@ export default function CardHomeVertical({
   path,
 }: CardHomeVerticalProps) {
   return (
-    <div className="w-[170px] h-[270px] rounded-xl flex flex-col shadow-card relative bg-white mdd:w-[200px] mdd:h-[300px] lgg:w-[220px] lgg:h-[320px] xl:w-[250px] xl:h-[350px]  ">
+    <div className="max-w-[200px] min-h-[270px] rounded-xl flex flex-col shadow-card relative bg-white mdd:max-w-[200px] mdd:min-h-[300px] lgg:max-w-[220px] lgg:min-h-[320px] xl:max-w-[250px] xl:min-h-[350px]  ">
       <div
-        className="w-full py-2 rounded-t-xl flex justify-center items-center"
-        style={{ backgroundColor: color }}
+        className={`${color.bg} w-full py-2 rounded-t-xl flex justify-center items-center`}
+        
       >
-        <div className="rounded-full border-4 bg-white h-20 w-20" style={{ borderColor: color }}>
-          <img src={src} alt={alt} className="object-cover" />
+        <div className={`${color.border} rounded-full border-4 bg-white h-25 w-25 flex items-center justify-center overflow-hidden`}>
+          <img
+            src={src}
+            alt={alt}
+            className="max-w-full max-h-full object-contain p-2"
+          />
         </div>
       </div>
       <div className="h-full flex flex-col justify-between py-4 px-6">
-        <h2 className="gilroy-semibold text-2xl" style={{ color }}>
+        <h2 className={`gilroy-semibold text-2xl ${color.text}`}>
           {title}
         </h2>
-        <p className="gilroy-regular text-xs text-left text-[#8C8C8C]">{description}</p>
+        <p className="p-2 gilroy-regular text-xs text-left text-[#8C8C8C]">{description}</p>
         <Link
           to={path}
-          className="gilroy-semibold text-sm text-white px-4 justify-center py-2 rounded-lg mt-2 flex w-full items-center gap-2"
-          style={{ backgroundColor: color }}
+          className={`${color.bg} gilroy-semibold text-sm text-white px-4 justify-center py-2 rounded-lg mt-2 flex w-full items-center gap-2`}          
         >
           Calculadora <ArrowRight className="w-5 h-5" />
         </Link>

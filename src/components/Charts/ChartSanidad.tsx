@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis, Tooltip } from 'recharts';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart';
 import Alert from '../ui/alert';
 import type { Aplicacion, Plan, Tratamiento } from '@/types/sanitizante';
@@ -98,7 +98,7 @@ export default function ChartSanidad({ planes }: { planes: Plan[] }) {
       config={{}}
       className={`h-full w-full ${planes.length > 12 ? 'w-[1000px]' : ''}`}
     >
-      <BarChart data={chartData} margin={{ top: 20, left: 20}} barGap={20}>
+      <BarChart data={chartData} margin={{ top: 20, left: 20}}>
         <CartesianGrid vertical={false} />
         <YAxis
           tickLine={false}
@@ -115,13 +115,6 @@ export default function ChartSanidad({ planes }: { planes: Plan[] }) {
         <Tooltip content={<CustomTooltip />} />
         {tratamientoKeys.map((key, index) => (
           <Bar key={key} dataKey={key} fill={`${tailwindColorMap[index % tailwindColorMap.length].hex}`} radius={4} barSize={30} cursor="pointer">
-            <LabelList
-              position="top"
-              offset={6}
-              className="fill-foreground"
-              fontSize={11}
-              formatter={(value: number) => `$${Number(value).toLocaleString('es-AR')}/ha`}
-            />
           </Bar>
         ))}
       </BarChart>

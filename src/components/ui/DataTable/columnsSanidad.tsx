@@ -49,7 +49,7 @@ const colClasses = {
       volumen_envase: 'px-4  bg-purple-100',
       unidad: 'px-4  bg-purple-100',
       precio_usd_envase: 'px-4  bg-purple-100',
-      app_volumen: 'px-4  bg-yellow-100',
+      app_volumen_x_ha: 'px-4  bg-yellow-100',
       dosis_x_hl: 'px-4  bg-purple-100',
       app_costo: 'px-4  bg-purple-100',
       tipo: 'px-4  bg-purple-100',
@@ -330,13 +330,13 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
   },
 
   {
-    id: 'aplicacion.volumen_aplicado',
+    id: 'aplicacion.volumen_x_ha',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.app_volumen} flex has-[>svg]:px-0`}
+          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.app_volumen_x_ha} flex has-[>svg]:px-0`}
         >
           {colLabels.app_volumen}
         </Button>
@@ -346,7 +346,7 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
       const data = row.original;      
       return (
         <div className="align-top">
-          {data.aplicacion.volumen_aplicado.toLocaleString('es-AR')} hl
+          {data.aplicacion.volumen_x_ha.toLocaleString('es-AR')} hl
         </div>
       );
     },

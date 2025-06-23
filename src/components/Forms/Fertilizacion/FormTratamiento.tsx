@@ -13,6 +13,7 @@ import {
 import { FormField, FormItem, FormLabel, FormMessage, FormControl } from '@/components/ui/form';
 import { type Producto } from '@/types/fertilizacion';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Plus, Trash, ChevronDownIcon } from 'lucide-react';
@@ -26,10 +27,10 @@ interface FormTratamientoProps {
 
 export default function FormTratamiento({ planControl, index, removeTrat }: FormTratamientoProps) {
   const [open, setOpen] = useState(false);
-  const productosContext = useContext(FertilizantesContext);
-  const { control } = useFormContext();
+  const fertilizantesContext = useContext(FertilizantesContext);
+  const {control, setValue } = useFormContext();
 
-  const { data: productos } = productosContext ?? {};
+  const { data: fertilizantes } = fertilizantesContext ?? {};
   const { fields, append, remove } = useFieldArray({
     control,
     name: `tratamientos.${index}.aplicaciones`,
@@ -46,7 +47,7 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
               <div className="w-full flex justify-between items-center p-2 border-b border-border">
                 <div className="w-full flex flex-row justify-between">
                   <p className="font-semibold flex items-center">Tratamiento #{index + 1}</p>
-                  <div className="flex gap-2 items-end">
+                  <div className="flex gap-2">
                     <FormField
                       control={control}
                       name={`tratamientos.${index}.fecha`}
@@ -102,12 +103,18 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
                             <div className="grid grid-cols-1">
                               <Select
                                 value={field.value?.id_fertilizante ?? ''}
-                                onValueChange={(selectedId) => {
-                                  const selectedProducto = productos?.find(
-                                    (p) => p.id_fertilizante === selectedId
+                                onValueChange={(value) => {
+                                  const fertilizante = fertilizantes?.find(
+                                    (p) => p.id_fertilizante === value
                                   );
-                                  if (selectedProducto) {
-                                    field.onChange(selectedProducto);
+                                  
+                                  if (fertilizante) {
+                                    field.onChange(fertilizante);
+                                    setValue(`tratamientos.${index}.aplicaciones.${aplicacionIndex}.dosis_x_ha`, fertilizante.dosis_x_ha, {
+                                      shouldValidate: true,
+                                      shouldDirty: true,
+                                      shouldTouch: true,
+                                    });
                                   }
                                 }}
                               >
@@ -115,18 +122,40 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
                                   <SelectValue placeholder="Selecciona un producto" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                  {productos?.map((producto: Producto) => (
+                                  {fertilizantes?.map((producto: Producto) => (
                                     <SelectItem
                                       key={producto.id_fertilizante}
                                       value={producto.id_fertilizante}
                                     >
                                       {producto.nombre} {producto.volumen_envase}
-                                      {producto.unidad}
+                                      {producto.unidad} {producto.dosis_x_ha}{producto.unidad}/ha
                                     </SelectItem>
                                   ))}
                                 </SelectContent>
                               </Select>
                             </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={control}
+                        name={`tratamientos.${index}.aplicaciones.${aplicacionIndex}.dosis_x_ha`}
+                        render={({ field }) => (
+                          <FormItem className="flex flex-col w-4/9">
+                            <FormLabel>Dosis por ha</FormLabel>
+                            <FormControl>
+                              <Input
+                                type="number"
+                                placeholder="Dosis por ha"
+                                value={field.value ?? ''}
+                                className="pr-10 px-3 py-2 border transition-all duration-200 bg-white text-black border-gray-300"
+                                onChange={(e) => {
+                                  const value = e.target.valueAsNumber;
+                                  field.onChange(isNaN(value) ? '' : value);
+                                }}
+                              />
+                            </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
@@ -144,7 +173,14 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
                   </div>
                 ))}
 
-                <Button type="button" variant="outline" onClick={() => append({ id_producto: '' })}>
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={() => {
+                      append({                      
+                        id_producto: '',
+                      })
+                    }}>
                   <Plus className="mr-1 w-4 h-4" /> prod.
                 </Button>
               </div>

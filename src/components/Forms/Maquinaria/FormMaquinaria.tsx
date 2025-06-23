@@ -350,7 +350,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="number"
                           readOnly={!customTractorCV}
-                          placeholder="Selecciona tractor"
+                          placeholder={`${selectedTractor?'Ingrese CV':'Selecciona tractor'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                             customTractorCV
@@ -390,7 +390,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="number"
                           readOnly={!customTractorUSD}
-                          placeholder="Selecciona tractor"
+                          placeholder={`${selectedTractor?'Ingrese precio USD':'Selecciona tractor'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-4 py-2 border rounded-md transition-all duration-200 ${
                             customTractorUSD
@@ -428,7 +428,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="number"
                           readOnly={!customTractorResiduoPCT}
-                          placeholder="Selecciona tractor"
+                          placeholder={`${selectedTractor?'Ingrese porcentaje residual':'Selecciona tractor'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                             customTractorResiduoPCT
@@ -544,7 +544,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="number"
                           readOnly={!customImplementoConsumo}
-                          placeholder="Selecciona implemento"
+                          placeholder={`${selectedImplemento?'Ingrese consumo en lt/h.CV':'Selecciona implemento'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                             customImplementoConsumo
@@ -582,7 +582,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="input"
                           readOnly={!customImplementoUSD}
-                          placeholder="Selecciona implemento"
+                          placeholder={`${selectedImplemento?'Ingrese precio USD':'Selecciona implemento'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                             customImplementoUSD
@@ -620,7 +620,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="number"
                           readOnly={!customImplementoResiduoPCT}
-                          placeholder="Selecciona implemento"
+                          placeholder={`${selectedImplemento?'Ingrese porcentaje residual':'Selecciona implemento'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                             customImplementoResiduoPCT

@@ -11,7 +11,7 @@ import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
 import { useState, useContext } from 'react';
 import FormTratamiento from './FormTratamiento';
 import { CostoPlanFertilizacionContext } from '@/context/CostoPlanFertilizacionContext';
-// import { calcularCostoTotalSanitizacion } from '@/utils/costoTotalSanitizacion';
+
 import {
   Carousel,
   CarouselContent,

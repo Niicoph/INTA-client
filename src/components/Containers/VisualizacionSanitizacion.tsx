@@ -53,7 +53,7 @@ export default function VisualizacionSanitizacion() {
           >
             <div className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<div>Cargando gráfico...</div>}>
+                <Suspense fallback={<Alert text="Cargando gráfico..." />}>
                   <ChartSanidad planes={data} />
                 </Suspense>
               ) : (
@@ -62,7 +62,7 @@ export default function VisualizacionSanitizacion() {
             </div>
             <div className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<div>Cargando tabla...</div>}>
+                <Suspense fallback={<Alert text="Cargando tabla..." />}>
                   <DataTable
                     columns={columnsSanidad as ColumnDef<unknown, unknown>[]}
                     data={filasTabla}
@@ -81,7 +81,7 @@ export default function VisualizacionSanitizacion() {
           >
             <div className="overflow-x-auto h-full">
               {data.length > 0 ? (
-                <Suspense fallback={<div>Cargando tabla...</div>}>
+                <Suspense fallback={<Alert text="Cargando tabla..." />}>
                   <DataTable
                     columns={columnsSanidad as ColumnDef<unknown, unknown>[]}
                     data={filasTabla}
@@ -99,7 +99,7 @@ export default function VisualizacionSanitizacion() {
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
             {data.length > 0 ? (
-              <Suspense fallback={<div>Cargando gráfico...</div>}>
+              <Suspense fallback={<Alert text="Cargando gráfico..." />}>
                 <ChartSanidad planes={data} />
               </Suspense>
             ) : (

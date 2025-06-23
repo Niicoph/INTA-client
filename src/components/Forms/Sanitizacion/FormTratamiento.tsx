@@ -2,7 +2,7 @@
 
 import { useContext, useState } from 'react';
 import { useFormContext, useFieldArray, type Control } from 'react-hook-form';
-import { ProductosContext } from '@/context/ProductosContext';
+import { SanitizantesContext } from '@/context/SanitizantesContext';
 import {
   Select,
   SelectContent,
@@ -25,10 +25,10 @@ interface FormTratamientoProps {
 }
 
 export default function FormTratamiento({ planControl, index, removeTrat }: FormTratamientoProps) {
-  const productosContext = useContext(ProductosContext);
+  const sanitizantesContext = useContext(SanitizantesContext);
   const { control } = useFormContext();
 
-  const { data: productos } = productosContext ?? {};
+  const { data: sanitizantes } = sanitizantesContext ?? {};
   const { fields, append, remove } = useFieldArray({
     control,
     name: `tratamientos.${index}.aplicaciones`,
@@ -45,9 +45,9 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
           (/*{ field }*/) => (
             <FormItem>
               <div className="w-full flex justify-between items-center p-2 border-b border-border">
-                <div className="w-full flex flex-row justify-between">
+                <div className="w-full flex justify-between">
                   <p className="font-semibold flex items-center">Tratamiento #{index + 1}</p>
-                  <div className="flex gap-2 items-end">
+                  <div className="flex gap-2">
                     <FormField
                       control={control}
                       name={`tratamientos.${index}.fecha`}
@@ -104,12 +104,12 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
                             <div className='grid grid-cols-1'>
                               <Select
                                 value={field.value?.id_sanitizante ?? ''}
-                                onValueChange={(selectedId) => {
-                                  const selectedProducto = productos?.find(
-                                    (p) => p.id_sanitizante === selectedId
+                                onValueChange={(value) => {
+                                  const sanitizante = sanitizantes?.find(
+                                    (p) => p.id_sanitizante === value
                                   );
-                                  if (selectedProducto) {
-                                    field.onChange(selectedProducto);
+                                  if (sanitizante) {
+                                    field.onChange(sanitizante);
                                   }
                                 }}
                               >
@@ -117,13 +117,13 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
                                   <SelectValue placeholder="Selecciona un producto" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                  {productos?.map((producto: Producto) => (
+                                  {sanitizantes?.map((producto: Producto) => (
                                     <SelectItem
                                       key={producto.id_sanitizante}
                                       value={producto.id_sanitizante}
                                     >
-                                      {producto.nombre} ({producto.tipo}) {producto.volumen_envase}
-                                      {producto.unidad}
+                                      {producto.nombre} {producto.volumen_envase}
+                                      {producto.unidad} ({producto.tipo}) {producto.dosis_x_hl}{producto.unidad}/hl
                                     </SelectItem>
                                   ))}
                                 </SelectContent>
@@ -135,14 +135,14 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
                       />
                       <FormField
                         control={control}
-                        name={`tratamientos.${index}.aplicaciones.${aplicacionIndex}.volumen_aplicado`}
+                        name={`tratamientos.${index}.aplicaciones.${aplicacionIndex}.volumen_x_ha`}
                         render={({ field }) => (
                           <FormItem className="flex flex-col w-4/9">
-                            <FormLabel>Volumen</FormLabel>
+                            <FormLabel>Vol. hl/ha</FormLabel>
                             <FormControl>
                               <Input
                                 type="number"
-                                placeholder="Vol. aplicado"
+                                placeholder="Vol. hl/ha"
                                 value={field.value ?? ''}
                                 className="pr-10 px-3 py-2 border transition-all duration-200 bg-white text-black border-gray-300"
                                 onChange={(e) => {
@@ -169,7 +169,14 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
                   </div>
                 ))}
 
-                <Button type="button" variant="outline" onClick={() => append({ id_producto: '' })}>
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={() => {
+                      append({ 
+                        id_producto: ''
+                      })
+                    }}>
                   <Plus className="mr-1 w-4 h-4" /> prod.
                 </Button>
               </div>

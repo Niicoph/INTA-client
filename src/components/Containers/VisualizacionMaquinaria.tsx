@@ -121,7 +121,7 @@ export default function VisualizacionMaquinaria() {
           >
             <div ref={captureRef} className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<div>Cargando gráfico...</div>}>
+                <Suspense fallback={<Alert text="Cargando gráfico..." />}>
                   <ChartMaquinaria conjuntosMaquinaria={data} />
                 </Suspense>
               ) : (
@@ -130,7 +130,7 @@ export default function VisualizacionMaquinaria() {
             </div>
             <div className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<div>Cargando tabla...</div>}>
+                <Suspense fallback={<Alert text="Cargando tabla..." />}>
                   <DataTable
                     columns={columnsMaquinaria as ColumnDef<unknown, unknown>[]}
                     data={data}
@@ -149,7 +149,7 @@ export default function VisualizacionMaquinaria() {
           >
             <div className="overflow-x-auto h-full">
               {data.length > 0 ? (
-                <Suspense fallback={<div>Cargando tabla...</div>}>
+                <Suspense fallback={<Alert text="Cargando tabla..." />}>
                   <DataTable
                     columns={columnsMaquinaria as ColumnDef<unknown, unknown>[]}
                     data={data}
@@ -167,7 +167,7 @@ export default function VisualizacionMaquinaria() {
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
             {data.length > 0 ? (
-              <Suspense fallback={<div>Cargando gráfico...</div>}>
+              <Suspense fallback={<Alert text="Cargando gráfico..." />}>
                 <ChartMaquinaria conjuntosMaquinaria={data} />
               </Suspense>
             ) : (

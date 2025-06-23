@@ -3,11 +3,11 @@ import VisualizacionFertilizacion from '@/components/Containers/VisualizacionFer
 import FormProducto from '@/components/Forms/Fertilizacion/FormProducto';
 import FormPlan from '@/components/Forms/Fertilizacion/FormPlan';
 
-import AppLayout from '@/layouts/AppLayout';
+import CalcLayout from '@/layouts/CalcLayout';
 
 export default function Fertilizacion() {
   return (
-    <AppLayout
+    <CalcLayout
       ContainerCotizaciones={<ContainerCotizaciones dollar={true} />}
       Form={
         <div className="flex flex-col h-full gap-4">

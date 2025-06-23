@@ -36,9 +36,11 @@ export default function FormProducto() {
   }
   const setDataFertilizantes = fertilizantesContext.setData;
   const [selectedFertilizante, setSelectedFertilizante] = useState<Producto | null>(null);
+
   const [customDosisHa, setCustomDosisHa] = useState(false);
   const [customVolumenEnvase, setCustomVolumenEnvase] = useState(false);
   const [customUsdEnvase, setCustomUsdEnvase] = useState(false);
+
   const [isFormFertilizanteComplete, setIsFormProductoComplete] = useState<boolean>(false);
 
   const fertilizantes = useFertilizantes();
@@ -56,8 +58,14 @@ export default function FormProducto() {
   });
 
   const handleFormFertilizanteSubmit = (data: ProductoFormData) => {
+    /* Manejo de index para evitar que al eliminar, se intente usar un id utilizado */
+    let index = fertilizantesContext.data.length + 1;
+    if (index > 1) {
+      index = parseInt(fertilizantesContext.data[index - 2].id_fertilizante) + 1;
+    }
     const finalData = {
       ...data,
+      id_fertilizante: `${index}`,
     };
     setDataFertilizantes((prevData) => [...prevData, finalData]);
     resetFormFertilizante();
@@ -80,7 +88,7 @@ export default function FormProducto() {
 
   return (
     <div className="rounded-md flex flex-col border border-border w-full">
-      <TitleContainer title="Carga Producto" icon={CargaDatosIcon} />
+      <TitleContainer title="Carga Producto Fertilizante" icon={CargaDatosIcon} />
       <Form {...formFertilizante}>
         <form
           onSubmit={formFertilizante.handleSubmit(handleFormFertilizanteSubmit)}
@@ -102,11 +110,6 @@ export default function FormProducto() {
                       setSelectedFertilizante(fertilizante);
 
                       if (fertilizante) {
-                        formFertilizante.setValue('id_fertilizante', fertilizante.id_fertilizante, {
-                          shouldValidate: true,
-                          shouldDirty: true,
-                          shouldTouch: true,
-                        });
                         formFertilizante.setValue('nombre', fertilizante.nombre, {
                           shouldValidate: true,
                           shouldDirty: true,
@@ -142,7 +145,7 @@ export default function FormProducto() {
                     <SelectTrigger
                       className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                     >
-                      <SelectValue placeholder="Selecciona un sanitizante" />
+                      <SelectValue placeholder="Selecciona un fertilizante" />
                     </SelectTrigger>
                     <SelectContent>
                       {fertilizantes.data?.map((s: Producto) => (
@@ -170,7 +173,7 @@ export default function FormProducto() {
                       <Input
                         type="number"
                         readOnly={!customDosisHa}
-                        placeholder="Selecciona fertilizante"
+                        placeholder={`${selectedFertilizante?'Ingrese dosis/ha':'Selecciona fertilizante'}`}
                         value={field.value ?? ''}
                         className={`w-full pr-10 px-4 py-2 border rounded-md transition-all duration-200 ${
                           customDosisHa
@@ -210,7 +213,7 @@ export default function FormProducto() {
                       <Input
                         type="number"
                         readOnly={!customUsdEnvase}
-                        placeholder="Selecciona fertilizante"
+                        placeholder={`${selectedFertilizante?'Ingrese USD por envase':'Selecciona fertilizante'}`}
                         value={field.value ?? ''}
                         className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                           customUsdEnvase
@@ -248,7 +251,7 @@ export default function FormProducto() {
                       <Input
                         type="number"
                         readOnly={!customVolumenEnvase}
-                        placeholder="Selecciona fertilizante"
+                        placeholder={`${selectedFertilizante?'Ingrese volumen de envase':'Selecciona fertilizante'}`}
                         value={field.value ?? ''}
                         className={`w-full pr-10 px-4 py-2 border rounded-md transition-all duration-200 ${
                           customVolumenEnvase
@@ -295,7 +298,7 @@ export default function FormProducto() {
                       <SelectTrigger
                         className={`text-xs w-full  border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
-                        <SelectValue placeholder={'Selecciona fertilizante'} />
+                        <SelectValue placeholder={`${selectedFertilizante?'Seleccione unidad':'Selecciona fertilizante'}`} />
                       </SelectTrigger>
                       <SelectContent>
                         {unidades?.map((unidad: string) => (

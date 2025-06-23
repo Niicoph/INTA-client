@@ -4,7 +4,6 @@ import { type ProductoFormData } from '@/schemas/Fertilizacion/types';
 /**
  * Context contiene una lista de fertilizantes.
  */
-
 type FertilizantesContextInterface = {
   data: ProductoFormData[];
   setData: Dispatch<React.SetStateAction<ProductoFormData[]>>;
@@ -21,9 +20,5 @@ const FertilizantesProvider = ({ children }: { children: React.ReactNode }) => {
     </FertilizantesContext.Provider>
   );
 };
-
-if (!FertilizantesContext) {
-  throw new Error('FertilizantesContext must be used within a FertilizantesProvider');
-}
 
 export { FertilizantesContext, FertilizantesProvider };

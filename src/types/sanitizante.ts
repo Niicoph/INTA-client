@@ -9,8 +9,9 @@ export type Producto = {
 };
 
 export type Aplicacion = {
+  id_aplicacion: string;
   producto : Producto;
-  volumen_aplicado : number;
+  volumen_x_ha : number;
   costo_total: number;
 }
 

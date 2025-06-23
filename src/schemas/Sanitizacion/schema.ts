@@ -1,10 +1,7 @@
 import { z } from 'zod';
 import { unidades } from '@/types/sanitizante';
 export const ProductoSchema = z.object({
-  id_sanitizante: z.string({
-    required_error: 'El principio activo es obligatorio',
-    invalid_type_error: 'Debe seleccionar un principio activo',
-  }),
+  id_sanitizante: z.string(),
   // Precarga.nombre
   nombre: z.string({
     required_error: 'El principio activo es obligatorio',
@@ -43,24 +40,23 @@ export const ProductoSchema = z.object({
 });
 
 export const AplicacionSchema = z.object({
-    producto: z.object(ProductoSchema.shape, {
-      required_error: 'Debe seleccionar un producto',
-      invalid_type_error: 'Debe seleccionar una opción',
-    }),
-    volumen_aplicado : z.number({
-        required_error: 'Debe ingresar un volumen aplicado',
-        invalid_type_error: 'Debe ser un número'
-    },).positive('Debe ser un valor positivo'),
-
+  producto: z.object(ProductoSchema.shape, {
+    required_error: 'Debe seleccionar un producto',
+    invalid_type_error: 'Debe seleccionar una opción',
+  }),
+  volumen_x_ha : z.number({
+      required_error: 'Debe ingresar hl/ha',
+      invalid_type_error: 'Debe ser un numero positivo'
+  },).positive('Debe ser un numero positivo'),
 })
 
 export const TratamientoSchema = z.object({
-    id_tratamiento: z.string(),
-    aplicaciones: z.array(AplicacionSchema).min(1, 'Debe incluir al menos una aplicación de producto'),
-    fecha: z.date({
-      required_error: 'La fecha es obligatoria',
-      invalid_type_error: 'La fecha debe ser válida',
-    })
+  id_tratamiento: z.string(),
+  aplicaciones: z.array(AplicacionSchema).min(1, 'Debe incluir al menos una aplicación de producto'),
+  fecha: z.date({
+    required_error: 'La fecha es obligatoria',
+    invalid_type_error: 'La fecha debe ser válida',
+  })
 });
 
 export const PlanSchema = z.object({

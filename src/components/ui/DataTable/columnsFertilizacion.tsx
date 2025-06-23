@@ -21,14 +21,14 @@ const colLabels = {
   id_tratamiento: 'Tto.',
   tratamiento_fecha: 'Fecha',
   tratamiento_costo: 'Costo Tto.',
+  dosis_x_ha: 'Dosis/ha',
   /* APLICACION */
   app_producto_nombre: 'Producto',
   volumen_envase: 'Vol. Envase',
   unidad: 'Unidad',
   precio_usd_envase: 'USD Envase',
-  dosis_x_ha: 'Dosis/ha',
   app_costo: 'Costo Aplicacion',
-  /* APLICACION */
+  /* APLICACION */  
   /* TRATAMIENTO */
   /* PLAN */
 };
@@ -297,7 +297,7 @@ export const columnsFertilizacion: ColumnDef<FilaPlan>[] = [
       const data = row.original;
       return (
         <div className="align-top">
-          {data.aplicacion.producto.dosis_x_ha.toLocaleString('es-AR')}{' '}
+          {data.aplicacion.dosis_x_ha.toLocaleString('es-AR')}{' '}
           {data.aplicacion.producto.unidad}/hl
         </div>
       );
