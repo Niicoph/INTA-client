@@ -2,12 +2,12 @@ import type { ColumnDef } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
 import { type ConjuntoMaquinaria } from '@/types/maquinaria';
 import {
-  DropdownMenu,  
+  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { MoreHorizontal } from "lucide-react"
+} from '@/components/ui/dropdown-menu';
+import { MoreHorizontal } from 'lucide-react';
 
 import { MaquinariaContext } from '@/context/MaquinariaContext';
 import { useContext } from 'react';
@@ -17,7 +17,7 @@ const colLabels = {
   cotizacion_usd: 'USD',
   cotizacion_gasoil_litro: 'Gasoil',
 
-  tractor: {  
+  tractor: {
     id_tractor: 'ID Tractor',
     nombre: 'Tractor',
     potencia_CV: 'Potencia',
@@ -26,9 +26,9 @@ const colLabels = {
     horas_utiles: 'Horas Útiles',
     valor_residual_pct: 'Valor Residual',
 
-    //Resultado de calculos    
+    //Resultado de calculos
     amortizacion: 'Costo Amortización',
-    costo_mantenimiento: 'Costo Mantenimiento',    
+    costo_mantenimiento: 'Costo Mantenimiento',
   },
 
   implemento: {
@@ -36,21 +36,21 @@ const colLabels = {
     nombre: 'Implemento',
     consumo_litros_hora_CV: 'Consumo lt/h CV',
     precio_usd: 'USD',
-    coef_gastos_conservacion: 'Coef Conservacion',    
-    horas_utiles: 'Horas Útiles',    
+    coef_gastos_conservacion: 'Coef Conservacion',
+    horas_utiles: 'Horas Útiles',
     valor_residual_pct: 'Valor Residual',
 
     //Resultado de calculos
     amortizacion: 'Costo Amortización',
-    costo_mantenimiento: 'Costo Mantenimiento',    
-  },  
-  
+    costo_mantenimiento: 'Costo Mantenimiento',
+  },
+
   costo_combustible: 'Costo Combustible',
   costo_total_hora: 'Costo Conjunto',
 };
 
 const colClasses = {
-  conjunto: 'px-4  bg-blue-100',
+  conjunto: 'px-4 bg-blue-100',
   cotizaciones: 'px-4 bg-orange-100',
   tractor: 'px-4 bg-red-100',
   implemento: 'px-4 bg-yellow-100',
@@ -59,13 +59,13 @@ const colClasses = {
 
 export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
   {
-    id: "actions",
+    id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
       const data = row.original;
-      const { remove } = useContext(MaquinariaContext)!;      
-      
-      return (        
+      const { remove } = useContext(MaquinariaContext)!;
+
+      return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
@@ -73,7 +73,7 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
               <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className='bg-accent'>
+          <DropdownMenuContent align="end" className="bg-accent">
             <DropdownMenuItem
               onClick={() => {
                 remove(data.id_conjunto);
@@ -82,8 +82,8 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
               Eliminar Conjunto {data.id_conjunto}
             </DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>        
-      )
+        </DropdownMenu>
+      );
     },
   },
   {
@@ -99,8 +99,8 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
         </Button>
       );
     },
-  },  
-  {    
+  },
+  {
     id: 'cotizacion_usd',
     header: ({ column }) => {
       return (
@@ -114,12 +114,8 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
-      return (
-        <div className="align-top">
-          ${data.cotizacion_usd}
-        </div>
-      );
+      const data = row.original;
+      return <div className="align-top">${data.cotizacion_usd}</div>;
     },
   },
   {
@@ -136,12 +132,8 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
-      return (
-        <div className="align-top">
-          ${data.cotizacion_gasoil_litro}/lt
-        </div>
-      );
+      const data = row.original;
+      return <div className="align-top">${data.cotizacion_gasoil_litro}/lt</div>;
     },
   },
   {
@@ -158,12 +150,8 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
-      return (
-        <div className="align-top">
-          ${data.costo_total_hora.toLocaleString('es-AR')}/h
-        </div>
-      );
+      const data = row.original;
+      return <div className="align-top">${data.costo_total_hora.toLocaleString('es-AR')}/h</div>;
     },
   },
   {
@@ -180,12 +168,8 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
-      return (
-        <div className="align-top">
-          ${data.costo_combustible.toLocaleString('es-AR')}/h
-        </div>
-      );
+      const data = row.original;
+      return <div className="align-top">${data.costo_combustible.toLocaleString('es-AR')}/h</div>;
     },
   },
   {
@@ -216,12 +200,8 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
-      return (
-        <div className="align-top">
-          {data.tractor.potencia_CV} CV
-        </div>
-      );
+      const data = row.original;
+      return <div className="align-top">{data.tractor.potencia_CV} CV</div>;
     },
   },
   {
@@ -238,12 +218,8 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
-      return (
-        <div className="align-top">
-          USD {data.tractor.precio_usd.toLocaleString('es-AR')}
-        </div>
-      );
+      const data = row.original;
+      return <div className="align-top">USD {data.tractor.precio_usd.toLocaleString('es-AR')}</div>;
     },
   },
   {
@@ -260,10 +236,10 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
         <div className="align-top">
-          {data.tractor.coef_gastos_conservacion.toLocaleString('es-AR', {            
+          {data.tractor.coef_gastos_conservacion.toLocaleString('es-AR', {
             maximumFractionDigits: 10,
           })}
         </div>
@@ -284,11 +260,9 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
-        <div className="align-top">
-          {data.tractor.horas_utiles.toLocaleString('es-AR')} hs
-        </div>
+        <div className="align-top">{data.tractor.horas_utiles.toLocaleString('es-AR')} hs</div>
       );
     },
   },
@@ -306,11 +280,9 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
-        <div className="align-top">
-          {data.tractor.valor_residual_pct.toLocaleString('es-AR')}%
-        </div>
+        <div className="align-top">{data.tractor.valor_residual_pct.toLocaleString('es-AR')}%</div>
       );
     },
   },
@@ -328,11 +300,9 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
-        <div className="align-top">
-          ${data.tractor.amortizacion?.toLocaleString('es-AR')}/h
-        </div>
+        <div className="align-top">${data.tractor.amortizacion?.toLocaleString('es-AR')}/h</div>
       );
     },
   },
@@ -350,7 +320,7 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
         <div className="align-top">
           ${data.tractor.costo_mantenimiento?.toLocaleString('es-AR')}/h
@@ -386,7 +356,7 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
         <div className="align-top">
           {data.implemento.consumo_litros_hora_CV.toLocaleString('es-AR')} lt/h.CV
@@ -408,14 +378,11 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
-        <div className="align-top">
-          USD {data.implemento.precio_usd.toLocaleString('es-AR')}
-        </div>
+        <div className="align-top">USD {data.implemento.precio_usd.toLocaleString('es-AR')}</div>
       );
     },
-    
   },
   {
     id: 'implemento.coef_gastos_conservacion',
@@ -431,10 +398,10 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
         <div className="align-top">
-          {data.implemento.coef_gastos_conservacion.toLocaleString('es-AR', {            
+          {data.implemento.coef_gastos_conservacion.toLocaleString('es-AR', {
             maximumFractionDigits: 10,
           })}
         </div>
@@ -455,11 +422,9 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
-        <div className="align-top">
-          {data.implemento.horas_utiles.toLocaleString('es-AR')} hs
-        </div>
+        <div className="align-top">{data.implemento.horas_utiles.toLocaleString('es-AR')} hs</div>
       );
     },
   },
@@ -477,7 +442,7 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
         <div className="align-top">
           {data.implemento.valor_residual_pct.toLocaleString('es-AR')}%
@@ -499,14 +464,12 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
-        <div className="align-top">
-          ${data.implemento.amortizacion?.toLocaleString('es-AR')}/h
-        </div>
+        <div className="align-top">${data.implemento.amortizacion?.toLocaleString('es-AR')}/h</div>
       );
     },
-  },  
+  },
   {
     id: 'implemento.costo_mantenimiento',
     header: ({ column }) => {
@@ -521,12 +484,12 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       );
     },
     cell: ({ row }) => {
-      const data = row.original;      
+      const data = row.original;
       return (
         <div className="align-top">
           ${data.implemento.costo_mantenimiento?.toLocaleString('es-AR')}/h
         </div>
       );
     },
-  },  
+  },
 ];

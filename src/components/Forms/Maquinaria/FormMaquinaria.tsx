@@ -4,6 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { EditButton } from '@/components/ui/edit-button';
+
 import {
   Form,
   FormControl,
@@ -154,8 +156,8 @@ export default function FormMaquinaria() {
                 name="cotizacion_usd"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Dólar</FormLabel>
-                    <div className="flex flex-col gap-1 md:flex-row ">
+                    <FormLabel className="text-muted-foreground text-xs">Dólar</FormLabel>
+                    <div className="flex flex-col gap-4 md:flex-row ">
                       <Select
                         value={valorDolar ?? ''}
                         onValueChange={(val) => {
@@ -168,7 +170,7 @@ export default function FormMaquinaria() {
                         }}
                       >
                         <SelectTrigger
-                          className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
+                          className={`text-sm font-normal  p-5 w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'} ${form.formState.errors.cotizacion_usd ? 'border-red-500' : ''} `}
                         >
                           <SelectValue placeholder="Selecciona cotización" />
                         </SelectTrigger>
@@ -188,7 +190,7 @@ export default function FormMaquinaria() {
                         </SelectContent>
                       </Select>
                       <Input
-                        className={`text-xs w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                        className={`w-full text-sm font-normal p-5 border transition-all duration-200 ${
                           isCustomDolar
                             ? 'bg-white text-black border-gray-300'
                             : 'bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
@@ -213,8 +215,8 @@ export default function FormMaquinaria() {
                 name="cotizacion_gasoil_litro"
                 render={({ field }) => (
                   <FormItem className="flex flex-col ">
-                    <FormLabel>Gasoil</FormLabel>
-                    <div className="flex flex-col gap-1 md:flex-row">
+                    <FormLabel className="text-muted-foreground text-xs">Gasoil</FormLabel>
+                    <div className="flex flex-col gap-4 md:flex-row">
                       <Select
                         value={valorGasoil ?? ''}
                         onValueChange={(val) => {
@@ -227,7 +229,7 @@ export default function FormMaquinaria() {
                         }}
                       >
                         <SelectTrigger
-                          className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
+                          className={`text-sm font-normal p-5 w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                         >
                           <SelectValue placeholder="Selecciona cotización" />
                         </SelectTrigger>
@@ -244,7 +246,7 @@ export default function FormMaquinaria() {
                         </SelectContent>
                       </Select>
                       <Input
-                        className={`text-xs w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                        className={`w-full text-sm font-normal p-5 border transition-all duration-200 ${
                           isCustomGasoil
                             ? 'bg-white text-black border-gray-300'
                             : 'bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
@@ -266,14 +268,14 @@ export default function FormMaquinaria() {
               />
             </div>
           </div>
-          <div className="col-span-full h-full flex flex-col gap-4 md:flex-row xl:grid grid-cols-2">
-            <div className="w-full flex flex-col gap-4">
+          <div className="col-span-full h-full flex flex-col gap-4 md:flex-row xl:grid xl:grid-cols-2">
+            <div className="w-full flex flex-col gap-4 ">
               <FormField
                 control={form.control}
                 name="id_tractor"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Tractor</FormLabel>
+                    <FormLabel className="text-muted-foreground text-xs">Tractor</FormLabel>
                     <Select
                       value={field.value ?? ''}
                       onValueChange={(value) => {
@@ -321,7 +323,7 @@ export default function FormMaquinaria() {
                       }}
                     >
                       <SelectTrigger
-                        className={`text-xs w-full border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
+                        className={`text-sm font-normal py-5 pr-0 w-full overflow-hidden border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
                         <SelectValue placeholder="Selecciona tractor" />
                       </SelectTrigger>
@@ -346,7 +348,7 @@ export default function FormMaquinaria() {
                 name="potencia_CV"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>CV del tractor</FormLabel>
+                    <FormLabel className="text-muted-foreground text-xs">CV del tractor</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
@@ -354,7 +356,7 @@ export default function FormMaquinaria() {
                           readOnly={!customTractorCV}
                           placeholder={`${selectedTractor ? 'Ingrese CV' : 'Selecciona tractor'}`}
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                          className={`w-full text-sm font-normal p-5 border transition-all duration-200 ${
                             customTractorCV
                               ? 'bg-white text-black border-gray-300'
                               : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
@@ -365,15 +367,10 @@ export default function FormMaquinaria() {
                           }}
                         />
 
-                        <Button
-                          type="button"
-                          variant="outline"
+                        <EditButton
                           onClick={() => setCustomTractorCV((prev) => !prev)}
-                          className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
                           hidden={selectedTractor == null}
-                        >
-                          ✏️
-                        </Button>
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -386,7 +383,9 @@ export default function FormMaquinaria() {
                 name="precio_usd_t"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Precio del tractor USD</FormLabel>
+                    <FormLabel className="text-muted-foreground text-xs">
+                      Precio del tractor USD
+                    </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
@@ -394,7 +393,7 @@ export default function FormMaquinaria() {
                           readOnly={!customTractorUSD}
                           placeholder={`${selectedTractor ? 'Ingrese precio USD' : 'Selecciona tractor'}`}
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-4 py-2 border rounded-md transition-all duration-200 ${
+                          className={`w-full text-sm font-normal p-5 border rounded-md transition-all duration-200 ${
                             customTractorUSD
                               ? 'bg-white text-black border-gray-300'
                               : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
@@ -404,15 +403,11 @@ export default function FormMaquinaria() {
                             field.onChange(isNaN(value) ? '' : value);
                           }}
                         />
-                        <Button
-                          type="button"
-                          variant="outline"
+
+                        <EditButton
                           onClick={() => setCustomTractorUSD((prev) => !prev)}
-                          className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
                           hidden={selectedTractor == null}
-                        >
-                          ✏️
-                        </Button>
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -424,7 +419,9 @@ export default function FormMaquinaria() {
                 name="valor_residual_pct_t"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Valor residual (%)</FormLabel>
+                    <FormLabel className="text-muted-foreground text-xs">
+                      Valor residual (%)
+                    </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
@@ -432,7 +429,7 @@ export default function FormMaquinaria() {
                           readOnly={!customTractorResiduoPCT}
                           placeholder={`${selectedTractor ? 'Ingrese porcentaje residual' : 'Selecciona tractor'}`}
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                          className={`w-full text-sm font-normal p-5 border transition-all duration-200 ${
                             customTractorResiduoPCT
                               ? 'bg-white text-black border-gray-300'
                               : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
@@ -442,15 +439,11 @@ export default function FormMaquinaria() {
                             field.onChange(isNaN(value) ? '' : value);
                           }}
                         />
-                        <Button
-                          type="button"
-                          variant="outline"
+
+                        <EditButton
                           onClick={() => setCustomTractorResiduoPCT((prev) => !prev)}
-                          className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
                           hidden={selectedTractor == null}
-                        >
-                          ✏️
-                        </Button>
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -458,13 +451,13 @@ export default function FormMaquinaria() {
                 )}
               />
             </div>
-            <div className="w-full flex flex-col gap-4 ">
+            <div className="w-full flex flex-col gap-4  ">
               <FormField
                 control={form.control}
                 name="id_implemento"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Implemento</FormLabel>
+                    <FormLabel className="text-muted-foreground text-xs">Implemento</FormLabel>
                     <Select
                       value={field.value ?? ''}
                       onValueChange={(value) => {
@@ -517,7 +510,7 @@ export default function FormMaquinaria() {
                       }}
                     >
                       <SelectTrigger
-                        className={`text-xs w-full  border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
+                        className={`text-sm font-normal py-5 pr-0 w-full overflow-hidden border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
                         <SelectValue placeholder={'Selecciona implemento'} />
                       </SelectTrigger>
@@ -541,7 +534,7 @@ export default function FormMaquinaria() {
                 name="consumo_litros_hora_CV"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Consumo lt/h.CV</FormLabel>
+                    <FormLabel className="text-muted-foreground text-xs">Consumo lt/h.CV</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
@@ -549,7 +542,7 @@ export default function FormMaquinaria() {
                           readOnly={!customImplementoConsumo}
                           placeholder={`${selectedImplemento ? 'Ingrese consumo en lt/h.CV' : 'Selecciona implemento'}`}
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                          className={`w-full text-sm font-normal p-5 border transition-all duration-200 ${
                             customImplementoConsumo
                               ? 'bg-white text-black border-gray-300'
                               : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
@@ -559,15 +552,11 @@ export default function FormMaquinaria() {
                             field.onChange(isNaN(value) ? '' : value);
                           }}
                         />
-                        <Button
-                          type="button"
-                          variant="outline"
+
+                        <EditButton
                           onClick={() => setCustomImplementoConsumo((prev) => !prev)}
-                          className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
                           hidden={selectedImplemento == null}
-                        >
-                          ✏️
-                        </Button>
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -579,7 +568,9 @@ export default function FormMaquinaria() {
                 name="precio_usd_i"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Precio del implemento USD</FormLabel>
+                    <FormLabel className="text-muted-foreground text-xs">
+                      Precio del implemento USD
+                    </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
@@ -587,7 +578,7 @@ export default function FormMaquinaria() {
                           readOnly={!customImplementoUSD}
                           placeholder={`${selectedImplemento ? 'Ingrese precio USD' : 'Selecciona implemento'}`}
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                          className={`w-full text-sm font-normal p-5 border transition-all duration-200 ${
                             customImplementoUSD
                               ? 'bg-white text-black border-gray-300'
                               : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
@@ -597,15 +588,11 @@ export default function FormMaquinaria() {
                             field.onChange(isNaN(value) ? '' : value);
                           }}
                         />
-                        <Button
-                          type="button"
-                          variant="outline"
+
+                        <EditButton
                           onClick={() => setCustomImplementoUSD((prev) => !prev)}
-                          className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
                           hidden={selectedImplemento == null}
-                        >
-                          ✏️
-                        </Button>
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -617,7 +604,9 @@ export default function FormMaquinaria() {
                 name="valor_residual_pct_i"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Valor residual (%)</FormLabel>
+                    <FormLabel className="text-muted-foreground text-xs">
+                      Valor residual (%)
+                    </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
@@ -625,7 +614,7 @@ export default function FormMaquinaria() {
                           readOnly={!customImplementoResiduoPCT}
                           placeholder={`${selectedImplemento ? 'Ingrese porcentaje residual' : 'Selecciona implemento'}`}
                           value={field.value ?? ''}
-                          className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
+                          className={`w-full text-sm font-normal p-5 border transition-all duration-200 ${
                             customImplementoResiduoPCT
                               ? 'bg-white text-black border-gray-300'
                               : 'text-xs bg-gray-100 text-gray-500 border-gray-200 cursor-not-allowed'
@@ -635,15 +624,11 @@ export default function FormMaquinaria() {
                             field.onChange(isNaN(value) ? '' : value);
                           }}
                         />
-                        <Button
-                          type="button"
-                          variant="outline"
+
+                        <EditButton
                           onClick={() => setCustomImplementoResiduoPCT((prev) => !prev)}
-                          className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
                           hidden={selectedImplemento == null}
-                        >
-                          ✏️
-                        </Button>
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />

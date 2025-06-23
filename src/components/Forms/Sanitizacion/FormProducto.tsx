@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { useSanitizantes } from '@/hooks/useSanitizantes';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { EditButton } from '@/components/ui/edit-button';
 import {
   Form,
   FormControl,
@@ -187,15 +188,11 @@ export default function FormProducto() {
                           field.onChange(isNaN(value) ? '' : value);
                         }}
                       />
-                      <Button
-                        type="button"
-                        variant="outline"
+
+                      <EditButton
                         onClick={() => setCustomDosisHl((prev) => !prev)}
-                        className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
                         hidden={selectedSanitizante == null}
-                      >
-                        ✏️
-                      </Button>
+                      />
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -227,15 +224,11 @@ export default function FormProducto() {
                           field.onChange(isNaN(value) ? '' : value);
                         }}
                       />
-                      <Button
-                        type="button"
-                        variant="outline"
+
+                      <EditButton
                         onClick={() => setCustomUsdEnvase((prev) => !prev)}
-                        className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
                         hidden={selectedSanitizante == null}
-                      >
-                        ✏️
-                      </Button>
+                      />
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -265,15 +258,11 @@ export default function FormProducto() {
                           field.onChange(isNaN(value) ? '' : value);
                         }}
                       />
-                      <Button
-                        type="button"
-                        variant="outline"
+
+                      <EditButton
                         onClick={() => setCustomVolumenEnvase((prev) => !prev)}
-                        className="h-fit w-fit p-0.5 absolute right-0.5 top-1/2 -translate-y-1/2 text-gray-500  text-lg transition-colors"
                         hidden={selectedSanitizante == null}
-                      >
-                        ✏️
-                      </Button>
+                      />
                     </div>
                   </FormControl>
                   <FormMessage />

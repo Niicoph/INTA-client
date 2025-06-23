@@ -24,20 +24,6 @@ export default tseslint.config(
       'prettier': prettier,
       'react': react,
     },
-    // rules: {
-    //   ...reactHooks.configs.recommended.rules,
-    //   'react-refresh/only-export-components': [
-    //     'warn',
-    //     { allowConstantExport: true },
-    //   ],
-    //   'prettier/prettier': ['error'],
-
-    //   'react/jsx-indent': ['error', 2],
-    //   'react/jsx-first-prop-new-line': ['error', 'multiline-multiprop'],
-    //   'react/jsx-max-props-per-line': ['error', { maximum: 1, when: 'multiline' }],
-    //   'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
-    //   'react/jsx-one-expression-per-line': ['off'],
-    // },
     settings: {
       react: {
         version: 'detect',

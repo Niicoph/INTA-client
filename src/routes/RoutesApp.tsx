@@ -9,7 +9,6 @@ const Sanitizacion = lazy(() => import('@/pages/Sanitizacion/Sanitizacion'));
 const Fertilizacion = lazy(() => import('@/pages/Fertilizacion/Fertilizacion'));
 const Maquinaria = lazy(() => import('@/pages/Maquinaria/Maquinaria'));
 const NotFound = lazy(() => import('@/pages/NotFound/NotFound'));
-
 const ModuloLayout = lazy(() => import('@/layouts/ModuloLayout'));
 
 export default function RoutesApp() {
@@ -23,27 +22,12 @@ export default function RoutesApp() {
           </Suspense>
         }
       >
-        <Route path={router.maquinaria} 
-          element={
-            <Maquinaria />
-          } 
-        />
-        <Route path={router.sanitizacion} 
-          element={
-            <Sanitizacion />
-            } 
-        />
-        <Route path={router.fertilizacion} 
-          element={
-            <Fertilizacion />
-            } 
-        />
+        <Route path={router.maquinaria} element={<Maquinaria />} />
+        <Route path={router.sanitizacion} element={<Sanitizacion />} />
+        <Route path={router.fertilizacion} element={<Fertilizacion />} />
       </Route>
 
-      <Route path="*" element={
-          <NotFound />
-        } 
-      />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
