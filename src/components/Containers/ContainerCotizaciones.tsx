@@ -1,11 +1,10 @@
-import CotizacionesIcon from '../../assets/Icons/Outlined/cotizaciones.png';
 import TitleContainer from '../ui/TitleContainer/TitleContainer';
 import CardCotizaciones from '../Cards/CardCotizaciones';
 
 import { useDollar } from '@/hooks/useDollar';
-import { useGasoil } from '@/hooks/useGasoil';
-import { type Gasoil } from '@/types/gasoil';
-import { Fuel } from 'lucide-react';
+// import { useGasoil } from '@/hooks/useGasoil';
+// import { type Gasoil } from '@/types/gasoil';
+// import { Fuel } from 'lucide-react';
 import { DollarSignIcon } from 'lucide-react';
 import { CardSkeleton } from '../Loadings/CardSkeleton/CardSkeleton';
 
@@ -14,12 +13,12 @@ interface Props {
   gasoil?: boolean;
 }
 
-export default function ContainerCotizaciones({ dollar = false, gasoil = false }: Props) {
+export default function ContainerCotizaciones({ dollar = false }: Props) {
   const dollarCollection = useDollar();
-  const gasoilCollectionNQN = useGasoil('NEUQUEN');
+  //   const gasoilCollectionNQN = useGasoil('NEUQUEN');
   return (
     <div className="rounded-md flex flex-col border border-border">
-      <TitleContainer icon={CotizacionesIcon} title="Cotizaciones" />
+      <TitleContainer type="cotizacion" />
 
       <div className="flex flex-col">
         {dollar &&
@@ -36,7 +35,7 @@ export default function ContainerCotizaciones({ dollar = false, gasoil = false }
           />
         )}
 
-        {gasoil &&
+        {/* {gasoil &&
           gasoilCollectionNQN.isLoading &&
           Array.from({ length: 1 }).map((_, index) => <CardSkeleton key={index} />)}
 
@@ -64,7 +63,7 @@ export default function ContainerCotizaciones({ dollar = false, gasoil = false }
                 color="E86C2A"
               />
             );
-          })}
+          })} */}
       </div>
     </div>
   );

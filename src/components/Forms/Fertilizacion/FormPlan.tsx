@@ -7,7 +7,6 @@ import { type PlanFormData } from '@/schemas/Fertilizacion/types';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
-import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
 import { useState, useContext } from 'react';
 import FormTratamiento from './FormTratamiento';
 import { CostoPlanFertilizacionContext } from '@/context/CostoPlanFertilizacionContext';
@@ -110,7 +109,7 @@ export default function FormPlan() {
 
   return (
     <div className="rounded-md flex flex-col justify-between w-full h-full border border-border ">
-      <TitleContainer title="Carga de Plan Fertilizante" icon={CargaDatosIcon} />
+      <TitleContainer type="CargaPlan" />
       <Form {...formPlan}>
         <form
           onSubmit={handleSubmit(handleFormSubmit)}

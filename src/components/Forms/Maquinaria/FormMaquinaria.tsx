@@ -1,5 +1,4 @@
 'use client';
-import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
 import { useState, useEffect, useContext } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -29,13 +28,13 @@ import { type MaquinariaFormData } from '@/schemas/Maquinaria/types';
 import { type Implemento, type Tractor } from '@/types/maquinaria';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
 import { useDollar } from '@/hooks/useDollar';
-import { useGasoil } from '@/hooks/useGasoil';
+// import { useGasoil } from '@/hooks/useGasoil';
 import { calcularCostoTotalMaquinaria } from '@/utils/costoTotalMaquinaria';
 
 export default function FormMaquinaria() {
   const maquinariaContext = useContext(MaquinariaContext);
-  const gasoilCollectionNQN = useGasoil('NEUQUEN');
-  const gasoilCollection = gasoilCollectionNQN.data?.slice(0, 1);
+  //   const gasoilCollectionNQN = useGasoil('NEUQUEN');
+  //   const gasoilCollection = gasoilCollectionNQN.data?.slice(0, 1);
 
   if (!maquinariaContext) {
     return null;
@@ -63,7 +62,7 @@ export default function FormMaquinaria() {
 
   const form = useForm<MaquinariaFormData>({
     resolver: zodResolver(MaquinariaSchema),
-    defaultValues: {      
+    defaultValues: {
       id_conjunto: '',
 
       //Cotizaciones
@@ -107,7 +106,7 @@ export default function FormMaquinaria() {
     };
     // calcula datos faltantes y los envia al context como ConjuntoMaquinaria[].
     const finalFinalData = calcularCostoTotalMaquinaria(finalData);
-    
+
     setData((prev) => [...prev, finalFinalData]);
     resetForm();
   };
@@ -142,7 +141,7 @@ export default function FormMaquinaria() {
 
   return (
     <div className="rounded-md flex flex-col border h-full border-border">
-      <TitleContainer icon={CargaDatosIcon} title="Carga de Conjuntos" />
+      <TitleContainer type="CargaConjunto" />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleFormSubmit)}
@@ -233,14 +232,14 @@ export default function FormMaquinaria() {
                           <SelectValue placeholder="Selecciona cotización" />
                         </SelectTrigger>
                         <SelectContent>
-                          {gasoilCollection?.map((gasoil, index) => (
+                          {/* {gasoilCollection?.map((gasoil, index) => (
                             <SelectItem
                               key={gasoil.localidad + index}
                               value={gasoil.precio.toString()}
                             >
                               ${gasoil.precio} - {gasoil.localidad}
                             </SelectItem>
-                          ))}
+                          ))} */}
                           <SelectItem value="custom">Otro (especificar)</SelectItem>
                         </SelectContent>
                       </Select>
@@ -279,7 +278,7 @@ export default function FormMaquinaria() {
                       value={field.value ?? ''}
                       onValueChange={(value) => {
                         const tractor =
-                          maquinaria.data?.tractores.find((t) => t.id_tractor === value) || null;                          
+                          maquinaria.data?.tractores.find((t) => t.id_tractor === value) || null;
                         setSelectedTractor(tractor);
 
                         if (tractor) {
@@ -328,7 +327,10 @@ export default function FormMaquinaria() {
                       </SelectTrigger>
                       <SelectContent>
                         {maquinaria.data?.tractores.map((tractor: Tractor) => (
-                          <SelectItem key={`${tractor.id_tractor} ${tractor.nombre}`} value={tractor.id_tractor}>
+                          <SelectItem
+                            key={`${tractor.id_tractor} ${tractor.nombre}`}
+                            value={tractor.id_tractor}
+                          >
                             {tractor.nombre} ({tractor.potencia_CV} CV)
                           </SelectItem>
                         ))}
@@ -350,7 +352,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="number"
                           readOnly={!customTractorCV}
-                          placeholder={`${selectedTractor?'Ingrese CV':'Selecciona tractor'}`}
+                          placeholder={`${selectedTractor ? 'Ingrese CV' : 'Selecciona tractor'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                             customTractorCV
@@ -390,7 +392,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="number"
                           readOnly={!customTractorUSD}
-                          placeholder={`${selectedTractor?'Ingrese precio USD':'Selecciona tractor'}`}
+                          placeholder={`${selectedTractor ? 'Ingrese precio USD' : 'Selecciona tractor'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-4 py-2 border rounded-md transition-all duration-200 ${
                             customTractorUSD
@@ -428,7 +430,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="number"
                           readOnly={!customTractorResiduoPCT}
-                          placeholder={`${selectedTractor?'Ingrese porcentaje residual':'Selecciona tractor'}`}
+                          placeholder={`${selectedTractor ? 'Ingrese porcentaje residual' : 'Selecciona tractor'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                             customTractorResiduoPCT
@@ -467,7 +469,8 @@ export default function FormMaquinaria() {
                       value={field.value ?? ''}
                       onValueChange={(value) => {
                         const implemento =
-                          maquinaria.data?.implementos.find((i) => i.id_implemento === value) || null;
+                          maquinaria.data?.implementos.find((i) => i.id_implemento === value) ||
+                          null;
                         setSelectedImplemento(implemento);
 
                         if (implemento) {
@@ -544,7 +547,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="number"
                           readOnly={!customImplementoConsumo}
-                          placeholder={`${selectedImplemento?'Ingrese consumo en lt/h.CV':'Selecciona implemento'}`}
+                          placeholder={`${selectedImplemento ? 'Ingrese consumo en lt/h.CV' : 'Selecciona implemento'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                             customImplementoConsumo
@@ -582,7 +585,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="input"
                           readOnly={!customImplementoUSD}
-                          placeholder={`${selectedImplemento?'Ingrese precio USD':'Selecciona implemento'}`}
+                          placeholder={`${selectedImplemento ? 'Ingrese precio USD' : 'Selecciona implemento'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                             customImplementoUSD
@@ -620,7 +623,7 @@ export default function FormMaquinaria() {
                         <Input
                           type="number"
                           readOnly={!customImplementoResiduoPCT}
-                          placeholder={`${selectedImplemento?'Ingrese porcentaje residual':'Selecciona implemento'}`}
+                          placeholder={`${selectedImplemento ? 'Ingrese porcentaje residual' : 'Selecciona implemento'}`}
                           value={field.value ?? ''}
                           className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                             customImplementoResiduoPCT

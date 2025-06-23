@@ -1,4 +1,3 @@
-import VisualizacionesIcon from '@/assets/Icons/Outlined/graficoBarras.png';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -7,8 +6,9 @@ import { CostoPlanContext } from '@/context/CostoPlanContext';
 import { useContext, lazy, Suspense } from 'react';
 import { columnsSanidad } from '../ui/DataTable/columnsSanidad';
 import { flattenPlanes } from '@/utils/flattenPlanesSanitizacion';
-
+import LoadingSpinner from '../Loadings/LoadingSpinner/LoadingSpinner';
 import Alert from '@/components/ui/alert';
+
 const ChartSanidad = lazy(() => import('@/components/Charts/ChartSanidad'));
 const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
 import { type ColumnDef } from '@tanstack/react-table';
@@ -33,7 +33,7 @@ export default function VisualizacionSanitizacion() {
   };
   return (
     <div className="rounded-md flex flex-col border border-border overflow-hidden w-full xl:h-full">
-      <TitleContainer icon={VisualizacionesIcon} title="Visualización Gráfica" />
+      <TitleContainer type="visualizacion" />
       <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col overflow-hidden h-[600px] xl:h-full">
         <Tabs
           defaultValue="tab1"
@@ -61,7 +61,7 @@ export default function VisualizacionSanitizacion() {
           >
             <div className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando gráfico..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <ChartSanidad planes={data} />
                 </Suspense>
               ) : (
@@ -70,7 +70,7 @@ export default function VisualizacionSanitizacion() {
             </div>
             <div className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando tabla..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <DataTable
                     columns={columnsSanidad as ColumnDef<unknown, unknown>[]}
                     data={filasTabla}
@@ -89,7 +89,7 @@ export default function VisualizacionSanitizacion() {
           >
             <div className="overflow-x-auto h-full">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando tabla..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <DataTable
                     columns={columnsSanidad as ColumnDef<unknown, unknown>[]}
                     data={filasTabla}
@@ -108,7 +108,7 @@ export default function VisualizacionSanitizacion() {
           >
             <div className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando gráfico..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <ChartSanidad planes={data} />
                 </Suspense>
               ) : (

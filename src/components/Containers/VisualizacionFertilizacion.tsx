@@ -1,4 +1,3 @@
-import VisualizacionesIcon from '@/assets/Icons/Outlined/graficoBarras.png';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -9,6 +8,7 @@ import { flattenPlanes } from '@/utils/flattenPlanesFertilizacion';
 import { columnsFertilizacion } from '../ui/DataTable/columnsFertilizacion';
 import Alert from '@/components/ui/alert';
 import { type ColumnDef } from '@tanstack/react-table';
+import LoadingSpinner from '../Loadings/LoadingSpinner/LoadingSpinner';
 
 const ChartFertilizacion = lazy(() => import('@/components/Charts/ChartFertilizacion'));
 const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
@@ -34,7 +34,7 @@ export default function VisualizacionFertilizacion() {
 
   return (
     <div className="rounded-md flex flex-col border border-border overflow-hidden w-full xl:h-full">
-      <TitleContainer icon={VisualizacionesIcon} title="Visualización Gráfica" />
+      <TitleContainer type="visualizacion" />
       <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col overflow-hidden h-[600px] xl:h-full">
         <Tabs
           defaultValue="tab1"
@@ -62,7 +62,7 @@ export default function VisualizacionFertilizacion() {
           >
             <div className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando gráfico..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <ChartFertilizacion planes={data} />
                 </Suspense>
               ) : (
@@ -71,7 +71,7 @@ export default function VisualizacionFertilizacion() {
             </div>
             <div className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando tabla..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <DataTable
                     columns={columnsFertilizacion as ColumnDef<unknown, unknown>[]}
                     data={filasTabla}
@@ -90,7 +90,7 @@ export default function VisualizacionFertilizacion() {
           >
             <div className="overflow-x-auto h-full">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando tabla..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <DataTable
                     columns={columnsFertilizacion as ColumnDef<unknown, unknown>[]}
                     data={filasTabla}
@@ -109,7 +109,7 @@ export default function VisualizacionFertilizacion() {
           >
             <div className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando gráfico..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <ChartFertilizacion planes={data} />
                 </Suspense>
               ) : (

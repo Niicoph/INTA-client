@@ -2,7 +2,6 @@
 import { useEffect, useState, useContext } from 'react';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import Legend from '@/components/ui/Legend/Legend';
-import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
 import { ProductoSchema } from '@/schemas/Fertilizacion/schema';
 import { type ProductoFormData } from '@/schemas/Fertilizacion/types';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -88,7 +87,7 @@ export default function FormProducto() {
 
   return (
     <div className="rounded-md flex flex-col border border-border w-full">
-      <TitleContainer title="Carga Producto Fertilizante" icon={CargaDatosIcon} />
+      <TitleContainer type="cargaProducto" />
       <Form {...formFertilizante}>
         <form
           onSubmit={formFertilizante.handleSubmit(handleFormFertilizanteSubmit)}
@@ -173,7 +172,7 @@ export default function FormProducto() {
                       <Input
                         type="number"
                         readOnly={!customDosisHa}
-                        placeholder={`${selectedFertilizante?'Ingrese dosis/ha':'Selecciona fertilizante'}`}
+                        placeholder={`${selectedFertilizante ? 'Ingrese dosis/ha' : 'Selecciona fertilizante'}`}
                         value={field.value ?? ''}
                         className={`w-full pr-10 px-4 py-2 border rounded-md transition-all duration-200 ${
                           customDosisHa
@@ -213,7 +212,7 @@ export default function FormProducto() {
                       <Input
                         type="number"
                         readOnly={!customUsdEnvase}
-                        placeholder={`${selectedFertilizante?'Ingrese USD por envase':'Selecciona fertilizante'}`}
+                        placeholder={`${selectedFertilizante ? 'Ingrese USD por envase' : 'Selecciona fertilizante'}`}
                         value={field.value ?? ''}
                         className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                           customUsdEnvase
@@ -251,7 +250,7 @@ export default function FormProducto() {
                       <Input
                         type="number"
                         readOnly={!customVolumenEnvase}
-                        placeholder={`${selectedFertilizante?'Ingrese volumen de envase':'Selecciona fertilizante'}`}
+                        placeholder={`${selectedFertilizante ? 'Ingrese volumen de envase' : 'Selecciona fertilizante'}`}
                         value={field.value ?? ''}
                         className={`w-full pr-10 px-4 py-2 border rounded-md transition-all duration-200 ${
                           customVolumenEnvase
@@ -298,7 +297,9 @@ export default function FormProducto() {
                       <SelectTrigger
                         className={`text-xs w-full  border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
-                        <SelectValue placeholder={`${selectedFertilizante?'Seleccione unidad':'Selecciona fertilizante'}`} />
+                        <SelectValue
+                          placeholder={`${selectedFertilizante ? 'Seleccione unidad' : 'Selecciona fertilizante'}`}
+                        />
                       </SelectTrigger>
                       <SelectContent>
                         {unidades?.map((unidad: string) => (

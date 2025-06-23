@@ -2,7 +2,6 @@
 import { useEffect, useState, useContext } from 'react';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import Legend from '@/components/ui/Legend/Legend';
-import CargaDatosIcon from '@/assets/Icons/Outlined/cargaDatos.png';
 import { ProductoSchema } from '@/schemas/Sanitizacion/schema';
 import { type ProductoFormData } from '@/schemas/Sanitizacion/types';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -64,7 +63,7 @@ export default function FormProducto() {
       index = parseInt(sanitizantesContext.data[index - 2].id_sanitizante) + 1;
     }
 
-    const finalData : Producto = {
+    const finalData: Producto = {
       ...data,
       id_sanitizante: `${index}`,
     };
@@ -89,7 +88,7 @@ export default function FormProducto() {
 
   return (
     <div className="rounded-md flex flex-col border border-border w-full">
-      <TitleContainer title="Carga Producto Sanitizante" icon={CargaDatosIcon} />
+      <TitleContainer type="cargaProducto" />
       <Form {...formSanitizante}>
         <form
           onSubmit={formSanitizante.handleSubmit(handleFormSanitizanteSubmit)}
@@ -116,11 +115,15 @@ export default function FormProducto() {
                           shouldDirty: true,
                           shouldTouch: true,
                         });
-                        formSanitizante.setValue('precio_usd_envase', sanitizante.precio_usd_envase, {
-                          shouldValidate: true,
-                          shouldDirty: true,
-                          shouldTouch: true,
-                        });
+                        formSanitizante.setValue(
+                          'precio_usd_envase',
+                          sanitizante.precio_usd_envase,
+                          {
+                            shouldValidate: true,
+                            shouldDirty: true,
+                            shouldTouch: true,
+                          }
+                        );
                         formSanitizante.setValue('dosis_x_hl', sanitizante.dosis_x_hl, {
                           shouldValidate: true,
                           shouldDirty: true,
@@ -172,7 +175,7 @@ export default function FormProducto() {
                       <Input
                         type="number"
                         readOnly={!customDosisHl}
-                        placeholder={`${selectedSanitizante?'Ingrese dosis/hl':'Selecciona sanitizante'}`}
+                        placeholder={`${selectedSanitizante ? 'Ingrese dosis/hl' : 'Selecciona sanitizante'}`}
                         value={field.value ?? ''}
                         className={`w-full pr-10 px-4 py-2 border rounded-md transition-all duration-200 ${
                           customDosisHl
@@ -212,7 +215,7 @@ export default function FormProducto() {
                       <Input
                         type="number"
                         readOnly={!customUsdEnvase}
-                        placeholder={`${selectedSanitizante?'Ingrese USD por envase':'Selecciona sanitizante'}`}
+                        placeholder={`${selectedSanitizante ? 'Ingrese USD por envase' : 'Selecciona sanitizante'}`}
                         value={field.value ?? ''}
                         className={`w-full pr-10 px-3 py-2 border transition-all duration-200 ${
                           customUsdEnvase
@@ -250,7 +253,7 @@ export default function FormProducto() {
                       <Input
                         type="number"
                         readOnly={!customVolumenEnvase}
-                        placeholder={`${selectedSanitizante?'Ingrese volumen de envase':'Selecciona sanitizante'}`}
+                        placeholder={`${selectedSanitizante ? 'Ingrese volumen de envase' : 'Selecciona sanitizante'}`}
                         value={field.value ?? ''}
                         className={`w-full pr-10 px-4 py-2 border rounded-md transition-all duration-200 ${
                           customVolumenEnvase
@@ -297,7 +300,9 @@ export default function FormProducto() {
                       <SelectTrigger
                         className={`text-xs w-full  border-2 ${field.value ? 'border-green-200' : 'border-blue-200'}`}
                       >
-                        <SelectValue placeholder={`${selectedSanitizante?'Seleccione unidad':'Selecciona sanitizante'}`} />
+                        <SelectValue
+                          placeholder={`${selectedSanitizante ? 'Seleccione unidad' : 'Selecciona sanitizante'}`}
+                        />
                       </SelectTrigger>
                       <SelectContent>
                         {unidades?.map((unidad: string, index) => (

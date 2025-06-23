@@ -1,4 +1,3 @@
-import VisualizacionesIcon from '@/assets/Icons/Outlined/graficoBarras.png';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import { Button } from '@/components/ui/button';
@@ -7,6 +6,7 @@ import { MaquinariaContext } from '@/context/MaquinariaContext';
 import Alert from '@/components/ui/alert';
 import { columnsMaquinaria } from '@/components/ui/DataTable/columnsMaquinaria';
 import { lazy, Suspense, useContext, useRef } from 'react';
+import LoadingSpinner from '../Loadings/LoadingSpinner/LoadingSpinner';
 
 const ChartMaquinaria = lazy(() => import('@/components/Charts/ChartMaquinaria'));
 const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
@@ -92,7 +92,7 @@ export default function VisualizacionMaquinaria() {
 
   return (
     <div className="rounded-md flex flex-col border border-border overflow-hidden w-full xl:h-full">
-      <TitleContainer icon={VisualizacionesIcon} title="Visualización Gráfica" />
+      <TitleContainer type="visualizacion" />
       <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col overflow-hidden h-[600px] xl:h-full">
         <Tabs
           defaultValue="tab1"
@@ -120,16 +120,16 @@ export default function VisualizacionMaquinaria() {
           >
             <div ref={captureRef} className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando gráfico..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <ChartMaquinaria conjuntosMaquinaria={data} />
                 </Suspense>
               ) : (
                 <Alert text="No hay conjuntos para mostrar." />
               )}
             </div>
-            <div className="overflow-x-auto">
+            <div ref={captureRef} className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando tabla..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <DataTable
                     columns={columnsMaquinaria as ColumnDef<unknown, unknown>[]}
                     data={data}
@@ -146,9 +146,9 @@ export default function VisualizacionMaquinaria() {
             aria-label="Tabla"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            <div className="overflow-x-auto h-full">
+            <div ref={captureRef} className="overflow-x-auto h-full">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando tabla..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <DataTable
                     columns={columnsMaquinaria as ColumnDef<unknown, unknown>[]}
                     data={data}
@@ -165,9 +165,9 @@ export default function VisualizacionMaquinaria() {
             aria-label="Grafico"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            <div className="overflow-x-auto">
+            <div ref={captureRef} className="overflow-x-auto">
               {data.length > 0 ? (
-                <Suspense fallback={<Alert text="Cargando gráfico..." />}>
+                <Suspense fallback={<LoadingSpinner />}>
                   <ChartMaquinaria conjuntosMaquinaria={data} />
                 </Suspense>
               ) : (
