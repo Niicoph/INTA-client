@@ -23,6 +23,15 @@ export default function VisualizacionFertilizacion() {
 
   const filasTabla = flattenPlanes(data);
 
+  const downloadXLS = async () => {
+    try {
+      const { default: DownloadXLS } = await import('@/utils/SectionXLS/DownloadXLS');
+      DownloadXLS(data, 'fertilizante');
+    } catch (error) {
+      console.error('Error con el excel', error);
+    }
+  };
+
   return (
     <div className="rounded-md flex flex-col border border-border overflow-hidden w-full xl:h-full">
       <TitleContainer icon={VisualizacionesIcon} title="Visualización Gráfica" />
@@ -41,7 +50,7 @@ export default function VisualizacionFertilizacion() {
               PDF
               <Download size={24} strokeWidth={2} />
             </Button>
-            <Button variant="outline" className="h-10 w-full md:w-fit">
+            <Button variant="outline" className="h-10 w-full md:w-fit" onClick={downloadXLS}>
               Excel
               <Download size={24} strokeWidth={2} />
             </Button>
@@ -98,13 +107,15 @@ export default function VisualizacionFertilizacion() {
             aria-label="Grafico"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            {data.length > 0 ? (
-              <Suspense fallback={<Alert text="Cargando gráfico..." />}>
-                <ChartFertilizacion planes={data} />
-              </Suspense>
-            ) : (
-              <Alert text="No hay conjuntos para mostrar." />
-            )}
+            <div className="overflow-x-auto">
+              {data.length > 0 ? (
+                <Suspense fallback={<Alert text="Cargando gráfico..." />}>
+                  <ChartFertilizacion planes={data} />
+                </Suspense>
+              ) : (
+                <Alert text="No hay conjuntos para mostrar." />
+              )}
+            </div>
           </TabsContent>
         </Tabs>
       </div>

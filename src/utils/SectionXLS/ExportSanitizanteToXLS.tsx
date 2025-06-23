@@ -1,38 +1,50 @@
 import * as XLSX from 'xlsx';
+import type { Plan } from '@/types/sanitizante';
 
 //instalar SheetJS con npm i --save https://cdn.sheetjs.com/xlsx-latest/xlsx-latest.tgz
 //desintalar con npm rm --save xlsx
 
-export default function exportToXLS(costosEconomicos: any[]) {
+export default function exportSanitizanteToXLS(planes: Plan[]) {
   const columnHeadersMap: Record<string, string> = {
-    id_conjunto: 'Conjunto',
+    id_plan: 'Plan',
     cotizacion_usd: 'Cotización USD',
-    cotizacion_gasoil_litro: 'Precio Gasoil',
-    nombre_t: 'Tractor',
-    potencia_CV: 'CV',
-    nombre_i: 'Implemento',
-    amortizacion_t: 'Amortización Tractor $/h',
-    costo_mantenimiento_t: 'Mantenimiento Tractor $/h',
-    amortizacion_i: 'Amortización Implemento $/h',
-    costo_combustible: 'Combustible $/h',
-    costo_mantenimiento_i: 'Mantenimiento Implemento $/h',
-    costo_total_hora: 'Costo Total $/h',
+    costo_x_ha: 'Costo Total Plan',
+    id_tratamiento: 'Tto.',
+    tratamiento_fecha: 'Fecha',
+    costo_tratamiento: 'Costo Tratamiento',
+    nombre_producto: 'Producto',
+    volumen_envase: 'Vol. envase',
+    unidad_envase: 'Unidad envase',
+    precio_usd_envase: 'USD envase',
+    dosis_x_hl: 'Dosis/hl',
+    volumen_aplicado: 'Vol. Aplicado/hl',
+    costo_aplicacion: 'Costo Aplicacion/ha',
+    tipo_producto: 'Tipo',
   };
 
-  const flatData = costosEconomicos.map((item) => ({
-    id_conjunto: item.id_conjunto,
-    cotizacion_usd: item.conjunto.cotizacion_usd,
-    cotizacion_gasoil_litro: item.conjunto.cotizacion_gasoil_litro,
-    nombre_t: item.conjunto.nombre_t,
-    potencia_CV: item.conjunto.potencia_CV,
-    nombre_i: item.conjunto.nombre_i,
-    amortizacion_t: item.amortizacion_t,
-    costo_mantenimiento_t: item.costo_mantenimiento_t,
-    amortizacion_i: item.amortizacion_i,
-    costo_combustible: item.costo_combustible,
-    costo_mantenimiento_i: item.costo_mantenimiento_i,
-    costo_total_hora: item.costo_total_hora,
-  }));
+  const flatData = planes.flatMap((plan) =>
+    plan.tratamientos.flatMap((tratamiento) =>
+      tratamiento.aplicaciones.map((aplicacion) => ({
+        id_plan: plan.id_plan,
+        cotizacion_usd: plan.cotizacion_usd,
+        costo_x_ha: plan.costo_total,
+
+        id_tratamiento: tratamiento.id_tratamiento,
+        tratamiento_fecha: tratamiento.fecha.toLocaleDateString('es-AR'),
+        costo_tratamiento: tratamiento.costo_total,
+
+        nombre_producto: aplicacion.producto.nombre,
+        volumen_envase: aplicacion.producto.volumen_envase,
+        unidad_envase: aplicacion.producto.unidad,
+        precio_usd_envase: aplicacion.producto.precio_usd_envase,
+        dosis_x_hl: aplicacion.producto.dosis_x_hl,
+        tipo_producto: aplicacion.producto.tipo,
+
+        volumen_aplicado: aplicacion.volumen_x_ha,
+        costo_aplicacion: aplicacion.costo_total,
+      }))
+    )
+  );
 
   const renamedData =
     flatData.length > 0
@@ -60,13 +72,10 @@ export default function exportToXLS(costosEconomicos: any[]) {
 
   const currencyColumns = [
     'Cotización USD',
-    'Precio Gasoil',
-    'Amortización Tractor $/h',
-    'Mantenimiento Tractor $/h',
-    'Amortización Implemento $/h',
-    'Combustible $/h',
-    'Mantenimiento Implemento $/h',
-    'Costo Total $/h',
+    'Costo Total Plan',
+    'Costo Tratamiento',
+    'USD Envase',
+    'Costo Aplicacion/ha',
   ];
 
   const headers = Object.keys(renamedData[0]);
@@ -85,7 +94,7 @@ export default function exportToXLS(costosEconomicos: any[]) {
   });
 
   const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Maquinaria');
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Sanitizantes');
 
-  XLSX.writeFile(workbook, 'Maquinaria.xlsx');
+  XLSX.writeFile(workbook, 'Sanitizantes.xlsx');
 }

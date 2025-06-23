@@ -80,14 +80,13 @@ export default function VisualizacionMaquinaria() {
   //     }
   //   };
 
-  // exportar a excel (solo maquinaria por ahora, con el resto cambian las columnas solamente -posible modularización-)
-  // comando para instalar componente en ExportToXLS, a veces no lo instala con 'npm install' automáticamente.
-  const exportToXLS = async () => {
+  // Excel
+  const downloadXLS = async () => {
     try {
-      const { default: ExportToXLS } = await import('../../utils/SectionXLS/ExportToXLS');
-      ExportToXLS(data);
+      const { default: DownloadXLS } = await import('@/utils/SectionXLS/DownloadXLS');
+      DownloadXLS(data, 'maquinaria');
     } catch (error) {
-      console.error('Error al generar el archivo de Excel', error);
+      console.error('Error con el excel', error);
     }
   };
 
@@ -109,7 +108,7 @@ export default function VisualizacionMaquinaria() {
               PDF
               <Download size={24} strokeWidth={2} />
             </Button>
-            <Button variant="outline" className="h-10 w-full md:w-fit " onClick={exportToXLS}>
+            <Button variant="outline" className="h-10 w-full md:w-fit " onClick={downloadXLS}>
               Excel
               <Download size={24} strokeWidth={2} />
             </Button>
@@ -166,13 +165,15 @@ export default function VisualizacionMaquinaria() {
             aria-label="Grafico"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            {data.length > 0 ? (
-              <Suspense fallback={<Alert text="Cargando gráfico..." />}>
-                <ChartMaquinaria conjuntosMaquinaria={data} />
-              </Suspense>
-            ) : (
-              <Alert text="No hay conjuntos para mostrar." />
-            )}
+            <div className="overflow-x-auto">
+              {data.length > 0 ? (
+                <Suspense fallback={<Alert text="Cargando gráfico..." />}>
+                  <ChartMaquinaria conjuntosMaquinaria={data} />
+                </Suspense>
+              ) : (
+                <Alert text="No hay conjuntos para mostrar." />
+              )}
+            </div>
           </TabsContent>
         </Tabs>
       </div>

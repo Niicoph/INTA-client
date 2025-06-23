@@ -298,7 +298,7 @@ export const columnsFertilizacion: ColumnDef<FilaPlan>[] = [
       return (
         <div className="align-top">
           {data.aplicacion.dosis_x_ha.toLocaleString('es-AR')}{' '}
-          {data.aplicacion.producto.unidad}/hl
+          {data.aplicacion.producto.unidad}/ha
         </div>
       );
     },
