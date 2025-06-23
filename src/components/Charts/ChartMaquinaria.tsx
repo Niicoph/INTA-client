@@ -20,7 +20,7 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
         {/* KEYS DE TRACTOR */}
         <div className="text-red-500 font-mono font-medium mb-1">{cjto.tractor.nombre}</div>
         <div className="flex justify-between gap-4 text-foreground font-medium tabular-nums">
-          <span>Amortizacion</span>
+          <span>Amortización</span>
           <span>
             $
             {Number(cjto.tractor.amortizacion).toLocaleString('es-AR', {
@@ -44,7 +44,7 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
         <div className="flex justify-between gap-4 text-foreground font-medium tabular-nums border-t border-dashed border-blue-500"></div>
         <div className="text-yellow-500 font-mono font-medium mb-1">{cjto.implemento.nombre}</div>
         <div className="flex justify-between gap-4 text-foreground font-medium tabular-nums">
-          <span>Amortizacion</span>
+          <span>Amortización</span>
           <span>
             $
             {Number(cjto.implemento.amortizacion).toLocaleString('es-AR', {

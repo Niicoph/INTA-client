@@ -41,7 +41,7 @@ const colLabels = {
     valor_residual_pct: 'Valor Residual',
 
     //Resultado de calculos
-    amortizacion: 'Costo Amortizacion',
+    amortizacion: 'Costo Amortización',
     costo_mantenimiento: 'Costo Mantenimiento',    
   },  
   

@@ -77,7 +77,7 @@ export default function Home() {
                 <source media="(min-width: 640px)" srcSet="/src/assets/utils/bg-md.png" />
                 <img
                   src="/src/assets/utils/bg.png"
-                  alt="Hero background"
+                  alt="Fondo home"
                   className="absolute h-full object-cover z-0"
                 />
               </picture>

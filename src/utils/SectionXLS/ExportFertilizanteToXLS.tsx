@@ -1,5 +1,6 @@
 import * as XLSX from 'xlsx';
-import type { Plan } from '@/types/fertilizacion';
+import { type Plan } from '@/types/fertilizacion';
+import { getTimestampString } from '../getTimestampString';
 
 //instalar SheetJS con npm i --save https://cdn.sheetjs.com/xlsx-latest/xlsx-latest.tgz
 //desintalar con npm rm --save xlsx
@@ -137,5 +138,5 @@ export default function exportFertilizanteToXLS(planes: Plan[]) {
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, 'Fertilizantes');
 
-  XLSX.writeFile(workbook, 'Fertilizantes.xlsx');
+  XLSX.writeFile(workbook, 'planes_fertilizacion_'+getTimestampString()+'.xlsx');
 }

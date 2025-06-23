@@ -18,17 +18,17 @@ export default function TabsNav() {
     >
       <TabsList className="w-full h-12 gap-2 p-1 text-lg">
         <TabsTrigger asChild value="Maquinaria">
-          <Link className="bg-orange-100 hover:bg-orange-300 data-[state=active]:bg-orange-300" to="/maquinaria">
+          <Link className="text-orange-400 font-semibold hover:text-orange-500 hover:font-bold  data-[state=active]:text-orange-500 data-[state=active]:font-bold" to="/maquinaria">
             Maquinaria
           </Link>
         </TabsTrigger>
         <TabsTrigger asChild value="Sanitizacion">
-          <Link className="bg-green-100 hover:bg-green-300 data-[state=active]:bg-green-300" to="/sanitizacion">
+          <Link className="text-green-500 font-semibold hover:text-green-600 hover:font-bold data-[state=active]:text-green-600 data-[state=active]:font-bold" to="/sanitizacion">
             Sanitización
           </Link>
         </TabsTrigger>
         <TabsTrigger asChild value="Fertilizacion">
-          <Link className="bg-blue-100 hover:bg-blue-300 data-[state=active]:bg-blue-300" to="/fertilizacion">
+          <Link className="!text-blue-500 font-semibold hover:text-blue-600 hover:font-bold  data-[state=active]:text-blue-600 data-[state=active]:font-bold" to="/fertilizacion">          
             Fertilización
           </Link>
         </TabsTrigger>

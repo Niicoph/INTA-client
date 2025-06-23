@@ -1,5 +1,6 @@
 import * as XLSX from 'xlsx';
-import type { Plan } from '@/types/sanitizante';
+import { type Plan } from '@/types/sanitizante';
+import { getTimestampString } from '../getTimestampString';
 
 //instalar SheetJS con npm i --save https://cdn.sheetjs.com/xlsx-latest/xlsx-latest.tgz
 //desintalar con npm rm --save xlsx
@@ -140,5 +141,5 @@ worksheet['!merges'] = getMergeRanges(renamedData, headers);
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, 'Sanitizantes');
 
-  XLSX.writeFile(workbook, 'Sanitizantes.xlsx');
+  XLSX.writeFile(workbook, 'planes_fitosanitarios_'+getTimestampString()+'.xlsx');
 }

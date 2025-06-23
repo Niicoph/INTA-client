@@ -1,5 +1,6 @@
 import * as XLSX from 'xlsx';
 import { type ConjuntoMaquinaria } from '@/types/maquinaria';
+import { getTimestampString } from '../getTimestampString';
 
 //instalar SheetJS con npm i --save https://cdn.sheetjs.com/xlsx-latest/xlsx-latest.tgz
 //desintalar con npm rm --save xlsx
@@ -127,5 +128,5 @@ export default function exportMaquinariaToXLS(ConjuntoMaquinaria: ConjuntoMaquin
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, 'Maquinaria');
 
-  XLSX.writeFile(workbook, 'Maquinaria.xlsx');
+  XLSX.writeFile(workbook, 'conjuntos_maquinaria_'+getTimestampString()+'.xlsx');
 }
