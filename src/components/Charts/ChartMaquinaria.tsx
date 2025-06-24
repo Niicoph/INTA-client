@@ -99,30 +99,80 @@ export function ChartMaquinaria({
   const shouldScroll = conjuntosMaquinaria.length > scrollThreshold;
 
   return (
-    <ChartContainer
-      config={chartConfig}
-      className={`h-full w-full${shouldScroll ? ' w-[1000px]' : ''}`}
-    >
-      <BarChart data={conjuntosMaquinaria} margin={{ top: 20, left: 20 }}>
-        <CartesianGrid vertical={false} />
-        <YAxis
-          tickLine={false}
-          axisLine={false}
-          tickMargin={1}
-          tickFormatter={(value) => `$${value.toLocaleString('es-AR')}/h`}
-        />
-        <XAxis
-          dataKey="id_conjunto"
-          tickLine={false}
-          tickMargin={7}
-          axisLine={false}
-          tickFormatter={(value) => `Cjto. ${value}`}
-        />
-        <Tooltip content={<CustomTooltip />} />
-        <Bar dataKey="costo_total_hora" fill={'#3b82f6'} radius={4} barSize={30} cursor="pointer">          
-        </Bar>
-      </BarChart>
-    </ChartContainer>
+    <>
+      <ChartContainer
+        config={chartConfig}
+        className={`h-full w-full ${shouldScroll ? ' w-[1000px]' : ''}`}
+      >
+        <BarChart data={conjuntosMaquinaria} margin={{ top: 20, left: 30 }}>
+          <CartesianGrid vertical={false} />
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tickMargin={1}
+            tickFormatter={(value) => `$${value.toLocaleString('es-AR')}/h`}
+          />
+          <XAxis
+            dataKey="id_conjunto"
+            tickLine={false}
+            tickMargin={7}
+            axisLine={false}
+            tickFormatter={(value) => `Cjto. ${value}`}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          <Bar
+            dataKey="costo_total_hora"
+            fill={'#3b82f6'}
+            radius={4}
+            barSize={30}
+            cursor="pointer"
+          />
+        </BarChart>
+      </ChartContainer>
+      <div
+        style={{
+          display: 'none',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: 1000,
+          height: 400,
+          overflow: 'hidden',
+        }}
+        className="chart-maquinaria-export"
+      >
+        <BarChart
+          width={1000}
+          height={400}
+          data={conjuntosMaquinaria}
+          margin={{ top: 20, left: 40 }}
+        >
+          <CartesianGrid vertical={false} />
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tickMargin={1}
+            tickFormatter={(value) => `$${value.toLocaleString('es-AR')}/h`}
+          />
+          <XAxis
+            dataKey="id_conjunto"
+            interval={0}
+            tickLine={false}
+            tickMargin={7}
+            axisLine={false}
+            tickFormatter={(value) => `Cjto. ${value}`}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          <Bar
+            dataKey="costo_total_hora"
+            fill={'#3b82f6'}
+            radius={4}
+            barSize={30}
+            cursor="pointer"
+          />
+        </BarChart>
+      </div>
+    </>
   );
 }
 

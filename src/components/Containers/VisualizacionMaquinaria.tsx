@@ -5,18 +5,15 @@ import { Download } from 'lucide-react';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
 import Alert from '@/components/ui/alert';
 import { columnsMaquinaria } from '@/components/ui/DataTable/columnsMaquinaria';
-import { lazy, Suspense, useContext, useRef } from 'react';
+import { lazy, Suspense, useContext } from 'react';
 import LoadingSpinner from '../Loadings/LoadingSpinner/LoadingSpinner';
 
 const ChartMaquinaria = lazy(() => import('@/components/Charts/ChartMaquinaria'));
 const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
 
 import { type ColumnDef } from '@tanstack/react-table';
-
-// import pdfMake from 'pdfmake/build/pdfmake';
-// import pdfFonts from 'pdfmake/build/vfs_fonts';
-// pdfMake.vfs = pdfFonts.vfs;
-// import { mejorarImagenPDF } from '@/utils/mejorarImagenPDF';
+import jsPDF from 'jspdf';
+import { svg2pdf } from 'svg2pdf.js';
 
 export default function VisualizacionMaquinaria() {
   const maquinariaContext = useContext(MaquinariaContext);
@@ -25,62 +22,29 @@ export default function VisualizacionMaquinaria() {
   }
   const { data } = maquinariaContext;
 
-  const captureRef = useRef<HTMLDivElement>(null);
-  // exportar a pdf
-  //   const exportToPDF = async () => {
-  //     if (!captureRef.current) {
-  //       console.error('Elemento no encontrado para capturar');
-  //       return;
-  //     }
+  const downloadPDF = async () => {
+    try {
+      const svgElement = document.querySelector('.chart-maquinaria-export svg') as SVGSVGElement;
+      if (!svgElement) {
+        console.error('No se encontró el SVG del gráfico');
+        return;
+      }
+      const pdf = new jsPDF('p', 'pt', 'a4');
+      const pageWidth = pdf.internal.pageSize.getWidth();
 
-  //     console.log('Botón PDF clickeado');
+      await svg2pdf(svgElement, pdf, {
+        x: 0,
+        y: 0,
+        width: pageWidth,
+        height: 500,
+      });
 
-  //     try {
-  //       const dataUrl = await mejorarImagenPDF(captureRef.current);
+      pdf.save('grafico-maquinaria.pdf');
+    } catch (error) {
+      console.error('Error al generar el PDF', error);
+    }
+  };
 
-  //       const tableBody = [
-  //         ['Conjunto', 'Costo total por hora ($)'],
-  //         ...costosEconomicos.map((item) => [
-  //           item.id_conjunto,
-  //           item.costo_total_hora.toLocaleString('es-AR', { minimumFractionDigits: 2 }),
-  //         ]),
-  //       ];
-
-  //       const docDefinition: any = {
-  //         content: [
-  //           { text: 'Reporte de Maquinaria', style: 'header' },
-  //           { image: dataUrl, width: 500 },
-  //           { text: 'Tabla de Costos', style: 'subheader' },
-  //           {
-  //             table: {
-  //               headerRows: 1,
-  //               widths: ['auto', 'auto'],
-  //               body: tableBody,
-  //             },
-  //             layout: 'lightHorizontalLines',
-  //           },
-  //         ],
-  //         styles: {
-  //           header: {
-  //             fontSize: 20,
-  //             bold: true,
-  //             margin: [0, 0, 0, 10],
-  //           },
-  //           subheader: {
-  //             fontSize: 16,
-  //             bold: true,
-  //             margin: [0, 10, 0, 5],
-  //           },
-  //         },
-  //       };
-
-  //       pdfMake.createPdf(docDefinition).download('maquinaria.pdf');
-  //     } catch (error) {
-  //       console.error('Error al generar la imagen o el PDF:', error);
-  //     }
-  //   };
-
-  // Excel
   const downloadXLS = async () => {
     try {
       const { default: DownloadXLS } = await import('@/utils/SectionXLS/DownloadXLS');
@@ -93,7 +57,7 @@ export default function VisualizacionMaquinaria() {
   return (
     <div className="rounded-md flex flex-col border border-border overflow-hidden w-full xl:h-full">
       <TitleContainer type="visualizacion" />
-      <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col overflow-hidden h-[600px] xl:h-full">
+      <div className="w-full rounded-b-lg p-4 gap-4 flex flex-col overflow-hidden h-[1000px] xl:h-full">
         <Tabs
           defaultValue="tab1"
           className="w-full flex flex-col flex-1 justify-between gap-4 h-full"
@@ -104,7 +68,11 @@ export default function VisualizacionMaquinaria() {
               <TabsTrigger value="tab2">Tabla</TabsTrigger>
               <TabsTrigger value="tab3">Gráfico</TabsTrigger>
             </TabsList>
-            <Button variant="outline" className="ml-auto h-10 w-full md:w-fit">
+            <Button
+              variant="outline"
+              className="ml-auto h-10 w-full md:w-fit"
+              onClick={downloadPDF}
+            >
               PDF
               <Download size={24} strokeWidth={2} />
             </Button>
@@ -118,7 +86,7 @@ export default function VisualizacionMaquinaria() {
             aria-label="GraficoTabla"
             className="w-full min-w-0 grid grid-rows-2 gap-4 overflow-hidden h-full"
           >
-            <div ref={captureRef} className="overflow-x-auto">
+            <div className="overflow-x-auto">
               {data.length > 0 ? (
                 <Suspense fallback={<LoadingSpinner />}>
                   <ChartMaquinaria conjuntosMaquinaria={data} />
@@ -127,7 +95,7 @@ export default function VisualizacionMaquinaria() {
                 <Alert text="No hay conjuntos para mostrar." />
               )}
             </div>
-            <div ref={captureRef} className="overflow-x-auto">
+            <div className="overflow-x-auto">
               {data.length > 0 ? (
                 <Suspense fallback={<LoadingSpinner />}>
                   <DataTable
@@ -146,7 +114,7 @@ export default function VisualizacionMaquinaria() {
             aria-label="Tabla"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            <div ref={captureRef} className="overflow-x-auto h-full">
+            <div className="overflow-x-auto h-full">
               {data.length > 0 ? (
                 <Suspense fallback={<LoadingSpinner />}>
                   <DataTable
@@ -165,7 +133,7 @@ export default function VisualizacionMaquinaria() {
             aria-label="Grafico"
             className="w-full min-w-0 grid grid-rows-1 gap-4 overflow-hidden h-full"
           >
-            <div ref={captureRef} className="overflow-x-auto">
+            <div className="overflow-x-auto">
               {data.length > 0 ? (
                 <Suspense fallback={<LoadingSpinner />}>
                   <ChartMaquinaria conjuntosMaquinaria={data} />
