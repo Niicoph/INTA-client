@@ -13,7 +13,6 @@ export default async function ExportSanitizanteToPDF(
 ) {
   try {
     const imageHeader = await createHeader(header);
-    console.log(chartSanidad)
 
     const imageChart = await svgToDataURL(chartSanidad, 3);
 
