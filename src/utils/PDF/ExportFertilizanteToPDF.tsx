@@ -7,10 +7,9 @@ import createHeader from './createHeader';
 import header from '/images/encabezadoINTA.png?url';
 import { getTimestampString } from '../getTimestampString';
 
-export default async function ExportSanitizanteToPDF(Planes: Plan[], ChartFertilizacion: SVGSVGElement) {
+export default async function ExportFertilizanteToPDF(Planes: Plan[], ChartFertilizacion: SVGSVGElement) {
   try {
-    const imageHeader = await createHeader(header);
-    console.log(ChartFertilizacion);
+    const imageHeader = await createHeader(header);    
 
     const imageChart = await svgToDataURL(ChartFertilizacion, 3);
 
@@ -121,7 +120,7 @@ export default async function ExportSanitizanteToPDF(Planes: Plan[], ChartFertil
         width: 595,
       },
       content: [
-        { text: 'Reporte de Sanitizantes', style: 'header' },
+        { text: 'Reporte de Fertilizantes', style: 'header' },
 
         separador,
         ,
@@ -185,7 +184,7 @@ export default async function ExportSanitizanteToPDF(Planes: Plan[], ChartFertil
 
     pdfMake
       .createPdf(docDefinition)
-      .download('conjuntos_sanitizante_' + getTimestampString() + '.pdf');
+      .download('conjuntos_fertilizante_' + getTimestampString() + '.pdf');
   } catch (error) {
     console.error('Error al generar la imagen o el PDF:', error);
   }
