@@ -3,7 +3,7 @@ import { type MaquinariaList } from "@/types/maquinaria";
 import { type MaquinariaSipan } from "@/types/sipan";
 import { adapterMaquinarias } from "@/utils/Adapter/adapterMaquinarias";
 
-export async function getMaquinariaSipan(): Promise<MaquinariaList> {
+export async function getMaquinariaListSipan(): Promise<MaquinariaList> {
   const response = await sipanApi.post('/maquinaria.json.php', new URLSearchParams({ token: import.meta.env.VITE_TOKEN_MAQUINARIAS }));
   
   const sipanData: MaquinariaSipan[] = Object.values(response.data);
