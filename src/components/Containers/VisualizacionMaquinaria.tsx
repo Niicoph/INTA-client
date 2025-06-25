@@ -11,8 +11,7 @@ const ChartMaquinaria = lazy(() => import('@/components/Charts/ChartMaquinaria')
 const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
 
 import { type ColumnDef } from '@tanstack/react-table';
-import jsPDF from 'jspdf';
-import { svg2pdf } from 'svg2pdf.js';
+import emptyChart from '@/utils/PDF/EmptyChartPDF';
 
 export default function VisualizacionMaquinaria() {
   const maquinariaContext = useContext(MaquinariaContext);
@@ -21,28 +20,17 @@ export default function VisualizacionMaquinaria() {
   }
   const { data } = maquinariaContext;
 
-  const downloadPDF = async () => {
+const downloadPDF = async () => {
     try {
-      const svgElement = document.querySelector('.chart-maquinaria-export svg') as SVGSVGElement;
-      if (!svgElement) {
-        console.error('No se encontró el SVG del gráfico');
-        return;
-      }
-      const pdf = new jsPDF('p', 'pt', 'a4');
-      const pageWidth = pdf.internal.pageSize.getWidth();
+      const chart = document.querySelector('.chart-maquinaria-export svg') as SVGSVGElement;
+      const svgElement = chart || emptyChart();
 
-      await svg2pdf(svgElement, pdf, {
-        x: 0,
-        y: 0,
-        width: pageWidth,
-        height: 500,
-      });
-
-      pdf.save('grafico-maquinaria.pdf');
+      const { default: DownloadPDF } = await import('@/utils/PDF/DownloadPDF');
+      DownloadPDF(data,svgElement,'maquinaria')      
     } catch (error) {
       console.error('Error al generar el PDF', error);
     }
-  };
+  };  
 
   const downloadXLS = async () => {
     try {

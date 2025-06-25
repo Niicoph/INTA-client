@@ -579,7 +579,7 @@ export default function FormMaquinaria() {
                     <FormControl>
                       <div className="relative">
                         <Input
-                          type="input"
+                          type="number"
                           readOnly={!customImplementoUSD}
                           placeholder={`${selectedImplemento ? 'Ingrese precio USD' : 'Selecciona implemento'}`}
                           value={field.value ?? ''}

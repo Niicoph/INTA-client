@@ -135,8 +135,8 @@ export function ChartMaquinaria({
           position: 'fixed',
           top: 0,
           left: 0,
-          width: 1000,
-          height: 400,
+          width: 2000,
+          height: 1000,
           overflow: 'hidden',
         }}
         className="chart-maquinaria-export"
