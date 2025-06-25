@@ -120,7 +120,7 @@ export default function FormPlan() {
             name="cotizacion_usd"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>Dólar</FormLabel>
+                <FormLabel className="text-muted-foreground text-xs">Dólar</FormLabel>
                 <div className="flex flex-col gap-1 md:flex-row ">
                   <Select
                     value={valorDolar ?? ''}

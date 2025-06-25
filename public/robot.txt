@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://valentinomenu.com/sitemap.xml
+Sitemap: https://patagoniabit.com/sitemap.xml

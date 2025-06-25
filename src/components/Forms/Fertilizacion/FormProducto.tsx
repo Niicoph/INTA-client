@@ -47,7 +47,7 @@ export default function FormProducto() {
   const [isFormFertilizanteComplete, setIsFormProductoComplete] = useState<boolean>(false);
 
   //const fertilizantes = useFertilizantes(); //JSON data
-  const fertilizantes = useFertilizantesSipan(); //SIPAN data  
+  const fertilizantes = useFertilizantesSipan(); //SIPAN data
 
   const formFertilizante = useForm<ProductoFormData>({
     resolver: zodResolver(ProductoSchema),
@@ -104,7 +104,7 @@ export default function FormProducto() {
               name="id_fertilizante"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Fertilizante</FormLabel>
+                  <FormLabel className="text-muted-foreground text-xs">Fertilizante</FormLabel>
                   <Select
                     value={field.value ?? ''}
                     onValueChange={(value) => {
@@ -171,7 +171,7 @@ export default function FormProducto() {
               name="dosis_x_ha"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Dosis por ha</FormLabel>
+                  <FormLabel className="text-muted-foreground text-xs">Dosis por ha</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
@@ -207,7 +207,7 @@ export default function FormProducto() {
               name="precio_usd_envase"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>USD por envase</FormLabel>
+                  <FormLabel className="text-muted-foreground text-xs">USD por envase</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
@@ -241,7 +241,7 @@ export default function FormProducto() {
               name="volumen_envase"
               render={({ field }) => (
                 <FormItem className="h-full flex flex-col justify-start">
-                  <FormLabel>Volumen envase</FormLabel>
+                  <FormLabel className="text-muted-foreground text-xs">Volumen envase</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
@@ -275,7 +275,7 @@ export default function FormProducto() {
               name="unidad"
               render={({ field }) => (
                 <FormItem className="h-full flex flex-col justify-start">
-                  <FormLabel>Unidad envase</FormLabel>
+                  <FormLabel className="text-muted-foreground text-xs">Unidad envase</FormLabel>
                   <FormControl>
                     <Select
                       value={field.value ?? ''}

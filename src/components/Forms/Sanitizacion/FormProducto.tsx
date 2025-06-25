@@ -105,7 +105,7 @@ export default function FormProducto() {
               name="id_sanitizante"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Sanitizante</FormLabel>
+                  <FormLabel className="text-muted-foreground text-xs">Sanitizante</FormLabel>
                   <Select
                     value={field.value ?? ''}
                     onValueChange={(value) => {
@@ -174,7 +174,7 @@ export default function FormProducto() {
               name="dosis_x_hl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Dosis por hl</FormLabel>
+                  <FormLabel className="text-muted-foreground text-xs">Dosis por hl</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
@@ -210,7 +210,7 @@ export default function FormProducto() {
               name="precio_usd_envase"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>USD por envase</FormLabel>
+                  <FormLabel className="text-muted-foreground text-xs">USD por envase</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
@@ -244,7 +244,7 @@ export default function FormProducto() {
               name="volumen_envase"
               render={({ field }) => (
                 <FormItem className="h-full flex flex-col justify-start">
-                  <FormLabel>Volumen envase</FormLabel>
+                  <FormLabel className="text-muted-foreground text-xs">Volumen envase</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
@@ -278,7 +278,7 @@ export default function FormProducto() {
               name="unidad"
               render={({ field }) => (
                 <FormItem className="h-full flex flex-col justify-start">
-                  <FormLabel>Unidad envase</FormLabel>
+                  <FormLabel className="text-muted-foreground text-xs">Unidad envase</FormLabel>
                   <FormControl>
                     <Select
                       value={field.value ?? ''}

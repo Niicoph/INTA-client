@@ -121,7 +121,7 @@ export default function FormPlan() {
             name="cotizacion_usd"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>Dólar</FormLabel>
+                <FormLabel className="text-muted-foreground text-xs">Dólar</FormLabel>
                 <div className="flex flex-col gap-1 md:flex-row ">
                   <Select
                     value={valorDolar ?? ''}
@@ -187,7 +187,7 @@ export default function FormPlan() {
                     loop: true,
                   }}
                 >
-                  <CarouselContent className="m-0 p-0 gap-1 xl:w-full h-[260px]">
+                  <CarouselContent className="m-0 p-0 gap-1 xl:w-full h-[270px]">
                     {fields.map((field, index) => (
                       <CarouselItem
                         key={`${field.id}-${index}`}

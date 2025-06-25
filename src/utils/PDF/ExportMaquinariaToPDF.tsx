@@ -4,7 +4,7 @@ pdfMake.vfs = pdfFonts.vfs;
 import svgToDataURL from './svgToImagePDF';
 import { type ConjuntoMaquinaria } from '@/types/maquinaria';
 import createHeader from './createHeader';
-import header from '@/assets/utils/encabezadoINTA.png?url';
+import header from '/images/encabezadoINTA.png?url';
 import { getTimestampString } from '../getTimestampString';
 
 export default async function ExportMaquinariaToPDF(
@@ -241,7 +241,9 @@ export default async function ExportMaquinariaToPDF(
       pageMargins: [20, 60, 20, 60],
     };
 
-    pdfMake.createPdf(docDefinition).download('conjuntos_maquinaria_'+getTimestampString()+'.pdf');
+    pdfMake
+      .createPdf(docDefinition)
+      .download('conjuntos_maquinaria_' + getTimestampString() + '.pdf');
   } catch (error) {
     console.error('Error al generar la imagen o el PDF:', error);
   }
