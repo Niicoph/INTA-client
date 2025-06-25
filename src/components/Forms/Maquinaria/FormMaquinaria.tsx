@@ -25,7 +25,10 @@ import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import Legend from '@/components/ui/Legend/Legend';
 
 import { MaquinariaSchema } from '@/schemas/Maquinaria/schema';
-import { useMaquinaria } from '@/hooks/useMaquinaria';
+
+//import { useMaquinaria } from '@/hooks/useMaquinaria'; //JSON data
+import { useMaquinariaSipan } from '@/hooks/useMaquinariaSipan'; //SIPAN data
+
 import { type MaquinariaFormData } from '@/schemas/Maquinaria/types';
 import { type Implemento, type Tractor } from '@/types/maquinaria';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
@@ -51,7 +54,9 @@ export default function FormMaquinaria() {
   const [selectedTractor, setSelectedTractor] = useState<Tractor | null>(null);
   const [selectedImplemento, setSelectedImplemento] = useState<Implemento | null>(null);
   const [isFormComplete, setIsFormComplete] = useState(false);
-  const maquinaria = useMaquinaria();
+
+  //const maquinaria = useMaquinaria(); //JSON data
+  const maquinaria = useMaquinariaSipan(); //SIPAN data
 
   const isCustomGasoil = valorGasoil === 'custom';
   const isCustomDolar = valorDolar === 'custom';

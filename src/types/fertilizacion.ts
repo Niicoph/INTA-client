@@ -41,4 +41,4 @@ export type FilaPlan = {
     cotizacion_usd: number;
 }
 
-export const unidades: string[] = ['lts', 'kg'];
+export const unidades: string[] = ['Lts', 'Kg'];

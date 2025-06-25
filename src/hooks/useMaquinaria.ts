@@ -6,15 +6,12 @@ export function useMaquinaria() {
   const query = useQuery<MaquinariaList>({
     queryKey: ["maquinariaData"],
     queryFn: () => getMaquinariaList(),
-    staleTime: 1000 * 60 * 10, // 10 minutos
+    staleTime: 1000 * 60 * 10,
     refetchOnWindowFocus: false,
   });
 
-  // Podés filtrar o transformar según lo que necesites
-  const maquinaria = query.data;
-
   return {
-    data: maquinaria,
+    data: query.data,
     isLoading: query.isLoading,
     isError: query.isError,
   };

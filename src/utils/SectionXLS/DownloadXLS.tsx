@@ -12,7 +12,6 @@ export default function DownloadXLS(data: any[], module: string) {
   }
 
   if (module === 'fertilizante') {
-    // return console.log(data);
     return exportFertilizanteToXLS(data);
   }
 }

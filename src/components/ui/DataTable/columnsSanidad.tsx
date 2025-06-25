@@ -375,18 +375,18 @@ export const columnsSanidad: ColumnDef<FilaPlan>[] = [
     },
   },
 
-  {
-    accessorKey: 'aplicacion.producto.tipo',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.tipo} flex has-[>svg]:px-0`}
-        >
-          {colLabels.tipo}
-        </Button>
-      );
-    },
-  },
+  // {
+  //   accessorKey: 'aplicacion.producto.tipo',
+  //   header: ({ column }) => {
+  //     return (
+  //       <Button
+  //         variant="ghost"
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+  //         className={`rounded-none  w-full text-left text-xs justify-start ${colClasses.tipo} flex has-[>svg]:px-0`}
+  //       >
+  //         {colLabels.tipo}
+  //       </Button>
+  //     );
+  //   },
+  // },
 ];

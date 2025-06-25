@@ -6,7 +6,10 @@ import { ProductoSchema } from '@/schemas/Sanitizacion/schema';
 import { type ProductoFormData } from '@/schemas/Sanitizacion/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useSanitizantes } from '@/hooks/useSanitizantes';
+
+//import { useSanitizantes } from '@/hooks/useSanitizantes'; //JSON data
+import { useSanitizantesSipan } from '@/hooks/useSanitizantesSipan'; //SIPAN data
+
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { EditButton } from '@/components/ui/edit-button';
@@ -43,7 +46,8 @@ export default function FormProducto() {
 
   const [isFormSanitizanteComplete, setIsFormSanitizanteComplete] = useState<boolean>(false);
 
-  const sanitizantes = useSanitizantes();
+  //const sanitizantes = useSanitizantes(); //JSON data
+  const sanitizantes = useSanitizantesSipan(); //SIPAN data
 
   const formSanitizante = useForm<ProductoFormData>({
     resolver: zodResolver(ProductoSchema),

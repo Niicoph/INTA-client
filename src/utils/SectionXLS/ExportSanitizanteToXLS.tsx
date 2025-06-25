@@ -20,7 +20,7 @@ export default function exportSanitizanteToXLS(planes: Plan[]) {
     dosis_x_hl: 'Dosis/hl',
     volumen_aplicado: 'Vol. Aplicado/hl',
     costo_aplicacion: 'Costo Aplicacion/ha',
-    tipo_producto: 'Tipo',
+    //tipo_producto: 'Tipo',
   };
 
   const flatData = planes.flatMap((plan) =>
@@ -39,7 +39,7 @@ export default function exportSanitizanteToXLS(planes: Plan[]) {
         unidad_envase: aplicacion.producto.unidad,
         precio_usd_envase: aplicacion.producto.precio_usd_envase,
         dosis_x_hl: aplicacion.producto.dosis_x_hl,
-        tipo_producto: aplicacion.producto.tipo,
+        //tipo_producto: aplicacion.producto.tipo,
 
         volumen_aplicado: aplicacion.volumen_x_ha,
         costo_aplicacion: aplicacion.costo_total,

@@ -4,7 +4,7 @@ import { getFertilizantes } from "@/services/fertilizacionService";
 
 export function useFertilizantes() {
     const query = useQuery<Producto[]>({
-        queryKey: ["fertilizacionData"],
+        queryKey: ["fertilizantesData"],
         queryFn: () => getFertilizantes(),
         staleTime: 1000 * 60 * 10,
         refetchOnWindowFocus: false,

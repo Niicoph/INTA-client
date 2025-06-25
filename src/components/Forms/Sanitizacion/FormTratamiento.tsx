@@ -123,7 +123,7 @@ export default function FormTratamiento({ planControl, index, removeTrat }: Form
                                       value={producto.id_sanitizante}
                                     >
                                       {producto.nombre} {producto.volumen_envase}
-                                      {producto.unidad} ({producto.tipo}) {producto.dosis_x_hl}{producto.unidad}/hl
+                                      {producto.unidad}{producto.tipo === '' ? '': ` (${producto.tipo})`} {producto.dosis_x_hl}{producto.unidad}/hl
                                     </SelectItem>
                                   ))}
                                 </SelectContent>

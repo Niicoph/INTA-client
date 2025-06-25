@@ -6,7 +6,10 @@ import { ProductoSchema } from '@/schemas/Fertilizacion/schema';
 import { type ProductoFormData } from '@/schemas/Fertilizacion/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useFertilizantes } from '@/hooks/useFertilizantes';
+
+//import { useFertilizantes } from '@/hooks/useFertilizantes'; //JSON data
+import { useFertilizantesSipan } from '@/hooks/useFertilizantesSipan'; //SIPAN data
+
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { EditButton } from '@/components/ui/edit-button';
@@ -43,7 +46,8 @@ export default function FormProducto() {
 
   const [isFormFertilizanteComplete, setIsFormProductoComplete] = useState<boolean>(false);
 
-  const fertilizantes = useFertilizantes();
+  //const fertilizantes = useFertilizantes(); //JSON data
+  const fertilizantes = useFertilizantesSipan(); //SIPAN data  
 
   const formFertilizante = useForm<ProductoFormData>({
     resolver: zodResolver(ProductoSchema),
