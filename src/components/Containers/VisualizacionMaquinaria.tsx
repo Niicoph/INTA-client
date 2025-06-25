@@ -1,12 +1,11 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
-import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
 import { MaquinariaContext } from '@/context/MaquinariaContext';
 import Alert from '@/components/ui/alert';
 import { columnsMaquinaria } from '@/components/ui/DataTable/columnsMaquinaria';
 import { lazy, Suspense, useContext } from 'react';
 import LoadingSpinner from '../Loadings/LoadingSpinner/LoadingSpinner';
+import { ExportarPopover } from '@/components/ui/exportar-popover';
 
 const ChartMaquinaria = lazy(() => import('@/components/Charts/ChartMaquinaria'));
 const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
@@ -62,24 +61,17 @@ export default function VisualizacionMaquinaria() {
           defaultValue="tab1"
           className="w-full flex flex-col flex-1 justify-between gap-4 h-full"
         >
-          <div className="w-full flex flex-col gap-2 md:flex-row">
+          <div className="w-full flex flex-col gap-2 md:flex-row md:justify-between">
             <TabsList className="h-10 text-lg w-full md:w-fit">
               <TabsTrigger value="tab1">Gráfico y Tabla</TabsTrigger>
               <TabsTrigger value="tab2">Tabla</TabsTrigger>
               <TabsTrigger value="tab3">Gráfico</TabsTrigger>
             </TabsList>
-            <Button
-              variant="outline"
-              className="ml-auto h-10 w-full md:w-fit"
-              onClick={downloadPDF}
-            >
-              PDF
-              <Download size={24} strokeWidth={2} />
-            </Button>
-            <Button variant="outline" className="h-10 w-full md:w-fit " onClick={downloadXLS}>
-              Excel
-              <Download size={24} strokeWidth={2} />
-            </Button>
+
+            <ExportarPopover
+              downloadPDF={downloadPDF}
+              downloadXLS={downloadXLS}
+            />
           </div>
           <TabsContent
             value="tab1"

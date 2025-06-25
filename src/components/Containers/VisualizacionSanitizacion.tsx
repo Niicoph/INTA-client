@@ -1,13 +1,12 @@
 import TitleContainer from '@/components/ui/TitleContainer/TitleContainer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
 import { CostoPlanContext } from '@/context/CostoPlanContext';
 import { useContext, lazy, Suspense } from 'react';
 import { columnsSanidad } from '../ui/DataTable/columnsSanidad';
 import { flattenPlanes } from '@/utils/flattenPlanesSanitizacion';
 import LoadingSpinner from '../Loadings/LoadingSpinner/LoadingSpinner';
 import Alert from '@/components/ui/alert';
+import { ExportarPopover } from '@/components/ui/exportar-popover';
 
 const ChartSanidad = lazy(() => import('@/components/Charts/ChartSanidad'));
 const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
@@ -39,20 +38,17 @@ export default function VisualizacionSanitizacion() {
           defaultValue="tab1"
           className="w-full flex flex-col flex-1 justify-between gap-4 h-full"
         >
-          <div className="w-full flex flex-col gap-2 md:flex-row">
+          <div className="w-full flex flex-col gap-2 md:flex-row md:justify-between">
             <TabsList className="h-10 text-lg w-full md:w-fit">
               <TabsTrigger value="tab1">Gráfico y Tabla</TabsTrigger>
               <TabsTrigger value="tab2">Tabla</TabsTrigger>
               <TabsTrigger value="tab3">Gráfico</TabsTrigger>
             </TabsList>
-            <Button variant="outline" className="ml-auto h-10 w-full md:w-fit">
-              PDF
-              <Download size={24} strokeWidth={2} />
-            </Button>
-            <Button variant="outline" className="h-10 w-full md:w-fit" onClick={downloadXLS}>
-              Excel
-              <Download size={24} strokeWidth={2} />
-            </Button>
+            
+            <ExportarPopover
+              downloadPDF={()=>{}}
+              downloadXLS={downloadXLS}
+            />
           </div>
           <TabsContent
             value="tab1"

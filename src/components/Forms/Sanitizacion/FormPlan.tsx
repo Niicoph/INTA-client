@@ -178,7 +178,7 @@ export default function FormPlan() {
           <div className="h-full gap-4 grid grid-cols-8">
             {fields.length > 0 ? (
               <div className="col-span-7 rounded-lg border-1 bg-accent">
-                <div className="text-muted-foreground h-8 flex justify-center items-center  text-sm">
+                <div className="text-muted-foreground h-8 flex justify-center items-center text-sm">
                   Tto. {current} de {fields.length}
                 </div>
                 <Carousel
@@ -187,11 +187,11 @@ export default function FormPlan() {
                     loop: true,
                   }}
                 >
-                  <CarouselContent className="m-0 p-0 gap-1 md:w-1/2 xl:w-full h-[260px]">
+                  <CarouselContent className="m-0 p-0 gap-1 xl:w-full h-[260px]">
                     {fields.map((field, index) => (
                       <CarouselItem
                         key={`${field.id}-${index}`}
-                        className="p-0 m-0 flex-row  bg-white rounded-b-lg"
+                        className="p-0 m-0 flex-row bg-white rounded-b-lg"
                       >
                         <FormTratamiento
                           planControl={formPlan.control}
@@ -212,7 +212,7 @@ export default function FormPlan() {
                 </Carousel>
               </div>
             ) : (
-              <div className="col-span-7  rounded-lg w-full">
+              <div className="col-span-7 md:h-73.5 rounded-lg w-full">
                 <Alert text="Tratamientos no agregados." />
               </div>
             )}
