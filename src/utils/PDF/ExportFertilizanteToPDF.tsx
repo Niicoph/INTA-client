@@ -56,7 +56,7 @@ export default async function ExportSanitizanteToPDF(Planes: Plan[], ChartFertil
         'Vol. envase',
         'Unidad envase',
         'USD envase',
-        'Dosis/hl',
+        'Dosis/ha',
         'Costo Aplicacion/ha',
       ],
       ...Planes.flatMap((plan) =>
