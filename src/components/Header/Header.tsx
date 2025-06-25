@@ -1,6 +1,6 @@
 import SipanLogo from '/Sipan.png';
-import { Menu } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { MobileMenu } from '../MobileMenu/MobileMenu';
 
 export default function Header() {
   return (
@@ -23,7 +23,7 @@ export default function Header() {
             Módulos
           </Link>
         </nav>
-        <Menu className="h-8 w-8 text-[#4A4A4A] lg:hidden" />
+        <MobileMenu/>
       </div>
     </header>
   );

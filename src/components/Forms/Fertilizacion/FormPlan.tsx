@@ -211,7 +211,7 @@ export default function FormPlan() {
                 </Carousel>
               </div>
             ) : (
-              <div className="col-span-7 md:h-73.5 rounded-lg w-full">
+              <div className="col-span-7 h-73.5 xl:h-auto rounded-lg w-full">
                 <Alert text="Tratamientos no agregados." />
               </div>
             )}

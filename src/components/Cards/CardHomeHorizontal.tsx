@@ -23,7 +23,7 @@ export default function CardHomeHorizontal({
   path,
 }: CardHomeHorizontalProps) {
   return (
-    <div className="w-full h-44 rounded-xl relative flex shadow-card">
+    <div className="w-full h-fit rounded-xl relative flex shadow-card">
       <div
         className={`${color.bg} px-4 flex justify-center items-center h-full rounded-l-xl`}
       >

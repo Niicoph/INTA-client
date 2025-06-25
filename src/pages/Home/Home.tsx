@@ -59,15 +59,14 @@ export default function Home() {
     <div className="flex justify-center bg-[#F3F7FD]">
       <div className="flex flex-col justify-between min-h-screen bg-[#F3F7FD] w-full xxl:max-w-4/6">        
         <section className="flex flex-1 flex-col md:flex-0">
-          <div className="px-4 py-10 smm:hidden">
+          <div className="px-4 py-10 md:hidden">
             <h1 className="text-[#4A4A4A] text-3xl text-justify gilroy-extrabold">
               Calculadoras de costos <br className="smm:hidden" />
               <span className="relative inline-block">
                 <span className="absolute bottom-0 left-0 w-full h-4 bg-[#7CC8A7] rounded-t-lg z-0"></span>
                 <span className="relative text-[#006936] z-10">Agrícolas</span>
               </span>
-            </h1>
-            
+            </h1>            
           </div>
           <div className="w-full relative">
             <div className="h-[340px] w-full max-w-sm smm:h-[400px] md:h-[500px] 2xl:h-[600px] xl:max-w-3xl">
@@ -82,7 +81,7 @@ export default function Home() {
                 />
               </picture>
 
-              <div className="absolute flex flex-col items-center gap-4 h-full smm:hidden">
+              <div className="absolute flex flex-col items-end mr-3 gap-4 h-full md:hidden">
                  {features.map((feat, index) => (
                     <div key={index} className="w-2/3 bg-white/50 backdrop-blur-md shadow-lg rounded-xl p-4 text-[#4A4A4A]">
                       <h2 className="gilroy-bold text-lg sm:text-xl">{feat.title}</h2>
@@ -91,11 +90,11 @@ export default function Home() {
                   ))}
               </div>
 
-              <div className="absolute right-0  gap-4 h-full z-10 pr-4 hidden smm:flex justify-center lg:w-full">
-                <div className="lg:w-5/6 2xl:w-4/6 smm:flex justify-end gap-4">
+              <div className="absolute right-0 gap-4 h-full z-10 pr-4 hidden md:flex justify-end lg:w-full">
+                <div className="lg:w-5/6 2xl:w-4/6 md:flex justify-center gap-4">
                   <div className="flex flex-col justify-center gap-4">
-                    <div className="h-10 border-b-2 border-[#4A4A4A]  w-fit">
-                      <h1 className="text-[#4A4A4A] text-2xl md:text-3xl lg:text-4xl flex gap-2  text-justify gilroy-extrabold">
+                    <div className="h-10 border-b-2 border-[#4A4A4A] w-fit">
+                      <h1 className="text-[#4A4A4A] text-2xl md:text-3xl lg:text-4xl flex gap-2 text-justify gilroy-extrabold">
                         Calculadoras de costos
                         <span className="relative text-[#006936] z-10">Agrícolas</span>
                       </h1>
@@ -137,7 +136,7 @@ export default function Home() {
             </svg>
           </div>
         </section>
-        <section className="flex flex-col items-center justify-center gap-10 px-4 py-10 smm:hidden">
+        <section className="flex flex-col items-center justify-center gap-10 px-4 py-10 md:hidden">
           {cards.map((card, index) => (
             <CardHomeHorizontal
               key={index}
@@ -150,10 +149,10 @@ export default function Home() {
             />
           ))}
         </section>
-        <section className="hidden smm:flex justify-center m-5">
+        <section className="hidden md:flex justify-center m-5">
           <div className="w-full grid grid-cols-3 lg:w-5/6 2xl:w-4/6 gap-5">
             {features.map((feat, index) => (
-              <div key={index} className="flex flex-col">
+              <div key={index} className="bg-white/50 backdrop-blur-md shadow-lg rounded-xl p-4 text-[#4A4A4A]">
                 <h3 className="gilroy-bold text-black text-2xl">{feat.title}</h3>
                 <p className="m-2 gilroy-regular text-[#4A4A4A] text-base">
                   {feat.description}
