@@ -102,38 +102,80 @@ export default function ChartFertilizacion({ planes }: { planes: Plan[] }) {
   }, [planes]);
 
   return planes?.length > 0 ? (
-    <ChartContainer
-      config={{}}
-      className={`h-full w-full ${planes.length > 12 ? 'w-[1000px]' : ''}`}
-    >
-      <BarChart data={chartData} margin={{ top: 20, left: 20 }}>
-        <CartesianGrid vertical={false} />
-        <YAxis
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={(escala) => `$${escala.toLocaleString('es-AR')}/ha`}
-        />
-        <XAxis
-          dataKey="id_plan"
-          tickLine={false}
-          tickMargin={7}
-          axisLine={false}
-          tickFormatter={(value) => `Plan ${value}`}
-        />
-        <Tooltip content={<CustomTooltip />} />
-        {tratamientoKeys.map((key, index) => (
-          <Bar
-            key={key}
-            dataKey={key}
-            fill={`${tailwindColorMap[index % tailwindColorMap.length].hex}`}
-            radius={4}
-            barSize={30}
-            cursor="pointer"
-          >            
-          </Bar>
-        ))}
-      </BarChart>
-    </ChartContainer>
+    <>
+      <ChartContainer
+        config={{}}
+        className={`h-full w-full ${planes.length > 12 ? 'w-[1000px]' : ''}`}
+      >
+        <BarChart data={chartData} margin={{ top: 20, left: 40 }}>
+          <CartesianGrid vertical={false} />
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tickMargin={10}
+            tickFormatter={(escala) => `$${escala.toLocaleString('es-AR')}/ha`}
+          />
+          <XAxis
+            dataKey="id_plan"
+            tickLine={false}
+            tickMargin={7}
+            axisLine={false}
+            tickFormatter={(value) => `Plan ${value}`}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          {tratamientoKeys.map((key, index) => (
+            <Bar
+              key={key}
+              dataKey={key}
+              fill={`${tailwindColorMap[index % tailwindColorMap.length].hex}`}
+              radius={4}
+              barSize={30}
+              cursor="pointer"
+            ></Bar>
+          ))}
+        </BarChart>
+      </ChartContainer>
+      <div
+        style={{
+          display: 'none',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: 2000,
+          height: 1000,
+          overflow: 'hidden',
+        }}
+        className="chart-fertilizante-export"
+      >
+        <BarChart width={1000} height={400} data={chartData} margin={{ top: 20, left: 60 }}>
+          <CartesianGrid vertical={false} />
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tickMargin={10}
+            tickFormatter={(escala) => `$${escala.toLocaleString('es-AR')}/ha`}
+          />
+          <XAxis
+            dataKey="id_plan"
+            tickLine={false}
+            tickMargin={7}
+            axisLine={false}
+            tickFormatter={(value) => `Plan ${value}`}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          {tratamientoKeys.map((key, index) => (
+            <Bar
+              key={key}
+              dataKey={key}
+              fill={`${tailwindColorMap[index % tailwindColorMap.length].hex}`}
+              radius={4}
+              barSize={30}
+              cursor="pointer"
+            ></Bar>
+          ))}
+        </BarChart>
+      </div>
+    </>
   ) : (
     <Alert text="No hay conjuntos para mostrar." />
   );

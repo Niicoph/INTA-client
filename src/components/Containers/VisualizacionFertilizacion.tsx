@@ -12,6 +12,8 @@ import { ExportarPopover } from '@/components/ui/exportar-popover';
 const ChartFertilizacion = lazy(() => import('@/components/Charts/ChartFertilizacion'));
 const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
 
+import emptyChart from '@/utils/PDF/EmptyChartPDF';
+
 export default function VisualizacionFertilizacion() {
   const costoPlanContext = useContext(CostoPlanFertilizacionContext);
   if (!costoPlanContext) {
@@ -21,6 +23,18 @@ export default function VisualizacionFertilizacion() {
   const { data } = costoPlanContext;
 
   const filasTabla = flattenPlanes(data);
+
+  const downloadPDF = async () => {
+      try {
+        const chart = document.querySelector('.chart-fertilizante-export svg') as SVGSVGElement;
+        const svgElement = chart || emptyChart();
+  
+        const { default: DownloadPDF } = await import('@/utils/PDF/DownloadPDF');
+        DownloadPDF(data,svgElement,'fertilizante')      
+      } catch (error) {
+        console.error('Error al generar el PDF', error);
+      }
+    };  
 
   const downloadXLS = async () => {
     try {
@@ -47,7 +61,7 @@ export default function VisualizacionFertilizacion() {
             </TabsList>
             
             <ExportarPopover
-              downloadPDF={()=>{}}
+              downloadPDF={downloadPDF}
               downloadXLS={downloadXLS}
             />   
           </div>

@@ -12,6 +12,8 @@ const ChartSanidad = lazy(() => import('@/components/Charts/ChartSanidad'));
 const DataTable = lazy(() => import('@/components/ui/DataTable/DataTable'));
 import { type ColumnDef } from '@tanstack/react-table';
 
+import emptyChart from '@/utils/PDF/EmptyChartPDF';
+
 export default function VisualizacionSanitizacion() {
   const costoPlanContext = useContext(CostoPlanContext);
   if (!costoPlanContext) {
@@ -21,6 +23,18 @@ export default function VisualizacionSanitizacion() {
   const { data } = costoPlanContext;
 
   const filasTabla = flattenPlanes(data);
+
+  const downloadPDF = async () => {
+    try {
+      const chart = document.querySelector('.chart-sanitizante-export svg') as SVGSVGElement;
+      const svgElement = chart || emptyChart();
+
+      const { default: DownloadPDF } = await import('@/utils/PDF/DownloadPDF');
+      DownloadPDF(data, svgElement, 'sanitizante');
+    } catch (error) {
+      console.error('Error al generar el PDF', error);
+    }
+  };
 
   const downloadXLS = async () => {
     try {
@@ -44,11 +58,8 @@ export default function VisualizacionSanitizacion() {
               <TabsTrigger value="tab2">Tabla</TabsTrigger>
               <TabsTrigger value="tab3">Gráfico</TabsTrigger>
             </TabsList>
-            
-            <ExportarPopover
-              downloadPDF={()=>{}}
-              downloadXLS={downloadXLS}
-            />
+
+            <ExportarPopover downloadPDF={downloadPDF} downloadXLS={downloadXLS} />
           </div>
           <TabsContent
             value="tab1"

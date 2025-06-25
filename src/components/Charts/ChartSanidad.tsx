@@ -29,26 +29,33 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
     <div className="rounded-md bg-white p-2 shadow-md">
       <div className="border-l-2 border-dashed border-blue-500 pl-2 flex flex-col gap-1">
         {/* CADA PLAN */}
-        <div className="text-foreground font-mono font-medium mb-1">
-          Plan {plan.id_plan}
-        </div>
+        <div className="text-foreground font-mono font-medium mb-1">Plan {plan.id_plan}</div>
         {plan.tratamientos.map((tto: Tratamiento, index) => (
           /* CADA TRATAMIENTO */
-          <div key={index} className="border-l-1 border-dashed border-blue-500 pl-2 flex flex-col gap-1">
+          <div
+            key={index}
+            className="border-l-1 border-dashed border-blue-500 pl-2 flex flex-col gap-1"
+          >
             <div
               className={`${tailwindColorMap[index % tailwindColorMap.length].class} flex justify-between gap-4 font-medium tabular-nums`}
             >
-              <div className={`font-mono font-medium mb-1`}>
-                Tto. {tto.id_tratamiento}
-              </div>
-              <span>${Number(tto.costo_total).toLocaleString('es-AR', { maximumFractionDigits: 2 })}/ha</span>
+              <div className={`font-mono font-medium mb-1`}>Tto. {tto.id_tratamiento}</div>
+              <span>
+                ${Number(tto.costo_total).toLocaleString('es-AR', { maximumFractionDigits: 2 })}/ha
+              </span>
             </div>
             {/* CADA APLICACION DE PRODUCTO */}
             <div className="border-l-1 border-dashed border-blue-500 pl-2 flex flex-col gap-1">
               {tto.aplicaciones.map((app: Aplicacion, index) => (
-                <div key={index} className="flex justify-between gap-4 text-foreground font-medium tabular-nums">
+                <div
+                  key={index}
+                  className="flex justify-between gap-4 text-foreground font-medium tabular-nums"
+                >
                   <span>{app.producto.nombre}</span>
-                  <span>${Number(app.costo_total).toLocaleString('es-AR', { maximumFractionDigits: 2 })}/ha</span>
+                  <span>
+                    ${Number(app.costo_total).toLocaleString('es-AR', { maximumFractionDigits: 2 })}
+                    /ha
+                  </span>
                 </div>
               ))}
               <div className="flex justify-between gap-4 text-foreground font-medium tabular-nums border-t border-dashed border-blue-500"></div>
@@ -61,7 +68,8 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
             $
             {Number(plan.costo_total).toLocaleString('es-AR', {
               maximumFractionDigits: 2,
-            })}/ha
+            })}
+            /ha
           </span>
         </div>
       </div>
@@ -94,31 +102,80 @@ export default function ChartSanidad({ planes }: { planes: Plan[] }) {
   }, [planes]);
 
   return planes?.length > 0 ? (
-    <ChartContainer
-      config={{}}
-      className={`h-full w-full ${planes.length > 12 ? 'w-[1000px]' : ''}`}
-    >
-      <BarChart data={chartData} margin={{ top: 20, left: 20}}>
-        <CartesianGrid vertical={false} />
-        <YAxis
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={(escala) => `$${escala.toLocaleString('es-AR')}/ha`}
-        />
-        <XAxis
-          dataKey="id_plan"
-          tickLine={false}
-          tickMargin={7}
-          axisLine={false}
-          tickFormatter={(value) => `Plan ${value}`}
-        />
-        <Tooltip content={<CustomTooltip />} />
-        {tratamientoKeys.map((key, index) => (
-          <Bar key={key} dataKey={key} fill={`${tailwindColorMap[index % tailwindColorMap.length].hex}`} radius={4} barSize={30} cursor="pointer">
-          </Bar>
-        ))}
-      </BarChart>
-    </ChartContainer>
+    <>
+      <ChartContainer
+        config={{}}
+        className={`h-full w-full ${planes.length > 12 ? 'w-[1000px]' : ''}`}
+      >
+        <BarChart data={chartData} margin={{ top: 20, left: 40 }}>
+          <CartesianGrid vertical={false} />
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tickMargin={10}
+            tickFormatter={(escala) => `$${escala.toLocaleString('es-AR')}/ha`}
+          />
+          <XAxis
+            dataKey="id_plan"
+            tickLine={false}
+            tickMargin={7}
+            axisLine={false}
+            tickFormatter={(value) => `Plan ${value}`}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          {tratamientoKeys.map((key, index) => (
+            <Bar
+              key={key}
+              dataKey={key}
+              fill={`${tailwindColorMap[index % tailwindColorMap.length].hex}`}
+              radius={4}
+              barSize={30}
+              cursor="pointer"
+            ></Bar>
+          ))}
+        </BarChart>
+      </ChartContainer>
+      <div
+        style={{
+          display: 'none',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: 2000,
+          height: 1000,
+          overflow: 'hidden',
+        }}
+        className="chart-sanitizante-export"
+      >
+        <BarChart width={1000} height={400} data={chartData} margin={{ top: 20, left: 60 }}>
+          <CartesianGrid vertical={false} />
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tickMargin={10}
+            tickFormatter={(escala) => `$${escala.toLocaleString('es-AR')}/ha`}
+          />
+          <XAxis
+            dataKey="id_plan"
+            tickLine={false}
+            tickMargin={7}
+            axisLine={false}
+            tickFormatter={(value) => `Plan ${value}`}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          {tratamientoKeys.map((key, index) => (
+            <Bar
+              key={key}
+              dataKey={key}
+              fill={`${tailwindColorMap[index % tailwindColorMap.length].hex}`}
+              radius={4}
+              barSize={30}
+              cursor="pointer"
+            ></Bar>
+          ))}
+        </BarChart>
+      </div>
+    </>
   ) : (
     <Alert text="No hay conjuntos para mostrar." />
   );
