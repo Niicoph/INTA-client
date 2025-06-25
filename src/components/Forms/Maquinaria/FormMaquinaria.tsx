@@ -338,7 +338,7 @@ export default function FormMaquinaria() {
                             key={`${tractor.id_tractor} ${tractor.nombre}`}
                             value={tractor.id_tractor}
                           >
-                            {tractor.nombre} ({tractor.potencia_CV} CV)
+                            {tractor.nombre}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -353,13 +353,13 @@ export default function FormMaquinaria() {
                 name="potencia_CV"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-muted-foreground text-xs">CV del tractor</FormLabel>
+                    <FormLabel className="text-muted-foreground text-xs">HP del tractor</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
                           type="number"
                           readOnly={!customTractorCV}
-                          placeholder={`${selectedTractor ? 'Ingrese CV' : 'Selecciona tractor'}`}
+                          placeholder={`${selectedTractor ? 'Ingrese HP' : 'Selecciona tractor'}`}
                           value={field.value ?? ''}
                           className={`w-full text-sm font-normal p-5 border transition-all duration-200 ${
                             customTractorCV
@@ -539,13 +539,13 @@ export default function FormMaquinaria() {
                 name="consumo_litros_hora_CV"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-muted-foreground text-xs">Consumo lt/h.CV</FormLabel>
+                    <FormLabel className="text-muted-foreground text-xs">Consumo lt/h.HP</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
                           type="number"
                           readOnly={!customImplementoConsumo}
-                          placeholder={`${selectedImplemento ? 'Ingrese consumo en lt/h.CV' : 'Selecciona implemento'}`}
+                          placeholder={`${selectedImplemento ? 'Ingrese consumo en lt/h.HP' : 'Selecciona implemento'}`}
                           value={field.value ?? ''}
                           className={`w-full text-sm font-normal p-5 border transition-all duration-200 ${
                             customImplementoConsumo

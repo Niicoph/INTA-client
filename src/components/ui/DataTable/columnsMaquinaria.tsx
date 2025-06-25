@@ -34,7 +34,7 @@ const colLabels = {
   implemento: {
     id_implemento: 'ID Implemento',
     nombre: 'Implemento',
-    consumo_litros_hora_CV: 'Consumo lt/h CV',
+    consumo_litros_hora_CV: 'Consumo lt/h HP',
     precio_usd: 'USD',
     coef_gastos_conservacion: 'Coef Conservacion',
     horas_utiles: 'Horas Útiles',
@@ -201,7 +201,7 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
     },
     cell: ({ row }) => {
       const data = row.original;
-      return <div className="align-top">{data.tractor.potencia_CV} CV</div>;
+      return <div className="align-top">{data.tractor.potencia_CV} HP</div>;
     },
   },
   {
@@ -359,7 +359,7 @@ export const columnsMaquinaria: ColumnDef<ConjuntoMaquinaria>[] = [
       const data = row.original;
       return (
         <div className="align-top">
-          {data.implemento.consumo_litros_hora_CV.toLocaleString('es-AR')} lt/h.CV
+          {data.implemento.consumo_litros_hora_CV.toLocaleString('es-AR')} lt/h.HP
         </div>
       );
     },

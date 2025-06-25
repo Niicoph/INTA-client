@@ -160,7 +160,7 @@ export default function FormProducto() {
                     <SelectContent>
                       {sanitizantes.data?.map((s: Producto, index) => (
                         <SelectItem key={index} value={s.id_sanitizante}>
-                          {s.nombre} ({s.tipo})
+                          {s.nombre}
                         </SelectItem>
                       ))}
                     </SelectContent>
