@@ -1,54 +1,138 @@
-# React + TypeScript + Vite
+# 🌾 Calculadora de Costos Agropecuarios
+Aplicación web desarrollada con TypeScript y React, en colaboración con [INTA](https://www.argentina.gob.ar/inta) y [SIPAN](https://sipan.inta.gob.ar/), utilizando su API oficial como fuente de datos.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- 🔗 Demo online:
+👉 https://patagoniabit.com/
 
-Currently, two official plugins are available:
+La herramienta permite estimar y comparar costos agropecuarios asociados a:
+- 🚜 Maquinaria agrícola (Tractor + Implemento).
+- 🧪 Planes con productos fitosanitarios.
+- 🧴 Planes con productos fertilizantes.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Ademas, de estas comparaciones permite obtener:
+- 📊 Reportes exportables (PDF / Excel)
 
-## Expanding the ESLint configuration
+## 📸 Vista General
+### Home
+- Permite acceso a las calculadoras (Maquinaria, planes fitosanitarios y planes de fertilización).  
+![Home](public/screenshots/home.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Calculadoras
+#### Ejemplo 1, comparación de Tractores + Implementos
+![CalculadoraMaquinaria](public/screenshots/calculadora1.png)
+- Formulario con selección de tractor y su implemento, cotización de USD y cotización de gasoil (izquierda)
+- Permite la modificación de datos precargados de la API, mediante botones en los inputs.
+- Comparación gráfica de los conjuntos cargados, botón para descarga de datos (derecha-arriba).
+- Mediante la tabla, es posible eliminar conjuntos de la comparación (derecha-abajo).  
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+#### Ejemplo 2, comparación de planes fitosanitarios. 
+![CalculadoraPlanFitosanitario](public/screenshots/calculadora2.png)
+- Formulario con carga de productos a utilizar (izquierda-arriba). 
+- Carga de planes y tratamientos de cada plan (izquierda-abajo).
+- Comparación gráfica de planes cargados, botón para descarga de datos (derecha-arriba)
+- Mediante la tabla, es posible eliminar planes de la comparación (derecha-abajo).  
+
+## 🧮 Funcionalidades
+- Comparación de costos para Maquinaria + Implemento
+- Comparación de costos para planes fitosanitarios y planes de fertilización
+- Validación tipada de formularios
+- Generación de reportes en PDF
+- Exportación a Excel
+- Interfaz responsive
+
+## 🎯 Objetivo
+Brindar una herramienta portable para:
+- Productores agropecuarios
+- Técnicos y asesores
+- Estudiantes del sector
+
+Los cálculos se basan en datos oficiales provistos por la API de [SIPAN](https://sipan.inta.gob.ar/).
+
+## 🏗️ Stack Tecnológico
+
+### Frontend
+- React 19
+- TypeScript
+- Vite
+
+### Gestión de Datos
+- @tanstack/react-query
+- Fetch API
+
+### Formularios y Validación
+- react-hook-form
+- zod
+
+### UI y Estilos
+- TailwindCSS
+- Radix UI
+
+### Tablas y Visualización
+- @tanstack/react-table
+- recharts
+
+### Exportación de Reportes
+- pdfmake
+- html-to-image
+- xlsx (SheetJS)
+
+## 🔌 Integración con API
+
+La aplicación consume datos oficiales desde la API de [SIPAN](https://sipan.inta.gob.ar/), incluyendo:
+
+- Listado de maquinaria (Tractores + Implementos)
+- Productos fitosanitarios y fertilizantes
+
+## 📁 Estructura del Proyecto
+```
+src/
+ ├── api/
+ ├── components/
+ ├── context/
+ ├── hooks/
+ ├── layouts/
+ ├── lib/
+ ├── pages/
+ ├── routes/
+ ├── schemas/
+ ├── services/
+ ├── types/
+ ├── utils/
+ └── App.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ⚙️ Variables de Entorno
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+Crear un archivo .env en la raíz del proyecto:
 ```
+# DOLLAR API
+VITE_DOLLAR_API_URL=https://api.bcra.gob.ar
+
+# GASOIL API
+VITE_GASOIL_API_URL=http://datos.energia.gob.ar/
+
+# SIPAN API 
+# https://sipan.inta.gob.ar/ws/[endpoint].php
+VITE_SIPAN_API_URL=https://sipan.inta.gob.ar/ws
+# https://sipan.inta.gob.ar/ws/maquinaria.json.php
+VITE_TOKEN_MAQUINARIAS=tu_api_key1
+# https://sipan.inta.gob.ar/ws/productos.json.php
+VITE_TOKEN_PRODUCTOS=tu_api_key2
+```
+
+## 📦 Instalación
+```
+git clone https://github.com/Niicoph/INTA-client
+cd INTA-client
+npm install
+npm run dev
+```
+
+## 🤝 Colaboración Institucional
+Este proyecto se desarrolló en articulación con [INTA](https://www.argentina.gob.ar/inta) y [SIPAN](https://sipan.inta.gob.ar/).
+
+## 👥 Equipo de Desarrollo
+
+  - [FAI-3169] Benitez, Franco Fabian - fabian.benitez@est.fi.uncoma.edu.ar
+  - [FAI-4594] Pesce, Matías Nicolás - matias.pesce@est.fi.uncoma.edu.ar
+  - [FAI-3220] Reyes Castelló, José Vicente - jose.reyes@est.fi.uncoma.edu.ar
