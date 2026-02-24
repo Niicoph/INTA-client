@@ -81,7 +81,9 @@ Los cálculos se basan en datos oficiales provistos por la API de [SIPAN](https:
 La aplicación consume datos oficiales desde la API de [SIPAN](https://sipan.inta.gob.ar/), incluyendo:
 
 - Listado de maquinaria (Tractores + Implementos)
-- Productos fitosanitarios y fertilizantes
+- Productos fitosanitarios y fertilizantes  
+
+También consume datos oficiales desde la API de [BCRA](https://bcra.gob.ar) para obtener la cotización de USD actualizada.
 
 ## 📁 Estructura del Proyecto
 ```
